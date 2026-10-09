@@ -225,5 +225,150 @@ function ajouterOperation() {
 
 afficherOperations();
 </script>
+
+<section style="padding:16px;margin:12px auto;max-width:500px;font-family:Arial;background:#eef7f1;border-radius:12px">
+  <h3>💾 حفظ بيانات SKHAWA LIVRILI</h3>
+  <p>حمّل نسخة احتياطية من حساباتك، أو صدّرها إلى CSV.</p>
+
+  <button onclick="skhawaBackupJSON()" style="width:100%;padding:14px;margin:5px 0;background:#167c55;color:white;border:0;border-radius:8px">
+    📦 تحميل نسخة احتياطية JSON
+  </button>
+
+  <button onclick="skhawaExportCSV()" style="width:100%;padding:14px;margin:5px 0;background:#2457a7;color:white;border:0;border-radius:8px">
+    📊 تصدير الحسابات CSV
+  </button>
+
+  <label style="display:block;margin-top:15px">استرجاع نسخة JSON محفوظة:</label>
+  <input id="skhawaImportFile" type="file" accept=".json,application/json" style="width:100%;margin:10px 0">
+
+  <button onclick="skhawaRestoreJSON()" style="width:100%;padding:14px;background:#8a4c10;color:white;border:0;border-radius:8px">
+    ♻️ استرجاع النسخة الاحتياطية
+  </button>
+  <p style="font-size:12px">احتافظ بملف JSON فمكان آمن. الاسترجاع يضيف البيانات الاحتياطية دون حذف الحسابات الحالية.</p>
+</section>
+
+<script>
+function skhawaDownloadFile(content, name, type) {
+  const blob = new Blob([content], {type: type});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = name;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 1500);
+}
+
+function skhawaBackupJSON() {
+  const backup = {
+    app: "SKHAWA LIVRILI",
+    date: new Date().toISOString(),
+    data: {}
+  };
+
+  for (let i = 0; i < localStorage.length; i++) {
+    const key = localStorage.key(i);
+    backup.data[key] = localStorage.getItem(key);
+  }
+
+  skhawaDownloadFile(
+    JSON.stringify(backup, null, 2),
+    "SKHAWA-backup-" + new Date().toISOString().slice(0,10) + ".json",
+    "application/json;charset=utf-8"
+  );
+}
+
+function skhawaExportCSV() {
+  const raw = localStorage.getItem("skhawa_comptabilite_v1");
+  let ops;
+
+  try {
+    ops = JSON.parse(raw || "[]");
+  } catch(e) {
+    alert("تعذر قراءة الحسابات.");
+    return;
+  }
+
+  if (!Array.isArray(ops)) {
+    alert("صيغة الحسابات غير صحيحة.");
+    return;
+  }
+
+  const quote = v => '"' + String(v ?? "").replace(/"/g, '""') + '"';
+  const rows = [
+    ["النوع", "المبلغ DH", "الملاحظة", "التاريخ"],
+    ...ops.map(op => [
+      op.type === "income" ? "مدخول" : "مصاريف",
+      op.montant,
+      op.note,
+      op.date || ""
+    ])
+  ];
+
+  const csv = "\uFEFF" + rows.map(r => r.map(quote).join(";")).join("\r\n");
+
+  skhawaDownloadFile(
+    csv,
+    "SKHAWA-comptes-" + new Date().toISOString().slice(0,10) + ".csv",
+    "text/csv;charset=utf-8"
+  );
+}
+
+function skhawaRestoreJSON() {
+  const input = document.getElementById("skhawaImportFile");
+  const file = input.files[0];
+
+  if (!file) {
+    alert("اختار ملف JSON ديال النسخة الاحتياطية أولا.");
+    return;
+  }
+
+  const reader = new FileReader();
+
+  reader.onload = function() {
+    try {
+      const backup = JSON.parse(reader.result);
+
+      if (!backup || backup.app !== "SKHAWA LIVRILI" ||
+          !backup.data || typeof backup.data !== "object" ||
+          Array.isArray(backup.data)) {
+        throw new Error("invalid backup");
+      }
+
+      const entries = Object.entries(backup.data);
+
+      if (!entries.every(([k,v]) =>
+          typeof k === "string" && typeof v === "string")) {
+        throw new Error("invalid data");
+      }
+
+      const current = new Map();
+      for (let i = 0; i < localStorage.length; i++) {
+        const k = localStorage.key(i);
+        current.set(k, localStorage.getItem(k));
+      }
+
+      try {
+        entries.forEach(([k,v]) => {
+          if (k !== null && !current.has(k)) {
+            localStorage.setItem(k, v);
+          }
+        });
+      } catch(e) {
+        current.forEach((v,k) => localStorage.setItem(k,v));
+        throw e;
+      }
+
+      alert("تم استرجاع البيانات الجديدة. عاود فتح التطبيق للتأكد.");
+      location.reload();
+    } catch(e) {
+      alert("الملف غير صالح أو تعذر الاسترجاع. بياناتك الحالية ما خاصهاش تتمسح.");
+    }
+  };
+
+  reader.readAsText(file);
+}
+</script>
 </body>
 </html>
