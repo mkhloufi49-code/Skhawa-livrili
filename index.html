@@ -1,493 +1,621 @@
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f97316">
+<meta name="description" content="SKHAWA LIVRILI - إدارة التوصيلات والمدخول والمصاريف">
+<title>SKHAWA LIVRILI</title>
+<link rel="manifest" href="./manifest.json">
 
-  <meta name="theme-color" content="#075b46">
-  <meta name="description" content="SKHAWA LIVRILI - سخاوة فالقلب وليفري فالوقت">
+<style>
+* {
+  box-sizing: border-box;
+}
 
-  <title>SKHAWA LIVRILI</title>
+body {
+  margin: 0;
+  background: #f4f4f4;
+  color: #171717;
+  font-family: Arial, sans-serif;
+}
 
-  <link rel="manifest" href="./manifest.json">
-  <link rel="icon" href="./icon-192.png">
-  <link rel="apple-touch-icon" href="./icon-192.png">
+header {
+  background: #171717;
+  color: white;
+  text-align: center;
+  padding: 25px 12px;
+  border-bottom: 5px solid #f97316;
+}
 
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+header h1 {
+  margin: 8px 0;
+  font-size: 25px;
+}
 
-    body {
-      font-family: Arial, sans-serif;
-      background: #f2f5f3;
-      color: #202b27;
-      line-height: 1.7;
-    }
+header p {
+  color: #fdba74;
+  margin: 8px 0;
+}
 
-    header {
-      background: #075b46;
-      color: white;
-      text-align: center;
-      padding: 28px 15px;
-      border-bottom: 5px solid #f28c28;
-    }
+main {
+  max-width: 700px;
+  margin: auto;
+  padding: 15px;
+}
 
-    .logo {
-      width: 90px;
-      height: 90px;
-      object-fit: contain;
-      border-radius: 22px;
-      margin-bottom: 10px;
-      background: white;
-    }
+h2 {
+  font-size: 18px;
+  margin: 24px 0 12px;
+  border-right: 5px solid #f97316;
+  padding-right: 10px;
+}
 
-    header h1 {
-      font-size: 27px;
-      font-weight: 900;
-    }
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
 
-    header p {
-      color: #ffe0bd;
-      font-size: 15px;
-    }
+.card {
+  background: white;
+  padding: 15px;
+  border-radius: 14px;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 8px #0000000b;
+}
 
-    main {
-      max-width: 600px;
-      margin: 20px auto;
-      padding: 0 14px;
-    }
+.stat {
+  background: #171717;
+  color: white;
+  border-bottom: 3px solid #f97316;
+}
 
-    .card {
-      background: white;
-      padding: 22px 18px;
-      border-radius: 18px;
-      margin-bottom: 17px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.06);
-    }
+.stat small {
+  color: #ddd;
+}
 
-    h2 {
-      color: #075b46;
-      font-size: 21px;
-      margin-bottom: 10px;
-    }
+.num {
+  color: #fb923c;
+  font-size: 25px;
+  font-weight: bold;
+  margin-top: 8px;
+  overflow-wrap: anywhere;
+}
 
-    .welcome {
-      text-align: center;
-    }
+label {
+  display: block;
+  font-weight: bold;
+  font-size: 14px;
+  margin: 10px 0 6px;
+}
 
-    .welcome p {
-      color: #606b65;
-    }
+input, select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 9px;
+  font-size: 16px;
+  background: white;
+}
 
-    .stats {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-    }
+button {
+  border: 0;
+  border-radius: 9px;
+  padding: 12px;
+  font-weight: bold;
+  font-size: 15px;
+  cursor: pointer;
+}
 
-    .stat {
-      text-align: center;
-      border-radius: 16px;
-      padding: 18px 8px;
-    }
+.orange {
+  background: #f97316;
+  color: #171717;
+}
 
-    .customers {
-      background: #e4f2eb;
-    }
+.black {
+  background: #171717;
+  color: white;
+}
 
-    .deliveries {
-      background: #fff0df;
-    }
+.red {
+  background: #fee2e2;
+  color: #991b1b;
+}
 
-    .stat-icon {
-      font-size: 30px;
-    }
+.full {
+  width: 100%;
+  margin-top: 12px;
+}
 
-    .stat-label {
-      font-size: 15px;
-      font-weight: bold;
-    }
+.formgrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
 
-    .stat-number {
-      font-size: 32px;
-      font-weight: 900;
-      margin-top: 5px;
-      overflow-wrap: anywhere;
-    }
+.good {
+  color: #15803d;
+  font-weight: bold;
+}
 
-    .customers .stat-number {
-      color: #075b46;
-    }
+.bad {
+  color: #b91c1c;
+  font-weight: bold;
+}
 
-    .deliveries .stat-number {
-      color: #d97706;
-    }
+.entry {
+  background: white;
+  padding: 12px;
+  border: 1px solid #eee;
+  border-radius: 10px;
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
 
-    .btn {
-      display: block;
-      text-align: center;
-      text-decoration: none;
-      border: none;
-      border-radius: 12px;
-      padding: 14px;
-      font-size: 16px;
-      font-weight: bold;
-      cursor: pointer;
-      width: 100%;
-      font-family: inherit;
-    }
+.entry small {
+  display: block;
+  color: #777;
+  margin-top: 5px;
+}
 
-    .primary {
-      background: #075b46;
-      color: white;
-    }
+.hint {
+  font-size: 12px;
+  color: #777;
+  line-height: 1.7;
+}
 
-    .orange {
-      background: #f28c28;
-      color: white;
-    }
+footer {
+  text-align: center;
+  color: #777;
+  font-size: 12px;
+  padding: 20px;
+}
 
-    .light {
-      background: #e7f1ec;
-      color: #075b46;
-    }
-
-    .buttons {
-      display: grid;
-      gap: 12px;
-    }
-
-    .edit-panel {
-      display: none;
-      margin-top: 18px;
-      border-top: 1px solid #e5ebe7;
-      padding-top: 16px;
-    }
-
-    .edit-panel.show {
-      display: block;
-    }
-
-    .field {
-      margin-bottom: 14px;
-    }
-
-    .field label {
-      display: block;
-      font-weight: bold;
-      margin-bottom: 6px;
-    }
-
-    .field input {
-      width: 100%;
-      padding: 12px;
-      border: 1px solid #cbd8d0;
-      border-radius: 10px;
-      font-size: 18px;
-      font-family: inherit;
-      direction: ltr;
-      text-align: center;
-    }
-
-    .note {
-      font-size: 13px;
-      color: #65716b;
-      margin-top: 12px;
-      text-align: center;
-    }
-
-    footer {
-      text-align: center;
-      padding: 22px 12px;
-      color: #66736c;
-      font-size: 13px;
-    }
-  </style>
+@media (min-width: 560px) {
+  .stats {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+</style>
 </head>
 
 <body>
 
-  <header>
-    <img
-      class="logo"
-      src="./icon-192.png"
-      alt="SKHAWA LIVRILI"
-      onerror="this.style.display='none'"
-    >
-    <h1>SKHAWA LIVRILI</h1>
-    <p>سخاوة فالقلب و ليفري فالوقت ❤️</p>
-  </header>
+<header>
+  <div style="font-size:38px">🛵</div>
+  <h1>SKHAWA LIVRILI</h1>
+  <p>سخاوة فالقلب وليفري فالوقت 🧡</p>
+</header>
 
-  <main>
+<main>
 
-    <section class="card welcome">
-      <h2>مرحبا بيك فـ SKHAWA LIVRILI 👋</h2>
-      <p>
-        الوفاء ديالك كيهمنا، وثقتك هي راس مالنا.
-        معانا التوصيل بالسخاوة والاحترام.
-      </p>
-    </section>
+<h2>📊 الإحصائيات</h2>
 
-    <section class="card">
-      <h2>📊 إحصائيات الخدمة ديالك</h2>
+<div class="grid stats">
 
-      <div class="stats">
-        <div class="stat customers">
-          <div class="stat-icon">👥</div>
-          <div class="stat-label">عدد الزبناء</div>
-          <div class="stat-number" id="customersCount">0</div>
-        </div>
+  <div class="card stat">
+    <small>👥 عدد الزبناء</small>
+    <div class="num" id="clients">0</div>
+  </div>
 
-        <div class="stat deliveries">
-          <div class="stat-icon">🛵</div>
-          <div class="stat-label">عدد التوصيلات</div>
-          <div class="stat-number" id="deliveriesCount">0</div>
-        </div>
+  <div class="card stat">
+    <small>🛵 عدد التوصيلات</small>
+    <div class="num" id="deliveries">0</div>
+  </div>
+
+  <div class="card stat">
+    <small>💰 مجموع المدخول</small>
+    <div class="num" id="income">0 DH</div>
+  </div>
+
+  <div class="card stat">
+    <small>🧾 مجموع المصاريف</small>
+    <div class="num" id="expenses">0 DH</div>
+  </div>
+
+</div>
+
+<h2>👥 تحديث الزبناء والتوصيلات</h2>
+
+<div class="card">
+
+  <div class="formgrid">
+
+    <div>
+      <label for="clientInput">عدد الزبناء</label>
+      <input id="clientInput" type="number"
+             min="0" step="1" value="0">
+    </div>
+
+    <div>
+      <label for="deliveryInput">عدد التوصيلات</label>
+      <input id="deliveryInput" type="number"
+             min="0" step="1" value="0">
+    </div>
+
+  </div>
+
+  <button class="orange full" id="saveCounts">
+    حفظ الأعداد
+  </button>
+
+</div>
+
+<h2>💵 تسجيل المدخول والمصاريف</h2>
+
+<div class="card">
+
+  <label for="kind">نوع العملية</label>
+
+  <select id="kind">
+    <option value="income">مدخول</option>
+    <option value="expense">مصروف</option>
+  </select>
+
+  <label for="amount">المبلغ بالدرهم</label>
+
+  <input id="amount" type="number"
+         min="0.01" step="0.01"
+         placeholder="مثلاً 50">
+
+  <label for="details">تفاصيل العملية</label>
+  <input id="details" maxlength="100"
+         placeholder="مثلاً: توصيل، بنزين، صيانة">
+
+  <label for="date">التاريخ</label>
+  <input id="date" type="date">
+
+  <button class="orange full" id="add">
+    + تسجيل العملية
+  </button>
+
+</div>
+
+<h2>📈 الحصيلة المالية</h2>
+
+<div class="grid">
+
+  <div class="card">
+    مجموع المدخول
+    <div class="good" id="totalIn">0 DH</div>
+  </div>
+
+  <div class="card">
+    مجموع المصاريف
+    <div class="bad" id="totalOut">0 DH</div>
+  </div>
+
+  <div class="card" style="grid-column:1/-1">
+    الربح الصافي
+    <div class="num" id="profit">0 DH</div>
+  </div>
+
+</div>
+
+<h2>📋 سجل العمليات</h2>
+
+<div class="card">
+
+  <label for="filter">عرض العمليات</label>
+
+  <select id="filter">
+    <option value="all">جميع العمليات</option>
+    <option value="income">المدخول فقط</option>
+    <option value="expense">المصاريف فقط</option>
+  </select>
+
+  <div id="history">
+    <p class="hint">مازال ما سجلتي حتى عملية.</p>
+  </div>
+
+</div>
+
+<h2>💾 النسخ الاحتياطي</h2>
+
+<div class="card">
+
+  <button class="black full" id="backup">
+    تحميل نسخة احتياطية
+  </button>
+
+  <button class="orange full" id="chooseFile">
+    استرجاع نسخة احتياطية
+  </button>
+
+  <input id="file" type="file"
+         accept=".json,application/json" hidden>
+
+  <button class="red full" id="clear">
+    مسح جميع البيانات
+  </button>
+
+  <p class="hint">
+    البيانات كتتحفظ فالمتصفح ديال التليفون.
+    حمّل نسخة احتياطية بانتظام باش ما تضيعش معلوماتك.
+  </p>
+
+</div>
+
+</main>
+
+<footer>
+  SKHAWA LIVRILI © 🧡
+</footer>
+
+<script>
+(function(){
+
+const KEY = "skhawa_livrili_data_v3";
+
+const $ = id => document.getElementById(id);
+
+const today = () => {
+  const d = new Date();
+  return d.getFullYear() + "-" +
+    String(d.getMonth()+1).padStart(2,"0") + "-" +
+    String(d.getDate()).padStart(2,"0");
+};
+
+let data = {
+  clients: 0,
+  deliveries: 0,
+  transactions: []
+};
+
+try {
+  const old = localStorage.getItem(KEY);
+
+  if (old) {
+    const x = JSON.parse(old);
+
+    data.clients = Math.max(0, parseInt(x.clients) || 0);
+    data.deliveries = Math.max(0, parseInt(x.deliveries) || 0);
+
+    data.transactions = Array.isArray(x.transactions)
+      ? x.transactions : [];
+  }
+} catch(e) {}
+
+$("date").value = today();
+
+function save() {
+  try {
+    localStorage.setItem(KEY, JSON.stringify(data));
+  } catch(e) {
+    alert("ما قدرناش نحفظو البيانات. حمّل نسخة احتياطية إذا أمكن.");
+  }
+}
+
+function money(n) {
+  return (Number(n)||0).toLocaleString("fr-MA", {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+  }) + " DH";
+}
+
+function esc(s) {
+  return String(s ?? "").replace(/[&<>"']/g, c => ({
+    "&":"&amp;",
+    "<":"&lt;",
+    ">":"&gt;",
+    '"':"&quot;",
+    "'":"&#39;"
+  }[c]));
+}
+
+function totals() {
+  let inc = 0, out = 0;
+
+  data.transactions.forEach(t => {
+    if (t.kind === "income") inc += Number(t.amount)||0;
+    else out += Number(t.amount)||0;
+  });
+
+  return {
+    inc,
+    out,
+    profit: inc - out
+  };
+}
+</script>
+
+function render() {
+  $("clients").textContent = data.clients;
+  $("deliveries").textContent = data.deliveries;
+  $("clientInput").value = data.clients;
+  $("deliveryInput").value = data.deliveries;
+
+  const t = totals();
+
+  $("income").textContent = money(t.inc);
+  $("expenses").textContent = money(t.out);
+  $("totalIn").textContent = money(t.inc);
+  $("totalOut").textContent = money(t.out);
+  $("profit").textContent = money(t.profit);
+  $("profit").className = t.profit >= 0 ? "good" : "bad";
+
+  renderHistory();
+}
+
+function renderHistory() {
+  const filter = $("filter").value;
+
+  const items = data.transactions
+    .filter(t => filter === "all" || t.kind === filter)
+    .slice()
+    .reverse();
+
+  if (!items.length) {
+    $("history").innerHTML =
+      '<p class="hint">مازال ما كايناش عمليات مسجلة.</p>';
+    return;
+  }
+
+  $("history").innerHTML = items.map(t => `
+    <div class="entry">
+      <div>
+        <strong>
+          ${t.kind === "income" ? "🟢 مدخول" : "🔴 مصروف"}
+          — ${esc(t.details || "بلا تفاصيل")}
+        </strong>
+        <small>${esc(t.date || "")}</small>
       </div>
-
-      <p class="note">
-        هادو هما الأعداد اللي كتدخل بيدك وكتحدّثهم وقت ما بغيتي.
-      </p>
-
-      <button
-        class="btn primary"
-        id="editButton"
-        type="button"
-        style="margin-top:16px"
-        aria-expanded="false"
-        aria-controls="editPanel"
-      >
-        ✏️ تعديل الإحصائيات
-      </button>
-
-      <div class="edit-panel" id="editPanel">
-        <div class="field">
-          <label for="customersInput">👥 العدد الإجمالي ديال الزبناء</label>
-          <input
-            type="number"
-            id="customersInput"
-            min="0"
-            step="1"
-            inputmode="numeric"
-            value="0"
-          >
-        </div>
-
-        <div class="field">
-          <label for="deliveriesInput">🛵 العدد الإجمالي ديال التوصيلات</label>
-          <input
-            type="number"
-            id="deliveriesInput"
-            min="0"
-            step="1"
-            inputmode="numeric"
-            value="0"
-          >
-        </div>
-
-        <div class="buttons">
-          <button class="btn orange" id="saveButton" type="button">
-            💾 حفظ الأعداد
-          </button>
-
-          <button class="btn light" id="cancelButton" type="button">
-            إلغاء
-          </button>
-        </div>
-
-        <p class="note" id="saveMessage" role="status" aria-live="polite"></p>
+      <div>
+        <strong class="${t.kind === "income" ? "good" : "bad"}">
+          ${t.kind === "income" ? "+" : "−"} ${money(t.amount)}
+        </strong>
+        <button class="red" data-delete="${esc(t.id)}"
+          style="display:block;margin-top:6px;padding:7px">
+          حذف
+        </button>
       </div>
-    </section>
+    </div>
+  `).join("");
 
-    <section class="card">
-      <h2>🛵 الخدمات ديالنا</h2>
-
-      <div class="buttons">
-        <a
-          class="btn primary"
-          href="https://wa.me/212715063305"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          📲 تواصل معانا عبر WhatsApp
-        </a>
-
-        <a
-          class="btn orange"
-          href="https://www.instagram.com/skhawa.livrili/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          📸 تابعنا على Instagram
-        </a>
-
-        <a
-          class="btn light"
-          href="mailto:mkhloufi49@gmail.com"
-        >
-          ✉️ تواصل عبر البريد الإلكتروني
-        </a>
-      </div>
-    </section>
-
-    <section class="card">
-      <h2>📱 تثبيت التطبيق</h2>
-      <p>
-        تقدر تزيد SKHAWA LIVRILI للشاشة الرئيسية ديال تليفونك
-        وتدخل ليه بسهولة.
-      </p>
-      <p class="note">
-        من قائمة المتصفح اختار «إضافة إلى الشاشة الرئيسية»
-        أو «تثبيت التطبيق» إلا كان الخيار متاح.
-      </p>
-    </section>
-
-  </main>
-
-  <footer>
-    <p>SKHAWA LIVRILI © 2026</p>
-    <p>بثقتكم سنواصل التطور ❤️</p>
-  </footer>
-
-  <script>
-    const customersCount =
-      document.getElementById("customersCount");
-
-    const deliveriesCount =
-      document.getElementById("deliveriesCount");
-
-    const customersInput =
-      document.getElementById("customersInput");
-
-    const deliveriesInput =
-      document.getElementById("deliveriesInput");
-
-    const editButton =
-      document.getElementById("editButton");
-
-    const editPanel =
-      document.getElementById("editPanel");
-
-    const saveButton =
-      document.getElementById("saveButton");
-
-    const cancelButton =
-      document.getElementById("cancelButton");
-
-    const saveMessage =
-      document.getElementById("saveMessage");
-
-    function readCount(key) {
-      try {
-        const value = localStorage.getItem(key);
-
-        if (value === null) return 0;
-
-        const number = Number(value);
-
-        if (
-          Number.isSafeInteger(number) &&
-          number >= 0
-        ) {
-          return number;
-        }
-      } catch (error) {
-        console.error("Storage error:", error);
-      }
-
-      return 0;
-    }
-
-    function displayCounts() {
-      customersCount.textContent =
-        readCount("skhawa_customers");
-
-      deliveriesCount.textContent =
-        readCount("skhawa_deliveries");
-    }
-
-    function openEditor() {
-      customersInput.value =
-        readCount("skhawa_customers");
-
-      deliveriesInput.value =
-        readCount("skhawa_deliveries");
-
-      saveMessage.textContent = "";
-      editPanel.classList.add("show");
-      editButton.setAttribute("aria-expanded", "true");
-    }
-
-    function closeEditor() {
-      editPanel.classList.remove("show");
-      editButton.setAttribute("aria-expanded", "false");
-    }
-
-    editButton.addEventListener("click", function () {
-      if (editPanel.classList.contains("show")) {
-        closeEditor();
-      } else {
-        openEditor();
-      }
-    });
-
-    cancelButton.addEventListener("click", function () {
-      closeEditor();
-    });
-
-    saveButton.addEventListener("click", function () {
-      const customers = customersInput.value;
-      const deliveries = deliveriesInput.value;
-
-      if (
-        customers.trim() === "" ||
-        deliveries.trim() === "" ||
-        !Number.isSafeInteger(Number(customers)) ||
-        !Number.isSafeInteger(Number(deliveries)) ||
-        Number(customers) < 0 ||
-        Number(deliveries) < 0
-      ) {
-        saveMessage.textContent =
-          "دخل أعداد صحيحة وما تكونش سالبة.";
-        return;
-      }
-
-      try {
-        localStorage.setItem(
-          "skhawa_customers",
-          String(Number(customers))
+  $("history").querySelectorAll("[data-delete]").forEach(btn => {
+    btn.addEventListener("click", () => {
+      if (confirm("واش متأكد بغيتي تحذف هاد العملية؟")) {
+        data.transactions = data.transactions.filter(
+          t => String(t.id) !== btn.dataset.delete
         );
-
-        localStorage.setItem(
-          "skhawa_deliveries",
-          String(Number(deliveries))
-        );
-
-        displayCounts();
-
-        saveMessage.textContent = "تحفظو الأعداد بنجاح ❤️";
-
-        closeEditor();
-      } catch (error) {
-        saveMessage.textContent =
-          "ما قدرناش نحفظو الأعداد. تحقق من إعدادات المتصفح.";
+        save();
+        render();
       }
     });
+  });
+}
 
-    displayCounts();
+$("saveCounts").addEventListener("click", () => {
+  const c = Number($("clientInput").value);
+  const d = Number($("deliveryInput").value);
 
-    if ("serviceWorker" in navigator) {
-      window.addEventListener("load", function () {
-        navigator.serviceWorker.register("./service-worker.js")
-          .catch(function (error) {
-            console.error("Service Worker error:", error);
-          });
-      });
+  if (!Number.isInteger(c) || c < 0 ||
+      !Number.isInteger(d) || d < 0) {
+    alert("دخل أعداد صحيحة موجبة أو صفر.");
+    return;
+  }
+
+  data.clients = c;
+  data.deliveries = d;
+  save();
+  render();
+  alert("تسجلو الأعداد بنجاح ✅");
+});
+
+$("add").addEventListener("click", () => {
+  const amount = Number($("amount").value);
+
+  if (!Number.isFinite(amount) || amount <= 0) {
+    alert("دخل مبلغ صحيح أكبر من صفر.");
+    return;
+  }
+
+  data.transactions.push({
+    id: String(Date.now()) + "-" +
+        Math.random().toString(36).slice(2, 8),
+    kind: $("kind").value,
+    amount: Math.round(amount * 100) / 100,
+    details: $("details").value.trim(),
+    date: $("date").value || today()
+  });
+
+  save();
+
+  $("amount").value = "";
+  $("details").value = "";
+  $("date").value = today();
+
+  render();
+  alert("تسجلات العملية بنجاح ✅");
+});
+
+$("filter").addEventListener("change", renderHistory);
+
+$("backup").addEventListener("click", () => {
+  const blob = new Blob(
+    [JSON.stringify(data, null, 2)],
+    {type: "application/json"}
+  );
+
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+
+  a.href = url;
+  a.download = "skhawa-livrili-backup.json";
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+
+  URL.revokeObjectURL(url);
+});
+
+$("chooseFile").addEventListener("click", () => {
+  $("file").click();
+});
+
+$("file").addEventListener("change", async e => {
+  const file = e.target.files[0];
+  if (!file) return;
+
+  try {
+    const backup = JSON.parse(await file.text());
+
+    if (!Number.isInteger(Number(backup.clients)) ||
+        !Number.isInteger(Number(backup.deliveries)) ||
+        !Array.isArray(backup.transactions)) {
+      throw new Error("invalid");
     }
-  </script>
 
+    if (!confirm("استرجاع النسخة غادي يعوض البيانات الحالية. نكملو؟")) {
+      return;
+    }
+
+    data = {
+      clients: Math.max(0, Number(backup.clients)),
+      deliveries: Math.max(0, Number(backup.deliveries)),
+      transactions: backup.transactions
+    };
+
+    save();
+    render();
+    alert("ترجعات النسخة بنجاح ✅");
+
+  } catch(err) {
+    alert("الملف ماشي نسخة احتياطية صالحة.");
+  } finally {
+    e.target.value = "";
+  }
+});
+
+$("clear").addEventListener("click", () => {
+  if (confirm("واش متأكد بغيتي تمسح جميع البيانات؟")) {
+    data = {
+      clients: 0,
+      deliveries: 0,
+      transactions: []
+    };
+
+    save();
+    render();
+  }
+});
+
+if ("serviceWorker" in navigator &&
+    location.protocol.startsWith("http")) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("./service-worker.js")
+      .catch(() => {});
+  });
+}
+
+render();
+
+})();
+</script>
 </body>
 </html>
