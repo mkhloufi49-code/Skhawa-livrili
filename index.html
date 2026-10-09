@@ -1,532 +1,241 @@
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#075b46">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<title>SKHAWA LIVRILI</title>
-<link rel="manifest" href="./manifest.json">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<style>
-*{box-sizing:border-box}
-:root{
-  --green:#075b46;
-  --green2:#0b8965;
-  --light:#e8f6ef;
-  --text:#183b30;
-  --red:#bd3434;
-  --blue:#245ca6;
-}
-body{
-  margin:0;padding:16px;
-  font-family:Arial,sans-serif;
-  background:#f1f6f3;color:var(--text);
-}
-header{
-  background:linear-gradient(135deg,#064333,#087f5b,#16a878);
-  color:white;text-align:center;
-  padding:26px 16px;border-radius:22px;
-  box-shadow:0 8px 24px #06433325;
-}
-.logo{
-  width:76px;height:76px;border-radius:24px;
-  background:#ffffff20;border:2px solid #ffffff90;
-  margin:0 auto 12px;display:flex;
-  align-items:center;justify-content:center;
-  font-size:38px;
-}
-header h1{font-size:25px;margin:0}
-header p{margin:10px 0 0;font-size:14px}
-.container{max-width:560px;margin:auto}
-.card{
-  background:white;padding:18px;margin-top:15px;
-  border-radius:17px;box-shadow:0 3px 14px #123b2510;
-}
-h2{font-size:19px;margin:0 0 15px}
-label{display:block;font-size:14px;margin-top:12px}
-input,select,button{
-  width:100%;padding:13px;margin-top:8px;
-  border:1px solid #d5e3dc;border-radius:11px;
-  font-size:16px;font-family:inherit;
-}
-input,select{background:#fff;color:var(--text)}
-button{
-  background:var(--green);color:white;
-  border:0;font-weight:bold;cursor:pointer;
-}
-button:active{opacity:.8}
-.primary{background:var(--green2)}
-.danger{background:var(--red)}
-.blue{background:var(--blue)}
-.orange{background:#8a5414}
-.stats{
-  display:grid;grid-template-columns:1fr 1fr;gap:10px;
-}
-.stat{
-  padding:15px 10px;background:var(--light);
-  border-radius:13px;text-align:center;
-}
-.stat span{font-size:13px;display:block}
-.stat strong{
-  display:block;font-size:20px;margin-top:9px;
-  overflow-wrap:anywhere;
-}
-.balance{
-  margin-top:10px;background:#dceaff;
-  border-radius:13px;padding:17px;text-align:center;
-}
-.balance strong{display:block;font-size:24px;margin-top:8px}
-.item{
-  border:1px solid #e3ece7;border-radius:12px;
-  padding:12px;margin-top:10px;background:#fff;
-}
-.item-head{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
-.income-text{color:#087f5b}
-.expense-text{color:#bd3434}
-.item p{margin:8px 0;overflow-wrap:anywhere}
-.item small{color:#66766d}
-.delete-one{
-  background:#bd3434;padding:9px;margin-top:8px;
-}
-.muted{color:#687970;font-size:13px;line-height:1.7}
-.footer{text-align:center;color:#718078;font-size:12px;padding:22px 0}
-@media(max-width:360px){
-  body{padding:10px}
-  .stat strong{font-size:17px}
-}
-</style>
+  <meta name="theme-color" content="#075b46">
+  <meta name="description" content="SKHAWA LIVRILI - سخاوة فالقلب وليفري فالوقت">
+
+  <title>SKHAWA LIVRILI</title>
+
+  <link rel="manifest" href="./manifest.json">
+  <link rel="icon" href="./icon-192.png">
+  <link rel="apple-touch-icon" href="./icon-192.png">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f2f5f3;
+      color: #202b27;
+      line-height: 1.7;
+    }
+
+    header {
+      background: #075b46;
+      color: white;
+      text-align: center;
+      padding: 28px 15px;
+      border-bottom: 5px solid #f28c28;
+    }
+
+    .logo {
+      width: 90px;
+      height: 90px;
+      object-fit: contain;
+      border-radius: 22px;
+      margin-bottom: 10px;
+      background: white;
+    }
+
+    header h1 {
+      font-size: 27px;
+      font-weight: 900;
+    }
+
+    header p {
+      color: #ffe0bd;
+      font-size: 15px;
+    }
+
+    main {
+      max-width: 600px;
+      margin: 20px auto;
+      padding: 0 14px;
+    }
+
+    .card {
+      background: white;
+      padding: 22px 18px;
+      border-radius: 18px;
+      margin-bottom: 17px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+    }
+
+    h2 {
+      color: #075b46;
+      font-size: 21px;
+      margin-bottom: 10px;
+    }
+
+    .welcome {
+      text-align: center;
+    }
+
+    .welcome p {
+      color: #606b65;
+    }
+
+    .points {
+      text-align: center;
+      background: #075b46;
+      color: white;
+    }
+
+    .points h2 {
+      color: white;
+    }
+
+    .points-number {
+      color: #ffb45e;
+      font-size: 36px;
+      font-weight: bold;
+    }
+
+    .buttons {
+      display: grid;
+      gap: 12px;
+    }
+
+    .btn {
+      display: block;
+      text-align: center;
+      text-decoration: none;
+      border: none;
+      border-radius: 12px;
+      padding: 14px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    .primary {
+      background: #075b46;
+      color: white;
+    }
+
+    .orange {
+      background: #f28c28;
+      color: white;
+    }
+
+    .light {
+      background: #e7f1ec;
+      color: #075b46;
+    }
+
+    .note {
+      font-size: 13px;
+      color: #65716b;
+      margin-top: 12px;
+      text-align: center;
+    }
+
+    footer {
+      text-align: center;
+      padding: 22px 12px;
+      color: #66736c;
+      font-size: 13px;
+    }
+  </style>
 </head>
 
 <body>
-<div class="container">
 
-<header>
-  <div class="logo">🛵</div>
-  <h1>SKHAWA LIVRILI</h1>
-  <p>خدمات التوصيل والطلبات • بركان</p>
-  <p>💚 الدقة في التوصيل — خدمة موثوقة</p>
-</header>
-
-<section class="card">
-  <h2>➕ تسجيل عملية جديدة</h2>
-
-  <label for="typeOp">نوع العملية</label>
-  <select id="typeOp">
-    <option value="income">🟢 مدخول</option>
-    <option value="expense">🔴 مصاريف</option>
-  </select>
-
-  <label for="montant">المبلغ بالدرهم</label>
-  <input id="montant" type="number" min="0.01"
-    step="0.01" placeholder="مثلاً 100">
-
-  <label for="note">الشرح أو الملاحظة</label>
-  <input id="note" maxlength="300"
-    placeholder="مثلاً توصيل طلبية أو بنزين">
-
-  <button class="primary" onclick="ajouterOperation()">
-    ➕ حفظ العملية
-  </button>
-</section>
-
-<section class="card">
-  <h2>📊 ملخص الحسابات</h2>
-  <div class="stats">
-    <div class="stat">
-      <span>🟢 مجموع المدخول</span>
-      <strong id="totalIncome">0 DH</strong>
-    </div>
-    <div class="stat">
-      <span>🔴 مجموع المصاريف</span>
-      <strong id="totalExpense">0 DH</strong>
-    </div>
-  </div>
-  <div class="balance">
-    <span>💰 الربح الصافي / الرصيد</span>
-    <strong id="profit">0 DH</strong>
-  </div>
-  <p class="muted">الصافي = مجموع المدخول ناقص مجموع المصاريف.</p>
-</section>
-
-<section class="card">
-  <h2>📋 سجل العمليات</h2>
-  <div id="listeOperations">كنوجدو الحسابات...</div>
-  <button class="danger" onclick="viderOperations()">
-    🗑️ مسح جميع العمليات
-  </button>
-  <p class="muted">المسح نهائي من التخزين الحالي. حمّل نسخة احتياطية قبل استعماله.</p>
-</section>
-
-<section class="card">
-  <h2>💾 النسخ الاحتياطي والتصدير</h2>
-  <button onclick="skhawaBackupJSON()">📦 تحميل نسخة JSON</button>
-  <button class="blue" onclick="skhawaExportCSV()">📊 تصدير الحسابات CSV</button>
-
-  <label for="skhawaImportFile">اختار ملف النسخة الاحتياطية JSON</label>
-  <input id="skhawaImportFile" type="file" accept=".json,application/json">
-
-  <button class="orange" onclick="skhawaRestoreJSON()">
-    ♻️ استرجاع النسخة الاحتياطية
-  </button>
-
-  <p class="muted">
-    احتافظ بملف JSON فمكان آمن. الاسترجاع كيزيد العمليات اللي مازال ما كايناش
-    فالسجل الحالي، وما كيمسحش العمليات الموجودة.
-  </p>
-</section>
-
-<div class="footer">SKHAWA LIVRILI © خدمات التوصيل والطلبات</div>
-</div>
-
-<script>
-"use strict";
-
-const CLE = "skhawa_livrili_unified_v2";
-const ANCIENNES_CLES = [
-  "skhawa_comptabilite_v1",
-  "skhawa_livrili_entries_v1"
-];
-
-let operations = [];
-
-function lireTableau(valeur) {
-  try {
-    const resultat = JSON.parse(valeur || "[]");
-    return Array.isArray(resultat) ? resultat : [];
-  } catch(e) {
-    return [];
-  }
-}
-
-function normaliser(op) {
-  if (!op || typeof op !== "object") return null;
-
-  const montant = Number(op.montant ?? op.amount);
-  const type = op.type;
-
-  if (!["income", "expense"].includes(type) ||
-      !Number.isFinite(montant) || montant <= 0) {
-    return null;
-  }
-
-  return {
-    id: String(op.id || ""),
-    type: type,
-    montant: montant,
-    note: String(op.note ?? op.desc ?? ""),
-    date: String(op.date || "")
-  };
-}
-
-function signature(op) {
-  return JSON.stringify([
-    op.type, op.montant, op.note, op.date
-  ]);
-}
-
-function ajouterSansDoublons(cible, liste) {
-  const presentes = new Set(cible.map(signature));
-
-  liste.forEach(brute => {
-    const op = normaliser(brute);
-    if (!op) return;
-
-    const sig = signature(op);
-    if (!presentes.has(sig)) {
-      cible.push(op);
-      presentes.add(sig);
-    }
-  });
-
-  return cible;
-}
-
-function chargerOperations() {
-  const existantes = localStorage.getItem(CLE);
-
-  if (existantes !== null) {
-    operations = lireTableau(existantes)
-      .map(normaliser).filter(Boolean);
-    return;
-  }
-
-  // قراءة البيانات من النظامين السابقين عند أول تشغيل.
-  let anciennes = [];
-
-  ANCIENNES_CLES.forEach(cle => {
-    const donnees = lireTableau(localStorage.getItem(cle));
-    anciennes = ajouterSansDoublons(anciennes, donnees);
-  });
-
-  operations = anciennes;
-
-  try {
-    localStorage.setItem(CLE, JSON.stringify(operations));
-  } catch(e) {
-    alert("ما قدرناش نحفظو النسخة الموحدة. احتافظ بالنسخة الاحتياطية.");
-  }
-}
-
-function sauvegarderOperations() {
-  localStorage.setItem(CLE, JSON.stringify(operations));
-}
-
-function money(n) {
-  return Number(n).toLocaleString("fr-MA", {
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2
-  }) + " DH";
-}
-
-function afficherOperations() {
-  let income = 0;
-  let expense = 0;
-
-  operations.forEach(op => {
-    if (op.type === "income") income += op.montant;
-    else expense += op.montant;
-  });
-
-  document.getElementById("totalIncome").textContent = money(income);
-  document.getElementById("totalExpense").textContent = money(expense);
-  document.getElementById("profit").textContent = money(income - expense);
-
-  const liste = document.getElementById("listeOperations");
-  liste.replaceChildren();
-
-  if (!operations.length) {
-    liste.textContent = "مازال ما تسجلات حتى عملية.";
-    return;
-  }
-
-  operations.forEach((op, index) => {
-    const ligne = document.createElement("div");
-    ligne.className = "item";
-
-    const titre = document.createElement("div");
-    titre.className = "item-head";
-
-    const detail = document.createElement("strong");
-    detail.className = op.type === "income" ? "income-text" : "expense-text";
-    detail.textContent =
-      (op.type === "income" ? "🟢 مدخول: " : "🔴 مصاريف: ") +
-      money(op.montant);
-
-    const date = document.createElement("small");
-    date.textContent = op.date;
-
-    const note = document.createElement("p");
-    note.textContent = op.note || "بلا ملاحظة";
-
-    const supprimer = document.createElement("button");
-    supprimer.className = "delete-one";
-    supprimer.textContent = "حذف هاد العملية";
-
-    supprimer.onclick = function() {
-      if (!confirm("واش متأكد بغيتي تحذف هاد العملية؟")) return;
-
-      const ancienne = operations.slice();
-      operations.splice(index, 1);
-
-      try {
-        sauvegarderOperations();
-        afficherOperations();
-      } catch(e) {
-        operations = ancienne;
-        alert("تعذر الحفظ. العملية ما تحيداتش بشكل مؤكد.");
-      }
-    };
-
-    titre.append(detail, date);
-    ligne.append(titre, note, supprimer);
-    liste.appendChild(ligne);
-  });
-}
-
-function ajouterOperation() {
-  const champ = document.getElementById("montant");
-  const type = document.getElementById("typeOp").value;
-  const note = document.getElementById("note").value.trim();
-  const montant = Number(champ.value);
-
-  if (!Number.isFinite(montant) || montant <= 0) {
-    alert("دخل مبلغ صحيح أكبر من صفر.");
-    return;
-  }
-
-  const op = {
-    id: (typeof crypto !== "undefined" && crypto.randomUUID)
-      ? crypto.randomUUID()
-      : String(Date.now()) + Math.random().toString(16).slice(2),
-    type: type,
-    montant: montant,
-    note: note || (type === "income" ? "مدخول" : "مصاريف"),
-    date: new Date().toLocaleString("fr-MA")
-  };
-
-  operations.unshift(op);
-
-  try {
-    sauvegarderOperations();
-    champ.value = "";
-    document.getElementById("note").value = "";
-    afficherOperations();
-  } catch(e) {
-    operations.shift();
-    alert("ما قدرناش نحفظو العملية. احتافظ بالنسخة الاحتياطية وتأكد من مساحة التخزين.");
-  }
-}
-
-function viderOperations() {
-  if (!confirm("واش متأكد؟ غادي يتم مسح جميع العمليات من السجل الحالي.")) return;
-
-  const anciennes = operations.slice();
-  operations = [];
-
-  try {
-    sauvegarderOperations();
-    afficherOperations();
-  } catch(e) {
-    operations = anciennes;
-    alert("تعذر الحفظ. العمليات القديمة بقات فالذاكرة الحالية.");
-  }
-}
-
-function telecharger(contenu, nom, type) {
-  const blob = new Blob([contenu], {type: type});
-  const url = URL.createObjectURL(blob);
-  const lien = document.createElement("a");
-  lien.href = url;
-  lien.download = nom;
-  document.body.appendChild(lien);
-  lien.click();
-  lien.remove();
-  setTimeout(() => URL.revokeObjectURL(url), 2000);
-}
-
-function skhawaBackupJSON() {
-  try {
-    sauvegarderOperations();
-
-    const data = {};
-    for (let i = 0; i < localStorage.length; i++) {
-      const cle = localStorage.key(i);
-      if (cle !== null) data[cle] = localStorage.getItem(cle);
-    }
-
-    data[CLE] = JSON.stringify(operations);
-
-    const backup = {
-      app: "SKHAWA LIVRILI",
-      version: 2,
-      date: new Date().toISOString(),
-      data: data
-    };
-
-    telecharger(
-      JSON.stringify(backup, null, 2),
-      "SKHAWA-backup-" + new Date().toISOString().slice(0,10) + ".json",
-      "application/json;charset=utf-8"
-    );
-  } catch(e) {
-    alert("ما قدرناش نوجدو النسخة الاحتياطية.");
-  }
-}
-
-function skhawaExportCSV() {
-  const quote = v => '"' + String(v ?? "").replace(/"/g, '""') + '"';
-
-  const rows = [
-    ["النوع", "المبلغ DH", "الملاحظة", "التاريخ"],
-    ...operations.map(op => [
-      op.type === "income" ? "مدخول" : "مصاريف",
-      op.montant,
-      op.note,
-      op.date
-    ])
-  ];
-
-  const csv = "\uFEFF" + rows.map(r => r.map(quote).join(";")).join("\r\n");
-
-  telecharger(
-    csv,
-    "SKHAWA-comptes-" + new Date().toISOString().slice(0,10) + ".csv",
-    "text/csv;charset=utf-8"
-  );
-}
-
-function skhawaRestoreJSON() {
-  const input = document.getElementById("skhawaImportFile");
-  const file = input.files && input.files[0];
-
-  if (!file) {
-    alert("اختار ملف JSON أولا.");
-    return;
-  }
-
-  const reader = new FileReader();
-
-  reader.onload = function() {
-    try {
-      const backup = JSON.parse(reader.result);
-
-      if (!backup || backup.app !== "SKHAWA LIVRILI" ||
-          !backup.data || typeof backup.data !== "object" ||
-          Array.isArray(backup.data)) {
-        throw new Error("Invalid backup");
-      }
-
-      const data = backup.data;
-      let a = [];
-
-      // قبول النسخ الجديدة والنسخ القديمة المعروفة.
-      [CLE, ...ANCIENNES_CLES].forEach(cle => {
-        if (typeof data[cle] === "string") {
-          a = ajouterSansDoublons(a, lireTableau(data[cle]));
-        }
+  <header>
+    <img
+      class="logo"
+      src="./icon-192.png"
+      alt="SKHAWA LIVRILI"
+      onerror="this.style.display='none'"
+    >
+    <h1>SKHAWA LIVRILI</h1>
+    <p>سخاوة فالقلب و ليفري فالوقت ❤️</p>
+  </header>
+
+  <main>
+
+    <section class="card welcome">
+      <h2>مرحبا بيك فـ SKHAWA LIVRILI 👋</h2>
+      <p>
+        الوفاء ديالك كيهمنا، وثقتك هي راس مالنا.
+        معانا التوصيل بالسخاوة والاحترام.
+      </p>
+    </section>
+
+    <section class="card points">
+      <h2>🎁 برنامج الزبناء الأوفياء</h2>
+      <div class="points-number">⭐</div>
+      <p>جمع التوصيلات واستافد من الامتيازات ديالك.</p>
+      <p>التوصيلة رقم 11 مجانية من بعد كل 10 توصيلات مؤهلة.</p>
+    </section>
+
+    <section class="card">
+      <h2>🛵 الخدمات ديالنا</h2>
+      <div class="buttons">
+        <a
+          class="btn primary"
+          href="https://wa.me/212715063305"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          📲 تواصل معانا عبر WhatsApp
+        </a>
+
+        <a
+          class="btn orange"
+          href="https://www.instagram.com/skhawa.livrili/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          📸 تابعنا على Instagram
+        </a>
+
+        <a
+          class="btn light"
+          href="mailto:mkhloufi49@gmail.com"
+        >
+          ✉️ تواصل عبر البريد الإلكتروني
+        </a>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>📱 تثبيت التطبيق</h2>
+      <p>
+        تقدر تزيد SKHAWA LIVRILI للشاشة الرئيسية ديال تليفونك
+        وتدخل ليه بسهولة.
+      </p>
+      <p class="note">
+        من قائمة المتصفح اختار «إضافة إلى الشاشة الرئيسية»
+        أو «تثبيت التطبيق» إلا كان الخيار متاح.
+      </p>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>SKHAWA LIVRILI © 2026</p>
+    <p>بثقتكم سنواصل التطور ❤️</p>
+  </footer>
+
+  <script>
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", function () {
+        navigator.serviceWorker.register("./service-worker.js")
+          .catch(function (error) {
+            console.error("Service Worker error:", error);
+          });
       });
-
-      // حتى إلا كان ملف النسخة فيه النظام القديم فقط.
-      if (!a.length) {
-        throw new Error("No valid operations");
-      }
-
-      const resultat = operations.slice();
-      ajouterSansDoublons(resultat, a);
-
-      const anciennes = localStorage.getItem(CLE);
-
-      try {
-        localStorage.setItem(CLE, JSON.stringify(resultat));
-      } catch(e) {
-        if (anciennes === null) localStorage.removeItem(CLE);
-        else localStorage.setItem(CLE, anciennes);
-        throw e;
-      }
-
-      operations = resultat;
-      afficherOperations();
-      input.value = "";
-      alert("تم استرجاع العمليات الجديدة بنجاح.");
-    } catch(e) {
-      alert("تعذر استرجاع الملف. تأكد أنه نسخة JSON صحيحة ديال SKHAWA LIVRILI.");
     }
-  };
+  </script>
 
-  reader.readAsText(file);
-}
-
-chargerOperations();
-afficherOperations();
-
-if ("serviceWorker" in navigator) {
-  window.addEventListener("load", () => {
-    navigator.serviceWorker.register("./service-worker.js")
-      .catch(error => console.error("Service Worker error:", error));
-  });
-}
-</script>
 </body>
 </html>
