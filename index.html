@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -6,7 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#ff7900">
 <meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="description" content="SKHAWA LIVRILI - تتبع المدخول والمصاريف والزبناء والتوصيلات">
 <title>SKHAWA LIVRILI</title>
+
+<link rel="manifest" href="./manifest.json">
 
 <style>
 * {
@@ -26,6 +28,7 @@ body {
   font-family: Arial, sans-serif;
   background: var(--background);
   color: var(--black);
+  line-height: 1.7;
 }
 
 header {
@@ -95,6 +98,8 @@ h2 {
 
 .card strong {
   font-size: 21px;
+  direction: ltr;
+  display: inline-block;
 }
 
 .field {
@@ -132,6 +137,7 @@ button {
   font-size: 15px;
   font-weight: bold;
   cursor: pointer;
+  margin-top: 5px;
 }
 
 button:active {
@@ -144,8 +150,10 @@ button:active {
   margin-top: 10px;
 }
 
-  line-height: 1.7;
-  margin-top: 10px;
+.note {
+  font-size: 12px;
+  color: #666;
+  margin-top: 12px;
 }
 
 .status {
@@ -153,7 +161,7 @@ button:active {
   color: #168044;
   font-size: 13px;
   margin-top: 10px;
-  min-height: 20px;
+  min-height: 24px;
 }
 
 footer {
@@ -164,8 +172,12 @@ footer {
 }
 
 @media (max-width: 360px) {
+  .card {
+    padding: 10px;
+  }
+
   .card strong {
-    font-size: 18px;
+    font-size: 17px;
   }
 }
 </style>
@@ -181,35 +193,37 @@ footer {
 <main>
 
   <section class="summary">
+
     <div class="card">
-      <p>مجموع المدخول</p>
+      <p>💰 مجموع المدخول</p>
       <strong id="sumIncome">0.00 DH</strong>
     </div>
 
     <div class="card">
-      <p>مجموع المصاريف</p>
+      <p>💸 مجموع المصاريف</p>
       <strong id="sumExpenses">0.00 DH</strong>
     </div>
 
     <div class="card">
-      <p>الربح الصافي</p>
+      <p>📈 الربح الصافي</p>
       <strong id="netProfit">0.00 DH</strong>
     </div>
 
     <div class="card">
-      <p>عدد الزبناء</p>
+      <p>👥 عدد الزبناء</p>
       <strong id="sumClients">0</strong>
     </div>
 
     <div class="card">
-      <p>عدد التوصيلات</p>
+      <p>🛵 عدد التوصيلات</p>
       <strong id="sumDeliveries">0</strong>
     </div>
 
     <div class="card">
-      <p>معدل المدخول لكل توصيل</p>
+      <p>📊 المدخول لكل توصيل</p>
       <strong id="averageDelivery">0.00 DH</strong>
     </div>
+
   </section>
 
   <section class="panel">
@@ -217,16 +231,14 @@ footer {
 
     <div class="field">
       <label for="income">مجموع المدخول بالدرهم</label>
-      <input id="income" type="number" min="0"
-        step="0.01" inputmode="decimal"
-        placeholder="دخل مجموع المدخول">
+      <input id="income" type="number" min="0" step="0.01"
+        inputmode="decimal" placeholder="دخل مجموع المدخول">
     </div>
 
     <div class="field">
       <label for="expenses">مجموع المصاريف بالدرهم</label>
-      <input id="expenses" type="number" min="0"
-        step="0.01" inputmode="decimal"
-        placeholder="دخل مجموع المصاريف">
+      <input id="expenses" type="number" min="0" step="0.01"
+        inputmode="decimal" placeholder="دخل مجموع المصاريف">
     </div>
 
     <button id="saveMoney">حفظ المدخول والمصاريف</button>
@@ -237,16 +249,14 @@ footer {
 
     <div class="field">
       <label for="clients">مجموع الزبناء</label>
-      <input id="clients" type="number" min="0"
-        step="1" inputmode="numeric"
-        placeholder="دخل عدد الزبناء">
+      <input id="clients" type="number" min="0" step="1"
+        inputmode="numeric" placeholder="دخل عدد الزبناء">
     </div>
 
     <div class="field">
       <label for="deliveries">مجموع التوصيلات</label>
-      <input id="deliveries" type="number" min="0"
-        step="1" inputmode="numeric"
-        placeholder="دخل عدد التوصيلات">
+      <input id="deliveries" type="number" min="0" step="1"
+        inputmode="numeric" placeholder="دخل عدد التوصيلات">
     </div>
 
     <button id="saveCounts">حفظ الزبناء والتوصيلات</button>
@@ -256,46 +266,30 @@ footer {
     <h2>⚙️ إعدادات البيانات</h2>
 
     <button class="black-button" id="exportData">
-      تحميل نسخة احتياطية
+      📥 تحميل نسخة احتياطية
     </button>
 
+    <button class="black-button" id="importData">
+      📤 استرجاع نسخة احتياطية
+    </button>
+
+    <input id="backupFile" type="file" accept=".json,application/json"
+      style="display:none">
+
     <button class="black-button" id="resetData">
-      مسح جميع البيانات
+      🗑️ مسح جميع البيانات
     </button>
 
     <p class="note">
-      الأرقام كتتحفظ فالتليفون ديالك. حمّل نسخة احتياطية
-      باش تحافظ على بياناتك.
+      البيانات كتتحفظ فهاد المتصفح. حمّل نسخة احتياطية بانتظام
+      باش تقدر تسترجع الأرقام ديالك إلا تبدل المتصفح أو التليفون.
     </p>
 
-    <div id="status" class="status" role="status"></div>
+    <div id="status" class="status" role="status"
+      aria-live="polite"></div>
   </section>
 
 </main>
-
-<footer>
-  SKHAWA LIVRILI © — سخاوة فالقلب وليفري فالوقت
-</footer>
-
-<script>
-
-<section class="panel">
-  <h2>⚙️ إعدادات البيانات</h2>
-
-  <button class="black-button" id="exportData">
-    تحميل نسخة احتياطية
-  </button>
-
-  <button class="black-button" id="resetData" style="margin-top:10px">
-    مسح جميع البيانات
-  </button>
-
-  <p class="note">
-    البيانات كتتحفظ فالتليفون ديالك. حمّل نسخة احتياطية من حين لآخر.
-  </p>
-
-  <div id="status" class="status" role="status"></div>
-</section>
 
 <footer>
   SKHAWA LIVRILI © — سخاوة فالقلب وليفري فالوقت
@@ -306,8 +300,14 @@ footer {
   "use strict";
 
   const KEY = "skhawa_livrili_tracker_v2";
+  const OLD_KEYS = [
+    "skhawa_livrili_tracker_v1",
+    "skhawa_livrili_tracker"
+  ];
+
   const ids = ["income", "expenses", "clients", "deliveries"];
   const integerIds = ["clients", "deliveries"];
+
   const $ = id => document.getElementById(id);
 
   let data = {
@@ -318,8 +318,17 @@ footer {
   };
 
   function number(value, integer) {
+    if (value === "" || value === null ||
+        value === undefined) {
+      return 0;
+    }
+
     let n = Number(value);
-    if (!Number.isFinite(n) || n < 0) n = 0;
+
+    if (!Number.isFinite(n) || n < 0) {
+      n = 0;
+    }
+
     return integer ? Math.floor(n) : n;
   }
 
@@ -330,13 +339,20 @@ footer {
     }) + " DH";
   }
 
+  function showStatus(message, error) {
+    $("status").textContent = message;
+    $("status").style.color = error ? "#c73535" : "#168044";
+  }
+
   function save() {
     try {
       localStorage.setItem(KEY, JSON.stringify(data));
       return true;
     } catch (error) {
-      $("status").textContent =
-        "تعذر حفظ البيانات. تأكد من إعدادات المتصفح.";
+      showStatus(
+        "تعذر حفظ البيانات. حمّل نسخة احتياطية وتأكد من المتصفح.",
+        true
+      );
       return false;
     }
   }
@@ -346,6 +362,7 @@ footer {
     $("sumExpenses").textContent = money(data.expenses);
 
     const profit = data.income - data.expenses;
+
     $("netProfit").textContent = money(profit);
     $("netProfit").style.color =
       profit < 0 ? "#c73535" : "#168044";
@@ -363,35 +380,62 @@ footer {
     );
   }
 
-  function readInputs(list) {
-    list.forEach(id => {
-      data[id] = number($(id).value, integerIds.includes(id));
+  function updateDataFromInputs(list) {
+    list.forEach(function (id) {
+      data[id] = number(
+        $(id).value,
+        integerIds.includes(id)
+      );
+
       $(id).value = data[id];
     });
 
     calculate();
 
     if (save()) {
-      $("status").textContent = "تم الحفظ وتحديث الحسابات بنجاح ✅";
+      showStatus("تم الحفظ وتحديث الحسابات بنجاح ✅");
     }
+  }
+
+  function validData(obj) {
+    return obj &&
+      typeof obj === "object" &&
+      ids.every(id =>
+        obj[id] !== undefined &&
+        Number.isFinite(Number(obj[id])) &&
+        Number(obj[id]) >= 0
+      );
   }
 
   function load() {
     try {
-      const saved = localStorage.getItem(KEY);
+      let saved = localStorage.getItem(KEY);
+
+      // محاولة استرجاع البيانات القديمة إذا كانت موجودة
+      if (!saved) {
+        for (const oldKey of OLD_KEYS) {
+          const oldSaved = localStorage.getItem(oldKey);
+          if (oldSaved) {
+            saved = oldSaved;
+            break;
+          }
+        }
+      }
+
       if (saved) {
-        const oldData = JSON.parse(saved);
-        ids.forEach(id => {
-          if (oldData[id] !== undefined) {
+        const parsed = JSON.parse(saved);
+
+        if (validData(parsed)) {
+          ids.forEach(id => {
             data[id] = number(
-              oldData[id],
+              parsed[id],
               integerIds.includes(id)
             );
-          }
-        });
+          });
+        }
       }
     } catch (error) {
-      $("status").textContent = "تعذر قراءة البيانات المحفوظة.";
+      showStatus("تعذر قراءة البيانات المحفوظة.", true);
     }
 
     ids.forEach(id => {
@@ -402,48 +446,116 @@ footer {
   }
 
   $("saveMoney").addEventListener("click", function () {
-    readInputs(["income", "expenses"]);
+    updateDataFromInputs(["income", "expenses"]);
   });
 
   $("saveCounts").addEventListener("click", function () {
-    readInputs(["clients", "deliveries"]);
+    updateDataFromInputs(["clients", "deliveries"]);
   });
 
-  ids.forEach(id => {
+  ids.forEach(function (id) {
     $(id).addEventListener("input", function () {
-      data[id] = number(
-        $(id).value,
-        integerIds.includes(id)
-      );
+      if ($(id).value === "") {
+        data[id] = 0;
+      } else {
+        data[id] = number(
+          $(id).value,
+          integerIds.includes(id)
+        );
+      }
 
       calculate();
-      save();
-      $("status").textContent = "الحسابات كتتحدّث أوتوماتيكياً";
+
+      if (save()) {
+        showStatus("تم تحديث الحسابات والحفظ تلقائياً ✅");
+      }
     });
   });
 
   $("exportData").addEventListener("click", function () {
-    const blob = new Blob(
-      [JSON.stringify(data, null, 2)],
-      { type: "application/json;charset=utf-8" }
-    );
+    try {
+      const blob = new Blob(
+        [JSON.stringify(data, null, 2)],
+        { type: "application/json;charset=utf-8" }
+      );
 
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement("a");
-    link.href = url;
-    link.download = "skhawa-livrili-backup.json";
-    document.body.appendChild(link);
-    link.click();
-    link.remove();
-    URL.revokeObjectURL(url);
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
 
-    $("status").textContent = "تم تجهيز النسخة الاحتياطية.";
+      link.href = url;
+      link.download = "skhawa-livrili-backup.json";
+
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+
+      setTimeout(function () {
+        URL.revokeObjectURL(url);
+      }, 1000);
+
+      showStatus("تم تجهيز النسخة الاحتياطية ✅");
+    } catch (error) {
+      showStatus("تعذر تحميل النسخة الاحتياطية.", true);
+    }
+  });
+
+  $("importData").addEventListener("click", function () {
+    $("backupFile").click();
+  });
+
+  $("backupFile").addEventListener("change", function () {
+    const file = this.files[0];
+
+    if (!file) return;
+
+    const reader = new FileReader();
+
+    reader.onload = function () {
+      try {
+        const imported = JSON.parse(reader.result);
+
+        if (!validData(imported)) {
+          showStatus("ملف النسخة الاحتياطية غير صالح.", true);
+          return;
+        }
+
+        ids.forEach(id => {
+          data[id] = number(
+            imported[id],
+            integerIds.includes(id)
+          );
+
+          $(id).value = data[id];
+        });
+
+        calculate();
+
+        if (save()) {
+          showStatus("تم استرجاع البيانات بنجاح ✅");
+        }
+      } catch (error) {
+        showStatus("ما قدرناش نقراو ملف النسخة الاحتياطية.", true);
+      } finally {
+        $("backupFile").value = "";
+      }
+    };
+
+    reader.onerror = function () {
+      showStatus("وقع مشكل أثناء قراءة الملف.", true);
+      $("backupFile").value = "";
+    };
+
+    reader.readAsText(file);
   });
 
   $("resetData").addEventListener("click", function () {
-    if (!confirm("واش متأكد بغيتي تمسح جميع البيانات؟")) {
-      return;
-    }
+    const confirmed = confirm(
+      "واش متأكد بغيتي تمسح جميع البيانات؟ هاد العملية ما يمكنش ترجعها إلا كانت عندك نسخة احتياطية."
+    );
+
+    if (!confirmed) return;
+
+    const previousData = { ...data };
 
     data = {
       income: 0,
@@ -452,18 +564,45 @@ footer {
       deliveries: 0
     };
 
-    ids.forEach(id => {
-      $(id).value = 0;
-    });
-
     calculate();
 
     if (save()) {
-      $("status").textContent = "تم مسح البيانات.";
+      ids.forEach(id => {
+        $(id).value = 0;
+      });
+
+      showStatus("تم مسح البيانات بنجاح.");
+    } else {
+      data = previousData;
+
+      ids.forEach(id => {
+        $(id).value = data[id];
+      });
+
+      calculate();
     }
   });
 
   load();
+
+  // تحديث الواجهة إذا رجع المستخدم للتطبيق
+  document.addEventListener("visibilitychange", function () {
+    if (!document.hidden) {
+      calculate();
+    }
+  });
+
+  // تسجيل Service Worker إذا كان الملف موجوداً
+  if ("serviceWorker" in navigator &&
+      location.protocol.startsWith("http")) {
+    window.addEventListener("load", function () {
+      navigator.serviceWorker.register("./service-worker.js")
+        .catch(function () {
+          // التطبيق يبقى خدام حتى إلا فشل التسجيل
+        });
+    });
+  }
+
 })();
 </script>
 
