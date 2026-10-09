@@ -4,607 +4,702 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#ff7900">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="description" content="SKHAWA LIVRILI - تتبع المدخول والمصاريف والزبناء والتوصيلات">
+<meta name="description" content="SKHAWA LIVRILI">
 <title>SKHAWA LIVRILI</title>
-
 <link rel="manifest" href="./manifest.json">
 
 <style>
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+ --orange:#ff7900;
+ --black:#151515;
+ --bg:#f3f3f3;
+ --white:#fff;
 }
-
-:root {
-  --orange: #ff7900;
-  --black: #151515;
-  --background: #f3f3f3;
-  --white: #ffffff;
+body{
+ font-family:Arial,sans-serif;
+ background:var(--bg);
+ color:var(--black);
+ line-height:1.7;
 }
-
-body {
-  font-family: Arial, sans-serif;
-  background: var(--background);
-  color: var(--black);
-  line-height: 1.7;
+header{
+ background:var(--black);
+ color:white;
+ text-align:center;
+ padding:22px 12px;
+ border-bottom:5px solid var(--orange);
 }
-
-header {
-  background: var(--black);
-  color: white;
-  text-align: center;
-  padding: 24px 12px;
-  border-bottom: 5px solid var(--orange);
+header h1{font-size:25px;font-weight:900}
+header h1 span{color:var(--orange)}
+header p{font-size:13px;color:#ddd;margin-top:5px}
+main{max-width:650px;margin:auto;padding:14px}
+h2{font-size:18px;margin-bottom:13px}
+.panel,.card{
+ background:white;
+ border:1px solid #e5e5e5;
+ border-radius:13px;
+ box-shadow:0 3px 10px #00000008;
 }
-
-header h1 {
-  font-size: 25px;
-  font-weight: 900;
+.panel{padding:15px;margin-bottom:15px}
+.summary{
+ display:grid;
+ grid-template-columns:1fr 1fr;
+ gap:10px;
+ margin-bottom:15px;
 }
-
-header h1 span {
-  color: var(--orange);
+.card{padding:13px;border-top:4px solid var(--orange)}
+.card p{font-size:12px;color:#666;margin-bottom:5px}
+.card strong{font-size:19px;overflow-wrap:anywhere}
+.field{margin-bottom:12px}
+label{display:block;font-weight:bold;font-size:14px;margin-bottom:5px}
+input,select,textarea{
+ width:100%;
+ padding:12px;
+ font-size:16px;
+ font-family:inherit;
+ border:1px solid #ccc;
+ border-radius:9px;
+ background:white;
+ color:#151515;
 }
-
-header p {
-  margin-top: 8px;
-  font-size: 13px;
-  color: #ddd;
+input:focus,select:focus,textarea:focus{
+ outline:2px solid #ffbd80;
+ border-color:var(--orange);
 }
-
-main {
-  max-width: 650px;
-  margin: auto;
-  padding: 15px;
+button{
+ width:100%;
+ padding:12px;
+ border:0;
+ border-radius:9px;
+ background:var(--orange);
+ color:#111;
+ font-size:15px;
+ font-weight:bold;
+ cursor:pointer;
+ margin-top:6px;
 }
-
-h2 {
-  font-size: 18px;
-  margin-bottom: 14px;
+button:active{transform:scale(.99)}
+.black-button{background:var(--black);color:white}
+.red-button{background:#b42318;color:white}
+.green-button{background:#167844;color:white}
+.note{font-size:12px;color:#666;margin-top:9px}
+.status{
+ text-align:center;
+ font-size:13px;
+ margin-top:10px;
+ min-height:24px;
+ overflow-wrap:anywhere;
 }
-
-.panel {
-  background: white;
-  padding: 16px;
-  border-radius: 14px;
-  margin-bottom: 15px;
-  border: 1px solid #e5e5e5;
-  box-shadow: 0 3px 10px #00000008;
+.operation{
+ border:1px solid #e5e5e5;
+ border-right:4px solid var(--orange);
+ border-radius:9px;
+ padding:11px;
+ margin-top:9px;
+ background:#fff;
+ overflow-wrap:anywhere;
 }
-
-.summary {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-  margin-bottom: 15px;
+.operation-top{
+ display:flex;
+ justify-content:space-between;
+ gap:8px;
+ align-items:flex-start;
 }
-
-.card {
-  background: white;
-  padding: 14px;
-  border-radius: 12px;
-  border-top: 4px solid var(--orange);
-  box-shadow: 0 3px 10px #00000008;
-  overflow-wrap: anywhere;
+.operation-title{font-weight:bold}
+.operation-date{font-size:12px;color:#666}
+.operation-amount{font-weight:bold;direction:ltr;white-space:nowrap}
+.income-color{color:#168044}
+.expense-color{color:#c73535}
+.small-button{
+ width:auto;
+ padding:7px 10px;
+ font-size:12px;
+ margin-top:8px;
 }
-
-.card p {
-  color: #666;
-  font-size: 13px;
-  margin-bottom: 9px;
-}
-
-.card strong {
-  font-size: 21px;
-  direction: ltr;
-  display: inline-block;
-}
-
-.field {
-  margin-bottom: 13px;
-}
-
-label {
-  display: block;
-  font-weight: bold;
-  font-size: 14px;
-  margin-bottom: 7px;
-}
-
-input {
-  width: 100%;
-  padding: 12px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 9px;
-  background: white;
-}
-
-input:focus {
-  outline: 2px solid #ffbd80;
-  border-color: var(--orange);
-}
-
-button {
-  width: 100%;
-  padding: 13px;
-  border: none;
-  border-radius: 9px;
-  background: var(--orange);
-  color: #111;
-  font-size: 15px;
-  font-weight: bold;
-  cursor: pointer;
-  margin-top: 5px;
-}
-
-button:active {
-  transform: scale(.99);
-}
-
-.black-button {
-  background: var(--black);
-  color: white;
-  margin-top: 10px;
-}
-
-.note {
-  font-size: 12px;
-  color: #666;
-  margin-top: 12px;
-}
-
-.status {
-  text-align: center;
-  color: #168044;
-  font-size: 13px;
-  margin-top: 10px;
-  min-height: 24px;
-}
-
-footer {
-  text-align: center;
-  padding: 20px;
-  color: #777;
-  font-size: 12px;
-}
-
-@media (max-width: 360px) {
-  .card {
-    padding: 10px;
-  }
-
-  .card strong {
-    font-size: 17px;
-  }
+.empty{text-align:center;color:#777;padding:15px;font-size:13px}
+footer{text-align:center;padding:20px;color:#777;font-size:12px}
+@media(max-width:360px){
+ .card{padding:9px}
+ .card strong{font-size:16px}
+ .operation-top{flex-direction:column}
 }
 </style>
 </head>
 
 <body>
-
 <header>
-  <h1>SKHAWA <span>LIVRILI</span></h1>
-  <p>المدخول والمصاريف والزبناء والتوصيلات</p>
+ <h1>SKHAWA <span>LIVRILI</span></h1>
+ <p>المدخول والمصاريف والزبناء والتوصيلات</p>
 </header>
 
 <main>
 
-  <section class="summary">
+ <section class="summary">
+  <div class="card">
+   <p>💰 مجموع المدخول</p>
+   <strong id="sumIncome">0.00 DH</strong>
+  </div>
+  <div class="card">
+   <p>💸 مجموع المصاريف</p>
+   <strong id="sumExpenses">0.00 DH</strong>
+  </div>
+  <div class="card">
+   <p>📈 الربح الصافي</p>
+   <strong id="netProfit">0.00 DH</strong>
+  </div>
+  <div class="card">
+   <p>👥 مجموع الزبناء</p>
+   <strong id="sumClients">0</strong>
+  </div>
+  <div class="card">
+   <p>🛵 مجموع التوصيلات</p>
+   <strong id="sumDeliveries">0</strong>
+  </div>
+  <div class="card">
+   <p>🧾 عدد العمليات المسجلة</p>
+   <strong id="sumOperations">0</strong>
+  </div>
+ </section>
 
-    <div class="card">
-      <p>💰 مجموع المدخول</p>
-      <strong id="sumIncome">0.00 DH</strong>
-    </div>
+ <section class="panel">
+  <h2>➕ تسجيل مدخول أو مصروف</h2>
 
-    <div class="card">
-      <p>💸 مجموع المصاريف</p>
-      <strong id="sumExpenses">0.00 DH</strong>
-    </div>
+  <div class="field">
+   <label for="operationType">نوع العملية</label>
+   <select id="operationType">
+    <option value="income">💰 مدخول</option>
+    <option value="expense">💸 مصروف</option>
+   </select>
+  </div>
 
-    <div class="card">
-      <p>📈 الربح الصافي</p>
-      <strong id="netProfit">0.00 DH</strong>
-    </div>
+  <div class="field">
+   <label for="category">نوع المدخول أو المصروف</label>
+   <select id="category">
+    <option value="توصيل">توصيل</option>
+    <option value="طلبات">طلبات</option>
+    <option value="وقود">وقود / مازوط</option>
+    <option value="صيانة">صيانة الموتور</option>
+    <option value="هاتف وإنترنت">هاتف وإنترنت</option>
+    <option value="معدات">معدات</option>
+    <option value="أخرى">أخرى</option>
+   </select>
+  </div>
 
-    <div class="card">
-      <p>👥 عدد الزبناء</p>
-      <strong id="sumClients">0</strong>
-    </div>
+  <div class="field">
+   <label for="amount">المبلغ بالدرهم</label>
+   <input id="amount" type="number" min="0.01" step="0.01"
+    inputmode="decimal" placeholder="مثال: 50">
+  </div>
 
-    <div class="card">
-      <p>🛵 عدد التوصيلات</p>
-      <strong id="sumDeliveries">0</strong>
-    </div>
+  <div class="field">
+   <label for="description">الوصف (اختياري)</label>
+   <input id="description" type="text" maxlength="200"
+    placeholder="مثال: توصيل طلب لزبون">
+  </div>
 
-    <div class="card">
-      <p>📊 المدخول لكل توصيل</p>
-      <strong id="averageDelivery">0.00 DH</strong>
-    </div>
+  <div class="field">
+   <label for="operationDate">تاريخ العملية</label>
+   <input id="operationDate" type="date">
+  </div>
 
-  </section>
+  <button id="addOperation">➕ إضافة العملية وحفظها</button>
+  <p class="note">كل عملية كتتسجل بوحدها، بالتاريخ والنوع والمبلغ، وكتبقى فالسجل حتى تمسحها بنفسك.</p>
+  <div id="operationStatus" class="status" role="status" aria-live="polite"></div>
+ </section>
 
-  <section class="panel">
-    <h2>💰 المدخول والمصاريف</h2>
+ <section class="panel">
+  <h2>👥 زيادة عدد الزبناء</h2>
+  <p class="note">دخل عدد الزبناء الجدد اللي بغيتي تزيد للمجموع السابق.</p>
 
-    <div class="field">
-      <label for="income">مجموع المدخول بالدرهم</label>
-      <input id="income" type="number" min="0" step="0.01"
-        inputmode="decimal" placeholder="دخل مجموع المدخول">
-    </div>
+  <div class="field">
+   <label for="newClients">عدد الزبناء الجدد</label>
+   <input id="newClients" type="number" min="1" step="1"
+    inputmode="numeric" placeholder="مثال: 3">
+  </div>
 
-    <div class="field">
-      <label for="expenses">مجموع المصاريف بالدرهم</label>
-      <input id="expenses" type="number" min="0" step="0.01"
-        inputmode="decimal" placeholder="دخل مجموع المصاريف">
-    </div>
+  <button id="addClients">➕ زيادة الزبناء</button>
+  <p id="clientsStatus" class="status" role="status" aria-live="polite"></p>
+ </section>
 
-    <button id="saveMoney">حفظ المدخول والمصاريف</button>
-  </section>
+ <section class="panel">
+  <h2>🛵 زيادة عدد التوصيلات</h2>
+  <p class="note">دخل عدد التوصيلات الجديدة، وغادي يتزاد للمجموع السابق.</p>
 
-  <section class="panel">
-    <h2>🛵 الزبناء والتوصيلات</h2>
+  <div class="field">
+   <label for="newDeliveries">عدد التوصيلات الجديدة</label>
+   <input id="newDeliveries" type="number" min="1" step="1"
+    inputmode="numeric" placeholder="مثال: 5">
+  </div>
 
-    <div class="field">
-      <label for="clients">مجموع الزبناء</label>
-      <input id="clients" type="number" min="0" step="1"
-        inputmode="numeric" placeholder="دخل عدد الزبناء">
-    </div>
+  <button id="addDeliveries">➕ زيادة التوصيلات</button>
+  <p id="deliveriesStatus" class="status" role="status" aria-live="polite"></p>
+ </section>
 
-    <div class="field">
-      <label for="deliveries">مجموع التوصيلات</label>
-      <input id="deliveries" type="number" min="0" step="1"
-        inputmode="numeric" placeholder="دخل عدد التوصيلات">
-    </div>
+ <section class="panel">
+  <h2>📋 سجل العمليات</h2>
+  <p class="note">آخر العمليات المسجلة كيبانو هنا. العمليات القديمة كتبقى محفوظة حتى إلا زدت عمليات جديدة.</p>
+  <div id="operationList"></div>
+  <button class="black-button" id="showAll">عرض جميع العمليات</button>
+ </section>
 
-    <button id="saveCounts">حفظ الزبناء والتوصيلات</button>
-  </section>
+ <section class="panel">
+  <h2>💾 النسخة الاحتياطية</h2>
+  <button class="black-button" id="exportData">📥 تحميل نسخة احتياطية كاملة</button>
+  <button class="black-button" id="importData">📤 استرجاع نسخة احتياطية</button>
+  <input id="backupFile" type="file" accept=".json,application/json" hidden>
+  <p class="note">النسخة الاحتياطية كتضم الأرقام وسجل العمليات. حمّلها بانتظام وخليها فملف آمن فالتليفون.</p>
+  <div id="backupStatus" class="status" role="status" aria-live="polite"></div>
+ </section>
 
-  <section class="panel">
-    <h2>⚙️ إعدادات البيانات</h2>
-
-    <button class="black-button" id="exportData">
-      📥 تحميل نسخة احتياطية
-    </button>
-
-    <button class="black-button" id="importData">
-      📤 استرجاع نسخة احتياطية
-    </button>
-
-    <input id="backupFile" type="file" accept=".json,application/json"
-      style="display:none">
-
-    <button class="black-button" id="resetData">
-      🗑️ مسح جميع البيانات
-    </button>
-
-    <p class="note">
-      البيانات كتتحفظ فهاد المتصفح. حمّل نسخة احتياطية بانتظام
-      باش تقدر تسترجع الأرقام ديالك إلا تبدل المتصفح أو التليفون.
-    </p>
-
-    <div id="status" class="status" role="status"
-      aria-live="polite"></div>
-  </section>
+ <section class="panel">
+  <h2>⚠️ مسح البيانات</h2>
+  <p class="note">ما تستعملش هاد الزر إلا كنت متأكد، حيث مسح البيانات يقدر يضيّع السجل. حمّل نسخة احتياطية قبل أي مسح.</p>
+  <button class="red-button" id="resetData">مسح جميع البيانات</button>
+ </section>
 
 </main>
 
-<footer>
-  SKHAWA LIVRILI © — سخاوة فالقلب وليفري فالوقت
-</footer>
+<footer>SKHAWA LIVRILI © — سخاوة فالقلب وليفري فالوقت</footer>
 
 <script>
-(function () {
-  "use strict";
+(function(){
+"use strict";
 
-  const KEY = "skhawa_livrili_tracker_v2";
-  const OLD_KEYS = [
-    "skhawa_livrili_tracker_v1",
-    "skhawa_livrili_tracker"
-  ];
+const KEY = "skhawa_livrili_tracker_v3";
+const OLD_KEYS = [
+ "skhawa_livrili_tracker_v2",
+ "skhawa_livrili_tracker_v1",
+ "skhawa_livrili_tracker"
+];
 
-  const ids = ["income", "expenses", "clients", "deliveries"];
-  const integerIds = ["clients", "deliveries"];
+const $ = id => document.getElementById(id);
 
-  const $ = id => document.getElementById(id);
+const today = new Date();
+const localDate = [
+ today.getFullYear(),
+ String(today.getMonth()+1).padStart(2,"0"),
+ String(today.getDate()).padStart(2,"0")
+].join("-");
 
-  let data = {
-    income: 0,
-    expenses: 0,
-    clients: 0,
-    deliveries: 0
+$("operationDate").value = localDate;
+
+function freshData(){
+ return {
+  version:3,
+  openingIncome:0,
+  openingExpenses:0,
+  clients:0,
+  deliveries:0,
+  records:[],
+  createdAt:new Date().toISOString()
+ };
+}
+
+let data = freshData();
+let showAllRecords = false;
+
+function num(value){
+ const n = Number(value);
+ return Number.isFinite(n) && n >= 0 ? n : 0;
+}
+
+function money(value){
+ return num(value).toLocaleString("fr-MA",{
+  minimumFractionDigits:2,
+  maximumFractionDigits:2
+ })+" DH";
+}
+
+function integer(value){
+ return Math.floor(num(value));
+}
+
+function status(id,message,error){
+ $(id).textContent = message;
+ $(id).style.color = error ? "#c73535" : "#168044";
+}
+
+function save(){
+ try{
+  localStorage.setItem(KEY,JSON.stringify(data));
+  return true;
+ }catch(e){
+  status("backupStatus",
+   "تعذر الحفظ. تأكد من مساحة المتصفح وحمّل نسخة احتياطية.",
+   true);
+  return false;
+ }
+}
+
+function totals(){
+ let income = num(data.openingIncome);
+ let expenses = num(data.openingExpenses);
+
+ data.records.forEach(record=>{
+  if(record.type==="income") income += num(record.amount);
+  if(record.type==="expense") expenses += num(record.amount);
+ });
+
+ return {income,expenses,profit:income-expenses};
+}
+
+function renderSummary(){
+ const t = totals();
+
+ $("sumIncome").textContent = money(t.income);
+ $("sumExpenses").textContent = money(t.expenses);
+ $("netProfit").textContent = money(t.profit);
+ $("netProfit").style.color = t.profit < 0 ? "#c73535" : "#168044";
+ $("sumClients").textContent = integer(data.clients).toLocaleString("fr-MA");
+ $("sumDeliveries").textContent = integer(data.deliveries).toLocaleString("fr-MA");
+ $("sumOperations").textContent = data.records.length.toLocaleString("fr-MA");
+}
+
+function makeElement(tag,className,text){
+ const el = document.createElement(tag);
+ if(className) el.className = className;
+ if(text !== undefined) el.textContent = text;
+ return el;
+}
+
+function renderRecords(){
+ const container = $("operationList");
+ container.replaceChildren();
+
+ const records = [...data.records].reverse();
+ const visible = showAllRecords ? records : records.slice(0,5);
+
+ if(visible.length===0){
+  container.appendChild(makeElement("div","empty","مازال ما تسجلات حتى عملية جديدة."));
+ }else{
+  visible.forEach(record=>{
+   const item = makeElement("div","operation");
+   const top = makeElement("div","operation-top");
+   const left = makeElement("div","");
+   const title = makeElement("div","operation-title",
+    (record.type==="income" ? "💰 مدخول" : "💸 مصروف")+" — "+record.category);
+   const date = makeElement("div","operation-date",record.date || "");
+   left.append(title,date);
+
+   const amount = makeElement("div",
+    "operation-amount "+(record.type==="income"?"income-color":"expense-color"),
+    (record.type==="income"?"+":"−")+money(record.amount));
+
+   top.append(left,amount);
+   item.appendChild(top);
+
+   if(record.description){
+    item.appendChild(makeElement("p","note",record.description));
+   }
+
+   const del = makeElement("button","small-button red-button","حذف هاد العملية");
+   del.addEventListener("click",()=>{
+    if(!confirm("واش متأكد بغيتي تحذف هاد العملية؟")) return;
+    const index = data.records.findIndex(r=>r.id===record.id);
+    if(index<0) return;
+    const removed = data.records.splice(index,1)[0];
+    if(save()){
+     renderSummary();
+     renderRecords();
+     status("operationStatus","تم حذف العملية وحفظ التغيير.");
+    }else{
+     data.records.splice(index,0,removed);
+     renderSummary();
+     renderRecords();
+    }
+   });
+
+   item.appendChild(del);
+   container.appendChild(item);
+  });
+ }
+
+ $("showAll").textContent = showAllRecords
+  ? "عرض آخر 5 عمليات"
+  : "عرض جميع العمليات";
+ $("showAll").style.display = records.length>5 ? "block" : "none";
+}
+
+function render(){
+ renderSummary();
+ renderRecords();
+}
+
+function addOperation(){
+ const type = $("operationType").value;
+ const category = $("category").value;
+ const amount = Number($("amount").value);
+ const description = $("description").value.trim();
+ const date = $("operationDate").value;
+
+ if(!Number.isFinite(amount) || amount<=0){
+  status("operationStatus","دخل مبلغ صحيح أكبر من صفر.",true);
+  return;
+ }
+ if(!date){
+  status("operationStatus","اختار تاريخ العملية.",true);
+  return;
+ }
+
+ const record = {
+  id:Date.now().toString()+"-"+Math.random().toString(36).slice(2,8),
+  type,
+  category,
+  amount:Math.round(amount*100)/100,
+  description,
+  date,
+  createdAt:new Date().toISOString()
+ };
+
+ data.records.push(record);
+
+ if(save()){
+  $("amount").value = "";
+  $("description").value = "";
+  $("operationDate").value = localDate;
+  status("operationStatus","تسجلات العملية بنجاح ✅");
+  render();
+ }else{
+  data.records.pop();
+ }
+}
+
+function addCount(field,inputId,statusId,label){
+ const input = $(inputId);
+ const value = Number(input.value);
+
+ if(!Number.isSafeInteger(value) || value<=0){
+  status(statusId,"دخل عدد صحيح أكبر من صفر.",true);
+  return;
+ }
+
+ const previous = data[field];
+ const next = previous + value;
+
+ if(!Number.isSafeInteger(next)){
+  status(statusId,"العدد كبير بزاف.",true);
+  return;
+ }
+
+ data[field] = next;
+
+ if(save()){
+  input.value = "";
+  status(statusId,
+   "تزادو "+value+"، والمجموع الجديد ديال "+label+" هو "+next+" ✅");
+  renderSummary();
+ }else{
+  data[field] = previous;
+  renderSummary();
+ }
+}
+
+function validData(obj){
+ if(!obj || typeof obj!=="object") return false;
+
+ const hasNewFormat =
+  Array.isArray(obj.records) &&
+  Number.isFinite(Number(obj.clients)) &&
+  Number.isFinite(Number(obj.deliveries));
+
+ const hasOldFormat =
+  Number.isFinite(Number(obj.income)) &&
+  Number.isFinite(Number(obj.expenses)) &&
+  Number.isFinite(Number(obj.clients)) &&
+  Number.isFinite(Number(obj.deliveries));
+
+ return hasNewFormat || hasOldFormat;
+}
+
+function normalizeRecord(r){
+ if(!r || !["income","expense"].includes(r.type)) return null;
+ const amount = Number(r.amount);
+ if(!Number.isFinite(amount) || amount<=0) return null;
+
+ return {
+  id:String(r.id || (Date.now()+"-"+Math.random())),
+  type:r.type,
+  category:String(r.category || "أخرى").slice(0,100),
+  amount:Math.round(amount*100)/100,
+  description:String(r.description || "").slice(0,200),
+  date:/^\d{4}-\d{2}-\d{2}$/.test(String(r.date || ""))
+   ? r.date : localDate,
+  createdAt:String(r.createdAt || "")
+ };
+}
+
+function normalize(obj){
+ const result = freshData();
+ result.clients = integer(obj.clients);
+ result.deliveries = integer(obj.deliveries);
+
+ if(Array.isArray(obj.records)){
+  result.openingIncome = num(obj.openingIncome);
+  result.openingExpenses = num(obj.openingExpenses);
+  result.records = obj.records.map(normalizeRecord).filter(Boolean);
+ }else{
+  // حفظ الإجماليات الموجودة في النسخة القديمة
+  result.openingIncome = num(obj.income);
+  result.openingExpenses = num(obj.expenses);
+  result.records = [];
+ }
+
+ return result;
+}
+
+function load(){
+ try{
+  let saved = localStorage.getItem(KEY);
+  let sourceKey = KEY;
+
+  if(!saved){
+   for(const oldKey of OLD_KEYS){
+    const candidate = localStorage.getItem(oldKey);
+    if(candidate){
+     saved = candidate;
+     sourceKey = oldKey;
+     break;
+    }
+   }
+  }
+
+  if(saved){
+   const parsed = JSON.parse(saved);
+
+   if(validData(parsed)){
+    data = normalize(parsed);
+
+    if(sourceKey!==KEY){
+     save();
+    }
+   }else{
+    status("backupStatus","البيانات المحفوظة ما قدرناش نقراوها.",true);
+   }
+  }
+ }catch(e){
+  status("backupStatus","وقع مشكل فقراءة البيانات القديمة. ما تمسح حتى ملف احتياطي.",true);
+ }
+
+ render();
+}
+
+$("addOperation").addEventListener("click",addOperation);
+
+$("addClients").addEventListener("click",()=>{
+ addCount("clients","newClients","clientsStatus","الزبناء");
+});
+
+$("addDeliveries").addEventListener("click",()=>{
+ addCount("deliveries","newDeliveries","deliveriesStatus","التوصيلات");
+});
+
+$("showAll").addEventListener("click",()=>{
+ showAllRecords = !showAllRecords;
+ renderRecords();
+});
+
+$("exportData").addEventListener("click",()=>{
+ try{
+  const backup = {
+   app:"SKHAWA LIVRILI",
+   exportedAt:new Date().toISOString(),
+   data:data
   };
 
-  function number(value, integer) {
-    if (value === "" || value === null ||
-        value === undefined) {
-      return 0;
-    }
+  const blob = new Blob(
+   [JSON.stringify(backup,null,2)],
+   {type:"application/json;charset=utf-8"}
+  );
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = "skhawa-livrili-backup-"+localDate+".json";
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+  setTimeout(()=>URL.revokeObjectURL(url),2000);
 
-    let n = Number(value);
+  status("backupStatus","طلب تحميل النسخة الاحتياطية بنجاح. تأكد أنها تحمّلات فالتليفون.");
+ }catch(e){
+  status("backupStatus","تعذر إنشاء النسخة الاحتياطية.",true);
+ }
+});
 
-    if (!Number.isFinite(n) || n < 0) {
-      n = 0;
-    }
+$("importData").addEventListener("click",()=>{
+ $("backupFile").click();
+});
 
-    return integer ? Math.floor(n) : n;
+$("backupFile").addEventListener("change",function(){
+ const file = this.files && this.files[0];
+ if(!file) return;
+
+ const reader = new FileReader();
+
+ reader.onload = function(){
+  try{
+   const parsed = JSON.parse(reader.result);
+   const imported = parsed && parsed.data ? parsed.data : parsed;
+
+   if(!validData(imported)){
+    status("backupStatus","ملف النسخة الاحتياطية غير صالح.",true);
+    return;
+   }
+
+   if(!confirm("استرجاع النسخة غادي يعوض البيانات الحالية. حمّل نسخة من بياناتك الحالية أولاً. واش نكملو؟")){
+    return;
+   }
+
+   const previous = data;
+   data = normalize(imported);
+
+   if(save()){
+    status("backupStatus","تم استرجاع النسخة الاحتياطية بنجاح ✅");
+    render();
+   }else{
+    data = previous;
+    render();
+   }
+  }catch(e){
+   status("backupStatus","ما قدرناش نقراو الملف. اختار نسخة JSON صحيحة.",true);
+  }finally{
+   $("backupFile").value = "";
   }
+ };
 
-  function money(value) {
-    return number(value, false).toLocaleString("fr-MA", {
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2
-    }) + " DH";
-  }
+ reader.onerror = function(){
+  status("backupStatus","وقع مشكل فقراءة الملف.",true);
+  $("backupFile").value = "";
+ };
 
-  function showStatus(message, error) {
-    $("status").textContent = message;
-    $("status").style.color = error ? "#c73535" : "#168044";
-  }
+ reader.readAsText(file);
+});
 
-  function save() {
-    try {
-      localStorage.setItem(KEY, JSON.stringify(data));
-      return true;
-    } catch (error) {
-      showStatus(
-        "تعذر حفظ البيانات. حمّل نسخة احتياطية وتأكد من المتصفح.",
-        true
-      );
-      return false;
-    }
-  }
+$("resetData").addEventListener("click",()=>{
+ if(!confirm("تحذير: واش متأكد بغيتي تمسح جميع العمليات والأرقام؟ خاصك نسخة احتياطية باش تقدر ترجعهم.")) return;
+ if(!confirm("هاد العملية نهائية بالنسبة للبيانات الحالية. واش متأكد مرة أخرى؟")) return;
 
-  function calculate() {
-    $("sumIncome").textContent = money(data.income);
-    $("sumExpenses").textContent = money(data.expenses);
+ const previous = data;
+ data = freshData();
 
-    const profit = data.income - data.expenses;
+ if(save()){
+  showAllRecords = false;
+  status("backupStatus","تم مسح البيانات الحالية.");
+  render();
+ }else{
+  data = previous;
+  render();
+ }
+});
 
-    $("netProfit").textContent = money(profit);
-    $("netProfit").style.color =
-      profit < 0 ? "#c73535" : "#168044";
+load();
 
-    $("sumClients").textContent =
-      number(data.clients, true).toLocaleString("fr-MA");
-
-    $("sumDeliveries").textContent =
-      number(data.deliveries, true).toLocaleString("fr-MA");
-
-    $("averageDelivery").textContent = money(
-      data.deliveries > 0
-        ? data.income / data.deliveries
-        : 0
-    );
-  }
-
-  function updateDataFromInputs(list) {
-    list.forEach(function (id) {
-      data[id] = number(
-        $(id).value,
-        integerIds.includes(id)
-      );
-
-      $(id).value = data[id];
-    });
-
-    calculate();
-
-    if (save()) {
-      showStatus("تم الحفظ وتحديث الحسابات بنجاح ✅");
-    }
-  }
-
-  function validData(obj) {
-    return obj &&
-      typeof obj === "object" &&
-      ids.every(id =>
-        obj[id] !== undefined &&
-        Number.isFinite(Number(obj[id])) &&
-        Number(obj[id]) >= 0
-      );
-  }
-
-  function load() {
-    try {
-      let saved = localStorage.getItem(KEY);
-
-      // محاولة استرجاع البيانات القديمة إذا كانت موجودة
-      if (!saved) {
-        for (const oldKey of OLD_KEYS) {
-          const oldSaved = localStorage.getItem(oldKey);
-          if (oldSaved) {
-            saved = oldSaved;
-            break;
-          }
-        }
-      }
-
-      if (saved) {
-        const parsed = JSON.parse(saved);
-
-        if (validData(parsed)) {
-          ids.forEach(id => {
-            data[id] = number(
-              parsed[id],
-              integerIds.includes(id)
-            );
-          });
-        }
-      }
-    } catch (error) {
-      showStatus("تعذر قراءة البيانات المحفوظة.", true);
-    }
-
-    ids.forEach(id => {
-      $(id).value = data[id];
-    });
-
-    calculate();
-  }
-
-  $("saveMoney").addEventListener("click", function () {
-    updateDataFromInputs(["income", "expenses"]);
-  });
-
-  $("saveCounts").addEventListener("click", function () {
-    updateDataFromInputs(["clients", "deliveries"]);
-  });
-
-  ids.forEach(function (id) {
-    $(id).addEventListener("input", function () {
-      if ($(id).value === "") {
-        data[id] = 0;
-      } else {
-        data[id] = number(
-          $(id).value,
-          integerIds.includes(id)
-        );
-      }
-
-      calculate();
-
-      if (save()) {
-        showStatus("تم تحديث الحسابات والحفظ تلقائياً ✅");
-      }
-    });
-  });
-
-  $("exportData").addEventListener("click", function () {
-    try {
-      const blob = new Blob(
-        [JSON.stringify(data, null, 2)],
-        { type: "application/json;charset=utf-8" }
-      );
-
-      const url = URL.createObjectURL(blob);
-      const link = document.createElement("a");
-
-      link.href = url;
-      link.download = "skhawa-livrili-backup.json";
-
-      document.body.appendChild(link);
-      link.click();
-      link.remove();
-
-      setTimeout(function () {
-        URL.revokeObjectURL(url);
-      }, 1000);
-
-      showStatus("تم تجهيز النسخة الاحتياطية ✅");
-    } catch (error) {
-      showStatus("تعذر تحميل النسخة الاحتياطية.", true);
-    }
-  });
-
-  $("importData").addEventListener("click", function () {
-    $("backupFile").click();
-  });
-
-  $("backupFile").addEventListener("change", function () {
-    const file = this.files[0];
-
-    if (!file) return;
-
-    const reader = new FileReader();
-
-    reader.onload = function () {
-      try {
-        const imported = JSON.parse(reader.result);
-
-        if (!validData(imported)) {
-          showStatus("ملف النسخة الاحتياطية غير صالح.", true);
-          return;
-        }
-
-        ids.forEach(id => {
-          data[id] = number(
-            imported[id],
-            integerIds.includes(id)
-          );
-
-          $(id).value = data[id];
-        });
-
-        calculate();
-
-        if (save()) {
-          showStatus("تم استرجاع البيانات بنجاح ✅");
-        }
-      } catch (error) {
-        showStatus("ما قدرناش نقراو ملف النسخة الاحتياطية.", true);
-      } finally {
-        $("backupFile").value = "";
-      }
-    };
-
-    reader.onerror = function () {
-      showStatus("وقع مشكل أثناء قراءة الملف.", true);
-      $("backupFile").value = "";
-    };
-
-    reader.readAsText(file);
-  });
-
-  $("resetData").addEventListener("click", function () {
-    const confirmed = confirm(
-      "واش متأكد بغيتي تمسح جميع البيانات؟ هاد العملية ما يمكنش ترجعها إلا كانت عندك نسخة احتياطية."
-    );
-
-    if (!confirmed) return;
-
-    const previousData = { ...data };
-
-    data = {
-      income: 0,
-      expenses: 0,
-      clients: 0,
-      deliveries: 0
-    };
-
-    calculate();
-
-    if (save()) {
-      ids.forEach(id => {
-        $(id).value = 0;
-      });
-
-      showStatus("تم مسح البيانات بنجاح.");
-    } else {
-      data = previousData;
-
-      ids.forEach(id => {
-        $(id).value = data[id];
-      });
-
-      calculate();
-    }
-  });
-
-  load();
-
-  // تحديث الواجهة إذا رجع المستخدم للتطبيق
-  document.addEventListener("visibilitychange", function () {
-    if (!document.hidden) {
-      calculate();
-    }
-  });
-
-  // تسجيل Service Worker إذا كان الملف موجوداً
-  if ("serviceWorker" in navigator &&
-      location.protocol.startsWith("http")) {
-    window.addEventListener("load", function () {
-      navigator.serviceWorker.register("./service-worker.js")
-        .catch(function () {
-          // التطبيق يبقى خدام حتى إلا فشل التسجيل
-        });
-    });
-  }
-
+if("serviceWorker" in navigator &&
+   location.protocol.startsWith("http")){
+ window.addEventListener("load",()=>{
+  navigator.serviceWorker.register("./service-worker.js").catch(()=>{});
+ });
+}
 })();
 </script>
-
 </body>
 </html>
