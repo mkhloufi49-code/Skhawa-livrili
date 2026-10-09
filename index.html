@@ -82,25 +82,48 @@
       color: #606b65;
     }
 
-    .points {
+    .stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .stat {
       text-align: center;
-      background: #075b46;
-      color: white;
+      border-radius: 16px;
+      padding: 18px 8px;
     }
 
-    .points h2 {
-      color: white;
+    .customers {
+      background: #e4f2eb;
     }
 
-    .points-number {
-      color: #ffb45e;
-      font-size: 36px;
+    .deliveries {
+      background: #fff0df;
+    }
+
+    .stat-icon {
+      font-size: 30px;
+    }
+
+    .stat-label {
+      font-size: 15px;
       font-weight: bold;
     }
 
-    .buttons {
-      display: grid;
-      gap: 12px;
+    .stat-number {
+      font-size: 32px;
+      font-weight: 900;
+      margin-top: 5px;
+      overflow-wrap: anywhere;
+    }
+
+    .customers .stat-number {
+      color: #075b46;
+    }
+
+    .deliveries .stat-number {
+      color: #d97706;
     }
 
     .btn {
@@ -114,6 +137,7 @@
       font-weight: bold;
       cursor: pointer;
       width: 100%;
+      font-family: inherit;
     }
 
     .primary {
@@ -129,6 +153,43 @@
     .light {
       background: #e7f1ec;
       color: #075b46;
+    }
+
+    .buttons {
+      display: grid;
+      gap: 12px;
+    }
+
+    .edit-panel {
+      display: none;
+      margin-top: 18px;
+      border-top: 1px solid #e5ebe7;
+      padding-top: 16px;
+    }
+
+    .edit-panel.show {
+      display: block;
+    }
+
+    .field {
+      margin-bottom: 14px;
+    }
+
+    .field label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 6px;
+    }
+
+    .field input {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #cbd8d0;
+      border-radius: 10px;
+      font-size: 18px;
+      font-family: inherit;
+      direction: ltr;
+      text-align: center;
     }
 
     .note {
@@ -170,15 +231,80 @@
       </p>
     </section>
 
-    <section class="card points">
-      <h2>🎁 برنامج الزبناء الأوفياء</h2>
-      <div class="points-number">⭐</div>
-      <p>جمع التوصيلات واستافد من الامتيازات ديالك.</p>
-      <p>التوصيلة رقم 11 مجانية من بعد كل 10 توصيلات مؤهلة.</p>
+    <section class="card">
+      <h2>📊 إحصائيات الخدمة ديالك</h2>
+
+      <div class="stats">
+        <div class="stat customers">
+          <div class="stat-icon">👥</div>
+          <div class="stat-label">عدد الزبناء</div>
+          <div class="stat-number" id="customersCount">0</div>
+        </div>
+
+        <div class="stat deliveries">
+          <div class="stat-icon">🛵</div>
+          <div class="stat-label">عدد التوصيلات</div>
+          <div class="stat-number" id="deliveriesCount">0</div>
+        </div>
+      </div>
+
+      <p class="note">
+        هادو هما الأعداد اللي كتدخل بيدك وكتحدّثهم وقت ما بغيتي.
+      </p>
+
+      <button
+        class="btn primary"
+        id="editButton"
+        type="button"
+        style="margin-top:16px"
+        aria-expanded="false"
+        aria-controls="editPanel"
+      >
+        ✏️ تعديل الإحصائيات
+      </button>
+
+      <div class="edit-panel" id="editPanel">
+        <div class="field">
+          <label for="customersInput">👥 العدد الإجمالي ديال الزبناء</label>
+          <input
+            type="number"
+            id="customersInput"
+            min="0"
+            step="1"
+            inputmode="numeric"
+            value="0"
+          >
+        </div>
+
+        <div class="field">
+          <label for="deliveriesInput">🛵 العدد الإجمالي ديال التوصيلات</label>
+          <input
+            type="number"
+            id="deliveriesInput"
+            min="0"
+            step="1"
+            inputmode="numeric"
+            value="0"
+          >
+        </div>
+
+        <div class="buttons">
+          <button class="btn orange" id="saveButton" type="button">
+            💾 حفظ الأعداد
+          </button>
+
+          <button class="btn light" id="cancelButton" type="button">
+            إلغاء
+          </button>
+        </div>
+
+        <p class="note" id="saveMessage" role="status" aria-live="polite"></p>
+      </div>
     </section>
 
     <section class="card">
       <h2>🛵 الخدمات ديالنا</h2>
+
       <div class="buttons">
         <a
           class="btn primary"
@@ -227,6 +353,132 @@
   </footer>
 
   <script>
+    const customersCount =
+      document.getElementById("customersCount");
+
+    const deliveriesCount =
+      document.getElementById("deliveriesCount");
+
+    const customersInput =
+      document.getElementById("customersInput");
+
+    const deliveriesInput =
+      document.getElementById("deliveriesInput");
+
+    const editButton =
+      document.getElementById("editButton");
+
+    const editPanel =
+      document.getElementById("editPanel");
+
+    const saveButton =
+      document.getElementById("saveButton");
+
+    const cancelButton =
+      document.getElementById("cancelButton");
+
+    const saveMessage =
+      document.getElementById("saveMessage");
+
+    function readCount(key) {
+      try {
+        const value = localStorage.getItem(key);
+
+        if (value === null) return 0;
+
+        const number = Number(value);
+
+        if (
+          Number.isSafeInteger(number) &&
+          number >= 0
+        ) {
+          return number;
+        }
+      } catch (error) {
+        console.error("Storage error:", error);
+      }
+
+      return 0;
+    }
+
+    function displayCounts() {
+      customersCount.textContent =
+        readCount("skhawa_customers");
+
+      deliveriesCount.textContent =
+        readCount("skhawa_deliveries");
+    }
+
+    function openEditor() {
+      customersInput.value =
+        readCount("skhawa_customers");
+
+      deliveriesInput.value =
+        readCount("skhawa_deliveries");
+
+      saveMessage.textContent = "";
+      editPanel.classList.add("show");
+      editButton.setAttribute("aria-expanded", "true");
+    }
+
+    function closeEditor() {
+      editPanel.classList.remove("show");
+      editButton.setAttribute("aria-expanded", "false");
+    }
+
+    editButton.addEventListener("click", function () {
+      if (editPanel.classList.contains("show")) {
+        closeEditor();
+      } else {
+        openEditor();
+      }
+    });
+
+    cancelButton.addEventListener("click", function () {
+      closeEditor();
+    });
+
+    saveButton.addEventListener("click", function () {
+      const customers = customersInput.value;
+      const deliveries = deliveriesInput.value;
+
+      if (
+        customers.trim() === "" ||
+        deliveries.trim() === "" ||
+        !Number.isSafeInteger(Number(customers)) ||
+        !Number.isSafeInteger(Number(deliveries)) ||
+        Number(customers) < 0 ||
+        Number(deliveries) < 0
+      ) {
+        saveMessage.textContent =
+          "دخل أعداد صحيحة وما تكونش سالبة.";
+        return;
+      }
+
+      try {
+        localStorage.setItem(
+          "skhawa_customers",
+          String(Number(customers))
+        );
+
+        localStorage.setItem(
+          "skhawa_deliveries",
+          String(Number(deliveries))
+        );
+
+        displayCounts();
+
+        saveMessage.textContent = "تحفظو الأعداد بنجاح ❤️";
+
+        closeEditor();
+      } catch (error) {
+        saveMessage.textContent =
+          "ما قدرناش نحفظو الأعداد. تحقق من إعدادات المتصفح.";
+      }
+    });
+
+    displayCounts();
+
     if ("serviceWorker" in navigator) {
       window.addEventListener("load", function () {
         navigator.serviceWorker.register("./service-worker.js")
