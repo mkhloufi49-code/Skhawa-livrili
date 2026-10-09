@@ -3,491 +3,385 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <meta name="theme-color" content="#075b46">
-  <meta name="description" content="SKHAWA LIVRILI - سخاوة فالقلب وليفري فالوقت">
-
+  <meta name="theme-color" content="#171717">
+  <meta name="description" content="SKHAWA LIVRILI - تتبع الزبناء والتوصيلات">
   <title>SKHAWA LIVRILI</title>
 
   <link rel="manifest" href="./manifest.json">
-  <link rel="icon" href="./icon-192.png">
-  <link rel="apple-touch-icon" href="./icon-192.png">
 
   <style>
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
+      font-family: Arial, sans-serif;
     }
 
     body {
-      font-family: Arial, sans-serif;
-      background: #f2f5f3;
-      color: #202b27;
-      line-height: 1.7;
+      background: #171717;
+      color: #222;
+      padding: 16px;
+    }
+
+    .app {
+      max-width: 500px;
+      margin: auto;
     }
 
     header {
-      background: #075b46;
+      background: linear-gradient(135deg, #292929, #080808);
       color: white;
+      padding: 28px 16px;
+      border-radius: 22px;
       text-align: center;
-      padding: 28px 15px;
-      border-bottom: 5px solid #f28c28;
+      margin-bottom: 20px;
+      border: 1px solid #383838;
+      box-shadow: 0 6px 20px #00000050;
     }
 
     .logo {
-      width: 90px;
-      height: 90px;
+      width: 82px;
+      height: 82px;
       object-fit: contain;
-      border-radius: 22px;
-      margin-bottom: 10px;
-      background: white;
+      border-radius: 50%;
+      margin-bottom: 12px;
     }
 
     header h1 {
       font-size: 27px;
-      font-weight: 900;
-    }
-
-    header p {
-      color: #ffe0bd;
-      font-size: 15px;
-    }
-
-    main {
-      max-width: 600px;
-      margin: 20px auto;
-      padding: 0 14px;
-    }
-
-    .card {
-      background: white;
-      padding: 22px 18px;
-      border-radius: 18px;
-      margin-bottom: 17px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.06);
-    }
-
-    h2 {
-      color: #075b46;
-      font-size: 21px;
+      color: #ff812b;
+      letter-spacing: 1px;
       margin-bottom: 10px;
     }
 
+    header p {
+      font-size: 14px;
+      color: #eeeeee;
+      line-height: 1.8;
+    }
+
+    .orange-line {
+      width: 65px;
+      height: 4px;
+      border-radius: 5px;
+      background: #ff812b;
+      margin: 15px auto 0;
+    }
+
     .welcome {
-      text-align: center;
+      background: #fff;
+      border-radius: 17px;
+      padding: 20px;
+      margin-bottom: 18px;
+      border-right: 5px solid #ff812b;
+    }
+
+    .welcome h2 {
+      color: #191919;
+      font-size: 19px;
+      margin-bottom: 10px;
     }
 
     .welcome p {
-      color: #606b65;
+      color: #666;
+      font-size: 14px;
+      line-height: 1.9;
     }
 
     .stats {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 12px;
+      margin-bottom: 20px;
     }
 
     .stat {
+      background: #fff;
+      padding: 21px 8px;
+      border-radius: 17px;
       text-align: center;
-      border-radius: 16px;
-      padding: 18px 8px;
+      border-bottom: 5px solid #ff812b;
+      box-shadow: 0 4px 15px #00000030;
     }
 
-    .customers {
-      background: #e4f2eb;
-    }
-
-    .deliveries {
-      background: #fff0df;
-    }
-
-    .stat-icon {
+    .symbol {
       font-size: 30px;
+      margin-bottom: 10px;
     }
 
-    .stat-label {
-      font-size: 15px;
-      font-weight: bold;
+    .stat h3 {
+      font-size: 13px;
+      color: #555;
+      margin-bottom: 12px;
     }
 
-    .stat-number {
+    .number {
+      color: #e96513;
       font-size: 32px;
-      font-weight: 900;
-      margin-top: 5px;
+      font-weight: bold;
       overflow-wrap: anywhere;
     }
 
-    .customers .stat-number {
-      color: #075b46;
+    .panel {
+      background: #fff;
+      padding: 21px;
+      border-radius: 18px;
+      margin-bottom: 18px;
     }
 
-    .deliveries .stat-number {
-      color: #d97706;
+    .panel h2 {
+      color: #171717;
+      font-size: 19px;
+      margin-bottom: 10px;
     }
 
-    .btn {
-      display: block;
-      text-align: center;
-      text-decoration: none;
-      border: none;
-      border-radius: 12px;
-      padding: 14px;
-      font-size: 16px;
-      font-weight: bold;
-      cursor: pointer;
-      width: 100%;
-      font-family: inherit;
-    }
-
-    .primary {
-      background: #075b46;
-      color: white;
-    }
-
-    .orange {
-      background: #f28c28;
-      color: white;
-    }
-
-    .light {
-      background: #e7f1ec;
-      color: #075b46;
-    }
-
-    .buttons {
-      display: grid;
-      gap: 12px;
-    }
-
-    .edit-panel {
-      display: none;
-      margin-top: 18px;
-      border-top: 1px solid #e5ebe7;
-      padding-top: 16px;
-    }
-
-    .edit-panel.show {
-      display: block;
+    .hint {
+      color: #666;
+      font-size: 13px;
+      line-height: 1.9;
+      margin-bottom: 20px;
     }
 
     .field {
-      margin-bottom: 14px;
+      margin-bottom: 17px;
     }
 
-    .field label {
+    label {
       display: block;
       font-weight: bold;
-      margin-bottom: 6px;
+      font-size: 14px;
+      margin-bottom: 9px;
     }
 
-    .field input {
+    input {
       width: 100%;
-      padding: 12px;
-      border: 1px solid #cbd8d0;
-      border-radius: 10px;
+      padding: 14px;
+      border: 1px solid #ddd;
+      border-radius: 11px;
       font-size: 18px;
-      font-family: inherit;
       direction: ltr;
       text-align: center;
+      background: #fafafa;
+      color: #171717;
+      outline: none;
     }
 
-    .note {
-      font-size: 13px;
-      color: #65716b;
+    input:focus {
+      border: 2px solid #ff812b;
+    }
+
+    button {
+      width: 100%;
+      padding: 15px;
+      border: none;
+      border-radius: 12px;
+      background: #ff812b;
+      color: #171717;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 5px;
+    }
+
+    button:active {
+      transform: scale(.98);
+    }
+
+    .reset {
+      background: #222;
+      color: #fff;
       margin-top: 12px;
+    }
+
+    #message {
+      color: #16814d;
       text-align: center;
+      font-size: 14px;
+      margin-top: 14px;
+      min-height: 18px;
+      line-height: 1.7;
     }
 
     footer {
       text-align: center;
-      padding: 22px 12px;
-      color: #66736c;
-      font-size: 13px;
+      color: #ccc;
+      font-size: 12px;
+      line-height: 2;
+      padding: 15px 5px;
+    }
+
+    footer strong {
+      color: #ff812b;
     }
   </style>
 </head>
 
 <body>
+  <main class="app">
 
-  <header>
-    <img
-      class="logo"
-      src="./icon-192.png"
-      alt="SKHAWA LIVRILI"
-      onerror="this.style.display='none'"
-    >
-    <h1>SKHAWA LIVRILI</h1>
-    <p>سخاوة فالقلب و ليفري فالوقت ❤️</p>
-  </header>
+    <header>
+      <img
+        class="logo"
+        src="./icon-192.png"
+        alt="SKHAWA LIVRILI"
+        onerror="this.style.display='none'"
+      >
+      <h1>SKHAWA LIVRILI</h1>
+      <p>سخاوة فالقلب و ليفري فالوقت 🛵</p>
+      <div class="orange-line"></div>
+    </header>
 
-  <main>
-
-    <section class="card welcome">
-      <h2>مرحبا بيك فـ SKHAWA LIVRILI 👋</h2>
+    <section class="welcome">
+      <h2>مرحبا بيك صاحبي ❤️</h2>
       <p>
-        الوفاء ديالك كيهمنا، وثقتك هي راس مالنا.
-        معانا التوصيل بالسخاوة والاحترام.
+        التطبيق الخاص بك لتتبع الزبناء والتوصيلات.
+        دخل الأرقام ديالك، حفظها، وتابع الإحصائيات بكل سهولة.
       </p>
     </section>
 
-    <section class="card">
-      <h2>📊 إحصائيات الخدمة ديالك</h2>
-
-      <div class="stats">
-        <div class="stat customers">
-          <div class="stat-icon">👥</div>
-          <div class="stat-label">عدد الزبناء</div>
-          <div class="stat-number" id="customersCount">0</div>
-        </div>
-
-        <div class="stat deliveries">
-          <div class="stat-icon">🛵</div>
-          <div class="stat-label">عدد التوصيلات</div>
-          <div class="stat-number" id="deliveriesCount">0</div>
-        </div>
+    <section class="stats">
+      <div class="stat">
+        <div class="symbol">👥</div>
+        <h3>مجموع الزبناء</h3>
+        <div class="number" id="clientsDisplay">0</div>
       </div>
 
-      <p class="note">
-        هادو هما الأعداد اللي كتدخل بيدك وكتحدّثهم وقت ما بغيتي.
+      <div class="stat">
+        <div class="symbol">🛵</div>
+        <h3>مجموع التوصيلات</h3>
+        <div class="number" id="deliveriesDisplay">0</div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>📊 الإحصائيات ديالك</h2>
+      <p class="hint">
+        كتب العدد الإجمالي ديال الزبناء والتوصيلات اللي وصلتي ليهم،
+        ومن بعد ضغط على حفظ الأرقام.
       </p>
 
-      <button
-        class="btn primary"
-        id="editButton"
-        type="button"
-        style="margin-top:16px"
-        aria-expanded="false"
-        aria-controls="editPanel"
-      >
-        ✏️ تعديل الإحصائيات
+      <div class="field">
+        <label for="clients">👥 عدد الزبناء</label>
+        <input
+          type="number"
+          id="clients"
+          min="0"
+          step="1"
+          inputmode="numeric"
+          placeholder="مثلاً: 120"
+        >
+      </div>
+
+      <div class="field">
+        <label for="deliveries">🛵 عدد التوصيلات</label>
+        <input
+          type="number"
+          id="deliveries"
+          min="0"
+          step="1"
+          inputmode="numeric"
+          placeholder="مثلاً: 350"
+        >
+      </div>
+
+      <button type="button" id="saveButton">
+        💾 حفظ الأرقام
       </button>
 
-      <div class="edit-panel" id="editPanel">
-        <div class="field">
-          <label for="customersInput">👥 العدد الإجمالي ديال الزبناء</label>
-          <input
-            type="number"
-            id="customersInput"
-            min="0"
-            step="1"
-            inputmode="numeric"
-            value="0"
-          >
-        </div>
+      <button type="button" class="reset" id="resetButton">
+        إعادة ضبط الأرقام
+      </button>
 
-        <div class="field">
-          <label for="deliveriesInput">🛵 العدد الإجمالي ديال التوصيلات</label>
-          <input
-            type="number"
-            id="deliveriesInput"
-            min="0"
-            step="1"
-            inputmode="numeric"
-            value="0"
-          >
-        </div>
-
-        <div class="buttons">
-          <button class="btn orange" id="saveButton" type="button">
-            💾 حفظ الأعداد
-          </button>
-
-          <button class="btn light" id="cancelButton" type="button">
-            إلغاء
-          </button>
-        </div>
-
-        <p class="note" id="saveMessage" role="status" aria-live="polite"></p>
-      </div>
+      <p id="message" role="status" aria-live="polite"></p>
     </section>
 
-    <section class="card">
-      <h2>🛵 الخدمات ديالنا</h2>
-
-      <div class="buttons">
-        <a
-          class="btn primary"
-          href="https://wa.me/212715063305"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          📲 تواصل معانا عبر WhatsApp
-        </a>
-
-        <a
-          class="btn orange"
-          href="https://www.instagram.com/skhawa.livrili/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          📸 تابعنا على Instagram
-        </a>
-
-        <a
-          class="btn light"
-          href="mailto:mkhloufi49@gmail.com"
-        >
-          ✉️ تواصل عبر البريد الإلكتروني
-        </a>
-      </div>
-    </section>
-
-    <section class="card">
-      <h2>📱 تثبيت التطبيق</h2>
-      <p>
-        تقدر تزيد SKHAWA LIVRILI للشاشة الرئيسية ديال تليفونك
-        وتدخل ليه بسهولة.
-      </p>
-      <p class="note">
-        من قائمة المتصفح اختار «إضافة إلى الشاشة الرئيسية»
-        أو «تثبيت التطبيق» إلا كان الخيار متاح.
-      </p>
-    </section>
+    <footer>
+      <strong>SKHAWA LIVRILI</strong><br>
+      ماشي غير التوصيل، ولكن بزاف ديال السخاوة 🧡<br>
+      بثقتكم سنواصل التطور
+    </footer>
 
   </main>
 
-  <footer>
-    <p>SKHAWA LIVRILI © 2026</p>
-    <p>بثقتكم سنواصل التطور ❤️</p>
-  </footer>
-
   <script>
-    const customersCount =
-      document.getElementById("customersCount");
+    const clientsInput = document.getElementById("clients");
+    const deliveriesInput = document.getElementById("deliveries");
+    const clientsDisplay = document.getElementById("clientsDisplay");
+    const deliveriesDisplay = document.getElementById("deliveriesDisplay");
+    const message = document.getElementById("message");
 
-    const deliveriesCount =
-      document.getElementById("deliveriesCount");
+    function displayNumbers(clients, deliveries) {
+      clientsDisplay.textContent = clients.toLocaleString("fr-FR");
+      deliveriesDisplay.textContent = deliveries.toLocaleString("fr-FR");
+    }
 
-    const customersInput =
-      document.getElementById("customersInput");
-
-    const deliveriesInput =
-      document.getElementById("deliveriesInput");
-
-    const editButton =
-      document.getElementById("editButton");
-
-    const editPanel =
-      document.getElementById("editPanel");
-
-    const saveButton =
-      document.getElementById("saveButton");
-
-    const cancelButton =
-      document.getElementById("cancelButton");
-
-    const saveMessage =
-      document.getElementById("saveMessage");
-
-    function readCount(key) {
+    function loadNumbers() {
       try {
-        const value = localStorage.getItem(key);
+        const clients = Number(localStorage.getItem("skhawa_clients") || 0);
+        const deliveries = Number(localStorage.getItem("skhawa_deliveries") || 0);
 
-        if (value === null) return 0;
-
-        const number = Number(value);
-
-        if (
-          Number.isSafeInteger(number) &&
-          number >= 0
-        ) {
-          return number;
-        }
+        clientsInput.value = clients;
+        deliveriesInput.value = deliveries;
+        displayNumbers(clients, deliveries);
       } catch (error) {
-        console.error("Storage error:", error);
+        message.textContent = "تعذر تحميل الأرقام المحفوظة.";
       }
-
-      return 0;
     }
 
-    function displayCounts() {
-      customersCount.textContent =
-        readCount("skhawa_customers");
-
-      deliveriesCount.textContent =
-        readCount("skhawa_deliveries");
-    }
-
-    function openEditor() {
-      customersInput.value =
-        readCount("skhawa_customers");
-
-      deliveriesInput.value =
-        readCount("skhawa_deliveries");
-
-      saveMessage.textContent = "";
-      editPanel.classList.add("show");
-      editButton.setAttribute("aria-expanded", "true");
-    }
-
-    function closeEditor() {
-      editPanel.classList.remove("show");
-      editButton.setAttribute("aria-expanded", "false");
-    }
-
-    editButton.addEventListener("click", function () {
-      if (editPanel.classList.contains("show")) {
-        closeEditor();
-      } else {
-        openEditor();
-      }
-    });
-
-    cancelButton.addEventListener("click", function () {
-      closeEditor();
-    });
-
-    saveButton.addEventListener("click", function () {
-      const customers = customersInput.value;
-      const deliveries = deliveriesInput.value;
+    document.getElementById("saveButton").addEventListener("click", function () {
+      const clientsText = clientsInput.value.trim();
+      const deliveriesText = deliveriesInput.value.trim();
+      const clients = Number(clientsText);
+      const deliveries = Number(deliveriesText);
 
       if (
-        customers.trim() === "" ||
-        deliveries.trim() === "" ||
-        !Number.isSafeInteger(Number(customers)) ||
-        !Number.isSafeInteger(Number(deliveries)) ||
-        Number(customers) < 0 ||
-        Number(deliveries) < 0
+        clientsText === "" ||
+        deliveriesText === "" ||
+        !Number.isSafeInteger(clients) ||
+        !Number.isSafeInteger(deliveries) ||
+        clients < 0 ||
+        deliveries < 0
       ) {
-        saveMessage.textContent =
-          "دخل أعداد صحيحة وما تكونش سالبة.";
+        message.textContent = "عافاك دخل أعداد صحيحة وموجبة أو صفر.";
         return;
       }
 
       try {
-        localStorage.setItem(
-          "skhawa_customers",
-          String(Number(customers))
-        );
+        localStorage.setItem("skhawa_clients", String(clients));
+        localStorage.setItem("skhawa_deliveries", String(deliveries));
 
-        localStorage.setItem(
-          "skhawa_deliveries",
-          String(Number(deliveries))
-        );
-
-        displayCounts();
-
-        saveMessage.textContent = "تحفظو الأعداد بنجاح ❤️";
-
-        closeEditor();
+        displayNumbers(clients, deliveries);
+        message.textContent = "✅ تحفضو الأرقام بنجاح!";
       } catch (error) {
-        saveMessage.textContent =
-          "ما قدرناش نحفظو الأعداد. تحقق من إعدادات المتصفح.";
+        message.textContent = "تعذر الحفظ. تحقق من إعدادات المتصفح.";
       }
     });
 
-    displayCounts();
+    document.getElementById("resetButton").addEventListener("click", function () {
+      if (!confirm("واش متأكد بغيتي ترجع الأرقام للصفر؟")) return;
+
+      try {
+        localStorage.setItem("skhawa_clients", "0");
+        localStorage.setItem("skhawa_deliveries", "0");
+
+        clientsInput.value = "0";
+        deliveriesInput.value = "0";
+        displayNumbers(0, 0);
+
+        message.textContent = "تمت إعادة ضبط الأرقام.";
+      } catch (error) {
+        message.textContent = "تعذر حفظ التغييرات.";
+      }
+    });
+
+    loadNumbers();
 
     if ("serviceWorker" in navigator) {
       window.addEventListener("load", function () {
         navigator.serviceWorker.register("./service-worker.js")
-          .catch(function (error) {
-            console.error("Service Worker error:", error);
-          });
+          .catch(function () {});
       });
     }
   </script>
-
 </body>
 </html>
