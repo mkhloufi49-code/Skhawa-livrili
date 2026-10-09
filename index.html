@@ -4,181 +4,168 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#f97316">
-<meta name="description" content="SKHAWA LIVRILI - إدارة التوصيلات والمدخول والمصاريف">
+<meta name="theme-color" content="#ff7900">
+<meta name="apple-mobile-web-app-capable" content="yes">
 <title>SKHAWA LIVRILI</title>
-<link rel="manifest" href="./manifest.json">
 
 <style>
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --orange: #ff7900;
+  --black: #151515;
+  --background: #f3f3f3;
+  --white: #ffffff;
 }
 
 body {
-  margin: 0;
-  background: #f4f4f4;
-  color: #171717;
   font-family: Arial, sans-serif;
+  background: var(--background);
+  color: var(--black);
 }
 
 header {
-  background: #171717;
+  background: var(--black);
   color: white;
   text-align: center;
-  padding: 25px 12px;
-  border-bottom: 5px solid #f97316;
+  padding: 24px 12px;
+  border-bottom: 5px solid var(--orange);
 }
 
 header h1 {
-  margin: 8px 0;
   font-size: 25px;
+  font-weight: 900;
+}
+
+header h1 span {
+  color: var(--orange);
 }
 
 header p {
-  color: #fdba74;
-  margin: 8px 0;
+  margin-top: 8px;
+  font-size: 13px;
+  color: #ddd;
 }
 
 main {
-  max-width: 700px;
+  max-width: 650px;
   margin: auto;
   padding: 15px;
 }
 
 h2 {
   font-size: 18px;
-  margin: 24px 0 12px;
-  border-right: 5px solid #f97316;
-  padding-right: 10px;
+  margin-bottom: 14px;
 }
 
-.grid {
+.panel {
+  background: white;
+  padding: 16px;
+  border-radius: 14px;
+  margin-bottom: 15px;
+  border: 1px solid #e5e5e5;
+  box-shadow: 0 3px 10px #00000008;
+}
+
+.summary {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: 1fr 1fr;
   gap: 10px;
+  margin-bottom: 15px;
 }
 
 .card {
   background: white;
-  padding: 15px;
-  border-radius: 14px;
-  margin-bottom: 10px;
-  box-shadow: 0 2px 8px #0000000b;
-}
-
-.stat {
-  background: #171717;
-  color: white;
-  border-bottom: 3px solid #f97316;
-}
-
-.stat small {
-  color: #ddd;
-}
-
-.num {
-  color: #fb923c;
-  font-size: 25px;
-  font-weight: bold;
-  margin-top: 8px;
+  padding: 14px;
+  border-radius: 12px;
+  border-top: 4px solid var(--orange);
+  box-shadow: 0 3px 10px #00000008;
   overflow-wrap: anywhere;
+}
+
+.card p {
+  color: #666;
+  font-size: 13px;
+  margin-bottom: 9px;
+}
+
+.card strong {
+  font-size: 21px;
+}
+
+.field {
+  margin-bottom: 13px;
 }
 
 label {
   display: block;
   font-weight: bold;
   font-size: 14px;
-  margin: 10px 0 6px;
+  margin-bottom: 7px;
 }
 
-input, select {
+input {
   width: 100%;
   padding: 12px;
+  font-size: 16px;
   border: 1px solid #ccc;
   border-radius: 9px;
-  font-size: 16px;
   background: white;
+}
+
+input:focus {
+  outline: 2px solid #ffbd80;
+  border-color: var(--orange);
 }
 
 button {
-  border: 0;
+  width: 100%;
+  padding: 13px;
+  border: none;
   border-radius: 9px;
-  padding: 12px;
-  font-weight: bold;
+  background: var(--orange);
+  color: #111;
   font-size: 15px;
+  font-weight: bold;
   cursor: pointer;
 }
 
-.orange {
-  background: #f97316;
-  color: #171717;
+button:active {
+  transform: scale(.99);
 }
 
-.black {
-  background: #171717;
+.black-button {
+  background: var(--black);
   color: white;
-}
-
-.red {
-  background: #fee2e2;
-  color: #991b1b;
-}
-
-.full {
-  width: 100%;
-  margin-top: 12px;
-}
-
-.formgrid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-}
-
-.good {
-  color: #15803d;
-  font-weight: bold;
-}
-
-.bad {
-  color: #b91c1c;
-  font-weight: bold;
-}
-
-.entry {
-  background: white;
-  padding: 12px;
-  border: 1px solid #eee;
-  border-radius: 10px;
   margin-top: 10px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 8px;
 }
 
-.entry small {
-  display: block;
-  color: #777;
-  margin-top: 5px;
-}
-
-.hint {
-  font-size: 12px;
-  color: #777;
   line-height: 1.7;
+  margin-top: 10px;
+}
+
+.status {
+  text-align: center;
+  color: #168044;
+  font-size: 13px;
+  margin-top: 10px;
+  min-height: 20px;
 }
 
 footer {
   text-align: center;
+  padding: 20px;
   color: #777;
   font-size: 12px;
-  padding: 20px;
 }
 
-@media (min-width: 560px) {
-  .stats {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+@media (max-width: 360px) {
+  .card strong {
+    font-size: 18px;
   }
 }
 </style>
@@ -187,435 +174,298 @@ footer {
 <body>
 
 <header>
-  <div style="font-size:38px">🛵</div>
-  <h1>SKHAWA LIVRILI</h1>
-  <p>سخاوة فالقلب وليفري فالوقت 🧡</p>
+  <h1>SKHAWA <span>LIVRILI</span></h1>
+  <p>المدخول والمصاريف والزبناء والتوصيلات</p>
 </header>
 
 <main>
 
-<h2>📊 الإحصائيات</h2>
-
-<div class="grid stats">
-
-  <div class="card stat">
-    <small>👥 عدد الزبناء</small>
-    <div class="num" id="clients">0</div>
-  </div>
-
-  <div class="card stat">
-    <small>🛵 عدد التوصيلات</small>
-    <div class="num" id="deliveries">0</div>
-  </div>
-
-  <div class="card stat">
-    <small>💰 مجموع المدخول</small>
-    <div class="num" id="income">0 DH</div>
-  </div>
-
-  <div class="card stat">
-    <small>🧾 مجموع المصاريف</small>
-    <div class="num" id="expenses">0 DH</div>
-  </div>
-
-</div>
-
-<h2>👥 تحديث الزبناء والتوصيلات</h2>
-
-<div class="card">
-
-  <div class="formgrid">
-
-    <div>
-      <label for="clientInput">عدد الزبناء</label>
-      <input id="clientInput" type="number"
-             min="0" step="1" value="0">
+  <section class="summary">
+    <div class="card">
+      <p>مجموع المدخول</p>
+      <strong id="sumIncome">0.00 DH</strong>
     </div>
 
-    <div>
-      <label for="deliveryInput">عدد التوصيلات</label>
-      <input id="deliveryInput" type="number"
-             min="0" step="1" value="0">
+    <div class="card">
+      <p>مجموع المصاريف</p>
+      <strong id="sumExpenses">0.00 DH</strong>
     </div>
 
-  </div>
+    <div class="card">
+      <p>الربح الصافي</p>
+      <strong id="netProfit">0.00 DH</strong>
+    </div>
 
-  <button class="orange full" id="saveCounts">
-    حفظ الأعداد
-  </button>
+    <div class="card">
+      <p>عدد الزبناء</p>
+      <strong id="sumClients">0</strong>
+    </div>
 
-</div>
+    <div class="card">
+      <p>عدد التوصيلات</p>
+      <strong id="sumDeliveries">0</strong>
+    </div>
 
-<h2>💵 تسجيل المدخول والمصاريف</h2>
+    <div class="card">
+      <p>معدل المدخول لكل توصيل</p>
+      <strong id="averageDelivery">0.00 DH</strong>
+    </div>
+  </section>
 
-<div class="card">
+  <section class="panel">
+    <h2>💰 المدخول والمصاريف</h2>
 
-  <label for="kind">نوع العملية</label>
+    <div class="field">
+      <label for="income">مجموع المدخول بالدرهم</label>
+      <input id="income" type="number" min="0"
+        step="0.01" inputmode="decimal"
+        placeholder="دخل مجموع المدخول">
+    </div>
 
-  <select id="kind">
-    <option value="income">مدخول</option>
-    <option value="expense">مصروف</option>
-  </select>
+    <div class="field">
+      <label for="expenses">مجموع المصاريف بالدرهم</label>
+      <input id="expenses" type="number" min="0"
+        step="0.01" inputmode="decimal"
+        placeholder="دخل مجموع المصاريف">
+    </div>
 
-  <label for="amount">المبلغ بالدرهم</label>
+    <button id="saveMoney">حفظ المدخول والمصاريف</button>
+  </section>
 
-  <input id="amount" type="number"
-         min="0.01" step="0.01"
-         placeholder="مثلاً 50">
+  <section class="panel">
+    <h2>🛵 الزبناء والتوصيلات</h2>
 
-  <label for="details">تفاصيل العملية</label>
-  <input id="details" maxlength="100"
-         placeholder="مثلاً: توصيل، بنزين، صيانة">
+    <div class="field">
+      <label for="clients">مجموع الزبناء</label>
+      <input id="clients" type="number" min="0"
+        step="1" inputmode="numeric"
+        placeholder="دخل عدد الزبناء">
+    </div>
 
-  <label for="date">التاريخ</label>
-  <input id="date" type="date">
+    <div class="field">
+      <label for="deliveries">مجموع التوصيلات</label>
+      <input id="deliveries" type="number" min="0"
+        step="1" inputmode="numeric"
+        placeholder="دخل عدد التوصيلات">
+    </div>
 
-  <button class="orange full" id="add">
-    + تسجيل العملية
-  </button>
+    <button id="saveCounts">حفظ الزبناء والتوصيلات</button>
+  </section>
 
-</div>
+  <section class="panel">
+    <h2>⚙️ إعدادات البيانات</h2>
 
-<h2>📈 الحصيلة المالية</h2>
+    <button class="black-button" id="exportData">
+      تحميل نسخة احتياطية
+    </button>
 
-<div class="grid">
+    <button class="black-button" id="resetData">
+      مسح جميع البيانات
+    </button>
 
-  <div class="card">
-    مجموع المدخول
-    <div class="good" id="totalIn">0 DH</div>
-  </div>
+    <p class="note">
+      الأرقام كتتحفظ فالتليفون ديالك. حمّل نسخة احتياطية
+      باش تحافظ على بياناتك.
+    </p>
 
-  <div class="card">
-    مجموع المصاريف
-    <div class="bad" id="totalOut">0 DH</div>
-  </div>
-
-  <div class="card" style="grid-column:1/-1">
-    الربح الصافي
-    <div class="num" id="profit">0 DH</div>
-  </div>
-
-</div>
-
-<h2>📋 سجل العمليات</h2>
-
-<div class="card">
-
-  <label for="filter">عرض العمليات</label>
-
-  <select id="filter">
-    <option value="all">جميع العمليات</option>
-    <option value="income">المدخول فقط</option>
-    <option value="expense">المصاريف فقط</option>
-  </select>
-
-  <div id="history">
-    <p class="hint">مازال ما سجلتي حتى عملية.</p>
-  </div>
-
-</div>
-
-<h2>💾 النسخ الاحتياطي</h2>
-
-<div class="card">
-
-  <button class="black full" id="backup">
-    تحميل نسخة احتياطية
-  </button>
-
-  <button class="orange full" id="chooseFile">
-    استرجاع نسخة احتياطية
-  </button>
-
-  <input id="file" type="file"
-         accept=".json,application/json" hidden>
-
-  <button class="red full" id="clear">
-    مسح جميع البيانات
-  </button>
-
-  <p class="hint">
-    البيانات كتتحفظ فالمتصفح ديال التليفون.
-    حمّل نسخة احتياطية بانتظام باش ما تضيعش معلوماتك.
-  </p>
-
-</div>
+    <div id="status" class="status" role="status"></div>
+  </section>
 
 </main>
 
 <footer>
-  SKHAWA LIVRILI © 🧡
+  SKHAWA LIVRILI © — سخاوة فالقلب وليفري فالوقت
 </footer>
 
 <script>
-(function(){
 
-const KEY = "skhawa_livrili_data_v3";
+<section class="panel">
+  <h2>⚙️ إعدادات البيانات</h2>
 
-const $ = id => document.getElementById(id);
+  <button class="black-button" id="exportData">
+    تحميل نسخة احتياطية
+  </button>
 
-const today = () => {
-  const d = new Date();
-  return d.getFullYear() + "-" +
-    String(d.getMonth()+1).padStart(2,"0") + "-" +
-    String(d.getDate()).padStart(2,"0");
-};
+  <button class="black-button" id="resetData" style="margin-top:10px">
+    مسح جميع البيانات
+  </button>
 
-let data = {
-  clients: 0,
-  deliveries: 0,
-  transactions: []
-};
+  <p class="note">
+    البيانات كتتحفظ فالتليفون ديالك. حمّل نسخة احتياطية من حين لآخر.
+  </p>
 
-try {
-  const old = localStorage.getItem(KEY);
+  <div id="status" class="status" role="status"></div>
+</section>
 
-  if (old) {
-    const x = JSON.parse(old);
+<footer>
+  SKHAWA LIVRILI © — سخاوة فالقلب وليفري فالوقت
+</footer>
 
-    data.clients = Math.max(0, parseInt(x.clients) || 0);
-    data.deliveries = Math.max(0, parseInt(x.deliveries) || 0);
+<script>
+(function () {
+  "use strict";
 
-    data.transactions = Array.isArray(x.transactions)
-      ? x.transactions : [];
-  }
-} catch(e) {}
+  const KEY = "skhawa_livrili_tracker_v2";
+  const ids = ["income", "expenses", "clients", "deliveries"];
+  const integerIds = ["clients", "deliveries"];
+  const $ = id => document.getElementById(id);
 
-$("date").value = today();
-
-function save() {
-  try {
-    localStorage.setItem(KEY, JSON.stringify(data));
-  } catch(e) {
-    alert("ما قدرناش نحفظو البيانات. حمّل نسخة احتياطية إذا أمكن.");
-  }
-}
-
-function money(n) {
-  return (Number(n)||0).toLocaleString("fr-MA", {
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2
-  }) + " DH";
-}
-
-function esc(s) {
-  return String(s ?? "").replace(/[&<>"']/g, c => ({
-    "&":"&amp;",
-    "<":"&lt;",
-    ">":"&gt;",
-    '"':"&quot;",
-    "'":"&#39;"
-  }[c]));
-}
-
-function totals() {
-  let inc = 0, out = 0;
-
-  data.transactions.forEach(t => {
-    if (t.kind === "income") inc += Number(t.amount)||0;
-    else out += Number(t.amount)||0;
-  });
-
-  return {
-    inc,
-    out,
-    profit: inc - out
+  let data = {
+    income: 0,
+    expenses: 0,
+    clients: 0,
+    deliveries: 0
   };
-}
-</script>
 
-function render() {
-  $("clients").textContent = data.clients;
-  $("deliveries").textContent = data.deliveries;
-  $("clientInput").value = data.clients;
-  $("deliveryInput").value = data.deliveries;
-
-  const t = totals();
-
-  $("income").textContent = money(t.inc);
-  $("expenses").textContent = money(t.out);
-  $("totalIn").textContent = money(t.inc);
-  $("totalOut").textContent = money(t.out);
-  $("profit").textContent = money(t.profit);
-  $("profit").className = t.profit >= 0 ? "good" : "bad";
-
-  renderHistory();
-}
-
-function renderHistory() {
-  const filter = $("filter").value;
-
-  const items = data.transactions
-    .filter(t => filter === "all" || t.kind === filter)
-    .slice()
-    .reverse();
-
-  if (!items.length) {
-    $("history").innerHTML =
-      '<p class="hint">مازال ما كايناش عمليات مسجلة.</p>';
-    return;
+  function number(value, integer) {
+    let n = Number(value);
+    if (!Number.isFinite(n) || n < 0) n = 0;
+    return integer ? Math.floor(n) : n;
   }
 
-  $("history").innerHTML = items.map(t => `
-    <div class="entry">
-      <div>
-        <strong>
-          ${t.kind === "income" ? "🟢 مدخول" : "🔴 مصروف"}
-          — ${esc(t.details || "بلا تفاصيل")}
-        </strong>
-        <small>${esc(t.date || "")}</small>
-      </div>
-      <div>
-        <strong class="${t.kind === "income" ? "good" : "bad"}">
-          ${t.kind === "income" ? "+" : "−"} ${money(t.amount)}
-        </strong>
-        <button class="red" data-delete="${esc(t.id)}"
-          style="display:block;margin-top:6px;padding:7px">
-          حذف
-        </button>
-      </div>
-    </div>
-  `).join("");
+  function money(value) {
+    return number(value, false).toLocaleString("fr-MA", {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
+    }) + " DH";
+  }
 
-  $("history").querySelectorAll("[data-delete]").forEach(btn => {
-    btn.addEventListener("click", () => {
-      if (confirm("واش متأكد بغيتي تحذف هاد العملية؟")) {
-        data.transactions = data.transactions.filter(
-          t => String(t.id) !== btn.dataset.delete
-        );
-        save();
-        render();
-      }
+  function save() {
+    try {
+      localStorage.setItem(KEY, JSON.stringify(data));
+      return true;
+    } catch (error) {
+      $("status").textContent =
+        "تعذر حفظ البيانات. تأكد من إعدادات المتصفح.";
+      return false;
+    }
+  }
+
+  function calculate() {
+    $("sumIncome").textContent = money(data.income);
+    $("sumExpenses").textContent = money(data.expenses);
+
+    const profit = data.income - data.expenses;
+    $("netProfit").textContent = money(profit);
+    $("netProfit").style.color =
+      profit < 0 ? "#c73535" : "#168044";
+
+    $("sumClients").textContent =
+      number(data.clients, true).toLocaleString("fr-MA");
+
+    $("sumDeliveries").textContent =
+      number(data.deliveries, true).toLocaleString("fr-MA");
+
+    $("averageDelivery").textContent = money(
+      data.deliveries > 0
+        ? data.income / data.deliveries
+        : 0
+    );
+  }
+
+  function readInputs(list) {
+    list.forEach(id => {
+      data[id] = number($(id).value, integerIds.includes(id));
+      $(id).value = data[id];
     });
-  });
-}
 
-$("saveCounts").addEventListener("click", () => {
-  const c = Number($("clientInput").value);
-  const d = Number($("deliveryInput").value);
+    calculate();
 
-  if (!Number.isInteger(c) || c < 0 ||
-      !Number.isInteger(d) || d < 0) {
-    alert("دخل أعداد صحيحة موجبة أو صفر.");
-    return;
+    if (save()) {
+      $("status").textContent = "تم الحفظ وتحديث الحسابات بنجاح ✅";
+    }
   }
 
-  data.clients = c;
-  data.deliveries = d;
-  save();
-  render();
-  alert("تسجلو الأعداد بنجاح ✅");
-});
-
-$("add").addEventListener("click", () => {
-  const amount = Number($("amount").value);
-
-  if (!Number.isFinite(amount) || amount <= 0) {
-    alert("دخل مبلغ صحيح أكبر من صفر.");
-    return;
-  }
-
-  data.transactions.push({
-    id: String(Date.now()) + "-" +
-        Math.random().toString(36).slice(2, 8),
-    kind: $("kind").value,
-    amount: Math.round(amount * 100) / 100,
-    details: $("details").value.trim(),
-    date: $("date").value || today()
-  });
-
-  save();
-
-  $("amount").value = "";
-  $("details").value = "";
-  $("date").value = today();
-
-  render();
-  alert("تسجلات العملية بنجاح ✅");
-});
-
-$("filter").addEventListener("change", renderHistory);
-
-$("backup").addEventListener("click", () => {
-  const blob = new Blob(
-    [JSON.stringify(data, null, 2)],
-    {type: "application/json"}
-  );
-
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement("a");
-
-  a.href = url;
-  a.download = "skhawa-livrili-backup.json";
-  document.body.appendChild(a);
-  a.click();
-  a.remove();
-
-  URL.revokeObjectURL(url);
-});
-
-$("chooseFile").addEventListener("click", () => {
-  $("file").click();
-});
-
-$("file").addEventListener("change", async e => {
-  const file = e.target.files[0];
-  if (!file) return;
-
-  try {
-    const backup = JSON.parse(await file.text());
-
-    if (!Number.isInteger(Number(backup.clients)) ||
-        !Number.isInteger(Number(backup.deliveries)) ||
-        !Array.isArray(backup.transactions)) {
-      throw new Error("invalid");
+  function load() {
+    try {
+      const saved = localStorage.getItem(KEY);
+      if (saved) {
+        const oldData = JSON.parse(saved);
+        ids.forEach(id => {
+          if (oldData[id] !== undefined) {
+            data[id] = number(
+              oldData[id],
+              integerIds.includes(id)
+            );
+          }
+        });
+      }
+    } catch (error) {
+      $("status").textContent = "تعذر قراءة البيانات المحفوظة.";
     }
 
-    if (!confirm("استرجاع النسخة غادي يعوض البيانات الحالية. نكملو؟")) {
+    ids.forEach(id => {
+      $(id).value = data[id];
+    });
+
+    calculate();
+  }
+
+  $("saveMoney").addEventListener("click", function () {
+    readInputs(["income", "expenses"]);
+  });
+
+  $("saveCounts").addEventListener("click", function () {
+    readInputs(["clients", "deliveries"]);
+  });
+
+  ids.forEach(id => {
+    $(id).addEventListener("input", function () {
+      data[id] = number(
+        $(id).value,
+        integerIds.includes(id)
+      );
+
+      calculate();
+      save();
+      $("status").textContent = "الحسابات كتتحدّث أوتوماتيكياً";
+    });
+  });
+
+  $("exportData").addEventListener("click", function () {
+    const blob = new Blob(
+      [JSON.stringify(data, null, 2)],
+      { type: "application/json;charset=utf-8" }
+    );
+
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "skhawa-livrili-backup.json";
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    URL.revokeObjectURL(url);
+
+    $("status").textContent = "تم تجهيز النسخة الاحتياطية.";
+  });
+
+  $("resetData").addEventListener("click", function () {
+    if (!confirm("واش متأكد بغيتي تمسح جميع البيانات؟")) {
       return;
     }
 
     data = {
-      clients: Math.max(0, Number(backup.clients)),
-      deliveries: Math.max(0, Number(backup.deliveries)),
-      transactions: backup.transactions
-    };
-
-    save();
-    render();
-    alert("ترجعات النسخة بنجاح ✅");
-
-  } catch(err) {
-    alert("الملف ماشي نسخة احتياطية صالحة.");
-  } finally {
-    e.target.value = "";
-  }
-});
-
-$("clear").addEventListener("click", () => {
-  if (confirm("واش متأكد بغيتي تمسح جميع البيانات؟")) {
-    data = {
+      income: 0,
+      expenses: 0,
       clients: 0,
-      deliveries: 0,
-      transactions: []
+      deliveries: 0
     };
 
-    save();
-    render();
-  }
-});
+    ids.forEach(id => {
+      $(id).value = 0;
+    });
 
-if ("serviceWorker" in navigator &&
-    location.protocol.startsWith("http")) {
-  window.addEventListener("load", () => {
-    navigator.serviceWorker.register("./service-worker.js")
-      .catch(() => {});
+    calculate();
+
+    if (save()) {
+      $("status").textContent = "تم مسح البيانات.";
+    }
   });
-}
 
-render();
-
+  load();
 })();
 </script>
+
 </body>
 </html>
