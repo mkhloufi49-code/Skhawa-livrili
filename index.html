@@ -113,5 +113,117 @@ if ("serviceWorker" in navigator) {
   });
 }
 </script>
+
+<section id="comptabilite" style="padding:16px;max-width:500px;margin:auto;font-family:Arial;background:#f5f7fa;border-radius:14px">
+  <h2 style="text-align:center;color:#167c55">💰 SKHAWA LIVRILI</h2>
+  <h3>📊 حساب المدخول والمصاريف</h3>
+
+  <label>نوع العملية</label>
+  <select id="typeOp" style="width:100%;padding:12px;margin:6px 0">
+    <option value="income">مدخول</option>
+    <option value="expense">مصاريف</option>
+  </select>
+
+  <label>المبلغ بالدرهم (DH)</label>
+  <input id="montant" type="number" min="0.01" step="0.01" placeholder="مثلاً 100" style="width:100%;padding:12px;box-sizing:border-box;margin:6px 0">
+
+  <label>ملاحظة</label>
+  <input id="note" placeholder="مثلاً توصيل طلبية" style="width:100%;padding:12px;box-sizing:border-box;margin:6px 0">
+
+  <button onclick="ajouterOperation()" style="width:100%;padding:14px;background:#167c55;color:white;border:0;border-radius:8px;margin:10px 0">➕ تسجيل العملية</button>
+
+  <div style="background:#dff7e9;padding:12px;border-radius:8px;margin:8px 0">💵 المدخول: <b id="totalIncome">0.00 DH</b></div>
+  <div style="background:#ffe8e8;padding:12px;border-radius:8px;margin:8px 0">💸 المصاريف: <b id="totalExpense">0.00 DH</b></div>
+  <div style="background:#dceaff;padding:12px;border-radius:8px;margin:8px 0">📈 الربح الصافي: <b id="profit">0.00 DH</b></div>
+
+  <h3>📋 سجل العمليات</h3>
+  <div id="listeOperations"></div>
+</section>
+
+<script>
+const cleCompta = "skhawa_comptabilite_v1";
+let operations = [];
+
+try {
+  operations = JSON.parse(localStorage.getItem(cleCompta) || "[]");
+  if (!Array.isArray(operations)) operations = [];
+} catch(e) {
+  operations = [];
+}
+
+function sauvegarderOperations() {
+  localStorage.setItem(cleCompta, JSON.stringify(operations));
+}
+
+function afficherOperations() {
+  let income = 0, expense = 0;
+  const liste = document.getElementById("listeOperations");
+  liste.replaceChildren();
+
+  operations.forEach((op, index) => {
+    if (op.type === "income") income += op.montant;
+    else expense += op.montant;
+
+    const ligne = document.createElement("div");
+    ligne.style.cssText = "background:white;padding:10px;margin:8px 0;border-radius:8px;overflow-wrap:anywhere";
+
+    const detail = document.createElement("div");
+    detail.textContent =
+      (op.type === "income" ? "🟢 مدخول: " : "🔴 مصاريف: ") +
+      op.montant.toFixed(2) + " DH — " + op.note;
+
+    const supprimer = document.createElement("button");
+    supprimer.textContent = "حذف";
+    supprimer.style.cssText = "margin-top:8px;padding:6px 12px";
+    supprimer.onclick = function() {
+      if (confirm("واش متأكد بغيتي تحذف هاد العملية؟")) {
+        operations.splice(index, 1);
+        sauvegarderOperations();
+        afficherOperations();
+      }
+    };
+
+    ligne.append(detail, supprimer);
+    liste.appendChild(ligne);
+  });
+
+  document.getElementById("totalIncome").textContent = income.toFixed(2) + " DH";
+  document.getElementById("totalExpense").textContent = expense.toFixed(2) + " DH";
+  document.getElementById("profit").textContent = (income - expense).toFixed(2) + " DH";
+}
+
+function ajouterOperation() {
+  const champ = document.getElementById("montant");
+  const montant = Number(champ.value);
+  const type = document.getElementById("typeOp").value;
+  const note = document.getElementById("note").value.trim();
+
+  if (!Number.isFinite(montant) || montant <= 0) {
+    alert("دخل مبلغ صحيح أكبر من صفر");
+    return;
+  }
+
+  operations.unshift({
+    type: type,
+    montant: montant,
+    note: note || (type === "income" ? "مدخول" : "مصاريف"),
+    date: new Date().toISOString()
+  });
+
+  try {
+    sauvegarderOperations();
+  } catch(e) {
+    operations.shift();
+    alert("ما قدرناش نحفظو العملية. تأكد من مساحة التخزين.");
+    return;
+  }
+
+  champ.value = "";
+  document.getElementById("note").value = "";
+  afficherOperations();
+}
+
+afficherOperations();
+</script>
 </body>
 </html>
