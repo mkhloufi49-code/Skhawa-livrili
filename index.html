@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#087f5b">
+<title>SKHAWA LIVRILI</title>
+<style>
+*{box-sizing:border-box}
+body{font-family:Arial,sans-serif;margin:0;background:#f1f5f3;color:#18352b;padding:16px}
+header{background:#087f5b;color:white;padding:20px;border-radius:16px;text-align:center}
+h1{margin:0;font-size:25px}
+.card{background:white;padding:16px;margin-top:14px;border-radius:14px;box-shadow:0 2px 8px #0001}
+input,select,button{width:100%;padding:12px;margin-top:9px;border:1px solid #ccd8d2;border-radius:9px;font-size:16px}
+button{background:#087f5b;color:white;border:0;font-weight:bold}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.stat{background:#e0f5eb;padding:13px;border-radius:10px;text-align:center}
+.stat strong{display:block;font-size:21px;margin-top:7px}
+.item{padding:12px 0;border-bottom:1px solid #eee}
+.delete{background:#b42318}
+small{color:#5b6b63}
+</style>
+</head>
+<body>
+<header>
+<h1>🛵 SKHAWA LIVRILI</h1>
+<p>تسيير المدخول والمصاريف والطلبات</p>
+</header>
+
+<div class="card">
+<h3>➕ تسجيل عملية جديدة</h3>
+<select id="type">
+<option value="income">مدخول (+)</option>
+<option value="expense">مصاريف (-)</option>
+</select>
+<input id="amount" type="number" min="0.01" step="0.01" placeholder="المبلغ بالدرهم">
+<input id="desc" placeholder="الشرح: توصيل، بنزين، طلبية...">
+<button onclick="addEntry()">حفظ العملية</button>
+</div>
+
+<div class="card">
+<h3>📊 الحسابات</h3>
+<div class="stats">
+<div class="stat">مجموع المدخول<strong id="income">0 DH</strong></div>
+<div class="stat">مجموع المصاريف<strong id="expense">0 DH</strong></div>
+</div>
+<div class="stat" style="margin-top:10px">الصافي<strong id="balance">0 DH</strong></div>
+</div>
+
+<div class="card">
+<h3>📅 سجل العمليات</h3>
+<div id="list">مازال ما تسجلات حتى عملية.</div>
+<button class="delete" onclick="clearEntries()">مسح جميع العمليات</button>
+</div>
+
+<script>
+const KEY="skhawa_livrili_entries_v1";
+let entries=[];
+try{entries=JSON.parse(localStorage.getItem(KEY)||"[]")}catch(e){entries=[]}
+
+function money(n){return Number(n).toLocaleString("fr-MA",{maximumFractionDigits:2})+" DH"}
+
+function render(){
+let inc=0,exp=0;
+entries.forEach(e=>{if(e.type==="income")inc+=e.amount;else exp+=e.amount});
+document.getElementById("income").textContent=money(inc);
+document.getElementById("expense").textContent=money(exp);
+document.getElementById("balance").textContent=money(inc-exp);
+const list=document.getElementById("list");
+if(!entries.length){list.textContent="مازال ما تسجلات حتى عملية.";return}
+list.innerHTML="";
+entries.forEach((e,i)=>{
+const item=document.createElement("div");item.className="item";
+const title=document.createElement("strong");
+title.textContent=(e.type==="income"?"🟢 مدخول: ":"🔴 مصروف: ")+money(e.amount);
+const desc=document.createElement("div");desc.textContent=e.desc||"بلا شرح";
+const date=document.createElement("small");date.textContent=e.date;
+const del=document.createElement("button");del.className="delete";del.textContent="حذف العملية";
+del.onclick=()=>{entries.splice(i,1);save()};
+item.append(title,desc,date,del);list.appendChild(item);
+});
+}
+function save(){
+try{localStorage.setItem(KEY,JSON.stringify(entries));render()}
+catch(e){alert("ما قدرناش نحفظو البيانات. تأكد من مساحة الهاتف.")}
+}
+function addEntry(){
+const amount=Number(document.getElementById("amount").value);
+const desc=document.getElementById("desc").value.trim();
+const type=document.getElementById("type").value;
+if(!Number.isFinite(amount)||amount<=0){alert("دخل مبلغ صحيح");return}
+entries.unshift({type,amount,desc,date:new Date().toLocaleString("fr-MA")});
+save();
+document.getElementById("amount").value="";
+document.getElementById("desc").value="";
+}
+function clearEntries(){
+if(confirm("واش متأكد بغيتي تمسح جميع العمليات؟")){entries=[];save()}
+}
+render();
+</script>
+</body>
+</html>
