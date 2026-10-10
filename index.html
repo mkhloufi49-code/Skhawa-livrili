@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -8,9 +9,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
 <title>SKHAWA LIVRILI</title>
 
-<link rel="stylesheet"
-href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-crossorigin="">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
 
 <style>
 :root {
@@ -25,36 +24,17 @@ crossorigin="">
   --border:#eeeeee;
   --shadow:0 8px 25px rgba(0,0,0,.065);
 }
-
-* {
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-}
-
-html {
-  scroll-behavior:smooth;
-}
-
+* { box-sizing:border-box; margin:0; padding:0; }
+html { scroll-behavior:smooth; }
 body {
   font-family:Arial,sans-serif;
   background:var(--background);
   color:var(--black);
   padding-bottom:35px;
 }
-
-button,input,select {
-  font:inherit;
-}
-
-button {
-  cursor:pointer;
-  transition:transform .15s,opacity .15s;
-}
-
-button:active {
-  transform:scale(.98);
-}
+button,input,select { font:inherit; }
+button { cursor:pointer; transition:transform .15s,opacity .15s; }
+button:active { transform:scale(.98); }
 
 .hero {
   position:relative;
@@ -64,7 +44,6 @@ button:active {
   padding:27px 18px 30px;
   border-bottom:5px solid var(--orange);
 }
-
 .hero:before {
   content:"";
   position:absolute;
@@ -75,30 +54,10 @@ button:active {
   left:-80px;
   top:-80px;
 }
-
-.hero-content {
-  position:relative;
-  z-index:1;
-  max-width:700px;
-  margin:auto;
-}
-
-.brand {
-  font-size:27px;
-  font-weight:900;
-  letter-spacing:1px;
-}
-
-.brand span {
-  color:var(--orange);
-}
-
-.hero-subtitle {
-  color:#ddd;
-  font-size:13px;
-  margin-top:8px;
-}
-
+.hero-content { position:relative; z-index:1; max-width:700px; margin:auto; }
+.brand { font-size:27px; font-weight:900; letter-spacing:1px; }
+.brand span { color:var(--orange); }
+.hero-subtitle { color:#ddd; font-size:13px; margin-top:8px; }
 .hero-badge {
   display:inline-block;
   background:rgba(255,121,0,.16);
@@ -109,13 +68,7 @@ button:active {
   font-size:12px;
   margin-top:16px;
 }
-
-.container {
-  max-width:700px;
-  margin:auto;
-  padding:15px;
-}
-
+.container { max-width:700px; margin:auto; padding:15px; }
 .welcome {
   position:relative;
   overflow:hidden;
@@ -126,23 +79,9 @@ button:active {
   margin-bottom:22px;
   box-shadow:0 10px 25px rgba(255,121,0,.2);
 }
-
-.welcome h2 {
-  font-size:21px;
-  margin-bottom:10px;
-}
-
-.welcome p {
-  font-size:14px;
-  line-height:1.9;
-  color:#fff8f0;
-}
-
-.welcome-icon {
-  font-size:36px;
-  margin-bottom:12px;
-}
-
+.welcome h2 { font-size:21px; margin-bottom:10px; }
+.welcome p { font-size:14px; line-height:1.9; color:#fff8f0; }
+.welcome-icon { font-size:36px; margin-bottom:12px; }
 .section-title {
   font-size:18px;
   margin:25px 0 13px;
@@ -150,7 +89,6 @@ button:active {
   align-items:center;
   gap:9px;
 }
-
 .section-title:before {
   content:"";
   display:inline-block;
@@ -159,13 +97,7 @@ button:active {
   border-radius:5px;
   background:var(--orange);
 }
-
-.grid {
-  display:grid;
-  grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:12px;
-}
-
+.grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
 .card {
   position:relative;
   overflow:hidden;
@@ -176,7 +108,6 @@ button:active {
   border:1px solid #f0f0f0;
   min-width:0;
 }
-
 .card:after {
   content:"";
   position:absolute;
@@ -187,27 +118,12 @@ button:active {
   background:var(--orange);
   border-radius:5px 0 0 0;
 }
-
-.card .icon {
-  font-size:26px;
-  margin-bottom:12px;
-}
-
-.card .label {
-  color:var(--muted);
-  font-size:12px;
-  margin-bottom:10px;
-}
-
-.card .number {
-  font-size:23px;
-  font-weight:900;
-  overflow-wrap:anywhere;
-}
-
-.orange {color:var(--orange)}
-.green {color:var(--green)}
-.red {color:var(--red)}
+.card .icon { font-size:26px; margin-bottom:12px; }
+.card .label { color:var(--muted); font-size:12px; margin-bottom:10px; }
+.card .number { font-size:23px; font-weight:900; overflow-wrap:anywhere; }
+.orange { color:var(--orange); }
+.green { color:var(--green); }
+.red { color:var(--red); }
 
 .panel {
   background:white;
@@ -217,19 +133,8 @@ button:active {
   box-shadow:var(--shadow);
   border:1px solid #f0f0f0;
 }
-
-.panel-title {
-  font-size:16px;
-  margin-bottom:15px;
-}
-
-label {
-  display:block;
-  font-size:13px;
-  font-weight:bold;
-  margin-bottom:8px;
-}
-
+.panel-title { font-size:16px; margin-bottom:15px; }
+label { display:block; font-size:13px; font-weight:bold; margin-bottom:8px; }
 input,select {
   width:100%;
   min-width:0;
@@ -241,12 +146,10 @@ input,select {
   background:#fff;
   color:#151515;
 }
-
 input:focus,select:focus {
   outline:2px solid rgba(255,121,0,.22);
   border-color:var(--orange);
 }
-
 button {
   border:0;
   border-radius:12px;
@@ -256,96 +159,26 @@ button {
   width:100%;
   line-height:1.5;
 }
-
 .btn-orange {
   background:linear-gradient(135deg,#ff7900,#ff922c);
   color:white;
   box-shadow:0 5px 12px rgba(255,121,0,.15);
 }
+.btn-black { background:var(--black); color:white; }
+.btn-green { background:var(--green); color:white; }
+.btn-red { background:var(--red); color:white; }
+.btn-light { background:#fff3e8; color:#b95300; border:1px solid #ffdfc1; }
+.button-row { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:9px; }
+.small-note { font-size:12px; line-height:1.8; color:var(--muted); margin:5px 0 12px; }
 
-.btn-black {
-  background:var(--black);
-  color:white;
-}
-
-.btn-green {
-  background:var(--green);
-  color:white;
-}
-
-.btn-red {
-  background:var(--red);
-  color:white;
-}
-
-.btn-light {
-  background:#fff3e8;
-  color:#b95300;
-  border:1px solid #ffdfc1;
-}
-
-.button-row {
-  display:grid;
-  grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:9px;
-}
-
-.small-note {
-  font-size:12px;
-  line-height:1.8;
-  color:var(--muted);
-  margin:5px 0 12px;
-}
-
-.map-panel {
-  padding:12px;
-}
-
-.map-top {
-  padding:6px 5px 13px;
-}
-
-.map-top h3 {
-  font-size:16px;
-  margin-bottom:8px;
-}
-
-.map-top p {
-  color:var(--muted);
-  font-size:12px;
-  line-height:1.8;
-}
-
-.map-modes {
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:8px;
-  margin-bottom:12px;
-}
-
-.map-mode {
-  border:1px solid #e8e8e8;
-  background:#f7f7f7;
-  color:#444;
-  padding:11px 7px;
-  font-size:12px;
-}
-
-.map-mode.active {
-  color:white;
-  background:var(--orange);
-  border-color:var(--orange);
-}
-
-#map {
-  height:340px;
-  width:100%;
-  border-radius:15px;
-  overflow:hidden;
-  background:#e7e7e7;
-  z-index:1;
-}
-
+.map-panel { padding:12px; }
+.map-top { padding:6px 5px 13px; }
+.map-top h3 { font-size:16px; margin-bottom:8px; }
+.map-top p { color:var(--muted); font-size:12px; line-height:1.8; }
+.map-modes { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:12px; }
+.map-mode { border:1px solid #e8e8e8; background:#f7f7f7; color:#444; padding:11px 7px; font-size:12px; }
+.map-mode.active { color:white; background:var(--orange); border-color:var(--orange); }
+#map { height:340px; width:100%; border-radius:15px; overflow:hidden; background:#e7e7e7; z-index:1; }
 .map-status {
   padding:12px;
   margin-top:10px;
@@ -356,21 +189,8 @@ button {
   font-size:12px;
   line-height:1.8;
 }
-
-.location-box {
-  padding:12px;
-  background:#f8f8f8;
-  border-radius:12px;
-  margin-top:10px;
-  border:1px solid #eee;
-}
-
-.location-box strong {
-  display:block;
-  font-size:13px;
-  margin-bottom:6px;
-}
-
+.location-box { padding:12px; background:#f8f8f8; border-radius:12px; margin-top:10px; border:1px solid #eee; }
+.location-box strong { display:block; font-size:13px; margin-bottom:6px; }
 .location-box small {
   display:block;
   color:#666;
@@ -379,18 +199,8 @@ button {
   direction:ltr;
   text-align:left;
 }
-
-.map-actions {
-  display:grid;
-  gap:9px;
-  margin-top:12px;
-}
-
-.leaflet-popup-content {
-  font-family:Arial,sans-serif;
-  text-align:right;
-  line-height:1.8;
-}
+.map-actions { display:grid; gap:9px; margin-top:12px; }
+.leaflet-popup-content { font-family:Arial,sans-serif; text-align:right; line-height:1.8; }
 
 .transaction {
   background:white;
@@ -404,76 +214,27 @@ button {
   gap:10px;
   box-shadow:0 3px 10px rgba(0,0,0,.035);
 }
-
-.transaction-info {
-  min-width:0;
-}
-
-.transaction-info strong {
-  display:block;
-  margin-bottom:5px;
-  overflow-wrap:anywhere;
-}
-
-.transaction-info small {
-  color:#777;
-  font-size:11px;
-}
-
-.transaction-amount {
-  font-size:13px;
-  font-weight:bold;
-  white-space:nowrap;
-}
-
-.delete-btn {
-  width:auto;
-  padding:6px 9px;
-  margin-top:8px;
-  font-size:11px;
-}
-
-.empty {
-  text-align:center;
-  color:#777;
-  padding:22px 5px;
-  font-size:13px;
-  line-height:1.8;
-}
-
-.status {
-  text-align:center;
-  color:#777;
-  font-size:12px;
-  margin:13px 0;
-  line-height:1.8;
-}
-
-footer {
-  text-align:center;
-  padding:25px 10px;
-  color:#777;
-  font-size:12px;
-  line-height:1.9;
-}
-
-footer strong {
-  color:var(--orange);
-  font-size:14px;
-}
+.transaction-info { min-width:0; }
+.transaction-info strong { display:block; margin-bottom:5px; overflow-wrap:anywhere; }
+.transaction-info small { color:#777; font-size:11px; }
+.transaction-amount { font-size:13px; font-weight:bold; white-space:nowrap; }
+.delete-btn { width:auto; padding:6px 9px; margin-top:8px; font-size:11px; }
+.empty { text-align:center; color:#777; padding:22px 5px; font-size:13px; line-height:1.8; }
+.status { text-align:center; color:#777; font-size:12px; margin:13px 0; line-height:1.8; }
+footer { text-align:center; padding:25px 10px; color:#777; font-size:12px; line-height:1.9; }
+footer strong { color:var(--orange); font-size:14px; }
 
 @media(max-width:350px) {
-  .container {padding:10px}
-  .card {padding:13px 9px}
-  .card .number {font-size:19px}
-  #map {height:290px}
-  .brand {font-size:23px}
+  .container { padding:10px; }
+  .card { padding:13px 9px; }
+  .card .number { font-size:19px; }
+  #map { height:290px; }
+  .brand { font-size:23px; }
 }
 </style>
 </head>
 
 <body>
-
 <header class="hero">
   <div class="hero-content">
     <div class="brand">SKHAWA <span>LIVRILI</span></div>
@@ -483,43 +244,34 @@ footer strong {
 </header>
 
 <main class="container">
-
   <section class="welcome">
     <div class="welcome-icon">🛵</div>
     <h2>مرحبا بك فـ SKHAWA LIVRILI</h2>
-    <p>
-      كلشي مجموع فبلاصة وحدة: الإحصائيات، الحسابات،
-      ومواقع الزبناء والتوصيلات.
-    </p>
+    <p>كلشي مجموع فبلاصة وحدة: الإحصائيات، الحسابات، ومواقع التوصيلات.</p>
   </section>
 
   <h2 class="section-title">📊 الإحصائيات ديالك</h2>
-
   <section class="grid">
     <div class="card">
       <div class="icon">👥</div>
       <div class="label">عدد الزبناء</div>
       <div class="number orange" id="clientsDisplay">0</div>
     </div>
-
     <div class="card">
       <div class="icon">🛵</div>
       <div class="label">عدد التوصيلات</div>
       <div class="number orange" id="deliveriesDisplay">0</div>
     </div>
-
     <div class="card">
       <div class="icon">💰</div>
       <div class="label">مجموع المدخول</div>
       <div class="number green" id="incomeDisplay">0 DH</div>
     </div>
-
     <div class="card">
       <div class="icon">💸</div>
       <div class="label">مجموع المصاريف</div>
       <div class="number red" id="expensesDisplay">0 DH</div>
     </div>
-
     <div class="card" style="grid-column:1/-1">
       <div class="icon">🧮</div>
       <div class="label">الصافي ديالك</div>
@@ -528,23 +280,15 @@ footer strong {
   </section>
 
   <h2 class="section-title">🗺️ خريطة التوصيلات</h2>
-
   <section class="panel map-panel">
     <div class="map-top">
       <h3>📍 اختار المواقع ديالك</h3>
-      <p>
-        اختار نوع الموقع، ومن بعد ضغط على الخريطة باش تحددو.
-        المواقع غادي تتحفظ فالتليفون.
-      </p>
+      <p>اختار نوع الموقع، ومن بعد ضغط على الخريطة باش تحددو. موقع الزبون مؤقت، ووجهة التوصيل كتتحفظ.</p>
     </div>
 
     <div class="map-modes">
-      <button type="button" class="map-mode active" id="customerMode">
-        👤 تحديد موقع الزبون
-      </button>
-      <button type="button" class="map-mode" id="deliveryMode">
-        🛵 وجهة التوصيل
-      </button>
+      <button type="button" class="map-mode active" id="customerMode">👤 تحديد موقع الزبون</button>
+      <button type="button" class="map-mode" id="deliveryMode">🛵 وجهة التوصيل</button>
     </div>
 
     <div id="map" role="application" aria-label="خريطة تحديد المواقع"></div>
@@ -554,110 +298,71 @@ footer strong {
     </div>
 
     <div class="location-box">
-      <strong>👤 موقع الزبون</strong>
+      <strong>👤 موقع الزبون (مؤقت)</strong>
       <small id="customerCoords">مازال ما تحددش</small>
     </div>
-
     <div class="location-box">
       <strong>🛵 وجهة التوصيل</strong>
       <small id="deliveryCoords">مازال ما تحدداتش</small>
     </div>
-
     <div class="location-box">
       <strong>📱 موقعك الحالي</strong>
       <small id="currentCoords">ضغط على زر GPS لتحديد موقعك</small>
     </div>
 
     <div class="map-actions">
-      <button type="button" class="btn-orange" id="gpsButton">
-        🛰️ حدد موقعي الحالي بالـ GPS
-      </button>
-
-      <button type="button" class="btn-black" id="routeButton">
-        🧭 فتح الطريق فـ Google Maps
-      </button>
-
+      <button type="button" class="btn-orange" id="gpsButton">🛰️ حدد موقعي الحالي بالـ GPS</button>
+      <button type="button" class="btn-black" id="routeButton">🧭 فتح الطريق فـ Google Maps</button>
       <div class="button-row">
-        <button type="button" class="btn-light" id="clearCustomer">
-          مسح موقع الزبون
-        </button>
-        <button type="button" class="btn-light" id="clearDelivery">
-          مسح وجهة التوصيل
-        </button>
+        <button type="button" class="btn-light" id="clearCustomer">مسح موقع الزبون</button>
+        <button type="button" class="btn-light" id="clearDelivery">مسح وجهة التوصيل</button>
       </div>
     </div>
-
     <p class="small-note" style="margin-top:12px">
-      الخريطة كتحتاج الإنترنت. السماح بالموقع مطلوب لاستعمال GPS.
-      اختار موقع الزبون ووجهة التوصيل قبل فتح الطريق.
+      موقع الزبون مؤقت وما كيتحفظش. وجهة التوصيل كتتحفظ فالتليفون.
+      الخريطة كتحتاج الإنترنت، والسماح بالموقع مطلوب لاستعمال GPS.
     </p>
   </section>
 
   <h2 class="section-title">✏️ تحديث الإحصائيات</h2>
-
   <section class="panel">
     <label for="clientsInput">عدد الزبناء</label>
-    <input type="number" id="clientsInput" min="0" step="1"
-           inputmode="numeric" placeholder="دخل عدد الزبناء">
-
+    <input type="number" id="clientsInput" min="0" step="1" inputmode="numeric" placeholder="دخل عدد الزبناء">
     <label for="deliveriesInput">عدد التوصيلات</label>
-    <input type="number" id="deliveriesInput" min="0" step="1"
-           inputmode="numeric" placeholder="دخل عدد التوصيلات">
-
-    <button type="button" class="btn-orange" id="saveCounts">
-      💾 حفظ الإحصائيات
-    </button>
+    <input type="number" id="deliveriesInput" min="0" step="1" inputmode="numeric" placeholder="دخل عدد التوصيلات">
+    <button type="button" class="btn-orange" id="saveCounts">💾 حفظ الإحصائيات</button>
   </section>
 
   <h2 class="section-title">💵 تسجيل المدخول والمصاريف</h2>
-
   <section class="panel">
     <label for="typeInput">نوع العملية</label>
     <select id="typeInput">
       <option value="income">💰 مدخول</option>
       <option value="expense">💸 مصروف</option>
     </select>
-
     <label for="amountInput">المبلغ بالدرهم</label>
-    <input type="number" id="amountInput" min="0.01" step="0.01"
-           inputmode="decimal" placeholder="مثال: 50">
-
+    <input type="number" id="amountInput" min="0.01" step="0.01" inputmode="decimal" placeholder="مثال: 50">
     <label for="descriptionInput">تفاصيل العملية</label>
-    <input type="text" id="descriptionInput" maxlength="100"
-           placeholder="مثال: توصيل، بنزين، صيانة...">
-
-    <button type="button" class="btn-orange" id="addTransaction">
-      ➕ تسجيل العملية
-    </button>
+    <input type="text" id="descriptionInput" maxlength="100" placeholder="مثال: توصيل، بنزين، صيانة...">
+    <button type="button" class="btn-orange" id="addTransaction">➕ تسجيل العملية</button>
   </section>
 
   <h2 class="section-title">📋 سجل العمليات</h2>
   <div id="transactionsList"></div>
-
   <div class="status" id="saveStatus">💾 البيانات محفوظة فالتليفون</div>
 
   <h2 class="section-title">📦 النسخة الاحتياطية</h2>
-
   <section class="panel">
     <p class="small-note">
-      حمّل نسخة احتياطية من الإحصائيات والعمليات والمواقع،
-      واحتافظ بها باش تقدر تسترجع بياناتك عند الحاجة.
+      حمّل نسخة احتياطية من الإحصائيات والعمليات ووجهة التوصيل وموقعك الحالي.
+      موقع الزبون المؤقت ما كيدخلش فالنسخة الاحتياطية.
     </p>
-
-    <button type="button" class="btn-black" id="backupButton">
-      📥 تحميل النسخة الاحتياطية
-    </button>
-
+    <button type="button" class="btn-black" id="backupButton">📥 تحميل النسخة الاحتياطية</button>
     <div style="height:14px"></div>
-
     <label for="restoreInput">اختار ملف النسخة الاحتياطية</label>
     <input type="file" id="restoreInput" accept=".json,application/json">
-
-    <button type="button" class="btn-green" id="restoreButton">
-      ♻️ استرجاع البيانات
-    </button>
+    <button type="button" class="btn-green" id="restoreButton">♻️ استرجاع البيانات</button>
   </section>
-
 </main>
 
 <footer>
@@ -665,8 +370,7 @@ footer strong {
   <p>السخاوة فالقلب والليفري فالوقت 🧡</p>
 </footer>
 
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-crossorigin=""></script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
 
 <script>
 (function () {
@@ -710,54 +414,50 @@ crossorigin=""></script>
 
   function validLocation(value) {
     if (!value || typeof value !== "object") return null;
-
     const lat = Number(value.lat);
     const lng = Number(value.lng);
-
     if (!Number.isFinite(lat) || !Number.isFinite(lng)) return null;
     if (lat < -90 || lat > 90 || lng < -180 || lng > 180) return null;
-
     return {
-      lat: lat,
-      lng: lng,
-      updatedAt: typeof value.updatedAt === "string"
-        ? value.updatedAt
-        : ""
+      lat,
+      lng,
+      updatedAt: typeof value.updatedAt === "string" ? value.updatedAt : ""
     };
   }
 
   function loadData() {
     try {
       const saved = localStorage.getItem(STORAGE_KEY);
-
-      if (!saved) return {
-        ...defaultData,
-        transactions: []
-      };
+      if (!saved) return { ...defaultData, transactions: [] };
 
       const parsed = JSON.parse(saved);
-
       return {
         clients: validCount(parsed.clients),
         deliveries: validCount(parsed.deliveries),
         transactions: Array.isArray(parsed.transactions)
           ? parsed.transactions.filter(isValidTransaction)
           : [],
-        customerLocation: validLocation(parsed.customerLocation),
+        // موقع الزبون ما كيتحملش من التخزين القديم.
+        customerLocation: null,
         deliveryLocation: validLocation(parsed.deliveryLocation),
         currentLocation: validLocation(parsed.currentLocation)
       };
     } catch (error) {
-      return {
-        ...defaultData,
-        transactions: []
-      };
+      return { ...defaultData, transactions: [] };
     }
   }
 
   function saveData() {
     try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+      // ما كنخزّنش موقع الزبون نهائياً.
+      const dataToSave = {
+        clients: data.clients,
+        deliveries: data.deliveries,
+        transactions: data.transactions,
+        deliveryLocation: data.deliveryLocation,
+        currentLocation: data.currentLocation
+      };
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(dataToSave));
       $("saveStatus").textContent = "✅ البيانات محفوظة فالتليفون";
       return true;
     } catch (error) {
@@ -768,9 +468,7 @@ crossorigin=""></script>
   }
 
   function money(value) {
-    return new Intl.NumberFormat("fr-MA", {
-      maximumFractionDigits: 2
-    }).format(value) + " DH";
+    return new Intl.NumberFormat("fr-MA", { maximumFractionDigits: 2 }).format(value) + " DH";
   }
 
   function total(type) {
@@ -795,14 +493,12 @@ crossorigin=""></script>
 
     renderTransactions();
     renderLocationText();
-
     if (mapReady) refreshMarkers();
   }
 
   function renderTransactions() {
     const list = $("transactionsList");
     list.replaceChildren();
-
     const sorted = [...data.transactions].reverse();
 
     if (!sorted.length) {
@@ -833,10 +529,8 @@ crossorigin=""></script>
 
       remove.addEventListener("click", () => {
         if (!confirm("واش متأكد بغيتي تحذف هاد العملية؟")) return;
-
         const old = data.transactions;
         data.transactions = old.filter(x => x.id !== item.id);
-
         if (!saveData()) {
           data.transactions = old;
           return;
@@ -847,8 +541,7 @@ crossorigin=""></script>
       info.append(title, date, document.createElement("br"), remove);
 
       const amount = document.createElement("div");
-      amount.className = "transaction-amount " +
-        (item.type === "income" ? "green" : "red");
+      amount.className = "transaction-amount " + (item.type === "income" ? "green" : "red");
       amount.textContent = (item.type === "income" ? "+" : "-") + money(item.amount);
 
       box.append(info, amount);
@@ -876,8 +569,7 @@ crossorigin=""></script>
         'transform:rotate(-45deg);background:' + color +
         ';border:3px solid white;box-shadow:0 3px 10px #0005;' +
         'display:flex;align-items:center;justify-content:center">' +
-        '<span style="transform:rotate(45deg);font-size:21px">' + emoji +
-        '</span></div>',
+        '<span style="transform:rotate(45deg);font-size:21px">' + emoji + '</span></div>',
       iconSize: [42, 42],
       iconAnchor: [21, 42],
       popupAnchor: [0, -38]
@@ -886,13 +578,11 @@ crossorigin=""></script>
 
   function initMap() {
     if (!window.L) {
-      $("mapStatus").textContent =
-        "⚠️ ما قدرناش نحملو الخريطة. تأكد من الإنترنت وعاود فتح التطبيق.";
+      $("mapStatus").textContent = "⚠️ ما قدرناش نحملو الخريطة. تأكد من الإنترنت وعاود فتح التطبيق.";
       return;
     }
 
     map = L.map("map").setView([34.68, -1.91], 12);
-
     L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
       maxZoom: 19,
       attribution: '&copy; OpenStreetMap'
@@ -906,22 +596,25 @@ crossorigin=""></script>
       };
 
       if (selectionMode === "customer") {
+        // الموقع مؤقت: كيبقى غير فالذاكرة حتى تتسد الصفحة أو تتعاود تتحمل.
         data.customerLocation = point;
-        $("mapStatus").textContent = "✅ تسجل موقع الزبون.";
+        $("mapStatus").textContent = "✅ تحدد موقع الزبون مؤقتاً؛ ما غاديش يتحفظ فالتليفون.";
       } else {
+        const old = data.deliveryLocation;
         data.deliveryLocation = point;
-        $("mapStatus").textContent = "✅ تسجلات وجهة التوصيل.";
+        if (!saveData()) {
+          data.deliveryLocation = old;
+          return;
+        }
+        $("mapStatus").textContent = "✅ تحفطات وجهة التوصيل.";
       }
 
-      if (saveData()) {
-        refreshMarkers();
-        renderLocationText();
-      }
+      refreshMarkers();
+      renderLocationText();
     });
 
     mapReady = true;
     refreshMarkers();
-
     setTimeout(() => map.invalidateSize(), 300);
   }
 
@@ -932,33 +625,28 @@ crossorigin=""></script>
     }
 
     const latlng = [location.lat, location.lng];
-
     if (oldMarker) {
       oldMarker.setLatLng(latlng);
       oldMarker.setPopupContent(title);
       return oldMarker;
     }
 
-    return L.marker(latlng, {
-      icon: markerIcon(emoji, color)
-    }).addTo(map).bindPopup(title);
+    return L.marker(latlng, { icon: markerIcon(emoji, color) })
+      .addTo(map)
+      .bindPopup(title);
   }
 
   function refreshMarkers() {
     if (!mapReady || !map) return;
-
     customerMarker = addOrUpdateMarker(
-      customerMarker, data.customerLocation, "👤", "#ff7900", "موقع الزبون"
+      customerMarker, data.customerLocation, "👤", "#ff7900", "موقع الزبون (مؤقت)"
     );
-
     deliveryMarker = addOrUpdateMarker(
       deliveryMarker, data.deliveryLocation, "🛵", "#202020", "وجهة التوصيل"
     );
-
     currentMarker = addOrUpdateMarker(
       currentMarker, data.currentLocation, "📍", "#159447", "موقعك الحالي"
     );
-
     renderLocationText();
   }
 
@@ -966,16 +654,14 @@ crossorigin=""></script>
     selectionMode = "customer";
     $("customerMode").classList.add("active");
     $("deliveryMode").classList.remove("active");
-    $("mapStatus").textContent =
-      "🟠 الوضع الحالي: تحديد موقع الزبون. ضغط على الخريطة.";
+    $("mapStatus").textContent = "🟠 الوضع الحالي: تحديد موقع الزبون مؤقتاً. ضغط على الخريطة.";
   });
 
   $("deliveryMode").addEventListener("click", () => {
     selectionMode = "delivery";
     $("deliveryMode").classList.add("active");
     $("customerMode").classList.remove("active");
-    $("mapStatus").textContent =
-      "🛵 الوضع الحالي: تحديد وجهة التوصيل. ضغط على الخريطة.";
+    $("mapStatus").textContent = "🛵 الوضع الحالي: تحديد وجهة التوصيل. ضغط على الخريطة.";
   });
 
   $("gpsButton").addEventListener("click", () => {
@@ -985,7 +671,6 @@ crossorigin=""></script>
     }
 
     $("mapStatus").textContent = "⏳ كنحاولو نحددو موقعك الحالي...";
-
     navigator.geolocation.getCurrentPosition(
       position => {
         const point = {
@@ -993,36 +678,29 @@ crossorigin=""></script>
           lng: position.coords.longitude,
           updatedAt: new Date().toISOString()
         };
-
+        const old = data.currentLocation;
         data.currentLocation = point;
 
-        if (!saveData()) return;
+        if (!saveData()) {
+          data.currentLocation = old;
+          return;
+        }
 
         if (mapReady) {
           refreshMarkers();
           map.setView([point.lat, point.lng], 16);
         }
-
-        $("mapStatus").textContent =
-          "✅ تحدد موقعك الحالي. اختار وجهة التوصيل باش تفتح الطريق.";
+        $("mapStatus").textContent = "✅ تحدد موقعك الحالي. اختار وجهة التوصيل باش تفتح الطريق.";
       },
       error => {
         let message = "ما قدرناش نحددو موقعك.";
-        if (error.code === 1) {
-          message = "خاصك تسمح للتطبيق باستعمال الموقع من إعدادات المتصفح.";
-        } else if (error.code === 2) {
-          message = "الموقع ما متوفرش دابا. تأكد أن GPS شاعل.";
-        } else if (error.code === 3) {
-          message = "تحديد الموقع خذا وقت طويل. عاود المحاولة.";
-        }
+        if (error.code === 1) message = "خاصك تسمح للتطبيق باستعمال الموقع من إعدادات المتصفح.";
+        else if (error.code === 2) message = "الموقع ما متوفرش دابا. تأكد أن GPS شاعل.";
+        else if (error.code === 3) message = "تحديد الموقع خذا وقت طويل. عاود المحاولة.";
         $("mapStatus").textContent = "⚠️ " + message;
         alert(message);
       },
-      {
-        enableHighAccuracy: true,
-        timeout: 15000,
-        maximumAge: 30000
-      }
+      { enableHighAccuracy:true, timeout:15000, maximumAge:30000 }
     );
   });
 
@@ -1037,12 +715,9 @@ crossorigin=""></script>
 
     let url = "https://www.google.com/maps/dir/?api=1&destination=" +
       encodeURIComponent(destination.lat + "," + destination.lng);
-
     if (origin) {
-      url += "&origin=" +
-        encodeURIComponent(origin.lat + "," + origin.lng);
+      url += "&origin=" + encodeURIComponent(origin.lat + "," + origin.lng);
     }
-
     url += "&travelmode=driving";
     window.open(url, "_blank", "noopener");
   });
@@ -1052,13 +727,13 @@ crossorigin=""></script>
       alert(label + " مازال ما تحددش.");
       return;
     }
-
     if (!confirm("واش متأكد بغيتي تمسح " + label + "؟")) return;
 
     const old = data[key];
     data[key] = null;
 
-    if (!saveData()) {
+    // موقع الزبون مؤقت ولا يحتاج إلى الحفظ.
+    if (key !== "customerLocation" && !saveData()) {
       data[key] = old;
       return;
     }
@@ -1071,7 +746,6 @@ crossorigin=""></script>
   $("clearCustomer").addEventListener("click", () =>
     clearLocation("customerLocation", "موقع الزبون")
   );
-
   $("clearDelivery").addEventListener("click", () =>
     clearLocation("deliveryLocation", "وجهة التوصيل")
   );
@@ -1084,8 +758,7 @@ crossorigin=""></script>
 
     if (
       clientsRaw === "" || deliveriesRaw === "" ||
-      !Number.isSafeInteger(clients) ||
-      !Number.isSafeInteger(deliveries) ||
+      !Number.isSafeInteger(clients) || !Number.isSafeInteger(deliveries) ||
       clients < 0 || deliveries < 0
     ) {
       alert("دخل أعداد صحيحة وموجبة أو صفر.");
@@ -1094,7 +767,6 @@ crossorigin=""></script>
 
     const oldClients = data.clients;
     const oldDeliveries = data.deliveries;
-
     data.clients = clients;
     data.deliveries = deliveries;
 
@@ -1124,15 +796,13 @@ crossorigin=""></script>
 
     const transaction = {
       id: Date.now().toString(36) + Math.random().toString(36).slice(2),
-      type: type,
+      type,
       amount: Math.round(amount * 100) / 100,
-      description: description ||
-        (type === "income" ? "مدخول" : "مصروف"),
+      description: description || (type === "income" ? "مدخول" : "مصروف"),
       date: new Date().toLocaleString("fr-MA")
     };
 
     data.transactions.push(transaction);
-
     if (!saveData()) {
       data.transactions.pop();
       return;
@@ -1141,50 +811,47 @@ crossorigin=""></script>
     $("amountInput").value = "";
     $("descriptionInput").value = "";
     render();
-
-    alert(type === "income"
-      ? "تسجل المدخول بنجاح 💰"
-      : "تسجل المصروف بنجاح 💸");
+    alert(type === "income" ? "تسجل المدخول بنجاح 💰" : "تسجل المصروف بنجاح 💸");
   });
 
   $("backupButton").addEventListener("click", () => {
     const backup = {
       app: "SKHAWA LIVRILI",
-      version: 3,
+      version: 4,
       exportedAt: new Date().toISOString(),
-      data: data
+      data: {
+        clients: data.clients,
+        deliveries: data.deliveries,
+        transactions: data.transactions,
+        deliveryLocation: data.deliveryLocation,
+        currentLocation: data.currentLocation
+      }
     };
 
-    const blob = new Blob(
-      [JSON.stringify(backup, null, 2)],
-      { type: "application/json;charset=utf-8" }
-    );
-
+    const blob = new Blob([JSON.stringify(backup, null, 2)], {
+      type:"application/json;charset=utf-8"
+    });
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
-
     link.href = url;
     link.download = "SKHAWA-LIVRILI-backup-" +
       new Date().toISOString().slice(0, 10) + ".json";
-
     document.body.appendChild(link);
     link.click();
     link.remove();
-
     setTimeout(() => URL.revokeObjectURL(url), 1000);
   });
 
   $("restoreButton").addEventListener("click", async () => {
     const file = $("restoreInput").files[0];
-
     if (!file) {
       alert("اختار ملف النسخة الاحتياطية الأول.");
       return;
     }
 
     try {
-      const text = await file.text();
-      const parsed = JSON.parse(text);
+      const fileText = await file.text();
+      const parsed = JSON.parse(fileText);
       const restored = parsed.data || parsed;
 
       if (
@@ -1199,20 +866,16 @@ crossorigin=""></script>
         throw new Error("Invalid backup");
       }
 
-      if (!confirm(
-        "استرجاع النسخة غادي يعوض البيانات الحالية. " +
-        "واش متأكد؟"
-      )) return;
+      if (!confirm("استرجاع النسخة غادي يعوض البيانات الحالية. واش متأكد؟")) return;
 
       const oldData = data;
-
       data = {
-        clients: Number(restored.clients),
-        deliveries: Number(restored.deliveries),
-        transactions: restored.transactions,
-        customerLocation: validLocation(restored.customerLocation),
-        deliveryLocation: validLocation(restored.deliveryLocation),
-        currentLocation: validLocation(restored.currentLocation)
+        clients:Number(restored.clients),
+        deliveries:Number(restored.deliveries),
+        transactions:restored.transactions,
+        customerLocation:null,
+        deliveryLocation:validLocation(restored.deliveryLocation),
+        currentLocation:validLocation(restored.currentLocation)
       };
 
       if (!saveData()) {
@@ -1221,8 +884,8 @@ crossorigin=""></script>
       }
 
       render();
+      if (mapReady && map) refreshMarkers();
       alert("ترجعات البيانات بنجاح ✅");
-
     } catch (error) {
       alert("الملف غير صالح أو ماشي نسخة احتياطية صحيحة.");
     }
@@ -1230,9 +893,7 @@ crossorigin=""></script>
 
   render();
   initMap();
-
 })();
 </script>
-
 </body>
 </html>
