@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -326,6 +327,7 @@ function loadData(){
   }catch(e){return emptyData();}
 }
 let data=loadData();
+
 function saveData(){
   try{
     localStorage.setItem(STORAGE_KEY,JSON.stringify(data));
@@ -335,6 +337,7 @@ function saveData(){
     return false;
   }
 }
+
 function escapeHTML(value){
   return String(value??"").replace(/[&<>"']/g,ch=>({
     "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
@@ -352,7 +355,7 @@ function notify(message){
   el.textContent=message;
   el.style.display="block";
   clearTimeout(notify.timer);
-  notify.timer=setTimeout(()=>el.style.display="none",2800);
+  notify.timer=setTimeout(()=>el.style.display="none",3500);
 }
 function isClientX(customer){
   return String(customer.name||"").trim().toLowerCase()==="client x";
@@ -588,44 +591,149 @@ function deleteTransaction(id){
   saveData();renderAll();notify("تحذفات العملية.");
 }
 
+// تصدير نسخة احتياطية
 document.getElementById("exportBackup").addEventListener("click",()=>{
-  const blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"});
-  const url=URL.createObjectURL(blob);
-  const a=document.createElement("a");
-  a.href=url;
-  a.download="SKHAWA-LIVRILI-backup-"+new Date().toISOString().slice(0,10)+".json";
-  document.body.appendChild(a);a.click();a.remove();
-  URL.revokeObjectURL(url);
-  notify("وجدنا ليك النسخة الاحتياطية.");
-});
-
-document.getElementById("importButton").addEventListener("click",()=>{
-  document.getElementById("importFile").click();
-});
-document.getElementById("importFile").addEventListener("change",async e=>{
-  const file=e.target.files[0];
-  if(!file)return;
   try{
-    const imported=JSON.parse(await file.text());
-    if(!imported||!Array.isArray(imported.customers)||
-       !Array.isArray(imported.transactions)||!Array.isArray(imported.deliveries)){
-      throw new Error("invalid backup");
-    }
-    if(!confirm("استرجاع النسخة غادي يعوض البيانات الحالية. واش متأكد؟"))return;
-    data={
-      customers:imported.customers,
-      transactions:imported.transactions,
-      deliveries:imported.deliveries
-    };
-    saveData();renderAll();notify("ترجعات النسخة الاحتياطية بنجاح.");
-  }catch(err){notify("الملف ماشي نسخة احتياطية صحيحة.");}
-  finally{e.target.value="";}
+    const blob=new Blob(
+      [JSON.stringify(data,null,2)],
+      {type:"application/json;charset=utf-8"}
+    );
+    const url=URL.createObjectURL(blob);
+    const a=document.createElement("a");
+    a.href=url;
+    a.download="SKHAWA-LIVRILI-backup-"+new Date().toISOString().slice(0,10)+".json";
+    a.style.display="none";
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+
+    // تأخير حذف الرابط لتحسين التوافق مع بعض متصفحات الهاتف
+    setTimeout(()=>URL.revokeObjectURL(url),1500);
+    notify("وجدنا ليك النسخة الاحتياطية. تأكد أنها تحمّلات.");
+  }catch(error){
+    notify("ما قدرناش نصاوبو النسخة الاحتياطية.");
+  }
 });
 
+// استرجاع النسخة الاحتياطية باستعمال FileReader
+const importButton=document.getElementById("importButton");
+const importFile=document.getElementById("importFile");
+
+importButton.addEventListener("click",()=>{
+  // باش تقدر تختار نفس الملف مرة أخرى
+  importFile.value="";
+  importFile.click();
+});
+
+importFile.addEventListener("change",e=>{
+  const file=e.target.files && e.target.files[0];
+  if(!file)return;
+
+  if(file.size>20*1024*1024){
+    notify("الملف كبير بزاف. اختار نسخة أقل من 20MB.");
+    importFile.value="";
+    return;
+  }
+
+  const reader=new FileReader();
+
+  reader.onload=()=>{
+    try{
+      if(typeof reader.result!=="string"||!reader.result.trim()){
+        throw new Error("empty backup");
+      }
+
+      const imported=JSON.parse(reader.result);
+
+      // دعم النسخة المباشرة أو النسخة الموجودة داخل data
+      const backup=imported&&imported.data
+        ?imported.data
+        :imported;
+
+      if(
+        !backup||
+        !Array.isArray(backup.customers)||
+        !Array.isArray(backup.transactions)||
+        !Array.isArray(backup.deliveries)
+      ){
+        throw new Error("invalid backup");
+      }
+
+      // التأكد من البنية قبل تغيير البيانات الحالية
+      const validCustomers=backup.customers.every(c=>
+        c&&typeof c==="object"&&c.id!==undefined&&c.name!==undefined
+      );
+      const validTransactions=backup.transactions.every(t=>
+        t&&typeof t==="object"&&
+        t.id!==undefined&&
+        (t.type==="income"||t.type==="expense")
+      );
+      const validDeliveries=backup.deliveries.every(d=>
+        d&&typeof d==="object"&&d.id!==undefined
+      );
+
+      if(!validCustomers||!validTransactions||!validDeliveries){
+        throw new Error("invalid records");
+      }
+
+      if(!confirm(
+        "استرجاع النسخة غادي يعوض البيانات الحالية. "+
+        "تأكد أنك اخترتي النسخة الصحيحة. واش متأكد؟"
+      )){
+        return;
+      }
+
+      // الاحتفاظ بالبيانات الحالية للرجوع إليها إذا فشل الحفظ
+      const previousData=data;
+
+      data={
+        customers:backup.customers,
+        transactions:backup.transactions,
+        deliveries:backup.deliveries
+      };
+
+      if(!saveData()){
+        data=previousData;
+        renderAll();
+        notify("فشل الحفظ. البيانات السابقة ما تبدلاتش فالتطبيق.");
+        return;
+      }
+
+      renderAll();
+      notify("ترجعات النسخة الاحتياطية بنجاح 🧡");
+
+    }catch(error){
+      notify("ما قدرناش نقراو النسخة. تأكد أنها ملف JSON صحيح.");
+    }finally{
+      importFile.value="";
+    }
+  };
+
+  reader.onerror=()=>{
+    importFile.value="";
+    notify("وقع مشكل فقراءة الملف. عاود اختار النسخة.");
+  };
+
+  reader.readAsText(file,"UTF-8");
+});
+
+// مسح البيانات مع تأكيدين
 document.getElementById("resetData").addEventListener("click",()=>{
   if(!confirm("تحذير: غادي يتم مسح جميع الزبناء والتوصيلات والعمليات المالية من هاد المتصفح. واش متأكد؟"))return;
   if(!confirm("آخر تأكيد: واش درتي نسخة احتياطية وباغي تمسح كلشي؟"))return;
-  data=emptyData();saveData();renderAll();notify("تم مسح البيانات.");
+
+  const previousData=data;
+  data=emptyData();
+
+  if(!saveData()){
+    data=previousData;
+    renderAll();
+    notify("ما قدرناش نمسحو البيانات. البيانات السابقة بقات.");
+    return;
+  }
+
+  renderAll();
+  notify("تم مسح البيانات.");
 });
 
 document.querySelectorAll(".nav-btn").forEach(btn=>{
