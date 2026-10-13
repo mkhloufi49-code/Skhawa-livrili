@@ -5,742 +5,916 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#ff7900">
-<title>SKHAWA LIVRILI Premium</title>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="description" content="SKHAWA LIVRILI - إدارة التوصيلات والزبناء والمدخول والمصاريف">
+<title>SKHAWA LIVRILI</title>
 
 <style>
 :root {
   --orange:#ff7900;
-  --orange2:#ff9b35;
+  --orange-light:#ffad52;
   --black:#151515;
-  --bg:#f4f5f7;
+  --dark:#202020;
+  --bg:#f5f6f8;
   --white:#fff;
-  --muted:#777;
-  --green:#168653;
-  --red:#d93434;
-  --border:#ececec;
-  --shadow:0 8px 28px rgba(0,0,0,.06);
+  --green:#159957;
+  --red:#df3c3c;
+  --gray:#818793;
+  --line:#eceef2;
+  --radius:20px;
+  --shadow:0 8px 26px rgba(20,20,20,.055);
 }
 *{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:85px}
 body{
   margin:0;
-  font-family:Arial,Tahoma,sans-serif;
+  font-family:Arial,"Tahoma",sans-serif;
   background:var(--bg);
   color:var(--black);
-  padding-bottom:95px;
+  -webkit-tap-highlight-color:transparent;
 }
-button,input,select,textarea{font:inherit}
-button{cursor:pointer}
+button,input,select{font:inherit}
+button{cursor:pointer;transition:transform .15s,opacity .15s}
 button:active{transform:scale(.98)}
-.header{
-  background:linear-gradient(135deg,#151515,#292929);
-  color:white;padding:22px 17px 30px;
-  border-radius:0 0 28px 28px;
+button:focus-visible,input:focus-visible,select:focus-visible{
+  outline:2px solid var(--orange);outline-offset:2px
 }
-.header-top{display:flex;align-items:center;justify-content:space-between;gap:12px}
-.brand{display:flex;align-items:center;gap:10px}
-.logo{
-  width:48px;height:48px;border-radius:16px;
-  background:var(--orange);display:grid;place-items:center;
-  font-size:27px;box-shadow:0 5px 18px #ff790044;
+.app-header{
+  background:linear-gradient(145deg,#111,#292929);
+  color:white;padding:23px 16px 25px;
+  border-bottom:4px solid var(--orange);
+  border-radius:0 0 26px 26px;
 }
-.brand h1{font-size:19px;margin:0 0 5px;font-weight:900}
-.brand p{margin:0;font-size:12px;color:#ddd}
-.status{
-  background:#183a2b;color:#7dffb9;border-radius:30px;
-  padding:7px 10px;font-size:11px;white-space:nowrap
+.header-inner{max-width:850px;margin:auto}
+.brand-row{display:flex;align-items:center;gap:12px}
+.brand-icon{
+  width:53px;height:53px;border-radius:17px;
+  display:grid;place-items:center;font-size:28px;
+  color:#111;background:linear-gradient(135deg,var(--orange),#ffc078);
+  box-shadow:0 5px 18px #ff790044;flex-shrink:0
 }
-.hero{margin-top:28px}
-.hero .eyebrow{color:#ffb66f;font-size:12px;font-weight:bold}
-.hero h2{font-size:25px;line-height:1.45;margin:9px 0}
-.hero p{font-size:13px;color:#ccc;line-height:1.9;margin:0}
-.container{max-width:760px;margin:auto;padding:17px}
-.section{margin-top:23px;scroll-margin-top:15px}
+.brand-name{font-weight:900;font-size:22px;letter-spacing:.3px}
+.brand-tag{font-size:12px;color:#ffbd87;margin-top:6px}
+.header-pill{
+  margin-right:auto;border:1px solid #ffffff24;border-radius:30px;
+  padding:8px 10px;font-size:11px;color:#ffd6b5;white-space:nowrap
+}
+.header-welcome{margin-top:23px}
+.header-welcome h1{font-size:24px;margin:0 0 9px}
+.header-welcome p{font-size:13px;color:#c8c8c8;line-height:1.8;margin:0}
+.container{max-width:850px;margin:auto;padding:16px 13px 100px}
 .section-title{
-  display:flex;justify-content:space-between;align-items:center;
-  gap:10px;margin-bottom:13px
+  display:flex;align-items:center;gap:9px;
+  font-size:18px;font-weight:900;margin:0 0 15px
 }
-.section-title h2{font-size:17px;margin:0}
-.section-title small{font-size:11px;color:var(--muted)}
-.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}
+.section-title .title-icon{
+  width:37px;height:37px;display:grid;place-items:center;
+  background:#fff0e2;border-radius:12px;font-size:19px
+}
+.hero{
+  position:relative;overflow:hidden;
+  color:#161616;background:linear-gradient(120deg,#ff7900,#ffb15c);
+  border-radius:24px;padding:21px 19px;margin-bottom:20px;
+  box-shadow:0 10px 24px #ff790021
+}
+.hero:after{
+  content:"🛵";position:absolute;left:7px;bottom:-14px;
+  font-size:92px;opacity:.14;transform:rotate(-12deg)
+}
+.hero small{font-weight:bold;opacity:.8}
+.hero h2{font-size:22px;line-height:1.5;margin:9px 0}
+.hero p{font-size:13px;line-height:1.8;margin:0;max-width:82%}
+.hero .hero-label{
+  display:inline-block;margin-top:15px;padding:8px 12px;
+  border-radius:12px;background:#111;color:white;font-size:12px;font-weight:bold
+}
+.section{margin-top:23px;scroll-margin-top:15px}
+.stats{
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:11px
+}
 .stat{
-  background:white;padding:16px;border-radius:18px;
-  box-shadow:var(--shadow);border:1px solid #eee
+  background:white;border:1px solid #f0f0f0;border-radius:19px;
+  padding:15px 13px;min-width:0;box-shadow:var(--shadow);
+  position:relative;overflow:hidden
 }
-.stat .stat-icon{
-  width:37px;height:37px;border-radius:12px;
-  display:grid;place-items:center;background:#fff0e2;font-size:19px
+.stat-top{display:flex;align-items:center;gap:8px;margin-bottom:13px}
+.stat-icon{
+  width:35px;height:35px;display:grid;place-items:center;
+  background:#fff0e2;border-radius:11px;font-size:18px;flex-shrink:0
 }
-.stat .label{font-size:12px;color:var(--muted);margin-top:12px}
-.stat .value{font-size:21px;font-weight:900;margin-top:7px;overflow-wrap:anywhere}
-.stat .hint{font-size:10px;color:var(--muted);margin-top:5px}
+.stat-label{font-size:12px;color:var(--gray);font-weight:bold}
+.stat strong{
+  display:block;font-size:clamp(17px,4.7vw,23px);
+  letter-spacing:-.4px;overflow-wrap:anywhere
+}
+.stat .stat-foot{font-size:11px;color:var(--gray);margin-top:8px}
+.stat.green .stat-icon{background:#e4f8ec}
+.stat.red .stat-icon{background:#fff0f0}
+.stat.dark-stat{background:#191919;color:white;border-color:#191919}
+.stat.dark-stat .stat-label,.stat.dark-stat .stat-foot{color:#c4c4c4}
+.stat.dark-stat .stat-icon{background:#333;color:#ff9a42}
 .card{
-  background:white;border:1px solid #eee;border-radius:20px;
-  padding:17px;box-shadow:var(--shadow);margin-bottom:13px
+  background:white;border:1px solid #eff0f2;border-radius:var(--radius);
+  padding:18px 15px;margin-top:15px;box-shadow:var(--shadow);
+  min-width:0
 }
-.card h3{font-size:15px;margin:0 0 15px}
-.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.field{min-width:0;margin-bottom:12px}
-.field.full{grid-column:1/-1}
-label{display:block;font-size:12px;font-weight:bold;margin-bottom:7px}
-input,select,textarea{
-  width:100%;border:1px solid #e5e5e5;background:#fafafa;
-  border-radius:12px;padding:12px;outline:none;min-height:44px;color:#222
+label{display:block;font-size:13px;font-weight:800;margin:14px 0 7px}
+input,select{
+  width:100%;min-width:0;min-height:47px;
+  border:1px solid #e2e4e8;border-radius:13px;
+  padding:12px;background:#fafafa;color:#171717;font-size:15px
 }
-input:focus,select:focus,textarea:focus{border-color:var(--orange);background:white}
-.btn{
-  border:0;border-radius:12px;padding:12px 15px;font-weight:bold;
-  display:inline-flex;justify-content:center;align-items:center;gap:7px
+input:focus,select:focus{border-color:var(--orange);background:white}
+input::placeholder{color:#a1a5ad}
+.primary,.dark,.success,.danger,.light{
+  border:0;border-radius:12px;padding:12px 13px;font-size:13px;font-weight:800
 }
-.btn-primary{background:var(--orange);color:#fff}
-.btn-dark{background:var(--black);color:white}
-.btn-light{background:#f1f1f1;color:#222}
-.btn-danger{background:#fff0f0;color:var(--red)}
-.btn-green{background:#e7f8ef;color:#137547}
-.btn-block{width:100%}
-.btn-small{font-size:11px;padding:8px 10px;border-radius:9px}
-.actions{display:flex;gap:8px;flex-wrap:wrap}
-.notice{
-  padding:13px;border-radius:14px;background:#fff2e4;
-  color:#8c4700;font-size:12px;line-height:1.9
+.primary{background:var(--orange);color:#171717}
+.dark{background:#171717;color:white}
+.success{background:#e2f7e9;color:#126b38}
+.danger{background:#fff0f0;color:#bf2727}
+.light{background:#f0f1f4;color:#292929}
+.full{width:100%;margin-top:15px;min-height:47px}
+.button-grid{
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:9px;margin-top:14px
 }
-.search{margin-bottom:12px}
-.customer-list{display:grid;gap:11px}
+.button-grid button{width:100%;min-height:45px}
+.note{font-size:12px;line-height:1.9;color:var(--gray);margin:0}
+.divider{height:1px;background:var(--line);margin:17px 0}
+.search-wrap{position:relative;margin:13px 0}
+.search-wrap input{padding-right:42px;background:#f8f8f9}
+.search-icon{position:absolute;right:14px;top:14px}
 .customer{
-  border:1px solid #eee;background:white;border-radius:17px;
-  padding:15px;box-shadow:var(--shadow)
+  padding:15px;border:1px solid #eceef2;border-right:4px solid var(--orange);
+  border-radius:16px;margin-top:11px;background:white
 }
-.customer-top{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
-.customer-name{font-size:15px;font-weight:900;overflow-wrap:anywhere}
-.customer-phone{font-size:12px;color:var(--muted);margin-top:6px}
-.rank{
-  background:#fff0e1;color:#ad5200;border-radius:9px;
-  padding:6px 9px;font-size:11px;font-weight:bold;white-space:nowrap
+.customer-heading{display:flex;justify-content:space-between;gap:8px;align-items:flex-start}
+.customer h3{font-size:16px;margin:0 0 6px;overflow-wrap:anywhere}
+.customer-phone{font-size:12px;color:var(--gray);direction:ltr;text-align:right}
+.badge{
+  display:inline-flex;align-items:center;gap:4px;
+  padding:6px 9px;border-radius:20px;background:#fff0e2;
+  color:#985000;font-size:11px;font-weight:bold;line-height:1.5
 }
-.customer-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin:14px 0}
-.mini-stat{background:#f7f7f7;padding:10px 6px;border-radius:11px;text-align:center}
-.mini-stat b{display:block;font-size:15px}
-.mini-stat span{display:block;font-size:10px;color:var(--muted);margin-top:5px}
-.customer-actions{display:flex;flex-wrap:wrap;gap:7px}
-.pill{font-size:10px;border-radius:20px;padding:5px 8px;background:#eee;display:inline-block}
-.pill-orange{background:#fff0df;color:#a95100}
-.pill-green{background:#e3f8eb;color:#147b45}
-.pill-red{background:#ffe9e9;color:#b52222}
-.table-wrap{overflow-x:auto}
-table{width:100%;border-collapse:collapse;font-size:12px;min-width:410px}
-th,td{text-align:right;padding:12px 8px;border-bottom:1px solid #eee}
-th{color:#777;font-size:11px;background:#fafafa}
-.amount-plus{color:var(--green);font-weight:bold}
-.amount-minus{color:var(--red);font-weight:bold}
-.empty{text-align:center;padding:25px;color:#888;font-size:13px}
-.backup-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.badge.free{background:#e0f7e8;color:#146d39}
+.customer-details{
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:9px;margin:14px 0
+}
+.detail-box{background:#f7f8fa;padding:10px;border-radius:11px;min-width:0}
+.detail-box span{display:block;font-size:11px;color:var(--gray);margin-bottom:6px}
+.detail-box strong{font-size:14px;overflow-wrap:anywhere}
+.progress{
+  height:7px;border-radius:10px;background:#eee;margin:10px 0 6px;overflow:hidden
+}
+.progress-bar{
+  height:100%;background:linear-gradient(90deg,var(--orange),#ffc078);
+  border-radius:10px;transition:width .25s
+}
+.progress-label{font-size:11px;color:var(--gray);line-height:1.8}
+.customer-actions{
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:7px;margin-top:13px
+}
+.customer-actions button{min-height:41px;padding:9px 5px;font-size:12px}
+.empty{
+  text-align:center;padding:24px 12px;background:#fafafa;
+  border:1px dashed #dedfe4;border-radius:14px;color:var(--gray);
+  font-size:13px;line-height:1.9;margin-top:12px
+}
+.transaction-item{
+  padding:13px 0;border-bottom:1px solid var(--line)
+}
+.transaction-item:last-child{border-bottom:0}
+.transaction-top{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.transaction-kind{font-size:13px;font-weight:bold}
+.transaction-amount{font-size:16px;font-weight:900;margin:8px 0}
+.income-text{color:var(--green)}
+.expense-text{color:var(--red)}
+.transaction-note{font-size:13px;line-height:1.7;overflow-wrap:anywhere}
+.transaction-date{font-size:11px;color:var(--gray);margin-top:6px}
+.transaction-top button{font-size:11px;padding:7px 9px}
+.summary-row{
+  display:flex;align-items:center;justify-content:space-between;gap:8px;
+  padding:10px 0;border-bottom:1px solid var(--line);font-size:13px
+}
+.summary-row:last-child{border:0}
+.summary-row strong{overflow-wrap:anywhere;text-align:left}
 .bottom-nav{
-  position:fixed;bottom:0;left:0;right:0;z-index:20;
-  background:#fff;border-top:1px solid #e9e9e9;
-  display:flex;justify-content:space-around;gap:3px;
-  padding:9px 5px calc(9px + env(safe-area-inset-bottom));
+  position:fixed;z-index:10;bottom:0;left:0;right:0;
+  background:#fff;border-top:1px solid #eceef2;
+  display:grid;grid-template-columns:repeat(4,minmax(0,1fr));
+  padding:8px 5px calc(8px + env(safe-area-inset-bottom));
+  box-shadow:0 -5px 22px #00000008
 }
-.nav-btn{
-  border:0;background:transparent;color:#777;flex:1;
-  padding:8px 3px;border-radius:12px;font-size:10px
+.bottom-nav a{
+  display:flex;flex-direction:column;align-items:center;gap:5px;
+  text-decoration:none;color:#858994;font-size:10px;font-weight:bold;
+  padding:5px 2px
 }
-.nav-btn span{display:block;font-size:20px;margin-bottom:4px}
-.nav-btn.active{background:#fff0e2;color:#b65300;font-weight:bold}
+.bottom-nav a span{font-size:20px}
+.bottom-nav a.active{color:#ed7100}
+footer{text-align:center;padding:20px 8px;color:var(--gray);font-size:11px;line-height:1.8}
 .toast{
-  position:fixed;top:18px;left:15px;right:15px;z-index:99;
-  max-width:500px;margin:auto;background:#171717;color:white;
-  padding:14px;border-radius:13px;box-shadow:var(--shadow);
-  display:none;font-size:13px;text-align:center
+  position:fixed;z-index:20;bottom:88px;left:14px;right:14px;
+  max-width:500px;margin:auto;background:#191919;color:white;
+  padding:13px 16px;border-radius:13px;text-align:center;
+  font-size:13px;box-shadow:0 8px 25px #0002;
+  opacity:0;transform:translateY(10px);pointer-events:none;
+  transition:.2s
 }
-.footer{text-align:center;color:#999;font-size:11px;padding:25px 0}
-.hidden{display:none!important}
+.toast.show{opacity:1;transform:translateY(0)}
 @media(min-width:600px){
- .grid{grid-template-columns:repeat(3,minmax(0,1fr))}
- .container{padding:22px}
+ .container{padding:23px 20px 110px}
+ .stats{grid-template-columns:repeat(3,minmax(0,1fr))}
+ .card{padding:22px}
+ .hero{padding:26px}
+ .customer{padding:18px}
+ .bottom-nav{left:50%;right:auto;transform:translateX(-50%);width:100%;max-width:850px;border-radius:18px 18px 0 0}
 }
-@media(max-width:380px){
- .brand h1{font-size:16px}
- .status{font-size:10px}
- .form-grid{grid-template-columns:1fr}
- .field.full{grid-column:auto}
- .stat .value{font-size:18px}
+@media(max-width:360px){
+ .brand-name{font-size:18px}
+ .header-pill{font-size:10px;padding:7px}
+ .customer-actions button{font-size:11px}
+ .customer-details{gap:6px}
+}
+@media(prefers-reduced-motion:reduce){
+ *{scroll-behavior:auto!important;transition:none!important}
 }
 </style>
 </head>
 
 <body>
-<header class="header">
-  <div class="header-top">
-    <div class="brand">
-      <div class="logo">🛵</div>
+
+<header class="app-header">
+  <div class="header-inner">
+    <div class="brand-row">
+      <div class="brand-icon">🛵</div>
       <div>
-        <h1>SKHAWA LIVRILI</h1>
-        <p>سخاوة فالقلب و ليفري فالوقت ❤️</p>
+        <div class="brand-name">SKHAWA LIVRILI</div>
+        <div class="brand-tag">سخاوة فالقلب و ليفري فالوقت ❤️</div>
       </div>
+      <div class="header-pill">● خدام</div>
     </div>
-    <div class="status">● خدام</div>
-  </div>
-  <div class="hero">
-    <div class="eyebrow">PREMIUM DASHBOARD</div>
-    <h2>مرحبا بيك 👋<br>السخاوة كتزيد الثقة 🧡</h2>
-    <p>نظّم التوصيلات، تابع الأرباح، وخلي الزبناء الأوفياء ديالك ديما فرحانين.</p>
+    <div class="header-welcome">
+      <h1>مرحبا بيك 👋</h1>
+      <p>كلشي ديال الخدمة ديالك مجموع هنا.<br>نظّم التوصيلات، تابع الأرباح وكافئ الزبناء الأوفياء.</p>
+    </div>
   </div>
 </header>
 
 <main class="container">
 
-<section class="section" id="dashboard">
-  <div class="section-title"><h2>📊 لوحة التحكم</h2><small>ملخص الخدمة</small></div>
-  <div class="grid">
-    <div class="stat"><div class="stat-icon">👥</div><div class="label">الزبناء</div><div class="value" id="statCustomers">0</div><div class="hint">مجموع المسجلين</div></div>
-    <div class="stat"><div class="stat-icon">🛵</div><div class="label">التوصيلات</div><div class="value" id="statDeliveries">0</div><div class="hint">مدفوعة ومجانية</div></div>
-    <div class="stat"><div class="stat-icon">💰</div><div class="label">المدخول</div><div class="value" id="statIncome">0 DH</div><div class="hint">مجموع المداخيل</div></div>
-    <div class="stat"><div class="stat-icon">🧾</div><div class="label">المصاريف</div><div class="value" id="statExpenses">0 DH</div><div class="hint">مجموع المصاريف</div></div>
-    <div class="stat"><div class="stat-icon">📈</div><div class="label">الصافي</div><div class="value" id="statNet">0 DH</div><div class="hint">المدخول ناقص المصاريف</div></div>
-    <div class="stat"><div class="stat-icon">🎁</div><div class="label">التوصيلات المجانية</div><div class="value" id="statFree">0</div><div class="hint">المكافآت المقدمة</div></div>
-  </div>
-</section>
+  <section class="hero">
+    <small>لوحة التحكم ديالك</small>
+    <h2>السخاوة كتزيد الثقة 🧡</h2>
+    <p>خدمتك منظمة، حساباتك واضحة، والزبون ديالك ديما عزيز.</p>
+    <span class="hero-label">SKHAWA • LIVRILI</span>
+  </section>
 
-<section class="section" id="customers">
-  <div class="section-title"><h2>👥 الزبناء الأوفياء</h2><small>الأكثر توصيلات أولا</small></div>
-
-  <div class="card">
-    <h3 id="customerFormTitle">➕ إضافة زبون جديد</h3>
-    <form id="customerForm">
-      <input type="hidden" id="customerId">
-      <div class="form-grid">
-        <div class="field">
-          <label for="customerName">اسم الزبون *</label>
-          <input id="customerName" required maxlength="100" placeholder="الاسم الكامل">
-        </div>
-        <div class="field">
-          <label for="customerPhone">رقم الهاتف</label>
-          <input id="customerPhone" type="tel" maxlength="30" placeholder="06XXXXXXXX">
-        </div>
-        <div class="field full">
-          <label for="customerSource">مصدر الطلب</label>
-          <select id="customerSource">
-            <option>واتساب</option><option>التطبيق</option>
-            <option>التليفون</option><option>مباشرة</option><option>أخرى</option>
-          </select>
-        </div>
+  <section id="dashboard">
+    <h2 class="section-title"><span class="title-icon">📊</span>ملخص الخدمة</h2>
+    <div class="stats">
+      <div class="stat">
+        <div class="stat-top"><div class="stat-icon">👥</div><span class="stat-label">الزبناء</span></div>
+        <strong id="totalCustomers">0</strong>
+        <div class="stat-foot">مجموع الزبناء المسجلين</div>
       </div>
-      <div class="actions">
-        <button class="btn btn-primary" type="submit" id="customerSubmit">حفظ الزبون</button>
-        <button class="btn btn-light hidden" type="button" id="cancelEdit">إلغاء التعديل</button>
+      <div class="stat">
+        <div class="stat-top"><div class="stat-icon">🛵</div><span class="stat-label">التوصيلات</span></div>
+        <strong id="totalDeliveries">0</strong>
+        <div class="stat-foot">المؤداة والمجانية</div>
       </div>
-    </form>
-  </div>
-
-  <div class="notice" style="margin-bottom:13px">
-    🎁 كل 10 توصيلات مدفوعة للزبون العادي، التوصيلة الموالية رقم 11 كتكون فابور.
-    <b>Client X مستثنى من التوصيلات المجانية.</b>
-  </div>
-
-  <input class="search" id="customerSearch" placeholder="🔎 قلب على زبون بالاسم أو الهاتف">
-  <div id="customerList" class="customer-list"></div>
-</section>
-
-<section class="section" id="finance">
-  <div class="section-title"><h2>💳 المدخول والمصاريف</h2><small>تسجيل العمليات</small></div>
-  <div class="card">
-    <h3>➕ عملية مالية جديدة</h3>
-    <form id="transactionForm">
-      <div class="form-grid">
-        <div class="field">
-          <label for="transactionType">نوع العملية</label>
-          <select id="transactionType"><option value="income">مدخول</option><option value="expense">مصروف</option></select>
-        </div>
-        <div class="field">
-          <label for="transactionAmount">المبلغ بالدرهم *</label>
-          <input id="transactionAmount" type="number" min="0.01" step="0.01" required placeholder="مثلا 20">
-        </div>
-        <div class="field full">
-          <label for="transactionNote">البيان *</label>
-          <input id="transactionNote" required maxlength="200" placeholder="مثلا: البنزين، توصيل...">
-        </div>
+      <div class="stat green">
+        <div class="stat-top"><div class="stat-icon">💰</div><span class="stat-label">المدخول</span></div>
+        <strong id="totalIncome">0 DH</strong>
+        <div class="stat-foot">جميع المداخيل المسجلة</div>
       </div>
-      <button class="btn btn-primary btn-block" type="submit">حفظ العملية</button>
-    </form>
-  </div>
-  <div class="card">
-    <h3>📋 سجل العمليات المالية</h3>
-    <div class="table-wrap" id="transactionTable"></div>
-  </div>
-</section>
-
-<section class="section" id="history">
-  <div class="section-title"><h2>🗂️ سجل التوصيلات</h2><small>آخر العمليات</small></div>
-  <div class="card"><div id="deliveryHistory"></div></div>
-</section>
-
-<section class="section" id="backup">
-  <div class="section-title"><h2>🛡️ النسخ الاحتياطي</h2><small>حافظ على بياناتك</small></div>
-  <div class="card">
-    <p style="font-size:13px;line-height:1.9;color:#666">
-      خرج نسخة احتياطية بانتظام باش تقدر ترجع بياناتك إلا بدلتي الهاتف أو المتصفح.
-    </p>
-    <div class="backup-grid">
-      <button class="btn btn-dark" id="exportBackup" type="button">📥 تصدير النسخة</button>
-      <button class="btn btn-light" id="importButton" type="button">📤 استرجاع نسخة</button>
+      <div class="stat red">
+        <div class="stat-top"><div class="stat-icon">💸</div><span class="stat-label">المصاريف</span></div>
+        <strong id="totalExpenses">0 DH</strong>
+        <div class="stat-foot">جميع المصاريف المسجلة</div>
+      </div>
+      <div class="stat dark-stat">
+        <div class="stat-top"><div class="stat-icon">✅</div><span class="stat-label">الصافي</span></div>
+        <strong id="balance">0 DH</strong>
+        <div class="stat-foot">المدخول ناقص المصاريف</div>
+      </div>
+      <div class="stat">
+        <div class="stat-top"><div class="stat-icon">🎁</div><span class="stat-label">التوصيلات المجانية</span></div>
+        <strong id="freeDeliveries">0</strong>
+        <div class="stat-foot">المكافآت اللي تسجلات</div>
+      </div>
     </div>
-    <input type="file" id="importFile" accept=".json,application/json" class="hidden">
-    <hr style="border:0;border-top:1px solid #eee;margin:20px 0">
-    <button class="btn btn-danger btn-block" id="resetData" type="button">🗑️ مسح جميع البيانات</button>
-    <p style="font-size:11px;color:#999;line-height:1.8">تنبيه: البيانات محفوظة فهاد المتصفح. التصدير المنتظم ضروري، حيث مسح بيانات المتصفح يقدر يحذفها.</p>
-  </div>
-</section>
+  </section>
 
-<div class="footer">SKHAWA LIVRILI © 2026 · السخاوة كتجمعنا 🧡</div>
+  <section class="section card" id="add-customer">
+    <h2 class="section-title"><span class="title-icon">👤</span>إضافة زبون جديد</h2>
+    <form id="customerForm">
+      <label for="customerName">الاسم ديال الزبون</label>
+      <input id="customerName" required maxlength="80" placeholder="دخل الاسم الكامل">
+
+      <label for="customerPhone">رقم الهاتف</label>
+      <input id="customerPhone" required type="tel" maxlength="25" placeholder="06xxxxxxxx">
+
+      <label for="customerSource">مصدر الطلب</label>
+      <select id="customerSource">
+        <option value="واتساب">📲 واتساب</option>
+        <option value="التطبيق">📱 التطبيق</option>
+        <option value="التليفون">☎️ التليفون</option>
+        <option value="مباشرة">🤝 مباشرة</option>
+        <option value="أخرى">📦 أخرى</option>
+      </select>
+
+      <button class="primary full" type="submit">＋ إضافة الزبون</button>
+    </form>
+  </section>
+
+  <section class="section card" id="loyalty">
+    <h2 class="section-title"><span class="title-icon">🎁</span>الزبناء الأوفياء</h2>
+    <p class="note">كل زبون كيخلص 10 توصيلات، التوصيلة رقم 11 كتكون فابور. من بعدها كيبدا حساب جديد.</p>
+
+    <label for="deliveryPrice">ثمن التوصيلة العادية (DH)</label>
+    <input id="deliveryPrice" type="number" min="0" step="0.01" value="20">
+
+    <label for="customerSearch">قلب على زبون</label>
+    <div class="search-wrap">
+      <span class="search-icon">🔎</span>
+      <input id="customerSearch" placeholder="الاسم أو رقم الهاتف" autocomplete="off">
+    </div>
+
+    <div id="customerList"></div>
+  </section>
+
+  <section class="section card" id="finance">
+    <h2 class="section-title"><span class="title-icon">💵</span>المدخول والمصاريف</h2>
+    <form id="transactionForm">
+      <label for="transactionType">نوع العملية</label>
+      <select id="transactionType">
+        <option value="income">🟢 مدخول</option>
+        <option value="expense">🔴 مصروف</option>
+      </select>
+
+      <label for="transactionAmount">المبلغ (DH)</label>
+      <input id="transactionAmount" type="number" min="0.01" step="0.01" required placeholder="مثلاً 50">
+
+      <label for="transactionNote">التفاصيل</label>
+      <input id="transactionNote" maxlength="150" placeholder="مثلاً البنزين أو مدخول إضافي">
+
+      <button class="primary full" type="submit">💾 حفظ العملية</button>
+    </form>
+
+    <div class="divider"></div>
+    <h3 style="font-size:15px;margin:0 0 8px">الحصيلة المالية</h3>
+    <div class="summary-row"><span>مجموع المدخول</span><strong class="income-text" id="summaryIncome">0 DH</strong></div>
+    <div class="summary-row"><span>مجموع المصاريف</span><strong class="expense-text" id="summaryExpenses">0 DH</strong></div>
+    <div class="summary-row"><span>الصافي</span><strong id="summaryBalance">0 DH</strong></div>
+  </section>
+
+  <section class="section card" id="history">
+    <h2 class="section-title"><span class="title-icon">📋</span>سجل العمليات المالية</h2>
+    <p class="note">راجع المداخيل والمصاريف المسجلة، وحذف أي عملية إلا احتجتي.</p>
+    <div id="transactionList"></div>
+  </section>
+
+  <section class="section card" id="backup">
+    <h2 class="section-title"><span class="title-icon">💾</span>النسخة الاحتياطية</h2>
+    <p class="note">حمّل نسخة من وقت لآخر، خصوصاً قبل تغيير الكود أو الهاتف. النسخة كتحتافظ بالزبناء والتوصيلات والعمليات المالية.</p>
+    <div class="button-grid">
+      <button class="dark" id="backupButton" type="button">⬇️ تحميل النسخة</button>
+      <button class="light" id="restoreButton" type="button">⬆️ استرجاع نسخة</button>
+    </div>
+    <input id="restoreFile" type="file" accept=".json,application/json" hidden>
+    <div class="divider"></div>
+    <button class="danger full" id="resetButton" type="button">⚠️ مسح جميع البيانات</button>
+    <p class="note" style="margin-top:10px">تنبيه: المسح نهائي فهاد المتصفح. ما تمسحش البيانات إلا كنت متأكد وعندك نسخة احتياطية.</p>
+  </section>
+
+  <footer>
+    <strong>SKHAWA LIVRILI</strong><br>
+    سخاوة فالقلب و ليفري فالوقت ❤️<br>
+    جميع الحقوق محفوظة © <span id="year"></span>
+  </footer>
+
 </main>
 
-<nav class="bottom-nav">
-  <button class="nav-btn active" data-target="dashboard"><span>📊</span>الرئيسية</button>
-  <button class="nav-btn" data-target="customers"><span>👥</span>الزبناء</button>
-  <button class="nav-btn" data-target="finance"><span>💳</span>المالية</button>
-  <button class="nav-btn" data-target="history"><span>🗂️</span>السجل</button>
-  <button class="nav-btn" data-target="backup"><span>🛡️</span>النسخ</button>
+<nav class="bottom-nav" aria-label="التنقل الرئيسي">
+  <a href="#dashboard" class="active"><span>🏠</span>الرئيسية</a>
+  <a href="#add-customer"><span>👤</span>زبون جديد</a>
+  <a href="#loyalty"><span>🎁</span>الأوفياء</a>
+  <a href="#finance"><span>💰</span>الحسابات</a>
 </nav>
-<div id="toast" class="toast"></div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script>
 "use strict";
 
 const STORAGE_KEY = "skhawa_livrili_loyalty_v1";
-const DELIVERY_PRICE = 10;
 
 function emptyData(){
-  return {customers:[],transactions:[],deliveries:[]};
+  return {customers:[],transactions:[]};
 }
-function makeId(){
-  return Date.now().toString(36)+Math.random().toString(36).slice(2,9);
-}
+
 function loadData(){
   try{
-    const raw=localStorage.getItem(STORAGE_KEY);
-    if(!raw) return emptyData();
-    const parsed=JSON.parse(raw);
+    const saved=localStorage.getItem(STORAGE_KEY);
+    if(!saved)return emptyData();
+    const parsed=JSON.parse(saved);
     return {
       customers:Array.isArray(parsed.customers)?parsed.customers:[],
-      transactions:Array.isArray(parsed.transactions)?parsed.transactions:[],
-      deliveries:Array.isArray(parsed.deliveries)?parsed.deliveries:[]
+      transactions:Array.isArray(parsed.transactions)?parsed.transactions:[]
     };
-  }catch(e){return emptyData();}
+  }catch(error){
+    alert("وقع مشكل فقراءة البيانات المحفوظة. ما تمسحش النسخة الاحتياطية القديمة.");
+    return emptyData();
+  }
 }
+
 let data=loadData();
+let toastTimer;
 
 function saveData(){
   try{
     localStorage.setItem(STORAGE_KEY,JSON.stringify(data));
     return true;
-  }catch(e){
-    notify("ما قدرناش نحفظو البيانات. خرج نسخة احتياطية.");
+  }catch(error){
+    alert("ما قدرناش نحفظو البيانات. حمّل نسخة احتياطية وتأكد من مساحة الهاتف.");
     return false;
   }
 }
 
+function makeId(){
+  return Date.now().toString(36)+Math.random().toString(36).slice(2,8);
+}
+
 function escapeHTML(value){
-  return String(value??"").replace(/[&<>"']/g,ch=>({
-    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
-  })[ch]);
+  return String(value??"").replace(/[&<>"']/g,char=>({
+    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
+  })[char]);
 }
-function money(n){
-  return (Number(n)||0).toLocaleString("fr-MA",{maximumFractionDigits:2})+" DH";
+
+function money(value){
+  return (Number(value)||0).toLocaleString("fr-MA",{
+    maximumFractionDigits:2
+  })+" DH";
 }
-function dateText(date){
-  const d=new Date(date);
-  return isNaN(d.getTime())?"—":d.toLocaleString("fr-MA");
+
+function dateText(value){
+  const date=new Date(value);
+  return isNaN(date.getTime())?"":date.toLocaleString("ar-MA");
 }
+
 function notify(message){
-  const el=document.getElementById("toast");
-  el.textContent=message;
-  el.style.display="block";
-  clearTimeout(notify.timer);
-  notify.timer=setTimeout(()=>el.style.display="none",3500);
+  const toast=document.getElementById("toast");
+  toast.textContent=message;
+  toast.classList.add("show");
+  clearTimeout(toastTimer);
+  toastTimer=setTimeout(()=>toast.classList.remove("show"),2800);
 }
-function isClientX(customer){
-  return String(customer.name||"").trim().toLowerCase()==="client x";
+
+function paidCount(customer){
+  return Math.max(0,Number(customer.paidSinceFree)||0);
 }
-function customerDeliveryCount(customerId){
-  return data.deliveries.filter(d=>d.customerId===customerId).length;
+
+function freeCount(customer){
+  return Math.max(0,Number(customer.freeDeliveries)||0);
 }
-function paidCount(customerId){
-  return data.deliveries.filter(d=>d.customerId===customerId&&!d.free).length;
+
+function customerDeliveryCount(customer){
+  return Math.max(0,Number(customer.deliveries)||0);
 }
-function freeCount(customerId){
-  return data.deliveries.filter(d=>d.customerId===customerId&&d.free).length;
-}
+
 function totalIncome(){
-  return data.transactions.filter(t=>t.type==="income").reduce((s,t)=>s+Number(t.amount||0),0);
+  return data.transactions.filter(item=>item.type==="income")
+    .reduce((sum,item)=>sum+(Number(item.amount)||0),0);
 }
+
 function totalExpenses(){
-  return data.transactions.filter(t=>t.type==="expense").reduce((s,t)=>s+Number(t.amount||0),0);
-}
-function sortedCustomers(){
-  return [...data.customers].sort((a,b)=>
-    customerDeliveryCount(b.id)-customerDeliveryCount(a.id) ||
-    String(a.name).localeCompare(String(b.name),"ar")
-  );
+  return data.transactions.filter(item=>item.type==="expense")
+    .reduce((sum,item)=>sum+(Number(item.amount)||0),0);
 }
 
 function renderDashboard(){
-  document.getElementById("statCustomers").textContent=data.customers.length;
-  document.getElementById("statDeliveries").textContent=data.deliveries.length;
-  document.getElementById("statIncome").textContent=money(totalIncome());
-  document.getElementById("statExpenses").textContent=money(totalExpenses());
-  document.getElementById("statNet").textContent=money(totalIncome()-totalExpenses());
-  document.getElementById("statFree").textContent=data.deliveries.filter(d=>d.free).length;
+  const deliveries=data.customers.reduce(
+    (sum,c)=>sum+customerDeliveryCount(c),0
+  );
+  const freebies=data.customers.reduce(
+    (sum,c)=>sum+freeCount(c),0
+  );
+  const income=totalIncome();
+  const expenses=totalExpenses();
+  const balance=income-expenses;
+
+  document.getElementById("totalCustomers").textContent=data.customers.length;
+  document.getElementById("totalDeliveries").textContent=deliveries;
+  document.getElementById("freeDeliveries").textContent=freebies;
+  document.getElementById("totalIncome").textContent=money(income);
+  document.getElementById("totalExpenses").textContent=money(expenses);
+  document.getElementById("balance").textContent=money(balance);
+  document.getElementById("summaryIncome").textContent=money(income);
+  document.getElementById("summaryExpenses").textContent=money(expenses);
+  document.getElementById("summaryBalance").textContent=money(balance);
 }
 
 function renderCustomers(){
   const list=document.getElementById("customerList");
   const query=document.getElementById("customerSearch").value.trim().toLowerCase();
-  const customers=sortedCustomers().filter(c=>
-    String(c.name||"").toLowerCase().includes(query)||
-    String(c.phone||"").toLowerCase().includes(query)
+
+  const filtered=data.customers.filter(customer=>
+    String(customer.name||"").toLowerCase().includes(query)||
+    String(customer.phone||"").toLowerCase().includes(query)
   );
 
-  if(!customers.length){
-    list.innerHTML='<div class="card empty">ما كاين حتى زبون هنا. زيد أول زبون ديالك 🧡</div>';
+  if(filtered.length===0){
+    list.innerHTML='<div class="empty">👤<br>ما كاين حتى زبون هنا.<br>زيد زبون جديد أو بدّل كلمات البحث.</div>';
     return;
   }
 
-  list.innerHTML=customers.map((c,index)=>{
-    const total=customerDeliveryCount(c.id);
-    const paid=paidCount(c.id);
-    const free=freeCount(c.id);
-    const special=isClientX(c);
-    const nextFree=special?null:10-(paid%10||0);
-    const loyalty=special
-      ?'<span class="pill pill-red">بدون توصيل مجاني</span>'
-      :'<span class="pill pill-orange">باقي '+nextFree+' توصيلات مدفوعة للمكافأة</span>';
+  list.innerHTML=filtered.map(customer=>{
+    const paid=paidCount(customer);
+    const remaining=Math.max(0,10-paid);
+    const free=freeCount(customer);
+    const ready=paid>=10;
+    const progress=Math.min(100,paid*10);
 
     return `
-    <article class="customer">
-      <div class="customer-top">
-        <div>
-          <div class="customer-name">${escapeHTML(c.name)}</div>
-          <div class="customer-phone">${escapeHTML(c.phone||"بلا رقم هاتف")} · ${escapeHTML(c.source||"أخرى")}</div>
+      <article class="customer">
+        <div class="customer-heading">
+          <div>
+            <h3>${escapeHTML(customer.name)}</h3>
+            <div class="customer-phone">${escapeHTML(customer.phone)}</div>
+          </div>
+          <span class="badge ${ready?"free":""}">
+            ${ready?"🎉 التوصيلة الجاية فابور":"⭐ زبون وفي"}
+          </span>
         </div>
-        <div class="rank">#${index+1}</div>
-      </div>
-      <div style="margin-top:10px">${loyalty}</div>
-      <div class="customer-stats">
-        <div class="mini-stat"><b>${total}</b><span>التوصيلات</span></div>
-        <div class="mini-stat"><b>${paid}</b><span>المدفوعة</span></div>
-        <div class="mini-stat"><b>${free}</b><span>المجانية</span></div>
-      </div>
-      <div class="customer-actions">
-        <button class="btn btn-primary btn-small" onclick="addDelivery('${c.id}')">🛵 توصيل جديد</button>
-        <button class="btn btn-light btn-small" onclick="editCustomer('${c.id}')">✏️ تعديل</button>
-        <button class="btn btn-light btn-small" onclick="showCustomerHistory('${c.id}')">📋 السجل</button>
-        <button class="btn btn-danger btn-small" onclick="deleteCustomer('${c.id}')">حذف</button>
-      </div>
-    </article>`;
+
+        <div class="customer-details">
+          <div class="detail-box">
+            <span>🛵 مجموع التوصيلات</span>
+            <strong>${customerDeliveryCount(customer)}</strong>
+          </div>
+          <div class="detail-box">
+            <span>🎁 التوصيلات المجانية</span>
+            <strong>${free}</strong>
+          </div>
+          <div class="detail-box">
+            <span>📲 مصدر الطلب</span>
+            <strong>${escapeHTML(customer.source||"أخرى")}</strong>
+          </div>
+          <div class="detail-box">
+            <span>🏆 التوصيلات المؤداة</span>
+            <strong>${paid}/10</strong>
+          </div>
+        </div>
+
+        <div class="progress" aria-label="التقدم نحو المكافأة">
+          <div class="progress-bar" style="width:${progress}%"></div>
+        </div>
+        <div class="progress-label">
+          ${ready?"وصل للمكافأة! سجل التوصيلة الجاية فابور.":
+          "باقي "+remaining+" توصيلات مؤداة باش يستافد من التوصيلة المجانية."}
+        </div>
+
+        <div class="customer-actions">
+          <button class="success" type="button" onclick="addDelivery('${customer.id}')">🛵 تسجيل توصيل</button>
+          <button class="light" type="button" onclick="editCustomer('${customer.id}')">✏️ تعديل المعلومات</button>
+          <button class="light" type="button" onclick="showCustomerHistory('${customer.id}')">📋 سجل الزبون</button>
+          <button class="danger" type="button" onclick="deleteCustomer('${customer.id}')">🗑️ حذف الزبون</button>
+        </div>
+      </article>`;
   }).join("");
 }
 
 function renderTransactions(){
-  const box=document.getElementById("transactionTable");
-  const items=[...data.transactions].sort((a,b)=>new Date(b.date)-new Date(a.date));
-  if(!items.length){
-    box.innerHTML='<div class="empty">مازال ما تسجلات حتى عملية مالية.</div>';
-    return;
-  }
-  box.innerHTML=`<table><thead><tr><th>البيان</th><th>التاريخ</th><th>المبلغ</th><th>حذف</th></tr></thead><tbody>
-  ${items.map(t=>`<tr>
-    <td>${escapeHTML(t.note)}<br><small>${t.type==="income"?"مدخول":"مصروف"}</small></td>
-    <td>${escapeHTML(dateText(t.date))}</td>
-    <td class="${t.type==="income"?"amount-plus":"amount-minus"}">${t.type==="income"?"+":"−"}${money(t.amount)}</td>
-    <td><button class="btn btn-danger btn-small" onclick="deleteTransaction('${t.id}')">×</button></td>
-  </tr>`).join("")}
-  </tbody></table>`;
-}
+  const list=document.getElementById("transactionList");
+  const items=[...data.transactions].sort(
+    (a,b)=>(Number(b.createdAt)||0)-(Number(a.createdAt)||0)
+  );
 
-function renderDeliveryHistory(){
-  const box=document.getElementById("deliveryHistory");
-  const items=[...data.deliveries].sort((a,b)=>new Date(b.date)-new Date(a.date)).slice(0,100);
   if(!items.length){
-    box.innerHTML='<div class="empty">مازال ما تسجلات حتى توصيل.</div>';
+    list.innerHTML='<div class="empty">💵<br>مازال ما تسجلات حتى عملية مالية.</div>';
     return;
   }
-  box.innerHTML=`<div class="table-wrap"><table>
-  <thead><tr><th>الزبون</th><th>التاريخ</th><th>النوع</th><th>المبلغ</th></tr></thead><tbody>
-  ${items.map(d=>{
-    const customer=data.customers.find(c=>c.id===d.customerId);
-    return `<tr>
-      <td>${escapeHTML(customer?customer.name:(d.customerName||"زبون محذوف"))}</td>
-      <td>${escapeHTML(dateText(d.date))}</td>
-      <td>${d.free?'<span class="pill pill-green">فابور</span>':'مدفوعة'}</td>
-      <td>${d.free?money(0):money(d.amount)}</td>
-    </tr>`;
-  }).join("")}
-  </tbody></table></div>`;
+
+  list.innerHTML=items.map(item=>`
+    <article class="transaction-item">
+      <div class="transaction-top">
+        <span class="transaction-kind ${item.type==="income"?"income-text":"expense-text"}">
+          ${item.type==="income"?"🟢 مدخول":"🔴 مصروف"}
+        </span>
+        <button class="danger" type="button" onclick="deleteTransaction('${item.id}')">حذف</button>
+      </div>
+      <div class="transaction-amount ${item.type==="income"?"income-text":"expense-text"}">
+        ${money(item.amount)}
+      </div>
+      <div class="transaction-note">${escapeHTML(item.note||"بلا تفاصيل")}</div>
+      <div class="transaction-date">${escapeHTML(dateText(item.createdAt))}</div>
+    </article>
+  `).join("");
 }
 
 function renderAll(){
   renderDashboard();
   renderCustomers();
   renderTransactions();
-  renderDeliveryHistory();
 }
 
-document.getElementById("customerForm").addEventListener("submit",e=>{
-  e.preventDefault();
-  const id=document.getElementById("customerId").value;
+document.getElementById("customerForm").addEventListener("submit",function(event){
+  event.preventDefault();
+
   const name=document.getElementById("customerName").value.trim();
   const phone=document.getElementById("customerPhone").value.trim();
   const source=document.getElementById("customerSource").value;
-  if(!name){notify("دخل اسم الزبون أولا.");return;}
 
-  if(id){
-    const c=data.customers.find(x=>x.id===id);
-    if(c){c.name=name;c.phone=phone;c.source=source;}
-    notify("تبدلات معلومات الزبون بنجاح.");
-  }else{
-    data.customers.push({id:makeId(),name,phone,source,createdAt:new Date().toISOString()});
-    notify("تزاد الزبون بنجاح 🧡");
+  if(!name||!phone){
+    notify("دخل الاسم ورقم الهاتف.");
+    return;
   }
-  saveData();
-  e.target.reset();
-  document.getElementById("customerId").value="";
-  document.getElementById("customerFormTitle").textContent="➕ إضافة زبون جديد";
-  document.getElementById("customerSubmit").textContent="حفظ الزبون";
-  document.getElementById("cancelEdit").classList.add("hidden");
+
+  const normalized=phone.replace(/\s/g,"");
+  const existing=data.customers.find(
+    c=>String(c.phone||"").replace(/\s/g,"")===normalized
+  );
+
+  if(existing){
+    notify("هاد الرقم مسجل من قبل.");
+    return;
+  }
+
+  data.customers.push({
+    id:makeId(),name,phone,source,
+    deliveries:0,paidSinceFree:0,freeDeliveries:0,
+    history:[],createdAt:Date.now()
+  });
+
+  if(!saveData())return;
+  this.reset();
   renderAll();
+  notify("تزاد الزبون بنجاح ❤️");
 });
 
-document.getElementById("cancelEdit").addEventListener("click",()=>{
-  document.getElementById("customerForm").reset();
-  document.getElementById("customerId").value="";
-  document.getElementById("customerFormTitle").textContent="➕ إضافة زبون جديد";
-  document.getElementById("customerSubmit").textContent="حفظ الزبون";
-  document.getElementById("cancelEdit").classList.add("hidden");
-});
-
-document.getElementById("customerSearch").addEventListener("input",renderCustomers);
-
-function editCustomer(id){
-  const c=data.customers.find(x=>x.id===id);
-  if(!c)return;
-  document.getElementById("customerId").value=c.id;
-  document.getElementById("customerName").value=c.name||"";
-  document.getElementById("customerPhone").value=c.phone||"";
-  document.getElementById("customerSource").value=c.source||"أخرى";
-  document.getElementById("customerFormTitle").textContent="✏️ تعديل معلومات الزبون";
-  document.getElementById("customerSubmit").textContent="حفظ التعديلات";
-  document.getElementById("cancelEdit").classList.remove("hidden");
-  document.getElementById("customers").scrollIntoView({behavior:"smooth"});
-}
+document.getElementById("customerSearch")
+  .addEventListener("input",renderCustomers);
 
 function addDelivery(id){
-  const c=data.customers.find(x=>x.id===id);
-  if(!c)return;
-  let free=false;
-  if(!isClientX(c)){
-    const paid=paidCount(id);
-    free=paid>0 && paid%10===0;
+  const customer=data.customers.find(c=>c.id===id);
+  if(!customer)return;
+
+  const price=Number(document.getElementById("deliveryPrice").value);
+  if(!Number.isFinite(price)||price<0){
+    notify("دخل ثمن صحيح للتوصيلة.");
+    return;
   }
-  const amount=free?0:DELIVERY_PRICE;
-  const delivery={
-    id:makeId(),customerId:id,customerName:c.name,
-    free,amount,source:c.source||"أخرى",date:new Date().toISOString()
-  };
-  data.deliveries.push(delivery);
-  if(!free){
-    data.transactions.push({
-      id:makeId(),type:"income",amount,
-      note:"توصيل - "+c.name,date:delivery.date,deliveryId:delivery.id
+
+  customer.history=Array.isArray(customer.history)?customer.history:[];
+  const isFree=paidCount(customer)>=10;
+  const now=Date.now();
+
+  customer.deliveries=customerDeliveryCount(customer)+1;
+
+  if(isFree){
+    customer.freeDeliveries=freeCount(customer)+1;
+    customer.paidSinceFree=0;
+    customer.history.push({
+      id:makeId(),type:"free",amount:0,createdAt:now
     });
+  }else{
+    customer.paidSinceFree=paidCount(customer)+1;
+    customer.history.push({
+      id:makeId(),type:"paid",amount:price,createdAt:now
+    });
+
+    if(price>0){
+      data.transactions.push({
+        id:makeId(),type:"income",amount:price,
+        note:"توصيلة للزبون: "+customer.name,
+        createdAt:now,customerId:customer.id
+      });
+    }
   }
-  saveData();
+
+  if(!saveData())return;
   renderAll();
-  notify(free?"🎁 هاد التوصيلة فابور للزبون!":"تسجلات التوصيلة المدفوعة بنجاح.");
+
+  if(isFree){
+    notify("🎁 التوصيلة فابور! مبروك للزبون.");
+  }else if(customer.paidSinceFree>=10){
+    notify("تسجلات التوصيلة رقم 10. الجاية فابور 🎁");
+  }else{
+    notify("تسجلات التوصيلة بنجاح ✅");
+  }
+}
+
+function editCustomer(id){
+  const customer=data.customers.find(c=>c.id===id);
+  if(!customer)return;
+
+  const newName=prompt("الاسم الجديد:",customer.name);
+  if(newName===null)return;
+  const newPhone=prompt("رقم الهاتف الجديد:",customer.phone);
+  if(newPhone===null)return;
+
+  if(!newName.trim()||!newPhone.trim()){
+    notify("الاسم ورقم الهاتف ضروريين.");
+    return;
+  }
+
+  const normalized=newPhone.trim().replace(/\s/g,"");
+  const duplicate=data.customers.find(c=>
+    c.id!==id&&String(c.phone||"").replace(/\s/g,"")===normalized
+  );
+
+  if(duplicate){
+    notify("هاد الرقم تابع لزبون آخر.");
+    return;
+  }
+
+  customer.name=newName.trim();
+  customer.phone=newPhone.trim();
+
+  // تحديث وصف مداخيل التوصيلات المرتبطة بالزبون
+  data.transactions.forEach(item=>{
+    if(item.customerId===id&&String(item.note||"").startsWith("توصيلة للزبون:")){
+      item.note="توصيلة للزبون: "+customer.name;
+    }
+  });
+
+  if(!saveData())return;
+  renderAll();
+  notify("تحدّثات معلومات الزبون.");
 }
 
 function showCustomerHistory(id){
-  const c=data.customers.find(x=>x.id===id);
-  if(!c)return;
-  const items=data.deliveries.filter(d=>d.customerId===id);
-  const text=items.length
-    ?items.map((d,i)=>(i+1)+". "+dateText(d.date)+" — "+(d.free?"فابور":"مدفوعة: "+money(d.amount))).join("\n")
-    :"مازال ما عندو حتى توصيل.";
-  alert("سجل توصيلات: "+c.name+"\n\n"+text);
+  const customer=data.customers.find(c=>c.id===id);
+  if(!customer)return;
+
+  const history=Array.isArray(customer.history)?customer.history:[];
+  if(!history.length){
+    notify("مازال ما تسجلات حتى توصيله لهاد الزبون.");
+    return;
+  }
+
+  const lines=history.slice().reverse().map(item=>{
+    const type=item.type==="free"?"🎁 فابور":"🛵 مؤداة";
+    return type+" — "+money(item.amount)+" — "+dateText(item.createdAt);
+  });
+
+  alert("سجل توصيلات: "+customer.name+"\n\n"+lines.join("\n"));
 }
 
 function deleteCustomer(id){
-  const c=data.customers.find(x=>x.id===id);
-  if(!c)return;
-  if(!confirm("واش متأكد بغيتي تحذف "+c.name+"؟ غادي يبقاو السجلات المالية والتوصيلات السابقة."))return;
-  data.customers=data.customers.filter(x=>x.id!==id);
-  saveData();renderAll();notify("تحذف الزبون.");
+  const customer=data.customers.find(c=>c.id===id);
+  if(!customer)return;
+
+  if(!confirm("واش متأكد بغيتي تحذف "+customer.name+"؟"))return;
+  if(!confirm("غادي يتحذف سجل التوصيلات ومداخيل التوصيلات المرتبطة به. نكملو؟"))return;
+
+  const oldCustomers=data.customers;
+  const oldTransactions=data.transactions;
+
+  data.customers=data.customers.filter(c=>c.id!==id);
+  data.transactions=data.transactions.filter(item=>item.customerId!==id);
+
+  if(!saveData()){
+    data.customers=oldCustomers;
+    data.transactions=oldTransactions;
+    return;
+  }
+
+  renderAll();
+  notify("تحذف الزبون والسجل المرتبط به.");
 }
 
-document.getElementById("transactionForm").addEventListener("submit",e=>{
-  e.preventDefault();
+document.getElementById("transactionForm").addEventListener("submit",function(event){
+  event.preventDefault();
+
   const type=document.getElementById("transactionType").value;
   const amount=Number(document.getElementById("transactionAmount").value);
   const note=document.getElementById("transactionNote").value.trim();
-  if(!note||!Number.isFinite(amount)||amount<=0){notify("راجع البيان والمبلغ.");return;}
-  data.transactions.push({id:makeId(),type,amount,note,date:new Date().toISOString()});
-  saveData();e.target.reset();renderAll();notify("تسجلات العملية المالية.");
+
+  if(!Number.isFinite(amount)||amount<=0){
+    notify("دخل مبلغ صحيح أكبر من صفر.");
+    return;
+  }
+
+  data.transactions.push({
+    id:makeId(),type,amount,
+    note:note||(type==="income"?"مدخول إضافي":"مصروف"),
+    createdAt:Date.now()
+  });
+
+  if(!saveData())return;
+  this.reset();
+  document.getElementById("transactionType").value="income";
+  renderAll();
+  notify("تحفظات العملية بنجاح ✅");
 });
 
 function deleteTransaction(id){
   if(!confirm("واش متأكد بغيتي تحذف هاد العملية المالية؟"))return;
-  data.transactions=data.transactions.filter(t=>t.id!==id);
-  saveData();renderAll();notify("تحذفات العملية.");
-}
 
-// تصدير نسخة احتياطية
-document.getElementById("exportBackup").addEventListener("click",()=>{
-  try{
-    const blob=new Blob(
-      [JSON.stringify(data,null,2)],
-      {type:"application/json;charset=utf-8"}
-    );
-    const url=URL.createObjectURL(blob);
-    const a=document.createElement("a");
-    a.href=url;
-    a.download="SKHAWA-LIVRILI-backup-"+new Date().toISOString().slice(0,10)+".json";
-    a.style.display="none";
-    document.body.appendChild(a);
-    a.click();
-    a.remove();
+  const old=data.transactions;
+  data.transactions=data.transactions.filter(item=>item.id!==id);
 
-    // تأخير حذف الرابط لتحسين التوافق مع بعض متصفحات الهاتف
-    setTimeout(()=>URL.revokeObjectURL(url),1500);
-    notify("وجدنا ليك النسخة الاحتياطية. تأكد أنها تحمّلات.");
-  }catch(error){
-    notify("ما قدرناش نصاوبو النسخة الاحتياطية.");
-  }
-});
-
-// استرجاع النسخة الاحتياطية باستعمال FileReader
-const importButton=document.getElementById("importButton");
-const importFile=document.getElementById("importFile");
-
-importButton.addEventListener("click",()=>{
-  // باش تقدر تختار نفس الملف مرة أخرى
-  importFile.value="";
-  importFile.click();
-});
-
-importFile.addEventListener("change",e=>{
-  const file=e.target.files && e.target.files[0];
-  if(!file)return;
-
-  if(file.size>20*1024*1024){
-    notify("الملف كبير بزاف. اختار نسخة أقل من 20MB.");
-    importFile.value="";
+  if(!saveData()){
+    data.transactions=old;
     return;
   }
+  renderAll();
+  notify("تحذفات العملية المالية.");
+}
 
-  const reader=new FileReader();
-
-  reader.onload=()=>{
-    try{
-      if(typeof reader.result!=="string"||!reader.result.trim()){
-        throw new Error("empty backup");
-      }
-
-      const imported=JSON.parse(reader.result);
-
-      // دعم النسخة المباشرة أو النسخة الموجودة داخل data
-      const backup=imported&&imported.data
-        ?imported.data
-        :imported;
-
-      if(
-        !backup||
-        !Array.isArray(backup.customers)||
-        !Array.isArray(backup.transactions)||
-        !Array.isArray(backup.deliveries)
-      ){
-        throw new Error("invalid backup");
-      }
-
-      // التأكد من البنية قبل تغيير البيانات الحالية
-      const validCustomers=backup.customers.every(c=>
-        c&&typeof c==="object"&&c.id!==undefined&&c.name!==undefined
-      );
-      const validTransactions=backup.transactions.every(t=>
-        t&&typeof t==="object"&&
-        t.id!==undefined&&
-        (t.type==="income"||t.type==="expense")
-      );
-      const validDeliveries=backup.deliveries.every(d=>
-        d&&typeof d==="object"&&d.id!==undefined
-      );
-
-      if(!validCustomers||!validTransactions||!validDeliveries){
-        throw new Error("invalid records");
-      }
-
-      if(!confirm(
-        "استرجاع النسخة غادي يعوض البيانات الحالية. "+
-        "تأكد أنك اخترتي النسخة الصحيحة. واش متأكد؟"
-      )){
-        return;
-      }
-
-      // الاحتفاظ بالبيانات الحالية للرجوع إليها إذا فشل الحفظ
-      const previousData=data;
-
-      data={
-        customers:backup.customers,
-        transactions:backup.transactions,
-        deliveries:backup.deliveries
-      };
-
-      if(!saveData()){
-        data=previousData;
-        renderAll();
-        notify("فشل الحفظ. البيانات السابقة ما تبدلاتش فالتطبيق.");
-        return;
-      }
-
-      renderAll();
-      notify("ترجعات النسخة الاحتياطية بنجاح 🧡");
-
-    }catch(error){
-      notify("ما قدرناش نقراو النسخة. تأكد أنها ملف JSON صحيح.");
-    }finally{
-      importFile.value="";
-    }
+document.getElementById("backupButton").addEventListener("click",function(){
+  const backup={
+    app:"SKHAWA LIVRILI",
+    version:1,
+    exportedAt:new Date().toISOString(),
+    data:data
   };
 
-  reader.onerror=()=>{
-    importFile.value="";
-    notify("وقع مشكل فقراءة الملف. عاود اختار النسخة.");
-  };
-
-  reader.readAsText(file,"UTF-8");
+  const blob=new Blob(
+    [JSON.stringify(backup,null,2)],
+    {type:"application/json"}
+  );
+  const url=URL.createObjectURL(blob);
+  const link=document.createElement("a");
+  link.href=url;
+  link.download="SKHAWA-LIVRILI-backup-"+new Date().toISOString().slice(0,10)+".json";
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+  setTimeout(()=>URL.revokeObjectURL(url),1500);
+  notify("وجدنا النسخة الاحتياطية.");
 });
 
-// مسح البيانات مع تأكيدين
-document.getElementById("resetData").addEventListener("click",()=>{
-  if(!confirm("تحذير: غادي يتم مسح جميع الزبناء والتوصيلات والعمليات المالية من هاد المتصفح. واش متأكد؟"))return;
-  if(!confirm("آخر تأكيد: واش درتي نسخة احتياطية وباغي تمسح كلشي؟"))return;
+document.getElementById("restoreButton").addEventListener("click",function(){
+  document.getElementById("restoreFile").click();
+});
 
-  const previousData=data;
+document.getElementById("restoreFile").addEventListener("change",async function(){
+  const file=this.files&&this.files[0];
+  if(!file)return;
+
+  try{
+    const text=await file.text();
+    const parsed=JSON.parse(text);
+    const restored=parsed.data||parsed;
+
+    if(!Array.isArray(restored.customers)||
+       !Array.isArray(restored.transactions)){
+      throw new Error("Invalid backup");
+    }
+
+    if(!confirm("استرجاع النسخة غادي يعوّض البيانات الحالية. حمّل نسخة من البيانات الحالية أولاً. نكملو؟")){
+      this.value="";
+      return;
+    }
+
+    const old=data;
+    data={
+      customers:restored.customers,
+      transactions:restored.transactions
+    };
+
+    if(!saveData()){
+      data=old;
+      return;
+    }
+
+    renderAll();
+    notify("ترجعات النسخة الاحتياطية بنجاح ✅");
+  }catch(error){
+    alert("ما قدرناش نقراو هاد الملف. اختار نسخة JSON صحيحة.");
+  }
+  this.value="";
+});
+
+document.getElementById("resetButton").addEventListener("click",function(){
+  if(!confirm("واش متأكد بغيتي تمسح جميع الزبناء والتوصيلات والعمليات المالية؟"))return;
+  if(!confirm("آخر تأكيد: البيانات غادي تتمسح من هاد المتصفح. واش نكملو؟"))return;
+
+  const old=data;
   data=emptyData();
 
   if(!saveData()){
-    data=previousData;
-    renderAll();
-    notify("ما قدرناش نمسحو البيانات. البيانات السابقة بقات.");
+    data=old;
     return;
   }
-
   renderAll();
   notify("تم مسح البيانات.");
 });
 
-document.querySelectorAll(".nav-btn").forEach(btn=>{
-  btn.addEventListener("click",()=>{
-    document.querySelectorAll(".nav-btn").forEach(b=>b.classList.remove("active"));
-    btn.classList.add("active");
-    document.getElementById(btn.dataset.target).scrollIntoView({behavior:"smooth"});
+document.getElementById("year").textContent=new Date().getFullYear();
+
+document.querySelectorAll(".bottom-nav a").forEach(link=>{
+  link.addEventListener("click",function(){
+    document.querySelectorAll(".bottom-nav a").forEach(a=>a.classList.remove("active"));
+    this.classList.add("active");
   });
 });
 
