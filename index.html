@@ -2,439 +2,636 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#ff7900">
-<title>SKHAWA LIVRILI</title>
-<style>
-:root{--o:#ff7900;--b:#151515;--w:#fff;--bg:#f4f5f7;--mut:#747474;--green:#16834a;--red:#c93434}
-*{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--b);font-family:Arial,sans-serif;padding-bottom:85px}
-header{background:var(--b);color:white;padding:22px 16px;border-bottom:4px solid var(--o)}
-.brand{font-weight:900;font-size:23px;letter-spacing:.4px}
-.brand span{color:var(--o)}
-header p{margin:7px 0 0;color:#ddd;font-size:13px}
-main{max-width:800px;margin:auto;padding:14px}
-h2{font-size:19px;margin:8px 0 14px}
-h3{font-size:16px;margin:0 0 12px}
-.card{background:white;border-radius:15px;padding:16px;margin-bottom:14px;box-shadow:0 2px 9px #0000000b}
-.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
-.stat{background:#fff;border-radius:13px;padding:14px;border-right:4px solid var(--o)}
-.stat small{display:block;color:var(--mut);font-size:12px;margin-bottom:8px}
-.stat strong{font-size:22px;overflow-wrap:anywhere}
-input,select,textarea{width:100%;padding:12px;border:1px solid #ddd;border-radius:10px;font-size:15px;background:#fff;margin:5px 0 11px;outline-color:var(--o)}
-label{font-size:13px;font-weight:bold}
-button{border:0;border-radius:10px;padding:12px 14px;background:var(--o);color:#111;font-size:14px;font-weight:bold;cursor:pointer}
-button.dark{background:var(--b);color:white}
-button.light{background:#eee;color:#222}
-button.danger{background:#ffe7e7;color:var(--red)}
-button.green{background:#dff5e8;color:#126b3c}
-.actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}
-.actions button{flex:1}
-.row{display:flex;justify-content:space-between;align-items:center;gap:10px}
-.muted{color:var(--mut);font-size:12px}
-.badge{display:inline-block;border-radius:30px;background:#fff0e1;color:#9a4800;padding:5px 9px;font-size:12px;font-weight:bold}
-.badge.green{background:#e1f6e9;color:#126b3c}
-.badge.gray{background:#eee;color:#555}
-.customer{border:1px solid #eee;border-radius:12px;padding:13px;margin-top:10px}
-.customer h3{margin-bottom:6px}
-.hidden{display:none!important}
-nav{position:fixed;bottom:0;left:0;right:0;background:white;border-top:1px solid #ddd;display:flex;justify-content:space-around;padding:8px 2px calc(8px + env(safe-area-inset-bottom));z-index:5}
-nav button{background:white;color:#555;padding:8px 5px;font-size:12px;flex:1;border-radius:8px}
-nav button.active{background:#fff0e1;color:#a54b00}
-hr{border:0;border-top:1px solid #eee;margin:14px 0}
-.empty{text-align:center;color:var(--mut);padding:20px 5px}
-.amount{font-weight:bold;font-size:17px}
-.notice{background:#fff4df;border-radius:10px;padding:12px;font-size:13px;line-height:1.7;margin-bottom:12px}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#101010">
+  <meta name="description" content="SKHAWA LIVRILI - برنامج وفاء الزبناء والتوصيل ببركان">
+  <title>SKHAWA LIVRILI | فضاء الإدارة</title>
+
+  <link rel="manifest" href="manifest.json">
+  <style>
+    :root {
+      --bg:#0b0b0d;
+      --panel:#151518;
+      --panel2:#1d1d21;
+      --orange:#ff7900;
+      --orange2:#ff9c32;
+      --white:#fff;
+      --muted:#a7a7ad;
+      --border:#303035;
+      --green:#39d98a;
+      --red:#ff555d;
+    }
+
+    * { box-sizing:border-box; }
+    body {
+      margin:0;
+      background:
+        radial-gradient(ellipse at 90% 0%, #542407 0%, transparent 35%),
+        var(--bg);
+      color:var(--white);
+      font-family:Arial,Tahoma,sans-serif;
+      min-height:100vh;
+    }
+
+    button,input,select { font:inherit; }
+    button { cursor:pointer; }
+    .app { max-width:1100px; margin:auto; padding:18px 15px 100px; }
+
+    header {
+      display:flex; align-items:center; justify-content:space-between;
+      gap:12px; padding:15px 0 23px;
+      border-bottom:1px solid var(--border);
+    }
+    .brand { display:flex; align-items:center; gap:12px; }
+    .logo {
+      width:55px; height:55px; border-radius:17px;
+      background:linear-gradient(145deg,#ffac43,#f45c00);
+      color:#111; display:grid; place-items:center;
+      font-size:27px; font-weight:1000;
+      box-shadow:0 0 27px #ff790035;
+    }
+    h1 { font-size:clamp(19px,4vw,27px); margin:0; letter-spacing:.3px; }
+    .brand p { color:var(--orange2); margin:6px 0 0; font-size:13px; }
+    .status {
+      color:var(--green); border:1px solid #39d98a55;
+      padding:8px 10px; border-radius:20px; font-size:12px;
+      white-space:nowrap;
+    }
+
+    .hero {
+      position:relative; overflow:hidden;
+      margin:22px 0; padding:25px 22px;
+      border:1px solid #ff790044; border-radius:23px;
+      background:linear-gradient(120deg,#271306,#171719 62%,#111);
+    }
+    .hero:after {
+      content:"⚡"; position:absolute; left:18px; top:-20px;
+      font-size:125px; opacity:.08; transform:rotate(-10deg);
+    }
+    .eyebrow { color:var(--orange2); font-size:12px; font-weight:bold; }
+    .hero h2 { font-size:clamp(23px,5vw,35px); margin:10px 0; }
+    .hero p { color:#dedee1; margin:0; line-height:1.8; }
+    .hero strong { color:var(--orange2); }
+
+    .section-title {
+      display:flex; align-items:center; justify-content:space-between;
+      gap:10px; margin:25px 0 13px;
+    }
+    .section-title h2 { font-size:19px; margin:0; }
+    .section-title small { color:var(--muted); }
+
+    .stats {
+      display:grid; grid-template-columns:repeat(4,minmax(0,1fr));
+      gap:12px;
+    }
+    .stat,.card {
+      background:linear-gradient(145deg,#19191d,#121214);
+      border:1px solid var(--border); border-radius:17px;
+    }
+    .stat { padding:17px 14px; min-width:0; }
+    .stat .label { color:var(--muted); font-size:12px; }
+    .stat .number {
+      font-size:clamp(21px,4vw,29px); font-weight:900;
+      margin:12px 0 5px; overflow-wrap:anywhere;
+    }
+    .orange { color:var(--orange2); }
+    .green { color:var(--green); }
+    .red { color:var(--red); }
+
+    .card { padding:18px; margin-bottom:15px; }
+    .form-grid {
+      display:grid; grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:12px;
+    }
+    label { display:block; color:#d7d7dc; font-size:13px; margin-bottom:7px; }
+    input,select {
+      width:100%; background:#0d0d0f; color:white;
+      border:1px solid #3a3a40; border-radius:11px;
+      padding:13px; outline:none; min-width:0;
+    }
+    input:focus,select:focus { border-color:var(--orange); }
+    .actions { display:flex; gap:9px; flex-wrap:wrap; margin-top:13px; }
+    .btn {
+      border:0; border-radius:11px; padding:12px 15px;
+      font-weight:bold; color:white; background:#303035;
+    }
+    .btn-primary {
+      color:#17100a;
+      background:linear-gradient(135deg,var(--orange2),var(--orange));
+    }
+    .btn-outline { border:1px solid #ff790077; background:#21170f; color:#ffb45f; }
+    .btn-danger { background:#401719; color:#ff858b; }
+    .btn-small { padding:8px 10px; font-size:12px; }
+    .btn:active { transform:scale(.98); }
+
+    .search { margin-bottom:13px; }
+    .customer-list { display:grid; gap:12px; }
+    .customer {
+      border:1px solid var(--border); background:#141416;
+      padding:16px; border-radius:16px;
+    }
+    .customer-top {
+      display:flex; justify-content:space-between; align-items:flex-start;
+      gap:10px;
+    }
+    .customer h3 { margin:0 0 7px; font-size:17px; overflow-wrap:anywhere; }
+    .phone { color:var(--muted); font-size:13px; direction:ltr; text-align:right; }
+    .tag {
+      background:#38210e; color:#ffb15b; padding:6px 9px;
+      border-radius:20px; font-size:11px; white-space:nowrap;
+    }
+    .progress-info {
+      display:flex; justify-content:space-between; gap:8px;
+      color:#c8c8ce; font-size:12px; margin:17px 0 8px;
+    }
+    .progress { height:8px; background:#303035; border-radius:20px; overflow:hidden; }
+    .progress div {
+      height:100%; background:linear-gradient(90deg,#ff5c00,#ffbd52);
+      border-radius:20px; transition:width .3s;
+    }
+    .customer-bottom {
+      display:flex; justify-content:space-between; align-items:center;
+      gap:10px; flex-wrap:wrap; margin-top:14px;
+    }
+    .customer-bottom small { color:var(--muted); }
+    .gift { color:var(--green); font-size:12px; font-weight:bold; margin-top:8px; }
+    .empty { text-align:center; color:var(--muted); padding:30px 10px; }
+    .notice {
+      border:1px solid #ff790055; background:#28180b;
+      padding:13px; border-radius:12px; margin-bottom:12px;
+      color:#ffd4a3; line-height:1.7; font-size:13px;
+    }
+
+    .transaction {
+      display:flex; justify-content:space-between; align-items:center;
+      gap:10px; border-bottom:1px solid var(--border); padding:12px 0;
+    }
+    .transaction:last-child { border:0; }
+    .transaction small { display:block; color:var(--muted); margin-top:5px; }
+    .amount { font-weight:bold; direction:ltr; white-space:nowrap; }
+
+    .bottom-nav {
+      position:fixed; bottom:0; left:0; right:0; z-index:5;
+      display:flex; justify-content:center; gap:5px;
+      background:#101012f2; backdrop-filter:blur(15px);
+      border-top:1px solid #333; padding:9px 8px calc(9px + env(safe-area-inset-bottom));
+    }
+    .bottom-nav button {
+      flex:1; max-width:180px; background:transparent; color:#aaa;
+      border:0; border-radius:10px; padding:10px 4px; font-size:12px;
+    }
+    .bottom-nav button.active { color:var(--orange2); background:#38200e; }
+    .page { display:none; }
+    .page.active { display:block; }
+    .footer { text-align:center; color:#777; font-size:11px; padding:20px 0; }
+
+    @media(max-width:650px) {
+      .stats { grid-template-columns:repeat(2,minmax(0,1fr)); gap:9px; }
+      .stat { padding:14px 12px; }
+      .form-grid { grid-template-columns:1fr; }
+      .status { display:none; }
+      .hero { padding:22px 17px; }
+      .card { padding:14px; }
+    }
+  </style>
 </head>
 <body>
-<header>
-  <div class="brand">SKHAWA <span>LIVRILI</span></div>
-  <p>لوحة التسيير ديال المشروع · سخاوة فالقلب، وليڤري فالوقت</p>
-</header>
-
-<main>
-<section id="home">
-  <h2>📊 لوحة القيادة</h2>
-  <div class="grid">
-    <div class="stat"><small>مجموع الزبناء</small><strong id="sCustomers">0</strong></div>
-    <div class="stat"><small>مجموع التوصيلات</small><strong id="sDeliveries">0</strong></div>
-    <div class="stat"><small>المداخيل</small><strong id="sIncome">0 DH</strong></div>
-    <div class="stat"><small>المصاريف</small><strong id="sExpense">0 DH</strong></div>
-  </div>
-  <div class="card" style="margin-top:14px">
-    <h3>النتيجة المالية</h3>
-    <div class="row"><span>الربح / الخسارة</span><strong id="sProfit">0 DH</strong></div>
-    <p class="muted">النتيجة = مجموع المداخيل ناقص مجموع المصاريف المسجلة.</p>
-  </div>
-  <div class="card">
-    <h3>⚡ اختصارات</h3>
-    <div class="actions">
-      <button onclick="showPage('customers')">+ زبون جديد</button>
-      <button class="dark" onclick="showPage('finance')">+ حركة مالية</button>
+<div class="app">
+  <header>
+    <div class="brand">
+      <div class="logo">⚡</div>
+      <div>
+        <h1>SKHAWA <span class="orange">LIVRILI</span></h1>
+        <p>السخاوة فالقلب و ليفري فالوقت ⚡🧡</p>
+      </div>
     </div>
-  </div>
-  <div class="card">
-    <h3>🎁 زبناء قريبين ياخدو الهدية</h3>
-    <div id="nearGift" class="muted">ما كاين حتى زبون دابا.</div>
-  </div>
-</section>
+    <div class="status">● النظام واجد</div>
+  </header>
 
-<section id="customers" class="hidden">
-  <h2>👥 تسيير الزبناء</h2>
-  <div class="card">
-    <h3>إضافة زبون</h3>
-    <label>الاسم</label>
-    <input id="newName" placeholder="دخل اسم الزبون">
-    <label>رقم الهاتف</label>
-    <input id="newPhone" type="tel" placeholder="06xxxxxxxx">
-    <label>نوع الزبون</label>
-    <select id="newType">
-      <option value="regular">زبون وفيّ — يستافد من الهدايا</option>
-      <option value="x">Client X — بلا هدايا</option>
-    </select>
-    <button style="width:100%" onclick="addCustomer()">حفظ الزبون</button>
-  </div>
-  <div class="card">
-    <h3>لائحة الزبناء</h3>
-    <input id="searchCustomer" placeholder="🔎 قلب بالاسم أو الهاتف" oninput="renderCustomers()">
-    <p class="muted">الترتيب تلقائي من الأكثر توصيلات للأقل.</p>
-    <div id="customerList"></div>
-  </div>
-</section>
+  <section class="hero">
+    <div class="eyebrow">برنامج الوفاء · BERKANE</div>
+    <h2>الزبون الوفي، <span class="orange">عندو القيمة.</span></h2>
+    <p>كل توصيل مدفوع كيقرب الزبون من الهدية ديالو.<br>
+      <strong>10 توصيلات مدفوعة = التوصيلة الموالية فابور.</strong>
+    </p>
+  </section>
 
-<section id="finance" class="hidden">
-  <h2>💰 المداخيل والمصاريف</h2>
-  <div class="card">
-    <h3>تسجيل حركة مالية</h3>
-    <label>نوع الحركة</label>
-    <select id="txType" onchange="updateCategories()">
-      <option value="income">مدخول</option>
-      <option value="expense">مصروف</option>
-    </select>
-    <label>الصنف</label>
-    <select id="txCategory"></select>
-    <label>المبلغ بالدرهم</label>
-    <input id="txAmount" type="number" min="0.01" step="0.01" placeholder="مثلاً 50">
-    <label>ملاحظة (اختياري)</label>
-    <input id="txNote" placeholder="مثلاً بنزين أو توصيل طلب">
-    <button style="width:100%" onclick="addTransaction()">حفظ الحركة</button>
-  </div>
-  <div class="card">
-    <h3>الحركات المسجلة</h3>
-    <div id="transactionList"></div>
-  </div>
-</section>
+  <section id="dashboard" class="page active">
+    <div class="section-title"><h2>نظرة عامة</h2><small>لوحة الإدارة</small></div>
+    <div class="stats">
+      <div class="stat"><div class="label">الزبناء</div><div class="number orange" id="sCustomers">0</div><small>مجموع المسجلين</small></div>
+      <div class="stat"><div class="label">التوصيلات المسجلة</div><div class="number" id="sDeliveries">0</div><small>مدفوعة ومجانية</small></div>
+      <div class="stat"><div class="label">المداخيل</div><div class="number green" id="sIncome">0</div><small>درهم</small></div>
+      <div class="stat"><div class="label">المصاريف</div><div class="number red" id="sExpenses">0</div><small>درهم</small></div>
+    </div>
+    <div class="section-title"><h2>الرصيد الصافي</h2></div>
+    <div class="card">
+      <div class="number orange" style="font-size:32px" id="sBalance">0 DH</div>
+      <small style="color:var(--muted)">المداخيل ناقص المصاريف المسجلة</small>
+    </div>
+    <div id="dashboardNotice"></div>
+    <div class="section-title"><h2>آخر الزبناء</h2></div>
+    <div id="recentCustomers" class="customer-list"></div>
+  </section>
 
-<section id="stats" class="hidden">
-  <h2>📈 الإحصائيات</h2>
-  <div class="card">
-    <label>الفترة</label>
-    <select id="period" onchange="renderStats()">
-      <option value="today">اليوم</option>
-      <option value="week">هاد الأسبوع</option>
-      <option value="month">هاد الشهر</option>
-      <option value="all">من نهار بديت</option>
-    </select>
-  </div>
-  <div class="grid">
-    <div class="stat"><small>المداخيل</small><strong id="pIncome">0 DH</strong></div>
-    <div class="stat"><small>المصاريف</small><strong id="pExpense">0 DH</strong></div>
-    <div class="stat"><small>الربح / الخسارة</small><strong id="pProfit">0 DH</strong></div>
-    <div class="stat"><small>التوصيلات المسجلة</small><strong id="pDeliveries">0</strong></div>
-  </div>
-  <div class="card" style="margin-top:14px">
-    <h3>معلومات عامة</h3>
-    <div id="generalStats"></div>
-  </div>
-</section>
+  <section id="customers" class="page">
+    <div class="section-title"><h2>إدارة الزبناء</h2><small>إضافة وتتبع</small></div>
+    <div class="card">
+      <h3 style="margin-top:0">＋ زبون جديد</h3>
+      <form id="customerForm">
+        <div class="form-grid">
+          <div><label for="customerName">الاسم الكامل</label><input id="customerName" required maxlength="100" placeholder="اسم الزبون"></div>
+          <div><label for="customerPhone">رقم الهاتف</label><input id="customerPhone" required type="tel" maxlength="25" placeholder="06xxxxxxxx"></div>
+          <div><label for="customerSource">طريقة الطلب</label>
+            <select id="customerSource"><option>WhatsApp</option><option>الهاتف</option><option>مباشر</option></select>
+          </div>
+        </div>
+        <div class="actions"><button class="btn btn-primary" type="submit">حفظ الزبون</button></div>
+      </form>
+    </div>
 
-<section id="backup" class="hidden">
-  <h2>💾 النسخ الاحتياطي</h2>
-  <div class="notice">
-    البيانات كتتحفظ فالمتصفح ديال هاد الجهاز. باش ما تضيعش إلا بدّلتي التليفون، دير نسخة احتياطية وحفظها فبلاصة آمنة أو صيفطها للإيميل ديالك. الاسترجاع كيبدل البيانات الحالية بالبيانات اللي فالنسخة.
-  </div>
-  <div class="card">
-    <h3>إنشاء نسخة احتياطية</h3>
-    <button style="width:100%" onclick="backupData()">⬇️ تحميل النسخة الاحتياطية</button>
-    <button class="dark" style="width:100%;margin-top:8px" onclick="shareBackup()">✉️ مشاركة النسخة / الإيميل</button>
-  </div>
-  <div class="card">
-    <h3>استرجاع نسخة احتياطية</h3>
-    <label>اختار ملف النسخة بصيغة JSON</label>
-    <input id="restoreFile" type="file" accept=".json,application/json">
-    <button class="green" style="width:100%" onclick="restoreData()">استرجاع البيانات</button>
-  </div>
-  <div class="card">
-    <h3>مسح البيانات</h3>
-    <p class="muted">استعمل هاد الاختيار غير إلا كنت متأكد. دير نسخة احتياطية قبل المسح.</p>
-    <button class="danger" style="width:100%" onclick="resetData()">مسح جميع البيانات</button>
-  </div>
-</section>
-</main>
+    <input id="search" class="search" placeholder="🔎 قلب بالاسم أو رقم الهاتف...">
+    <div id="customerList" class="customer-list"></div>
+  </section>
 
-<nav>
-  <button class="active" data-page="home" onclick="showPage('home')">🏠<br>الرئيسية</button>
-  <button data-page="customers" onclick="showPage('customers')">👥<br>الزبناء</button>
-  <button data-page="finance" onclick="showPage('finance')">💰<br>المالية</button>
-  <button data-page="stats" onclick="showPage('stats')">📊<br>الإحصائيات</button>
-  <button data-page="backup" onclick="showPage('backup')">💾<br>النسخ</button>
+  <section id="finance" class="page">
+    <div class="section-title"><h2>الحسابات</h2><small>المداخيل والمصاريف</small></div>
+    <div class="card">
+      <h3 style="margin-top:0">تسجيل حركة مالية</h3>
+      <form id="financeForm">
+        <div class="form-grid">
+          <div><label for="financeType">النوع</label><select id="financeType"><option value="expense">مصروف</option><option value="income">مدخول إضافي</option></select></div>
+          <div><label for="financeAmount">المبلغ بالدرهم</label><input id="financeAmount" type="number" min="0.01" step="0.01" required placeholder="مثلاً 50"></div>
+          <div><label for="financeNote">التفاصيل</label><input id="financeNote" maxlength="150" placeholder="مثلاً البنزين"></div>
+        </div>
+        <div class="actions"><button class="btn btn-primary" type="submit">تسجيل الحركة</button></div>
+      </form>
+    </div>
+    <div class="card">
+      <h3 style="margin-top:0">سجل الحركات</h3>
+      <div id="transactionList"></div>
+    </div>
+  </section>
+
+  <section id="backup" class="page">
+    <div class="section-title"><h2>الإعدادات والنسخ الاحتياطي</h2></div>
+    <div class="card">
+      <h3>حافظ على بياناتك</h3>
+      <p style="color:var(--muted);line-height:1.8">
+        دير نسخة احتياطية بانتظام. البيانات الحالية كتتخزن فالمتصفح ديال هاد الجهاز، وما كتنتاقلش بوحدها لجهاز آخر.
+      </p>
+      <div class="actions">
+        <button class="btn btn-primary" id="exportBtn">تحميل النسخة الاحتياطية</button>
+        <button class="btn btn-outline" id="importBtn">استرجاع نسخة</button>
+        <input id="importFile" type="file" accept="application/json,.json" hidden>
+      </div>
+    </div>
+    <div class="card">
+      <h3>قواعد برنامج الوفاء</h3>
+      <p style="line-height:2;color:#ddd">
+        • كل توصيل مدفوع كيتحسب توصيل واحد.<br>
+        • من بعد 10 توصيلات مدفوعة، التوصيلة 11 مجانية.<br>
+        • التوصيلة المجانية ما كتتحسبش مدفوعة.<br>
+        • من بعد الهدية، كيبدا الحساب من جديد.<br>
+        • ملي يبقاو 3 توصيلات للهدية، كيبان تذكير فلوحة الإدارة.
+      </p>
+    </div>
+  </section>
+
+  <div class="footer">SKHAWA LIVRILI · BERKANE · ⚡🧡</div>
+</div>
+
+<nav class="bottom-nav">
+  <button class="active" data-page="dashboard">⌂<br>الرئيسية</button>
+  <button data-page="customers">♙<br>الزبناء</button>
+  <button data-page="finance">▤<br>الحسابات</button>
+  <button data-page="backup">⚙<br>الإعدادات</button>
 </nav>
 
 <script>
-const STORAGE_KEY = "skhawa_livrili_loyalty_v1";
-let data = {customers:[],transactions:[]};
+(() => {
+  "use strict";
 
-function loadData(){
-  try{
-    const saved=localStorage.getItem(STORAGE_KEY);
-    if(saved){
-      const parsed=JSON.parse(saved);
-      data.customers=Array.isArray(parsed.customers)?parsed.customers:[];
-      data.transactions=Array.isArray(parsed.transactions)?parsed.transactions:[];
+  const STORAGE_KEY = "skhawa_livrili_loyalty_v1";
+  let customers = [];
+  let transactions = [];
+
+  const $ = id => document.getElementById(id);
+  const money = n => (Number(n) || 0).toLocaleString("fr-MA", {
+    maximumFractionDigits: 2
+  }) + " DH";
+  const safe = value => String(value ?? "").replace(/[&<>"']/g, ch => ({
+    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+  }[ch]));
+
+  function loadData() {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return;
+      const data = JSON.parse(raw);
+      if (Array.isArray(data.customers)) customers = data.customers;
+      if (Array.isArray(data.transactions)) transactions = data.transactions;
+      customers = customers.map(c => ({
+        ...c,
+        deliveries: Number(c.deliveries) || 0,
+        paidSinceFree: Math.max(0, Math.min(10, Number(c.paidSinceFree) || 0)),
+        freeDeliveries: Number(c.freeDeliveries) || 0,
+        history: Array.isArray(c.history) ? c.history : []
+      }));
+    } catch (error) {
+      console.error("تعذر قراءة البيانات", error);
+      alert("ما قدرناش نقراو البيانات المخزنة. ما تمسح حتى حاجة.");
     }
-  }catch(e){alert("وقع مشكل فقراءة البيانات المحفوظة.");}
-  data.customers.forEach(c=>{
-    if(!Array.isArray(c.history))c.history=[];
-    if(typeof c.deliveries!=="number")c.deliveries=0;
-    if(typeof c.paidSinceFree!=="number")c.paidSinceFree=0;
-    if(typeof c.freeDeliveries!=="number")c.freeDeliveries=0;
-    if(!c.type)c.type=c.source==="Client X"?"x":"regular";
-    if(typeof c.bonus50Awarded!=="boolean")c.bonus50Awarded=false;
-    if(typeof c.bonusFreePending!=="number")c.bonusFreePending=0;
+  }
+
+  function saveData() {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({
+      customers, transactions
+    }));
+  }
+
+  function addTransaction(type, amount, note, customerId = null) {
+    transactions.unshift({
+      id: Date.now() + Math.random(),
+      type,
+      amount: Number(amount) || 0,
+      note: note || "",
+      customerId,
+      date: new Date().toISOString()
+    });
+  }
+
+  function paidCount(c) {
+    return Math.max(0, Math.min(10, Number(c.paidSinceFree) || 0));
+  }
+
+  function recordDelivery(id) {
+    const c = customers.find(item => String(item.id) === String(id));
+    if (!c) return;
+
+    if (!confirm("تأكدتي أن التوصيلة تسالات؟")) return;
+
+    c.deliveries = (Number(c.deliveries) || 0) + 1;
+    c.history = Array.isArray(c.history) ? c.history : [];
+
+    if (paidCount(c) >= 10) {
+      c.paidSinceFree = 0;
+      c.freeDeliveries = (Number(c.freeDeliveries) || 0) + 1;
+      c.history.unshift({
+        type:"free", date:new Date().toISOString()
+      });
+      alert("🎁 هادي توصيلته المجانية! الدورة الجديدة بدات.");
+    } else {
+      c.paidSinceFree = paidCount(c) + 1;
+      c.history.unshift({
+        type:"paid", date:new Date().toISOString()
+      });
+      const price = prompt("شحال خلص الزبون على التوصيلة؟", "15");
+      if (price !== null && price.trim() !== "" &&
+          Number.isFinite(Number(price)) && Number(price) >= 0) {
+        if (Number(price) > 0) {
+          addTransaction("income", Number(price), "توصيلة مدفوعة: " + c.name, c.id);
+        }
+      }
+    }
+
+    saveData();
+    renderAll();
+  }
+
+  function deleteCustomer(id) {
+    const c = customers.find(item => String(item.id) === String(id));
+    if (!c) return;
+    if (!confirm("واش متأكد بغيتي تمسح الزبون " + c.name + "؟")) return;
+    customers = customers.filter(item => String(item.id) !== String(id));
+    saveData();
+    renderAll();
+  }
+
+  function editCustomer(id) {
+    const c = customers.find(item => String(item.id) === String(id));
+    if (!c) return;
+    const name = prompt("الاسم الجديد:", c.name);
+    if (name === null || !name.trim()) return;
+    const phone = prompt("رقم الهاتف:", c.phone);
+    if (phone === null || !phone.trim()) return;
+    c.name = name.trim();
+    c.phone = phone.trim();
+    saveData();
+    renderAll();
+  }
+
+  function customerHTML(c) {
+    const paid = paidCount(c);
+    const remaining = Math.max(0, 10 - paid);
+    const giftReady = paid >= 10;
+    const progress = giftReady ? 100 : paid * 10;
+    const phone = safe(c.phone || "");
+    return `
+      <article class="customer">
+        <div class="customer-top">
+          <div>
+            <h3>${safe(c.name)}</h3>
+            <div class="phone">${phone}</div>
+            <small style="display:block;color:#888;margin-top:6px">
+              طريقة الطلب: ${safe(c.source || "غير محددة")}
+            </small>
+          </div>
+          <span class="tag">${Number(c.deliveries)||0} توصيلات إجمالاً</span>
+        </div>
+        <div class="progress-info">
+          <span>التقدم نحو الهدية</span>
+          <strong class="${giftReady ? "green" : "orange"}">
+            ${giftReady ? "الهدية واجدة 🎁" : paid + "/10"}
+          </strong>
+        </div>
+        <div class="progress"><div style="width:${progress}%"></div></div>
+        <div class="gift">
+          ${giftReady ? "🎁 التوصيلة الجاية مجانية" :
+            remaining === 3 ? "⚡ بقاو غير 3 توصيلات للهدية!" :
+            "باقي " + remaining + " توصيلات للهدية"}
+        </div>
+        <div class="customer-bottom">
+          <small>الهدايا المستافد منها: ${Number(c.freeDeliveries)||0}</small>
+          <div class="actions" style="margin:0">
+            <button class="btn btn-primary btn-small" data-action="deliver" data-id="${safe(c.id)}">＋ توصيل</button>
+            <button class="btn btn-outline btn-small" data-action="edit" data-id="${safe(c.id)}">تعديل</button>
+            <button class="btn btn-danger btn-small" data-action="delete" data-id="${safe(c.id)}">مسح</button>
+          </div>
+        </div>
+      </article>`;
+  }
+
+  function renderCustomers() {
+    const query = ($("search").value || "").trim().toLowerCase();
+    const filtered = customers.filter(c =>
+      String(c.name || "").toLowerCase().includes(query) ||
+      String(c.phone || "").toLowerCase().includes(query)
+    );
+    $("customerList").innerHTML = filtered.length
+      ? filtered.map(customerHTML).join("")
+      : '<div class="empty">ما كاين حتى زبون هنا. زيد أول زبون ديالك 👇</div>';
+
+    const recent = [...customers].slice(-3).reverse();
+    $("recentCustomers").innerHTML = recent.length
+      ? recent.map(customerHTML).join("")
+      : '<div class="empty">الزبناء الجدد غادي يبانوا هنا.</div>';
+  }
+
+  function renderFinance() {
+    const income = transactions.filter(t => t.type === "income")
+      .reduce((sum,t) => sum + (Number(t.amount)||0), 0);
+    const expenses = transactions.filter(t => t.type === "expense")
+      .reduce((sum,t) => sum + (Number(t.amount)||0), 0);
+
+    $("sCustomers").textContent = customers.length;
+    $("sDeliveries").textContent = customers.reduce((sum,c) => sum + (Number(c.deliveries)||0), 0);
+    $("sIncome").textContent = money(income);
+    $("sExpenses").textContent = money(expenses);
+    $("sBalance").textContent = money(income - expenses);
+
+    const reminders = customers.filter(c => paidCount(c) === 7);
+    $("dashboardNotice").innerHTML = reminders.length
+      ? `<div class="notice">⚡ تذكير: ${reminders.length} زبون بقاو ليهم غير 3 توصيلات للهدية: ${
+          reminders.map(c => safe(c.name)).join("، ")
+        }</div>`
+      : "";
+
+    $("transactionList").innerHTML = transactions.length
+      ? transactions.slice(0,100).map(t => `
+        <div class="transaction">
+          <div>
+            <strong>${safe(t.note || (t.type === "income" ? "مدخول" : "مصروف"))}</strong>
+            <small>${safe(t.date ? new Date(t.date).toLocaleString("fr-MA") : "")}</small>
+          </div>
+          <div class="amount ${t.type === "income" ? "green" : "red"}">
+            ${t.type === "income" ? "+" : "−"}${money(t.amount)}
+          </div>
+        </div>`).join("")
+      : '<div class="empty">ما تسجل حتى حركة مالية.</div>';
+  }
+
+  function renderAll() {
+    renderCustomers();
+    renderFinance();
+  }
+
+  $("customerForm").addEventListener("submit", event => {
+    event.preventDefault();
+    const name = $("customerName").value.trim();
+    const phone = $("customerPhone").value.trim();
+    if (!name || !phone) return;
+
+    if (customers.some(c => String(c.phone).replace(/\s/g,"") === phone.replace(/\s/g,""))) {
+      alert("هاد الرقم مسجل من قبل.");
+      return;
+    }
+
+    customers.push({
+      id: (crypto.randomUUID ? crypto.randomUUID() : String(Date.now())),
+      name,
+      phone,
+      source: $("customerSource").value,
+      deliveries: 0,
+      paidSinceFree: 0,
+      freeDeliveries: 0,
+      history: [],
+      createdAt: new Date().toISOString()
+    });
+    saveData();
+    $("customerForm").reset();
+    renderAll();
+    alert("تسجل الزبون بنجاح 🧡");
   });
-}
-function saveData(){
-  localStorage.setItem(STORAGE_KEY,JSON.stringify(data));
-  renderAll();
-}
-function money(n){return (Number(n)||0).toLocaleString("fr-FR",{maximumFractionDigits:2})+" DH";}
-function escapeHTML(s){
-  return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-}
-function showPage(page){
-  document.querySelectorAll("main section").forEach(s=>s.classList.add("hidden"));
-  document.getElementById(page).classList.remove("hidden");
-  document.querySelectorAll("nav button").forEach(b=>b.classList.toggle("active",b.dataset.page===page));
-  renderAll();
-}
-function addCustomer(){
-  const name=document.getElementById("newName").value.trim();
-  const phone=document.getElementById("newPhone").value.trim();
-  const type=document.getElementById("newType").value;
-  if(!name){alert("دخل اسم الزبون.");return;}
-  if(phone && data.customers.some(c=>c.phone===phone)){alert("هاد الرقم مسجل من قبل.");return;}
-  data.customers.push({
-    id:crypto.randomUUID?crypto.randomUUID():String(Date.now()),
-    name,phone,type,source:type==="x"?"Client X":"regular",
-    deliveries:0,paidSinceFree:0,freeDeliveries:0,
-    bonusFreePending:0,bonus50Awarded:false,history:[],
-    createdAt:new Date().toISOString()
+
+  $("customerList").addEventListener("click", event => {
+    const btn = event.target.closest("button[data-action]");
+    if (!btn) return;
+    const { action, id } = btn.dataset;
+    if (action === "deliver") recordDelivery(id);
+    if (action === "edit") editCustomer(id);
+    if (action === "delete") deleteCustomer(id);
   });
-  document.getElementById("newName").value="";
-  document.getElementById("newPhone").value="";
-  saveData();alert("تزاد الزبون بنجاح.");
-}
-function sortedCustomers(){
-  return [...data.customers].sort((a,b)=>(b.deliveries||0)-(a.deliveries||0));
-}
-function renderCustomers(){
-  const q=(document.getElementById("searchCustomer")?.value||"").toLowerCase();
-  const list=sortedCustomers().filter(c=>(c.name+" "+(c.phone||"")).toLowerCase().includes(q));
-  const root=document.getElementById("customerList");
-  if(!list.length){root.innerHTML='<div class="empty">ما كاين حتى زبون مطابق.</div>';return;}
-  root.innerHTML=list.map(c=>{
-    const x=c.type==="x";
-    const reward=(c.freeDeliveries||0)+(c.bonusFreePending||0);
-    return `<div class="customer">
-      <div class="row"><h3>${escapeHTML(c.name)}</h3><span class="badge ${x?'gray':'green'}">${x?'Client X':'زبون وفيّ'}</span></div>
-      <div class="muted">${escapeHTML(c.phone||'بلا رقم هاتف')}</div>
-      <p>مجموع التوصيلات: <b>${c.deliveries||0}</b></p>
-      ${x?'<p class="muted">هاد الزبون ما كيستافدش من الهدايا.</p>':`<p>دورة الوفاء: <b>${c.paidSinceFree||0}/10</b></p><p>هدايا متاحة: <b>${reward}</b></p>${(c.paidSinceFree||0)===7?'<span class="badge">باقي 3 توصيلات للهدية 🎁</span>':''}`}
-      <div class="actions">
-        <button onclick="recordPaid('${c.id}')">+ توصيل مؤدى</button>
-        ${!x&&reward>0?`<button class="green" onclick="recordFree('${c.id}')">تسجيل توصيل فابور 🎁</button>`:''}
-      </div>
-      <div class="actions">
-        <button class="light" onclick="editCustomer('${c.id}')">تعديل الاسم/الهاتف</button>
-        <button class="danger" onclick="deleteCustomer('${c.id}')">حذف</button>
-      </div>
-      <details style="margin-top:10px"><summary>سجل التوصيلات</summary><div>${(c.history||[]).slice().reverse().map(h=>`<p class="muted">${escapeHTML(new Date(h.date).toLocaleString('fr-MA'))} — ${escapeHTML(h.kind)}</p>`).join('')||'<p class="muted">مازال ما تسجلات حتى توصيلة.</p>'}</div></details>
-    </div>`;
-  }).join("");
-}
-function findCustomer(id){return data.customers.find(c=>c.id===id);}
-function recordPaid(id){
-  const c=findCustomer(id);if(!c)return;
-  if(!confirm("تأكدتي بلي هاد التوصيلة مؤداة؟"))return;
-  c.deliveries=(c.deliveries||0)+1;
-  c.history.push({date:new Date().toISOString(),kind:"توصيلة مؤداة"});
-  if(c.type!=="x"){
-    c.paidSinceFree=(c.paidSinceFree||0)+1;
-    if(c.paidSinceFree>=10){
-      c.freeDeliveries=(c.freeDeliveries||0)+1;
-      c.paidSinceFree=10;
+
+  $("recentCustomers").addEventListener("click", event => {
+    const btn = event.target.closest("button[data-action]");
+    if (!btn) return;
+    const { action, id } = btn.dataset;
+    if (action === "deliver") recordDelivery(id);
+    if (action === "edit") editCustomer(id);
+    if (action === "delete") deleteCustomer(id);
+  });
+
+  $("search").addEventListener("input", renderCustomers);
+
+  $("financeForm").addEventListener("submit", event => {
+    event.preventDefault();
+    const amount = Number($("financeAmount").value);
+    if (!Number.isFinite(amount) || amount <= 0) {
+      alert("دخل مبلغ صحيح.");
+      return;
     }
-    if(c.deliveries>=50&&!c.bonus50Awarded){
-      c.bonusFreePending=(c.bonusFreePending||0)+2;
-      c.bonus50Awarded=true;
-      alert("مبروك! هاد الزبون وصل 50 توصيلة: تزادو ليه جوج توصيلات فابور.");
+    addTransaction(
+      $("financeType").value,
+      amount,
+      $("financeNote").value.trim() ||
+        ($("financeType").value === "income" ? "مدخول إضافي" : "مصروف")
+    );
+    saveData();
+    $("financeForm").reset();
+    renderAll();
+    alert("تسجلات الحركة المالية.");
+  });
+
+  document.querySelectorAll(".bottom-nav button").forEach(button => {
+    button.addEventListener("click", () => {
+      document.querySelectorAll(".bottom-nav button").forEach(b => b.classList.remove("active"));
+      document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
+      button.classList.add("active");
+      $(button.dataset.page).classList.add("active");
+      window.scrollTo({top:0, behavior:"smooth"});
+    });
+  });
+
+  $("exportBtn").addEventListener("click", () => {
+    const blob = new Blob([JSON.stringify({customers,transactions}, null, 2)], {
+      type:"application/json"
+    });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "SKHAWA-LIVRILI-backup-" + new Date().toISOString().slice(0,10) + ".json";
+    a.click();
+    URL.revokeObjectURL(url);
+  });
+
+  $("importBtn").addEventListener("click", () => $("importFile").click());
+
+  $("importFile").addEventListener("change", async event => {
+    const file = event.target.files[0];
+    if (!file) return;
+    try {
+      const data = JSON.parse(await file.text());
+      if (!Array.isArray(data.customers) || !Array.isArray(data.transactions)) {
+        throw new Error("صيغة غير صحيحة");
+      }
+      if (!confirm("استرجاع النسخة غادي يعوض البيانات الحالية. دير نسخة احتياطية قبل. نكملو؟")) return;
+      customers = data.customers;
+      transactions = data.transactions;
+      saveData();
+      renderAll();
+      alert("ترجعات النسخة الاحتياطية بنجاح.");
+    } catch {
+      alert("الملف ما صالحش أو ما قدرناش نقراوه.");
+    } finally {
+      event.target.value = "";
     }
-  }
-  saveData();
-}
-function recordFree(id){
-  const c=findCustomer(id);if(!c||c.type==="x")return;
-  if(!confirm("تسجيل هاد التوصيلة كهدية فابور؟"))return;
-  if((c.freeDeliveries||0)>0)c.freeDeliveries--;
-  else if((c.bonusFreePending||0)>0)c.bonusFreePending--;
-  else{alert("ما كايناش هدية متاحة.");return;}
-  c.deliveries=(c.deliveries||0)+1;
-  c.history.push({date:new Date().toISOString(),kind:"توصيلة فابور (هدية)"});
-  c.paidSinceFree=0;
-  saveData();
-}
-function editCustomer(id){
-  const c=findCustomer(id);if(!c)return;
-  const name=prompt("الاسم الجديد:",c.name);if(name===null)return;
-  const phone=prompt("رقم الهاتف الجديد:",c.phone||"");if(phone===null)return;
-  const cleanPhone=phone.trim();
-  if(cleanPhone&&data.customers.some(o=>o.id!==id&&o.phone===cleanPhone)){alert("هاد الرقم مستعمل عند زبون آخر.");return;}
-  c.name=name.trim()||c.name;c.phone=cleanPhone;saveData();
-}
-function deleteCustomer(id){
-  const c=findCustomer(id);if(!c)return;
-  if(!confirm("واش متأكد بغيتي تحذف "+c.name+"؟ هاد العملية ما كتترجعش."))return;
-  data.customers=data.customers.filter(o=>o.id!==id);
-  data.transactions=data.transactions.filter(t=>t.customerId!==id);
-  saveData();
-}
-function updateCategories(){
-  const type=document.getElementById("txType").value;
-  const cats=type==="income"
-    ?["مداخيل التوصيل","مدخول آخر"]
-    :["البنزين","الصيانة","التأمين والوثائق","قطع الغيار والعجلات","مصاريف أخرى"];
-  document.getElementById("txCategory").innerHTML=cats.map(c=>`<option>${c}</option>`).join("");
-}
-function addTransaction(){
-  const type=document.getElementById("txType").value;
-  const category=document.getElementById("txCategory").value;
-  const amount=Number(document.getElementById("txAmount").value);
-  const note=document.getElementById("txNote").value.trim();
-  if(!Number.isFinite(amount)||amount<=0){alert("دخل مبلغ صحيح.");return;}
-  data.transactions.push({id:Date.now().toString(),type,category,amount,note,date:new Date().toISOString()});
-  document.getElementById("txAmount").value="";
-  document.getElementById("txNote").value="";
-  saveData();alert("تسجلات الحركة المالية.");
-}
-function deleteTransaction(id){
-  if(!confirm("حذف هاد الحركة المالية؟"))return;
-  data.transactions=data.transactions.filter(t=>t.id!==id);saveData();
-}
-function renderTransactions(){
-  const root=document.getElementById("transactionList");
-  const arr=[...data.transactions].sort((a,b)=>new Date(b.date)-new Date(a.date));
-  root.innerHTML=arr.length?arr.map(t=>`<div class="customer">
-    <div class="row"><b>${escapeHTML(t.category)}</b><span class="amount" style="color:${t.type==="income"?'var(--green)':'var(--red)'}">${t.type==="income"?"+":"−"}${money(t.amount)}</span></div>
-    <p class="muted">${escapeHTML(new Date(t.date).toLocaleString('fr-MA'))}</p>
-    ${t.note?`<p>${escapeHTML(t.note)}</p>`:""}
-    <button class="danger" onclick="deleteTransaction('${t.id}')">حذف الحركة</button>
-  </div>`).join(""):'<div class="empty">مازال ما تسجلات حتى حركة مالية.</div>';
-}
-function dateInPeriod(date,period){
-  const d=new Date(date),now=new Date();
-  if(period==="all")return true;
-  if(period==="today")return d.toDateString()===now.toDateString();
-  if(period==="month")return d.getFullYear()===now.getFullYear()&&d.getMonth()===now.getMonth();
-  if(period==="week"){
-    const start=new Date(now);start.setHours(0,0,0,0);
-    const day=(start.getDay()+6)%7;start.setDate(start.getDate()-day);
-    return d>=start&&d<=now;
-  }
-  return false;
-}
-function totals(period){
-  const tx=data.transactions.filter(t=>dateInPeriod(t.date,period));
-  const income=tx.filter(t=>t.type==="income").reduce((s,t)=>s+Number(t.amount||0),0);
-  const expense=tx.filter(t=>t.type==="expense").reduce((s,t)=>s+Number(t.amount||0),0);
-  const deliveries=data.customers.reduce((s,c)=>s+(c.history||[]).filter(h=>dateInPeriod(h.date,period)).length,0);
-  return {income,expense,profit:income-expense,deliveries};
-}
-function renderStats(){
-  const period=document.getElementById("period").value;
-  const t=totals(period);
-  document.getElementById("pIncome").textContent=money(t.income);
-  document.getElementById("pExpense").textContent=money(t.expense);
-  document.getElementById("pProfit").textContent=money(t.profit);
-  document.getElementById("pProfit").style.color=t.profit<0?"var(--red)":"var(--green)";
-  document.getElementById("pDeliveries").textContent=t.deliveries;
-  document.getElementById("generalStats").innerHTML=
-    `<p>عدد الزبناء: <b>${data.customers.length}</b></p>
-    <p>الزبناء الأوفياء: <b>${data.customers.filter(c=>c.type!=="x").length}</b></p>
-    <p>زبناء Client X: <b>${data.customers.filter(c=>c.type==="x").length}</b></p>
-    <p>الربح/الخسارة: <b style="color:${t.profit<0?'var(--red)':'var(--green)'}">${t.profit<0?'خسارة':'ربح أو تعادل'} — ${money(t.profit)}</b></p>`;
-}
-function renderHome(){
-  const all=totals("all");
-  document.getElementById("sCustomers").textContent=data.customers.length;
-  document.getElementById("sDeliveries").textContent=data.customers.reduce((s,c)=>s+(c.deliveries||0),0);
-  document.getElementById("sIncome").textContent=money(all.income);
-  document.getElementById("sExpense").textContent=money(all.expense);
-  document.getElementById("sProfit").textContent=money(all.profit);
-  document.getElementById("sProfit").style.color=all.profit<0?"var(--red)":"var(--green)";
-  const near=data.customers.filter(c=>c.type!=="x"&&c.paidSinceFree===7);
-  document.getElementById("nearGift").innerHTML=near.length?near.map(c=>`<p>${escapeHTML(c.name)} — باقي 3 توصيلات 🎁</p>`).join(""):"ما كاين حتى زبون عندو باقي 3 توصيلات للهدية.";
-}
-function renderAll(){
-  renderHome();renderCustomers();renderTransactions();renderStats();
-}
-function getBackup(){
-  return JSON.stringify({app:"SKHAWA LIVRILI",version:1,exportedAt:new Date().toISOString(),customers:data.customers,transactions:data.transactions},null,2);
-}
-function backupData(){
-  const blob=new Blob([getBackup()],{type:"application/json"});
-  const url=URL.createObjectURL(blob);
-  const a=document.createElement("a");a.href=url;
-  a.download="SKHAWA-LIVRILI-backup-"+new Date().toISOString().slice(0,10)+".json";
-  a.click();URL.revokeObjectURL(url);
-}
-async function shareBackup(){
-  const content=getBackup();
-  try{
-    const file=new File([content],"SKHAWA-LIVRILI-backup.json",{type:"application/json"});
-    if(navigator.canShare&&navigator.canShare({files:[file]})){
-      await navigator.share({title:"SKHAWA LIVRILI - Backup",text:"النسخة الاحتياطية ديال SKHAWA LIVRILI",files:[file]});
-    }else{
-      backupData();alert("تحمّلات النسخة. تقدر دابا تزيدها كمرفق فالإيميل ديالك.");
-    }
-  }catch(e){
-    if(e.name!=="AbortError"){backupData();alert("تحمّلات النسخة. تقدر تصيفطها بالإيميل كمرفق.");}
-  }
-}
-function restoreData(){
-  const file=document.getElementById("restoreFile").files[0];
-  if(!file){alert("اختار ملف النسخة أولا.");return;}
-  const reader=new FileReader();
-  reader.onload=()=>{
-    try{
-      const obj=JSON.parse(reader.result);
-      if(!Array.isArray(obj.customers)||!Array.isArray(obj.transactions))throw new Error("invalid");
-      if(!confirm("استرجاع النسخة غادي يعوّض البيانات الحالية. واش متأكد؟"))return;
-      data={customers:obj.customers,transactions:obj.transactions};
-      saveData();alert("ترجعات البيانات بنجاح.");
-    }catch(e){alert("هاد الملف ماشي نسخة احتياطية صحيحة ديال التطبيق.");}
-  };
-  reader.readAsText(file);
-}
-function resetData(){
-  if(!confirm("تحذير: غادي يتم مسح جميع الزبناء والحركات المالية. واش متأكد؟"))return;
-  if(!confirm("تأكيد أخير: واش فعلاً بغيتي تمسح كلشي؟"))return;
-  data={customers:[],transactions:[]};saveData();alert("تم مسح البيانات.");
-}
-loadData();
-updateCategories();
-renderAll();
+  });
+
+  loadData();
+  renderAll();
+})();
 </script>
 </body>
 </html>
