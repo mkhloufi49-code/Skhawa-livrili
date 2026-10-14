@@ -6,6 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#101012">
 <meta name="description" content="SKHAWA LIVRILI - برنامج وفاء الزبناء ببركان">
+<link rel="manifest" href="./manifest.json">
 <title>SKHAWA LIVRILI | الإدارة</title>
 
 <style>
@@ -101,7 +102,6 @@ input,select{width:100%;min-width:0;background:#111114;color:white;border:1px so
  <div class="heading">
   <div><h2>مرحبا بك فالإدارة 👋</h2><p>نظرة سريعة على برنامج الوفاء</p></div>
  </div>
-
  <div class="stats">
   <div class="stat">👥<small>مجموع الزبناء</small><strong id="sCustomers">0</strong></div>
   <div class="stat">🛵<small>مجموع التوصيلات</small><strong id="sDeliveries">0</strong></div>
@@ -109,15 +109,12 @@ input,select{width:100%;min-width:0;background:#111114;color:white;border:1px so
   <div class="stat">🟢<small>المداخيل</small><strong id="sIncome">0 DH</strong></div>
   <div class="stat">💰<small>الرصيد الصافي</small><strong id="sBalance">0 DH</strong></div>
  </div>
-
  <div id="dashboardNotice"></div>
-
  <div class="heading">
   <div><h2>الزبناء الأكثر وفاءً 🏆</h2><p>حسب عدد التوصيلات المؤداة</p></div>
   <button class="btn outline" data-goto="customers">شوف الكل</button>
  </div>
  <div id="recentCustomers" class="customer-list"></div>
-
  <div class="panel">
   <h3>اختصارات الإدارة</h3>
   <div class="quick">
@@ -134,15 +131,13 @@ input,select{width:100%;min-width:0;background:#111114;color:white;border:1px so
   <div><h2>الزبناء الأوفياء 🧡</h2><p>تسجيل وتتبع التوصيلات والهدايا</p></div>
   <span class="tag" id="customerCountPill">0 زبون</span>
  </div>
-
  <div class="panel">
   <h3>إضافة زبون جديد</h3>
   <form id="customerForm">
    <div class="grid">
     <div class="field"><label for="customerName">الاسم الكامل</label><input id="customerName" required maxlength="90" placeholder="مثال: محمد العلوي"></div>
     <div class="field"><label for="customerPhone">رقم الهاتف</label><input id="customerPhone" required inputmode="tel" maxlength="25" placeholder="06XXXXXXXX"></div>
-    <div class="field">
-     <label for="customerSource">طريقة الطلب</label>
+    <div class="field"><label for="customerSource">طريقة الطلب</label>
      <select id="customerSource"><option>WhatsApp</option><option>الهاتف</option><option>مباشرة</option><option>أخرى</option></select>
     </div>
    </div>
@@ -150,7 +145,6 @@ input,select{width:100%;min-width:0;background:#111114;color:white;border:1px so
   </form>
   <p class="hint">الفئة كتتحدد أوتوماتيكياً حسب التوصيلات المؤداة.</p>
  </div>
-
  <div class="toolbar">
   <input id="search" type="search" placeholder="🔎 قلب بالاسم أو رقم الهاتف">
   <select id="filter">
@@ -164,20 +158,17 @@ input,select{width:100%;min-width:0;background:#111114;color:white;border:1px so
    <option value="passage">Client Passage</option>
   </select>
  </div>
-
  <div id="customerList" class="customer-list"></div>
 </section>
 
 <section id="finance" class="page">
  <div class="heading"><div><h2>المالية 💰</h2><p>المداخيل والمصاريف</p></div></div>
-
  <div class="stats">
   <div class="stat">🟢<small>المداخيل</small><strong id="fIncome">0 DH</strong></div>
   <div class="stat">🔴<small>المصاريف</small><strong id="sExpenses">0 DH</strong></div>
   <div class="stat">💎<small>الرصيد</small><strong id="fBalance">0 DH</strong></div>
   <div class="stat">🧾<small>الحركات</small><strong id="fCount">0</strong></div>
  </div>
-
  <div class="panel">
   <h3>تسجيل حركة مالية</h3>
   <form id="financeForm">
@@ -189,13 +180,11 @@ input,select{width:100%;min-width:0;background:#111114;color:white;border:1px so
    <button class="btn primary block" type="submit">حفظ الحركة المالية</button>
   </form>
  </div>
-
  <div class="panel"><h3>آخر الحركات المالية</h3><div id="transactionList"></div></div>
 </section>
 
 <section id="settings" class="page">
  <div class="heading"><div><h2>الإعدادات والنسخ الاحتياطي ⚙️</h2><p>حافظ على معلومات الزبناء</p></div></div>
-
  <div class="panel">
   <h3>نسخة احتياطية</h3>
   <p class="hint">نزّل ملف JSON للاحتفاظ بالزبناء والحركات، واسترجعو عند الحاجة.</p>
@@ -206,7 +195,6 @@ input,select{width:100%;min-width:0;background:#111114;color:white;border:1px so
   <input id="importFile" class="hidden" type="file" accept="application/json,.json">
   <p class="hint">البيانات محفوظة محلياً فهاد المتصفح، وما كتتشاركش تلقائياً بين الأجهزة.</p>
  </div>
-
  <div class="panel">
   <h3>قواعد الوفاء</h3>
   <div class="notice">🧡 كل 10 توصيلات مؤداة = كتربح توصيل فابور للطلبية الموالية.</div>
@@ -214,7 +202,6 @@ input,select{width:100%;min-width:0;background:#111114;color:white;border:1px so
   <div class="notice">🏆 عند بلوغ 50 توصيل مؤدى، كتزاد جوج توصيلات مجانية إضافية مرة وحدة.</div>
   <div class="notice">👑 VIP: 50+ توصيل مؤدى. 🥇 Premium: من 20 حتى 49. 🛡️ Fidèle: من 10 حتى 19. Passage: أقل من 10.</div>
  </div>
-
  <div class="panel">
   <h3>مسح البيانات</h3>
   <p class="hint">حمّل نسخة احتياطية قبل هاد العملية.</p>
@@ -244,7 +231,6 @@ const safe = v => String(v ?? "").replace(/[&<>"']/g, c => ({
 }[c]));
 const money = n => (Number(n)||0).toLocaleString("fr-MA",{maximumFractionDigits:2})+" DH";
 
-/* توحيد بيانات الزبون مع الحفاظ على البيانات القديمة */
 function normalizeCustomer(c) {
  const x = {...c};
  x.id = x.id || makeId();
@@ -255,24 +241,19 @@ function normalizeCustomer(c) {
  x.deliveries = Math.max(0, Number(x.deliveries)||0);
  x.freeDeliveries = Math.max(0, Number(x.freeDeliveries)||0);
  x.doubleFreeCredits = Math.max(0, Number(x.doubleFreeCredits)||0);
-
  if (Number.isFinite(Number(x.paidDeliveries))) {
   x.paidDeliveries = Math.max(0, Number(x.paidDeliveries));
  } else {
   x.paidDeliveries = Math.max(0, x.deliveries - x.freeDeliveries);
  }
-
  x.paidSinceFree = Math.max(0, Number(x.paidSinceFree)||0);
  if (x.paidSinceFree > 9) x.paidSinceFree = x.paidSinceFree % 10;
-
  x.availableGifts = Math.max(0, Number(x.availableGifts)||0);
  x.milestone50Claimed = Boolean(x.milestone50Claimed);
-
  if (!Number.isFinite(Number(c.paidDeliveries)) &&
      x.paidSinceFree === 0 && x.paidDeliveries >= 10) {
   x.availableGifts = Math.max(x.availableGifts, Math.floor(x.paidDeliveries/10) - x.freeDeliveries);
  }
-
  return x;
 }
 
@@ -298,15 +279,10 @@ function save() {
  }
 }
 
-function paid(c) {
- return Math.max(0, Number(c.paidDeliveries)||0);
-}
-function progress(c) {
- return Math.max(0, Math.min(9, Number(c.paidSinceFree)||0));
-}
-function freeUsed(c) {
- return Math.max(0, Number(c.freeDeliveries)||0);
-}
+function paid(c) { return Math.max(0, Number(c.paidDeliveries)||0); }
+function progress(c) { return Math.max(0, Math.min(9, Number(c.paidSinceFree)||0)); }
+function freeUsed(c) { return Math.max(0, Number(c.freeDeliveries)||0); }
+
 function categoryKey(c) {
  const n = paid(c);
  if (n >= 50) return "vip";
@@ -321,9 +297,8 @@ function categoryName(c) {
  if (k === "fidele") return "🛡️ Client Fidèle";
  return "Client Passage";
 }
-function categoryClass(c) {
- return categoryKey(c);
-}
+function categoryClass(c) { return categoryKey(c); }
+
 function addTransaction(type, amount, note, customerId=null) {
  transactions.unshift({
   id:makeId(),type,amount:Number(amount)||0,note,
@@ -331,7 +306,6 @@ function addTransaction(type, amount, note, customerId=null) {
  });
 }
 
-/* واجهة الزبون */
 function customerHTML(c) {
  const p = progress(c);
  const left = 10-p;
@@ -364,21 +338,15 @@ function customerHTML(c) {
   </div>
   <span class="tag ${categoryClass(c)}">${safe(categoryName(c))}</span>
  </div>
-
- <div class="progress-info">
-  <span>التقدم نحو الهدية</span>
-  <strong>${p}/10</strong>
- </div>
+ <div class="progress-info"><span>التقدم نحو الهدية</span><strong>${p}/10</strong></div>
  <div class="progress"><div style="width:${hasGift?100:p*10}%"></div></div>
  <div class="gift ${hasGift?"ready":""}">${safe(message)}</div>
-
  <div class="customer-stats">
   <div class="mini"><small>التوصيلات المؤداة</small><strong>${paid(c)}</strong></div>
   <div class="mini"><small>التوصيلات المجانية المستعملة</small><strong>${freeUsed(c)}</strong></div>
   <div class="mini"><small>النقاط</small><strong>${paid(c)*10}</strong></div>
   <div class="mini"><small>الهدايا المتاحة</small><strong>${gifts+bonus}</strong></div>
  </div>
-
  <div class="actions">
   <button class="btn primary" data-a="deliver" data-id="${safe(c.id)}">＋ توصيل</button>
   <button class="btn outline" data-a="undo" data-id="${safe(c.id)}">إلغاء آخر توصيلة</button>
@@ -392,10 +360,8 @@ function customerHTML(c) {
 function renderCustomers() {
  const q = $("search").value.trim().toLowerCase();
  const f = $("filter").value;
-
  const list = customers.filter(c => {
   if (!(String(c.name).toLowerCase().includes(q) || String(c.phone).toLowerCase().includes(q))) return false;
-
   const k = categoryKey(c);
   const p = progress(c);
   if (f === "near") return p===7 && Number(c.availableGifts)===0 && Number(c.doubleFreeCredits)===0;
@@ -410,7 +376,6 @@ function renderCustomers() {
   : '<div class="empty">ما لقينا حتى زبون مطابق. زيد زبون جديد.</div>';
 
  $("customerCountPill").textContent = customers.length+" زبون";
-
  const recent = [...customers].sort((a,b)=>paid(b)-paid(a)).slice(0,2);
  $("recentCustomers").innerHTML = recent.length
   ? recent.map(customerHTML).join("")
@@ -426,7 +391,6 @@ function renderFinance() {
  $("sFree").textContent = customers.reduce((s,c)=>s+freeUsed(c),0);
  $("sIncome").textContent = money(income);
  $("sBalance").textContent = money(income-expenses);
-
  $("fIncome").textContent = money(income);
  $("sExpenses").textContent = money(expenses);
  $("fBalance").textContent = money(income-expenses);
@@ -435,7 +399,6 @@ function renderFinance() {
  const reminders = customers.filter(c=>progress(c)===7 && !c.availableGifts && !c.doubleFreeCredits);
  const bonuses = customers.filter(c=>Number(c.doubleFreeCredits)>0);
  let notice = "";
-
  if (reminders.length) {
   notice += `<div class="notice">⚡ بقاو 3 توصيلات مؤداة للهدية عند: ${reminders.map(c=>safe(c.name)).join("، ")}</div>`;
  }
@@ -458,7 +421,6 @@ function render() {
  renderFinance();
 }
 
-/* تسجيل توصيلة مع تقليل التأكيدات */
 function recordDelivery(cid) {
  const c = customers.find(x=>String(x.id)===String(cid));
  if (!c) return;
@@ -475,7 +437,6 @@ function recordDelivery(cid) {
   choices.push("3 = توصيلة مؤداة");
   const ans = prompt("اختار نوع التوصيلة:\n"+choices.join("\n"), gifts>0?"1":bonusCredits>0?"2":"3");
   if (ans===null) return;
-
   if (ans.trim()==="1" && gifts>0) type="free";
   else if (ans.trim()==="2" && bonusCredits>0) type="bonus";
   else if (ans.trim()==="3") type="paid";
@@ -491,17 +452,12 @@ function recordDelivery(cid) {
   price = Number(ans);
  }
 
- const event = {
-  id:makeId(),type,date:new Date().toISOString(),
-  amount:type==="paid"?price:0,price
- };
-
+ const event = {id:makeId(),type,date:new Date().toISOString(),amount:type==="paid"?price:0,price};
  c.deliveries = (Number(c.deliveries)||0)+1;
 
  if (type==="paid") {
   c.paidDeliveries = paid(c)+1;
   c.paidSinceFree = progress(c)+1;
-
   let earnedGift = false;
   if (c.paidSinceFree >= 10) {
    c.paidSinceFree = 0;
@@ -532,39 +488,29 @@ function recordDelivery(cid) {
  }
 
  c.history.unshift(event);
-
- if (save()) {
-  render();
- }
+ if (save()) render();
 }
 
-/* إلغاء آخر توصيلة: تأكيد واحد للحماية */
 function undoDelivery(cid) {
  const c = customers.find(x=>String(x.id)===String(cid));
  if (!c) return;
-
  if (!c.history.length) {
   alert("ما كاينش سجل مفصل للتوصيلات القديمة باش نلغيوها بأمان.");
   return;
  }
-
  const e = c.history[0];
  if (!confirm("واش متأكد بغيتي تلغي آخر توصيلة ديال "+c.name+"؟")) return;
 
  if (e.type==="paid") {
   if (e.transactionId) transactions = transactions.filter(t=>t.id!==e.transactionId);
   c.paidDeliveries = Math.max(0,paid(c)-1);
-
   if (e.earnedGift) {
    if (Number(c.availableGifts)>0) c.availableGifts--;
-   else {
-    alert("تنبيه: هدية الوفاء المرتبطة بهاد التوصيلة ممكن تكون تستعملات من قبل. راجع الرصيد ديال الهدايا.");
-   }
+   else alert("تنبيه: هدية الوفاء المرتبطة بهاد التوصيلة ممكن تكون تستعملات من قبل. راجع الرصيد ديال الهدايا.");
    c.paidSinceFree = 9;
   } else {
    c.paidSinceFree = Math.max(0,progress(c)-1);
   }
-
   if (e.milestoneAward) {
    c.milestone50Claimed = false;
    c.doubleFreeCredits = Math.max(0,(Number(c.doubleFreeCredits)||0)-2);
@@ -578,46 +524,32 @@ function undoDelivery(cid) {
  } else if (e.type==="gift") {
   c.freeDeliveries = Math.max(0,freeUsed(c)-1);
  }
-
  c.history.shift();
  c.deliveries = Math.max(0,(Number(c.deliveries)||0)-1);
-
- if (save()) {
-  render();
- }
+ if (save()) render();
 }
 
-/* هدية استثنائية بقرار الإدارة */
 function manualGift(cid) {
  const c = customers.find(x=>String(x.id)===String(cid));
  if (!c) return;
  if (!confirm("منح توصيل فابور استثنائي لـ"+c.name+"؟")) return;
-
  c.deliveries = (Number(c.deliveries)||0)+1;
  c.freeDeliveries = freeUsed(c)+1;
- c.history.unshift({
-  id:makeId(),type:"gift",date:new Date().toISOString(),amount:0
- });
-
- if (save()) {
-  render();
- }
+ c.history.unshift({id:makeId(),type:"gift",date:new Date().toISOString(),amount:0});
+ if (save()) render();
 }
 
 function editCustomer(cid) {
  const c = customers.find(x=>String(x.id)===String(cid));
  if (!c) return;
-
  const name = prompt("الاسم الجديد:",c.name);
  if (name===null || !name.trim()) return;
  const phone = prompt("رقم الهاتف:",c.phone);
  if (phone===null || !phone.trim()) return;
-
  const normalized = phone.replace(/\s/g,"");
  if (customers.some(x=>String(x.id)!==String(cid)&&String(x.phone).replace(/\s/g,"")===normalized)) {
   alert("هاد الرقم مستعمل."); return;
  }
-
  c.name = name.trim();
  c.phone = phone.trim();
  if (save()) render();
@@ -627,30 +559,25 @@ function deleteCustomer(cid) {
  const c = customers.find(x=>String(x.id)===String(cid));
  if (!c) return;
  if (!confirm("واش متأكد بغيتي تمسح "+c.name+"؟")) return;
-
  customers = customers.filter(x=>String(x.id)!==String(cid));
  if (save()) render();
 }
 
-/* تسجيل زبون بلا تأكيد إضافي */
 $("customerForm").addEventListener("submit",e=>{
  e.preventDefault();
  const name = $("customerName").value.trim();
  const phone = $("customerPhone").value.trim();
  if (!name || !phone) return;
-
  const normalized = phone.replace(/\s/g,"");
  if (customers.some(c=>String(c.phone).replace(/\s/g,"")===normalized)) {
   alert("هاد الرقم مسجل من قبل."); return;
  }
-
  customers.push({
   id:makeId(),name,phone,source:$("customerSource").value,
   deliveries:0,paidDeliveries:0,paidSinceFree:0,
   availableGifts:0,freeDeliveries:0,doubleFreeCredits:0,
   milestone50Claimed:false,history:[],createdAt:new Date().toISOString()
  });
-
  if (!save()) return;
  $("customerForm").reset();
  render();
@@ -662,7 +589,6 @@ function customerAction(e) {
  const a = b.dataset.a;
  const cid = b.dataset.id;
  if (!customers.some(x=>String(x.id)===String(cid))) return;
-
  if (a==="deliver") recordDelivery(cid);
  if (a==="undo") undoDelivery(cid);
  if (a==="gift") manualGift(cid);
@@ -675,24 +601,20 @@ $("recentCustomers").addEventListener("click",customerAction);
 $("search").addEventListener("input",renderCustomers);
 $("filter").addEventListener("change",renderCustomers);
 
-/* المالية بلا رسالة تأكيد إضافية */
 $("financeForm").addEventListener("submit",e=>{
  e.preventDefault();
  const amount = Number($("financeAmount").value);
  if (!Number.isFinite(amount) || amount<=0) {
   alert("دخل مبلغ صحيح."); return;
  }
-
  const type = $("financeType").value;
  const note = $("financeNote").value.trim() || (type==="income"?"مدخول إضافي":"مصروف");
  addTransaction(type,amount,note);
-
  if (!save()) return;
  $("financeForm").reset();
  render();
 });
 
-/* التنقل */
 function go(page) {
  document.querySelectorAll(".page").forEach(p=>p.classList.toggle("active",p.id===page));
  document.querySelectorAll(".bottom-nav button").forEach(b=>b.classList.toggle("active",b.dataset.page===page));
@@ -701,12 +623,8 @@ function go(page) {
 document.querySelectorAll(".bottom-nav button").forEach(b=>b.addEventListener("click",()=>go(b.dataset.page)));
 document.querySelectorAll("[data-goto]").forEach(b=>b.addEventListener("click",()=>go(b.dataset.goto)));
 
-/* نسخة احتياطية */
 function exportBackup() {
- const blob = new Blob([JSON.stringify({
-  customers,transactions,exportedAt:new Date().toISOString()
- },null,2)],{type:"application/json"});
-
+ const blob = new Blob([JSON.stringify({customers,transactions,exportedAt:new Date().toISOString()},null,2)],{type:"application/json"});
  const url = URL.createObjectURL(blob);
  const a = document.createElement("a");
  a.href = url;
@@ -723,15 +641,12 @@ $("importBtn").addEventListener("click",()=>$("importFile").click());
 $("importFile").addEventListener("change",async e=>{
  const file = e.target.files[0];
  if (!file) return;
-
  try {
   const d = JSON.parse(await file.text());
   if (!Array.isArray(d.customers) || !Array.isArray(d.transactions)) throw Error("invalid");
   if (!confirm("استرجاع النسخة غادي يعوض البيانات الحالية. متأكد؟")) return;
-
   customers = d.customers.map(normalizeCustomer);
   transactions = d.transactions;
-
   if (save()) {
    load();
    render();
@@ -744,11 +659,9 @@ $("importFile").addEventListener("change",async e=>{
  }
 });
 
-/* مسح البيانات: تأكيدان للحماية */
 $("resetBtn").addEventListener("click",()=>{
  if (!confirm("غادي تتمسح جميع بيانات الزبناء والحركات. واش متأكد؟")) return;
  if (!confirm("آخر تأكيد: واش حمّلتي نسخة احتياطية؟")) return;
-
  customers = [];
  transactions = [];
  if (save()) {
@@ -761,5 +674,16 @@ load();
 render();
 })();
 </script>
+
+<!-- تسجيل Service Worker باش يدعم التطبيق العمل والتثبيت -->
+<script>
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("./service-worker.js")
+      .catch(error => console.error("Service Worker:", error));
+  });
+}
+</script>
+
 </body>
 </html>
