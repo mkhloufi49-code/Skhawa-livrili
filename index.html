@@ -5,395 +5,565 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#101012">
-<meta name="description" content="SKHAWA LIVRILI - برنامج وفاء الزبناء ببركان">
+<meta name="description" content="SKHAWA LIVRILI - برنامج وفاء الزبناء">
 <title>SKHAWA LIVRILI | الإدارة</title>
 <style>
-:root{--bg:#101012;--panel:#19191d;--orange:#ff8124;--white:#f7f7f8;--muted:#a5a5ad;--line:#303037;--green:#47d7a0;--red:#ff6565}
+:root{--bg:#101012;--panel:#1b1b20;--panel2:#25252c;--orange:#ff7900;--gold:#ffad52;--white:#fff;--muted:#aaaab5;--border:#36363e;--green:#42d392;--red:#ff6262}
 *{box-sizing:border-box}
-body{margin:0;background:radial-gradient(ellipse at top right,#292016,transparent 40%),var(--bg);color:var(--white);font-family:system-ui,Tahoma,Arial,sans-serif;padding-bottom:90px}
+body{margin:0;background:var(--bg);color:var(--white);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
 button,input,select{font:inherit}
 button{cursor:pointer}
-.app{max-width:1100px;margin:auto;padding:16px}
-.hero,.panel,.stat,.customer{border:1px solid var(--line);border-radius:20px}
-.hero{padding:24px;background:linear-gradient(135deg,#352114,#171719 70%);border-color:#49301d}
-.brand{font-size:clamp(27px,5vw,42px);font-weight:950;direction:ltr;text-align:right}
-.brand span{color:var(--orange)}
-.slogan{color:#f5c59c;margin-top:6px}
-.eyebrow{color:var(--orange);font-size:11px;letter-spacing:2px}
-.page{display:none}
-.page.active{display:block}
-.heading{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:24px 0 12px}
-.heading h2{font-size:20px;margin:0}
-.heading p,.hint{font-size:12px;color:var(--muted)}
-.stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
-.stat{background:var(--panel);padding:15px;min-width:0}
-.stat small{display:block;color:var(--muted);margin:7px 0}
-.stat strong{font-size:22px;overflow-wrap:anywhere}
-.panel{background:var(--panel);padding:16px;margin-top:14px}
-.panel h3{margin:0 0 13px}
-.grid{display:grid;grid-template-columns:1fr;gap:12px}
-.field label{display:block;font-size:12px;margin-bottom:6px}
-input,select{width:100%;min-width:0;background:#111114;color:white;border:1px solid #38383f;padding:12px;border-radius:12px}
-.btn{border:0;border-radius:11px;padding:10px 13px;font-weight:750}
-.primary{background:var(--orange);color:#1b120b}
-.outline{background:#25252b;color:white;border:1px solid #3b3b43}
-.danger{background:#381c1d;color:#ff8585;border:1px solid #633033}
-.block{width:100%;margin-top:13px}
-.toolbar{display:grid;grid-template-columns:1fr;gap:9px;margin:13px 0}
-.customer-list{display:grid;grid-template-columns:1fr;gap:12px}
-.customer{background:linear-gradient(145deg,#1d1d22,#17171b);padding:15px;min-width:0}
-.customer-top{display:flex;gap:10px;align-items:flex-start}
-.avatar{width:43px;height:43px;border-radius:14px;background:#382316;display:grid;place-items:center;font-size:22px}
-.customer-main{flex:1;min-width:0}
-.customer-main h3{margin:2px 0 5px;font-size:16px;overflow-wrap:anywhere}
-.phone{direction:ltr;text-align:right;font-size:13px}
-.sub{font-size:11px;color:var(--muted);margin-top:5px}
-.tag{font-size:10px;color:var(--orange);background:#302318;border-radius:20px;padding:5px 7px}
-.progress-info{display:flex;justify-content:space-between;margin:16px 0 7px;font-size:12px;color:var(--muted)}
-.progress{height:8px;background:#36363c;border-radius:20px;overflow:hidden}
-.progress div{height:100%;background:linear-gradient(90deg,#ff7620,#ffc16d)}
-.gift{background:#2a2019;color:#f2c79f;padding:10px;border-radius:10px;font-size:12px;margin-top:10px}
-.ready{background:#15372d;color:#8af0c5}
-.customer-stats{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
-.mini{background:#131316;padding:10px;border-radius:10px}
-.mini small{display:block;font-size:10px;color:var(--muted)}
-.mini strong{display:block;margin-top:5px;font-size:18px}
-.actions{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px}
-.actions button{flex:1 1 42%;font-size:11px;padding:9px 6px}
-.notice{background:#2b2016;border:1px solid #60401e;border-radius:12px;padding:12px;margin-top:10px;font-size:13px;line-height:1.7}
-.empty{text-align:center;padding:25px;color:var(--muted);border:1px dashed #424249;border-radius:15px}
-.transaction{display:flex;justify-content:space-between;gap:10px;padding:12px 0;border-bottom:1px solid var(--line);font-size:13px}
-.transaction small{display:block;color:var(--muted);margin-top:5px}
-.green{color:var(--green)}.red{color:var(--red)}
-.quick{display:grid;grid-template-columns:1fr 1fr;gap:9px}
-.bottom-nav{position:fixed;bottom:0;left:0;right:0;z-index:5;display:grid;grid-template-columns:repeat(4,1fr);gap:4px;padding:9px 8px calc(9px + env(safe-area-inset-bottom));background:#121214ed;border-top:1px solid #35353b;backdrop-filter:blur(14px)}
-.bottom-nav button{border:0;background:transparent;color:#aaa;border-radius:12px;padding:8px 3px;font-size:11px}
-.bottom-nav button span{display:block;font-size:19px;margin-bottom:3px}
-.bottom-nav button.active{background:#342115;color:#ff9d45}
-.hidden{display:none!important}
-@media(min-width:620px){.app{padding:24px}.stats{grid-template-columns:repeat(4,minmax(0,1fr))}.grid{grid-template-columns:1fr 1fr}.toolbar{grid-template-columns:1fr 220px}.customer-list{grid-template-columns:repeat(2,minmax(0,1fr))}.bottom-nav{left:50%;right:auto;transform:translateX(-50%);width:min(100%,1100px)}}
+.app{max-width:1100px;margin:auto;padding:15px;padding-bottom:45px}
+header{display:flex;justify-content:space-between;align-items:center;padding:20px;border:1px solid var(--border);border-radius:20px;background:linear-gradient(135deg,#25252b,#151518);margin-bottom:17px}
+h1{font-size:clamp(21px,5vw,30px);margin:0;font-weight:900}
+h1 span{color:var(--orange)}
+header p{font-size:12px;color:var(--muted);margin:7px 0 0}
+.logo{width:48px;height:48px;display:grid;place-items:center;border-radius:15px;background:var(--orange);color:#111;font-size:26px;font-weight:900}
+nav{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-bottom:20px}
+nav button{background:var(--panel);color:var(--muted);border:1px solid var(--border);border-radius:12px;padding:12px 3px;font-size:12px;font-weight:800}
+nav button.active{color:var(--gold);border-color:var(--orange);background:#ff790018}
+section{display:none}
+section.active{display:block}
+h2{font-size:21px;margin:0 0 15px}
+.subtitle{display:block;font-size:12px;font-weight:400;color:var(--muted);margin-top:5px}
+.stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-bottom:17px}
+.stat,.card,.customer{background:var(--panel);border:1px solid var(--border);border-radius:17px;padding:16px;margin-bottom:13px;min-width:0}
+.stat .label{font-size:12px;color:var(--muted)}
+.stat .value{font-size:clamp(23px,6vw,32px);font-weight:900;color:var(--gold);margin-top:7px;overflow-wrap:anywhere}
+.stat small{font-size:11px;color:var(--muted)}
+h3{font-size:16px;margin:0 0 13px}
+.row{display:flex;gap:9px;flex-wrap:wrap}
+.btn{border:1px solid transparent;border-radius:11px;padding:11px 14px;min-height:42px;font-weight:800}
+.primary{background:var(--orange);color:#111}
+.secondary{background:var(--panel2);color:white;border-color:var(--border)}
+.danger{background:#3a1d1d;color:#ffaaaa;border-color:#713838}
+.success{background:#153829;color:#a3f2c7;border-color:#276648}
+.small{font-size:12px;padding:8px 10px;min-height:34px}
+.full{width:100%}
+.field{margin-bottom:13px}
+.field label{display:block;font-size:13px;margin-bottom:7px;color:#ddd}
+.field input,.field select,.search{width:100%;min-height:44px;background:#111114;border:1px solid var(--border);border-radius:11px;padding:11px;color:white;outline:none}
+.field input:focus,.field select:focus,.search:focus{border-color:var(--orange)}
+.search{margin-bottom:13px}
+.hint{font-size:12px;line-height:1.8;color:var(--muted)}
+.notice{padding:12px;border:1px solid #70471e;border-radius:12px;color:#ffd1a0;background:#ff790010;font-size:13px;line-height:1.8;margin-bottom:14px}
+.notice.good{border-color:#276648;color:#a3f2c7;background:#153829}
+.customer-list{display:grid;gap:11px}
+.customer-top{display:flex;justify-content:space-between;gap:8px;align-items:flex-start}
+.customer-name{font-size:16px;font-weight:900;overflow-wrap:anywhere}
+.phone{direction:ltr;text-align:right;font-size:13px;color:var(--muted);margin-top:5px}
+.badge{font-size:11px;font-weight:800;border-radius:20px;padding:5px 9px;background:#ff79001c;color:var(--gold);white-space:nowrap}
+.metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;margin:14px 0}
+.metric{text-align:center;padding:9px 3px;background:var(--panel2);border-radius:10px}
+.metric strong{display:block;font-size:19px;color:var(--gold)}
+.metric span{display:block;font-size:10px;color:var(--muted);margin-top:4px}
+.progress{height:7px;background:#38383f;border-radius:10px;overflow:hidden;margin:10px 0 6px}
+.progress div{height:100%;background:linear-gradient(90deg,var(--orange),var(--gold))}
+.customer-actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}
+.empty{padding:24px;text-align:center;color:var(--muted);border:1px dashed var(--border);border-radius:13px}
+.table-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:400px}
+th,td{text-align:right;padding:10px 8px;border-bottom:1px solid var(--border);font-size:12px}
+th{color:var(--gold)}
+td{color:#e5e5ea}
+.modal-bg{display:none;position:fixed;inset:0;z-index:20;background:#000b;align-items:center;justify-content:center;padding:12px}
+.modal-bg.open{display:flex}
+.modal{background:#1b1b20;border:1px solid var(--border);border-radius:20px;padding:19px;width:100%;max-width:500px;max-height:90vh;overflow:auto}
+.modal h3{font-size:19px}
+.modal-actions{display:flex;gap:9px;margin-top:17px}
+.modal-actions button{flex:1}
+.toast{display:none;position:fixed;z-index:30;bottom:18px;left:15px;right:15px;margin:auto;max-width:450px;text-align:center;padding:13px;border:1px solid var(--border);border-radius:12px;background:#28282e;box-shadow:0 5px 25px #0008}
+.toast.show{display:block}
+footer{text-align:center;color:#777;font-size:11px;line-height:1.8;margin-top:25px}
+@media(min-width:700px){.stats{grid-template-columns:repeat(4,minmax(0,1fr))}.customer-list{grid-template-columns:repeat(2,minmax(0,1fr))}}
 </style>
 </head>
 <body>
 <div class="app">
-<header class="hero">
- <div class="eyebrow">BERKANE · LOYALTY ADMIN</div>
- <div class="brand">SKHAWA <span>LIVRILI</span></div>
- <div class="slogan">السخاوة فالقلب، وليڤري فالوقت ⚡🧡</div>
+<header>
+  <div>
+    <h1>SKHAWA <span>LIVRILI</span></h1>
+    <p>السخاوة فالقلب، وليڤري فالوقت ⚡🧡</p>
+  </div>
+  <div class="logo">S</div>
 </header>
 
-<section id="dashboard" class="page active">
- <div class="heading"><div><h2>مرحبا بك فالإدارة 👋</h2><p>نظرة سريعة على برنامج الوفاء</p></div></div>
- <div class="stats">
-  <div class="stat">👥<small>مجموع الزبناء</small><strong id="sCustomers">0</strong></div>
-  <div class="stat">🛵<small>مجموع التوصيلات</small><strong id="sDeliveries">0</strong></div>
-  <div class="stat">🟢<small>المداخيل</small><strong id="sIncome">0 DH</strong></div>
-  <div class="stat">💰<small>الرصيد الصافي</small><strong id="sBalance">0 DH</strong></div>
- </div>
- <div id="dashboardNotice"></div>
- <div class="heading"><div><h2>الزبناء الأكثر وفاءً 🏆</h2><p>حسب مجموع التوصيلات</p></div><button class="btn outline" data-goto="customers">شوف الكل</button></div>
- <div id="recentCustomers" class="customer-list"></div>
- <div class="panel"><h3>اختصارات الإدارة</h3><div class="quick">
-  <button class="btn primary" data-goto="customers">＋ زبون جديد</button>
-  <button class="btn outline" data-goto="finance">＋ حركة مالية</button>
-  <button class="btn outline" id="exportBtn">⬇️ نسخة احتياطية</button>
-  <button class="btn outline" data-goto="settings">⚙️ الإعدادات</button>
- </div></div>
-</section>
-
-<section id="customers" class="page">
- <div class="heading"><div><h2>الزبناء الأوفياء 🧡</h2><p>تسجيل وتتبع التوصيلات والهدايا</p></div><span class="tag" id="customerCountPill">0 زبون</span></div>
- <div class="panel">
-  <h3>إضافة زبون جديد</h3>
-  <form id="customerForm">
-   <div class="grid">
-    <div class="field"><label for="customerName">الاسم الكامل</label><input id="customerName" required maxlength="90" placeholder="مثال: محمد العلوي"></div>
-    <div class="field"><label for="customerPhone">رقم الهاتف</label><input id="customerPhone" required inputmode="tel" maxlength="25" placeholder="06XXXXXXXX"></div>
-    <div class="field"><label for="customerSource">طريقة الطلب</label><select id="customerSource"><option>WhatsApp</option><option>الهاتف</option><option>مباشرة</option><option>أخرى</option></select></div>
-    <div class="field"><label for="customerCategory">فئة الزبون</label><select id="customerCategory"><option value="regular">🧡 Client Régulier</option><option value="vip">👑 Client VIP</option><option value="passage">Client Passage</option></select></div>
-   </div>
-   <button class="btn primary block" type="submit">＋ تسجيل الزبون</button>
-  </form>
-  <p class="hint">المعلومات كتتحفظ فهاد المتصفح فقط. حمّل نسخة احتياطية بانتظام.</p>
- </div>
- <div class="toolbar"><input id="search" type="search" placeholder="🔎 قلب بالاسم أو رقم الهاتف"><select id="filter"><option value="all">جميع الزبناء</option><option value="near">باقي 3 توصيلات للهدية</option><option value="ready">الهدية واجدة</option><option value="bonus">هدايا إضافية</option><option value="vip">VIP</option><option value="regular">Régulier</option><option value="passage">Passage</option></select></div>
- <div id="customerList" class="customer-list"></div>
-</section>
-
-<section id="finance" class="page">
- <div class="heading"><div><h2>المالية 💰</h2><p>المداخيل والمصاريف</p></div></div>
- <div class="stats">
-  <div class="stat">🟢<small>المداخيل</small><strong id="fIncome">0 DH</strong></div>
-  <div class="stat">🔴<small>المصاريف</small><strong id="sExpenses">0 DH</strong></div>
-  <div class="stat">💎<small>الرصيد</small><strong id="fBalance">0 DH</strong></div>
-  <div class="stat">🧾<small>الحركات</small><strong id="fCount">0</strong></div>
- </div>
- <div class="panel"><h3>تسجيل حركة مالية</h3>
-  <form id="financeForm"><div class="grid">
-   <div class="field"><label for="financeType">نوع الحركة</label><select id="financeType"><option value="income">مدخول</option><option value="expense">مصروف</option></select></div>
-   <div class="field"><label for="financeAmount">المبلغ (DH)</label><input id="financeAmount" type="number" min="0.01" step="0.01" required placeholder="150"></div>
-   <div class="field"><label for="financeNote">ملاحظة</label><input id="financeNote" maxlength="140" placeholder="البنزين، الصيانة..."></div>
-  </div><button class="btn primary block" type="submit">حفظ الحركة المالية</button></form>
- </div>
- <div class="panel"><h3>آخر الحركات المالية</h3><div id="transactionList"></div></div>
-</section>
-
-<section id="settings" class="page">
- <div class="heading"><div><h2>الإعدادات والنسخ الاحتياطي ⚙️</h2><p>حافظ على معلومات الزبناء</p></div></div>
- <div class="panel"><h3>نسخة احتياطية</h3><p class="hint">نزّل ملف JSON للاحتفاظ بالزبناء والحركات، واسترجعو عند الحاجة.</p>
-  <div class="quick"><button id="exportBtn2" class="btn primary">⬇️ تحميل نسخة</button><button id="importBtn" class="btn outline">⬆️ استرجاع نسخة</button></div>
-  <input id="importFile" class="hidden" type="file" accept="application/json,.json">
-  <p class="hint">البيانات محفوظة محلياً فهاد المتصفح، وما كتتشاركش تلقائياً بين الأجهزة.</p>
- </div>
- <div class="panel"><h3>قواعد الوفاء</h3>
-  <div class="notice">🧡 كل 10 توصيلات مؤدى عليها = التوصيلة الموالية فابور.</div>
-  <div class="notice">⚡ ملي يبقاو 3 توصيلات للهدية، كيبان تذكير فالإدارة.</div>
-  <div class="notice">🏆 عند بلوغ 50 توصيل، كتزاد جوج توصيلات مجانية مرة وحدة.</div>
-  <div class="notice">👤 Client Passage الهدايا ديالو بقرار الإدارة.</div>
- </div>
- <div class="panel"><h3>مسح البيانات</h3><p class="hint">حمّل نسخة احتياطية قبل هاد العملية.</p><button id="resetBtn" class="btn danger block">مسح جميع البيانات</button></div>
-</section>
-</div>
-
-<nav class="bottom-nav">
- <button class="active" data-page="dashboard"><span>⌂</span>الرئيسية</button>
- <button data-page="customers"><span>♙</span>الزبناء</button>
- <button data-page="finance"><span>▤</span>المالية</button>
- <button data-page="settings"><span>⚙</span>الإعدادات</button>
+<nav>
+  <button class="active" data-page="dashboard">🏠 الرئيسية</button>
+  <button data-page="customers">👥 الزبناء</button>
+  <button data-page="finance">💰 المالية</button>
+  <button data-page="settings">⚙️ الإعدادات</button>
 </nav>
 
+<section id="dashboard" class="active">
+  <h2>لوحة الإدارة <span class="subtitle">نظرة عامة على برنامج الوفاء</span></h2>
+  <div class="stats">
+    <div class="stat"><div class="label">مجموع الزبناء</div><div class="value" id="sCustomers">0</div><small>زبون مسجل</small></div>
+    <div class="stat"><div class="label">مجموع التوصيلات المؤداة</div><div class="value" id="sDeliveries">0</div><small>توصيلة مؤداة</small></div>
+    <div class="stat"><div class="label">النقاط</div><div class="value" id="sPoints">0</div><small>10 نقاط لكل توصيل مؤدى</small></div>
+    <div class="stat"><div class="label">هدايا متاحة</div><div class="value" id="sGifts">0</div><small>توصيلات مجانية مستحقة</small></div>
+  </div>
+  <div id="dashboardNotice"></div>
+  <div class="card">
+    <h3>⚡ إجراءات سريعة</h3>
+    <div class="row">
+      <button class="btn primary" id="quickAdd">＋ زيد زبون</button>
+      <button class="btn secondary" id="quickDelivery">🛵 سجل توصيل</button>
+    </div>
+  </div>
+  <div class="card"><h3>⭐ باقي 3 توصيلات أو أقل على الهدية</h3><div id="nearGift"></div></div>
+  <div class="card"><h3>🕘 آخر العمليات</h3><div id="recent"></div></div>
+</section>
+
+<section id="customers">
+  <h2>الزبناء الأوفياء <span class="subtitle">سجل الزبناء وتابع التوصيلات والهدايا</span></h2>
+  <div class="row" style="margin-bottom:13px">
+    <button class="btn primary" id="addCustomer">＋ زبون جديد</button>
+    <button class="btn secondary" id="deliveryButton">🛵 سجل توصيل</button>
+  </div>
+  <input class="search" id="search" type="search" placeholder="🔎 قلب بالاسم أو رقم الهاتف...">
+  <div class="customer-list" id="customerList"></div>
+</section>
+
+<section id="finance">
+  <h2>المالية <span class="subtitle">المداخيل والمصاريف</span></h2>
+  <div class="stats">
+    <div class="stat"><div class="label">مداخيل التوصيل</div><div class="value" id="fIncome">0</div><small>درهم</small></div>
+    <div class="stat"><div class="label">مصاريف</div><div class="value" id="fExpenses">0</div><small>درهم</small></div>
+    <div class="stat"><div class="label">الصافي</div><div class="value" id="fNet">0</div><small>درهم</small></div>
+    <div class="stat"><div class="label">توصيلات مجانية</div><div class="value" id="fFree">0</div><small>هدية مستعملة</small></div>
+  </div>
+  <div class="card">
+    <h3>＋ إضافة عملية مالية</h3>
+    <div class="field"><label for="financeType">نوع العملية</label><select id="financeType"><option value="expense">مصروف</option><option value="income">مدخول إضافي</option></select></div>
+    <div class="field"><label for="financeAmount">المبلغ بالدرهم</label><input id="financeAmount" type="number" min="0.01" step="0.01" placeholder="مثال: 25"></div>
+    <div class="field"><label for="financeDescription">التفاصيل</label><input id="financeDescription" maxlength="120" placeholder="مثال: البنزين"></div>
+    <button class="btn primary full" id="saveFinance">حفظ العملية</button>
+  </div>
+  <div class="card"><h3>📋 سجل العمليات المالية</h3><div id="financeHistory"></div></div>
+</section>
+
+<section id="settings">
+  <h2>الإعدادات <span class="subtitle">النسخ الاحتياطي وحماية البيانات</span></h2>
+  <div class="notice">البيانات كتتحفظ فهاد المتصفح والجهاز. قبل تغيير الهاتف أو المتصفح، حمّل نسخة احتياطية واحتافظ بها.</div>
+  <div class="card">
+    <h3>💾 النسخ الاحتياطي</h3>
+    <button class="btn primary full" id="exportBackup">⬇️ تحميل نسخة احتياطية</button>
+    <button class="btn secondary full" style="margin-top:9px" id="importBackup">⬆️ استرجاع نسخة احتياطية</button>
+    <input id="backupFile" type="file" accept=".json,application/json" hidden>
+    <p class="hint">الاسترجاع كيعوّض البيانات الحالية ببيانات النسخة المختارة.</p>
+  </div>
+  <div class="card">
+    <h3>📊 قواعد الوفاء</h3>
+    <p class="hint">كل توصيل مؤدى = 10 نقاط.</p>
+    <p class="hint">من بعد 10 توصيلات مؤداة، كتستحق توصيل مجاني واحد.</p>
+    <p class="hint">كل ما يوصل الزبون لـ50 توصيل مؤدى إضافي حسب مراحل 50، كيتزاد ليه رصيد ديال جوج توصيلات مجانية.</p>
+    <p class="hint">المجموع من أول تعامل كيبقى محفوظ، والهدايا كتتسجل بوحدها.</p>
+  </div>
+  <div class="card">
+    <h3>⚠️ مسح البيانات</h3>
+    <p class="hint">هاد العملية كتحذف جميع بيانات التطبيق من هاد المتصفح.</p>
+    <button class="btn danger full" id="resetData">مسح جميع البيانات</button>
+  </div>
+</section>
+
+<footer>SKHAWA LIVRILI ©<br>السخاوة فالقلب، وليڤري فالوقت ⚡🧡</footer>
+</div>
+
+<div class="modal-bg" id="modalBg" role="dialog" aria-modal="true">
+  <div class="modal">
+    <h3 id="modalTitle">عملية جديدة</h3>
+    <div id="modalContent"></div>
+    <div class="modal-actions">
+      <button class="btn secondary" id="modalCancel">إلغاء</button>
+      <button class="btn primary" id="modalConfirm">تأكيد</button>
+    </div>
+  </div>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
 <script>
+(function(){
 "use strict";
-(() => {
-const KEY="skhawa_livrili_loyalty_v1";
-let customers=[],transactions=[];
-const $=id=>document.getElementById(id);
-const id=()=>globalThis.crypto?.randomUUID?.()||Date.now()+"-"+Math.random().toString(16).slice(2);
-const safe=v=>String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-const money=n=>(Number(n)||0).toLocaleString("fr-MA",{maximumFractionDigits:2})+" DH";
-const paid=c=>Math.max(0,Math.min(10,Number(c.paidSinceFree)||0));
-const eligible=c=>c.giftEligible&&c.category!=="passage";
 
-function load(){
- try{
-  const d=JSON.parse(localStorage.getItem(KEY)||"{}");
-  customers=Array.isArray(d.customers)?d.customers:[];
-  transactions=Array.isArray(d.transactions)?d.transactions:[];
-  customers=customers.map(c=>({...c,deliveries:Number(c.deliveries)||0,paidSinceFree:Math.max(0,Math.min(10,Number(c.paidSinceFree)||0)),freeDeliveries:Number(c.freeDeliveries)||0,doubleFreeCredits:Number(c.doubleFreeCredits)||0,history:Array.isArray(c.history)?c.history:[],category:["vip","regular","passage"].includes(c.category)?c.category:"regular",giftEligible:typeof c.giftEligible==="boolean"?c.giftEligible:c.category!=="passage"}));
- }catch(e){alert("ما قدرناش نقراو البيانات. جرّب استرجاع النسخة الاحتياطية.")}
-}
-function save(){
- try{localStorage.setItem(KEY,JSON.stringify({customers,transactions}));return true}
- catch(e){alert("ما قدرناش نحفظو البيانات. حمّل نسخة احتياطية.");return false}
-}
-function addTransaction(type,amount,note,customerId=null){
- transactions.unshift({id:id(),type,amount:Number(amount)||0,note,customerId,date:new Date().toISOString()});
-}
-function categoryName(c){return c.category==="vip"?"👑 Client VIP":c.category==="passage"?"Client Passage":"🧡 Client Régulier"}
+/* نفس المفتاح باش نحافظو على بيانات النسخة السابقة */
+const STORAGE_KEY = "skhawa_livrili_loyalty_v1";
+let customers = [];
+let transactions = [];
+let financeRecords = [];
+let toastTimer = null;
+let modalAction = null;
 
-function customerHTML(c){
- const n=paid(c),left=10-n,ok=eligible(c)&&n>=10;
- let message=!eligible(c)?"الهدايا بقرار الإدارة":ok?"🎁 التوصيلة الجاية مجانية":left===3?"⚡ بقاو غير 3 توصيلات للهدية!":"باقي "+left+" توصيلات للهدية";
- if(c.doubleFreeCredits>0)message+=" · "+c.doubleFreeCredits+" هدايا إضافية";
- return `<article class="customer">
- <div class="customer-top"><div class="avatar">${c.category==="vip"?"👑":"♙"}</div>
- <div class="customer-main"><h3>${safe(c.name)}</h3><div class="phone">${safe(c.phone)}</div><div class="sub">طريقة الطلب: ${safe(c.source||"غير محددة")}</div></div>
- <span class="tag">${safe(categoryName(c))}</span></div>
- <div class="progress-info"><span>التقدم نحو الهدية</span><strong>${n}/10</strong></div>
- <div class="progress"><div style="width:${ok?100:n*10}%"></div></div>
- <div class="gift ${ok?"ready":""}">${safe(message)}</div>
- <div class="customer-stats"><div class="mini"><small>مجموع التوصيلات</small><strong>${c.deliveries}</strong></div><div class="mini"><small>الهدايا المستافد منها</small><strong>${c.freeDeliveries}</strong></div></div>
- <div class="actions">
- <button class="btn primary" data-a="deliver" data-id="${safe(c.id)}">＋ توصيل</button>
- <button class="btn outline" data-a="undo" data-id="${safe(c.id)}">إلغاء آخر توصيلة</button>
- <button class="btn outline" data-a="category" data-id="${safe(c.id)}">تغيير الفئة</button>
- <button class="btn outline" data-a="eligibility" data-id="${safe(c.id)}">${c.giftEligible?"توقيف الهدايا":"تفعيل الهدايا"}</button>
- <button class="btn outline" data-a="gift" data-id="${safe(c.id)}">🎁 هدية استثنائية</button>
- <button class="btn outline" data-a="edit" data-id="${safe(c.id)}">تعديل</button>
- <button class="btn danger" data-a="delete" data-id="${safe(c.id)}">مسح</button>
- </div></article>`;
+const $ = id => document.getElementById(id);
+const money = n => (Number(n)||0).toLocaleString("fr-MA",{maximumFractionDigits:2});
+const dateText = d => {
+  try { return new Date(d).toLocaleString("fr-MA"); }
+  catch(e){ return String(d||""); }
+};
+const uid = () => "id-" + Date.now().toString(36) + "-" + Math.random().toString(36).slice(2,9);
+const safe = v => String(v ?? "").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const phoneClean = p => String(p||"").replace(/\s+/g,"").trim();
+
+function toast(message, type="good"){
+  const el=$("toast");
+  el.textContent=message;
+  el.className="toast show "+type;
+  clearTimeout(toastTimer);
+  toastTimer=setTimeout(()=>el.className="toast",3000);
 }
+
+function askModal(title, content, action, confirmText="تأكيد"){
+  $("modalTitle").textContent=title;
+  $("modalContent").innerHTML=content;
+  $("modalConfirm").textContent=confirmText;
+  modalAction=action;
+  $("modalBg").classList.add("open");
+}
+function closeModal(){
+  $("modalBg").classList.remove("open");
+  modalAction=null;
+  $("modalContent").innerHTML="";
+}
+$("modalCancel").addEventListener("click",closeModal);
+$("modalConfirm").addEventListener("click",()=>{
+  if(!modalAction)return;
+  const action=modalAction;
+  try{
+    const result=action();
+    if(result!==false)closeModal();
+  }catch(e){
+    console.error(e);
+    toast("وقع مشكل. راجع المعلومات وحاول من جديد.","bad");
+  }
+});
+$("modalBg").addEventListener("click",e=>{
+  if(e.target===$("modalBg"))closeModal();
+});
+
+function normaliseCustomer(c){
+  c=c||{};
+  const id=String(c.id||uid());
+  const paid=Math.max(0,Number(c.totalPaid ?? c.total_orders ?? c.totalOrders ?? c.orders ?? 0)||0);
+  const oldCycle=Number(c.cyclePaid ?? c.cycle_paid);
+  const cycle=Number.isFinite(oldCycle)?Math.max(0,oldCycle%10):paid%10;
+  return {
+    id,
+    name:String(c.name||c.Name||c.customer_name||"زبون بلا اسم"),
+    phone:String(c.phone||c.Phone||""),
+    category:String(c.category||"عادي"),
+    points:Math.max(0,Number(c.points ?? c.pointes ?? paid*10)||0),
+    totalPaid:paid,
+    totalAll:Math.max(paid,Number(c.totalAll ?? c.total_orders_all ?? paid)||paid),
+    cyclePaid:cycle,
+    giftCredits:Math.max(0,Number(c.giftCredits ?? c.gift_credits ?? c.freeDeliveries ?? 0)||0),
+    claimedMilestones:Array.isArray(c.claimedMilestones)?c.claimedMilestones:[],
+    createdAt:c.createdAt||c.created_at||new Date().toISOString()
+  };
+}
+
+function loadData(){
+  try{
+    const raw=localStorage.getItem(STORAGE_KEY);
+    if(!raw)return;
+    const data=JSON.parse(raw);
+    customers=Array.isArray(data.customers)?data.customers.map(normaliseCustomer):[];
+    transactions=Array.isArray(data.transactions)?data.transactions:[];
+    financeRecords=Array.isArray(data.financeRecords)?data.financeRecords:[];
+    /* محاولة قراءة سجل مالي قديم إن كان موجوداً */
+    if(!financeRecords.length && Array.isArray(data.finances))financeRecords=data.finances;
+  }catch(e){
+    console.error("Load error",e);
+    toast("ما قدرناش نقراو البيانات المحفوظة. ما تمسح والو.","bad");
+  }
+}
+function saveData(){
+  try{
+    localStorage.setItem(STORAGE_KEY,JSON.stringify({customers,transactions,financeRecords,updatedAt:new Date().toISOString()}));
+    return true;
+  }catch(e){
+    toast("تعذر الحفظ. حمّل نسخة احتياطية وتأكد من مساحة المتصفح.","bad");
+    return false;
+  }
+}
+
+function showPage(page){
+  document.querySelectorAll("section").forEach(s=>s.classList.toggle("active",s.id===page));
+  document.querySelectorAll("nav button").forEach(b=>b.classList.toggle("active",b.dataset.page===page));
+  renderAll();
+}
+document.querySelectorAll("nav button").forEach(b=>b.addEventListener("click",()=>showPage(b.dataset.page)));
+
+function findCustomer(id){return customers.find(c=>c.id===id)}
+function addTransaction(customer,type,amount,note){
+  transactions.unshift({
+    id:uid(),customerId:customer?customer.id:null,
+    customerName:customer?customer.name:"",
+    type,amount:Number(amount)||0,note:String(note||""),
+    date:new Date().toISOString()
+  });
+  if(transactions.length>1500)transactions=transactions.slice(0,1500);
+}
+
+function openCustomerForm(id=null){
+  const c=id?findCustomer(id):null;
+  const content=`
+    <div class="field"><label for="cName">الاسم الكامل</label><input id="cName" maxlength="100" value="${safe(c?.name||"")}" placeholder="اسم الزبون"></div>
+    <div class="field"><label for="cPhone">رقم الهاتف</label><input id="cPhone" type="tel" maxlength="25" value="${safe(c?.phone||"")}" placeholder="06XXXXXXXX"></div>
+    <div class="field"><label for="cCategory">الفئة</label><select id="cCategory">
+      <option value="عادي" ${c?.category==="عادي"?"selected":""}>عادي</option>
+      <option value="وفي" ${c?.category==="وفي"?"selected":""}>وفي</option>
+      <option value="مميز" ${c?.category==="مميز"?"selected":""}>مميز</option>
+    </select></div>
+    ${c?`<p class="hint">المجموع الحالي: ${c.totalPaid} توصيل مؤدى. تعديل الاسم أو الهاتف ما كيبدلش سجل التوصيلات.</p>`:""}
+  `;
+  askModal(c?"تعديل معلومات الزبون":"إضافة زبون جديد",content,()=>{
+    const name=$("cName").value.trim();
+    const phone=phoneClean($("cPhone").value);
+    const category=$("cCategory").value;
+    if(!name){toast("دخل اسم الزبون أولا.","bad");return false}
+    if(phone && customers.some(x=>x.id!==id&&phoneClean(x.phone)===phone)){
+      toast("هاد رقم الهاتف مسجل عند زبون آخر.","bad");return false;
+    }
+    if(c){
+      c.name=name;c.phone=phone;c.category=category;
+    }else{
+      customers.push({id:uid(),name,phone,category,points:0,totalPaid:0,totalAll:0,cyclePaid:0,giftCredits:0,claimedMilestones:[],createdAt:new Date().toISOString()});
+      addTransaction(null,"customer",0,"تسجيل زبون: "+name);
+    }
+    saveData();renderAll();toast(c?"تبدلات معلومات الزبون":"تزاد الزبون بنجاح");
+  },c?"حفظ التغييرات":"إضافة الزبون");
+}
+
+function openDeliveryForm(defaultId=null){
+  if(!customers.length){
+    toast("زيد زبون أولا قبل تسجيل التوصيل.","bad");
+    openCustomerForm();
+    return;
+  }
+  const options=customers.slice().sort((a,b)=>a.name.localeCompare(b.name,"ar")).map(c=>
+    `<option value="${safe(c.id)}" ${c.id===defaultId?"selected":""}>${safe(c.name)} — ${safe(c.phone||"بلا رقم")}</option>`
+  ).join("");
+  const content=`
+    <div class="field"><label for="dCustomer">اختار الزبون</label><select id="dCustomer">${options}</select></div>
+    <div class="field"><label for="dType">نوع التوصيل</label><select id="dType">
+      <option value="paid">توصيل مؤدى</option>
+      <option value="free">توصيل مجاني / هدية</option>
+    </select></div>
+    <div class="field"><label for="dPrice">ثمن التوصيل بالدرهم</label><input id="dPrice" type="number" min="0" step="0.5" value="15" inputmode="decimal"></div>
+    <div class="field"><label for="dNote">ملاحظة (اختياري)</label><input id="dNote" maxlength="120" placeholder="ملاحظة على الطلب"></div>
+    <div id="giftInfo" class="notice"></div>
+    <p class="hint">تأكد من الزبون ونوع التوصيل والثمن، ومن بعد ضغط على تأكيد مرة وحدة.</p>
+  `;
+  askModal("تسجيل توصيل",content,()=>{
+    const customer=findCustomer($("dCustomer").value);
+    const type=$("dType").value;
+    const price=Number($("dPrice").value);
+    const note=$("dNote").value.trim();
+    if(!customer){toast("اختار الزبون.","bad");return false}
+    if(!Number.isFinite(price)||price<0){toast("دخل ثمن صحيح.","bad");return false}
+    if(type==="paid"){
+      customer.totalPaid++;
+      customer.totalAll++;
+      customer.points+=10;
+      customer.cyclePaid++;
+      let giftMessage="";
+      if(customer.cyclePaid>=10){
+        customer.cyclePaid=0;
+        customer.giftCredits++;
+        giftMessage=" استحق هدية عادية جديدة.";
+      }
+      if(customer.totalPaid>0 && customer.totalPaid%50===0 && !customer.claimedMilestones.includes(customer.totalPaid)){
+        customer.giftCredits+=2;
+        customer.claimedMilestones.push(customer.totalPaid);
+        giftMessage+=" وصل لـ"+customer.totalPaid+" توصيل مؤدى واستحق جوج هدايا إضافية.";
+      }
+      addTransaction(customer,"paid",price,note||"توصيل مؤدى");
+      toast("تسجل التوصيل بنجاح. +10 نقاط."+giftMessage);
+    }else{
+      if(customer.giftCredits<=0){
+        toast("هاد الزبون ما عندوش هدية متاحة. اختار توصيل مؤدى أو راجع رصيد الهدايا.","bad");
+        return false;
+      }
+      customer.giftCredits--;
+      customer.totalAll++;
+      addTransaction(customer,"free",0,note||"توصيل مجاني");
+      toast("تسجل التوصيل المجاني. باقي ليه "+customer.giftCredits+" هدية.");
+    }
+    saveData();renderAll();
+  },"تأكيد التوصيل");
+
+  const updateGiftInfo=()=>{
+    const id=$("dCustomer").value;
+    const c=findCustomer(id);
+    if(!c)return;
+    const type=$("dType").value;
+    const info=$("giftInfo");
+    if(type==="free"){
+      info.textContent=c.giftCredits>0?"الهدايا المتاحة: "+c.giftCredits:"ما كايناش هدية متاحة لهاد الزبون.";
+      info.className=c.giftCredits>0?"notice good":"notice";
+    }else{
+      const remaining=10-c.cyclePaid;
+      info.textContent="المجموع: "+c.totalPaid+" توصيل مؤدى. باقي "+remaining+" توصيل"+(remaining===1?"":"ات")+" باش يستحق هدية عادية. الهدايا المتاحة حاليا: "+c.giftCredits+".";
+      info.className="notice";
+    }
+  };
+  $("dCustomer").addEventListener("change",updateGiftInfo);
+  $("dType").addEventListener("change",()=>{
+    $("dPrice").disabled=$("dType").value==="free";
+    if($("dType").value==="free")$("dPrice").value="0";
+    else if(Number($("dPrice").value)===0)$("dPrice").value="15";
+    updateGiftInfo();
+  });
+  updateGiftInfo();
+}
+
+function deleteCustomer(id){
+  const c=findCustomer(id);if(!c)return;
+  askModal("حذف الزبون",`<p>واش متأكد بغيتي تحذف <strong>${safe(c.name)}</strong>؟</p><p class="hint">سجل العمليات القديمة غادي يبقى، ولكن الزبون غادي يتحيد من القائمة.</p>`,()=>{
+    customers=customers.filter(x=>x.id!==id);
+    saveData();renderAll();toast("تحذف الزبون.");
+  },"حذف الزبون");
+}
+
 function renderCustomers(){
- const q=$("search").value.trim().toLowerCase(),f=$("filter").value;
- const list=customers.filter(c=>{
-  if(!(String(c.name).toLowerCase().includes(q)||String(c.phone).toLowerCase().includes(q)))return false;
-  if(f==="near")return paid(c)===7&&eligible(c);
-  if(f==="ready")return paid(c)>=10&&eligible(c);
-  if(f==="bonus")return c.doubleFreeCredits>0;
-  if(["vip","regular","passage"].includes(f))return c.category===f;
-  return true;
- }).sort((a,b)=>b.deliveries-a.deliveries);
- $("customerList").innerHTML=list.length?list.map(customerHTML).join(""):'<div class="empty">ما لقينا حتى زبون مطابق. زيد زبون جديد.</div>';
- $("customerCountPill").textContent=customers.length+" زبون";
- const recent=[...customers].sort((a,b)=>b.deliveries-a.deliveries).slice(0,2);
- $("recentCustomers").innerHTML=recent.length?recent.map(customerHTML).join(""):'<div class="empty">مازال ما تسجل حتى زبون.</div>';
+  const query=$("search").value.trim().toLowerCase();
+  const list=customers.filter(c=>(c.name+" "+c.phone).toLowerCase().includes(query))
+    .sort((a,b)=>b.totalPaid-a.totalPaid);
+  if(!list.length){
+    $("customerList").innerHTML='<div class="empty">ما لقينا حتى زبون. زيد زبون جديد أو بدّل البحث.</div>';return;
+  }
+  $("customerList").innerHTML=list.map(c=>{
+    const remaining=10-c.cyclePaid;
+    const pct=Math.min(100,c.cyclePaid*10);
+    return `<article class="customer">
+      <div class="customer-top">
+        <div><div class="customer-name">${safe(c.name)}</div><div class="phone">${safe(c.phone||"بلا رقم هاتف")}</div></div>
+        <span class="badge">${safe(c.category)}</span>
+      </div>
+      <div class="metrics">
+        <div class="metric"><strong>${c.totalPaid}</strong><span>توصيل مؤدى</span></div>
+        <div class="metric"><strong>${c.points}</strong><span>نقطة</span></div>
+        <div class="metric"><strong>${c.giftCredits}</strong><span>هدايا متاحة</span></div>
+      </div>
+      <div class="hint">المجموع من أول تعامل: <strong>${c.totalAll}</strong> توصيل</div>
+      <div class="progress"><div style="width:${pct}%"></div></div>
+      <div class="hint">${c.cyclePaid===0?"بداية دورة جديدة":`داز ${c.cyclePaid} من 10 توصيلات مؤداة`}. باقي ${remaining} باش يستحق هدية عادية.</div>
+      ${remaining<=3?'<p class="hint" style="color:var(--gold)">⭐ قرب يستحق الهدية!</p>':""}
+      <div class="customer-actions">
+        <button class="btn primary small" data-delivery="${safe(c.id)}">＋ توصيل</button>
+        <button class="btn secondary small" data-edit="${safe(c.id)}">✏️ تعديل</button>
+        <button class="btn danger small" data-delete="${safe(c.id)}">حذف</button>
+      </div>
+    </article>`;
+  }).join("");
+  $("customerList").querySelectorAll("[data-delivery]").forEach(b=>b.addEventListener("click",()=>openDeliveryForm(b.dataset.delivery)));
+  $("customerList").querySelectorAll("[data-edit]").forEach(b=>b.addEventListener("click",()=>openCustomerForm(b.dataset.edit)));
+  $("customerList").querySelectorAll("[data-delete]").forEach(b=>b.addEventListener("click",()=>deleteCustomer(b.dataset.delete)));
 }
+
+function renderDashboard(){
+  $("sCustomers").textContent=customers.length;
+  $("sDeliveries").textContent=customers.reduce((s,c)=>s+c.totalPaid,0);
+  $("sPoints").textContent=customers.reduce((s,c)=>s+c.points,0);
+  $("sGifts").textContent=customers.reduce((s,c)=>s+c.giftCredits,0);
+
+  const alerts=customers.filter(c=>10-c.cyclePaid<=3);
+  $("dashboardNotice").innerHTML=alerts.length?`<div class="notice">🔔 عندك ${alerts.length} زبون قربو يستحقو الهدية. تواصل معاهم وشجعهم يرجعو.</div>`:"";
+  $("nearGift").innerHTML=alerts.length?alerts.sort((a,b)=>a.cyclePaid-b.cyclePaid).map(c=>
+    `<div style="padding:10px 0;border-bottom:1px solid var(--border)"><strong>${safe(c.name)}</strong><div class="hint">باقي ${10-c.cyclePaid} توصيلات مؤداة — ${c.totalPaid} توصيل مؤدى</div></div>`
+  ).join(""):'<div class="empty">ما كاين حتى زبون قريب للهدية حاليا.</div>';
+
+  const recent=transactions.slice(0,6);
+  $("recent").innerHTML=recent.length?`<div class="table-wrap"><table><thead><tr><th>الزبون</th><th>العملية</th><th>المبلغ</th><th>التاريخ</th></tr></thead><tbody>${recent.map(t=>`<tr><td>${safe(t.customerName||"الإدارة")}</td><td>${safe(transactionLabel(t.type))}</td><td>${money(t.amount)} DH</td><td>${safe(dateText(t.date))}</td></tr>`).join("")}</tbody></table></div>`:'<div class="empty">مازال ما تسجلات حتى عملية.</div>';
+}
+
+function transactionLabel(type){
+  return ({paid:"توصيل مؤدى",free:"توصيل مجاني",customer:"تسجيل زبون",income:"مدخول إضافي",expense:"مصروف"}[type]||type||"عملية");
+}
+
 function renderFinance(){
- const income=transactions.filter(t=>t.type==="income").reduce((s,t)=>s+(Number(t.amount)||0),0);
- const expenses=transactions.filter(t=>t.type==="expense").reduce((s,t)=>s+(Number(t.amount)||0),0);
- $("sCustomers").textContent=customers.length;
- $("sDeliveries").textContent=customers.reduce((s,c)=>s+c.deliveries,0);
- $("sIncome").textContent=money(income);
- $("sBalance").textContent=money(income-expenses);
- $("fIncome").textContent=money(income);
- $("sExpenses").textContent=money(expenses);
- $("fBalance").textContent=money(income-expenses);
- $("fCount").textContent=transactions.length;
- const reminders=customers.filter(c=>paid(c)===7&&eligible(c));
- const bonuses=customers.filter(c=>c.doubleFreeCredits>0);
- let notice="";
- if(reminders.length)notice+=`<div class="notice">⚡ بقاو 3 توصيلات للهدية عند: ${reminders.map(c=>safe(c.name)).join("، ")}</div>`;
- if(bonuses.length)notice+=`<div class="notice">🎁 هدايا إضافية: ${bonuses.map(c=>safe(c.name)+" ("+c.doubleFreeCredits+")").join("، ")}</div>`;
- $("dashboardNotice").innerHTML=notice;
- $("transactionList").innerHTML=transactions.length?transactions.slice(0,100).map(t=>`<div class="transaction"><div><strong>${safe(t.note)}</strong><small>${safe(t.date?new Date(t.date).toLocaleString("fr-MA"):"")}</small></div><strong class="${t.type==="income"?"green":"red"}">${t.type==="income"?"+":"−"}${money(t.amount)}</strong></div>`).join(""):'<div class="empty">ما تسجل حتى حركة مالية.</div>';
-}
-function render(){renderCustomers();renderFinance()}
+  const paid=transactions.filter(t=>t.type==="paid").reduce((s,t)=>s+(Number(t.amount)||0),0);
+  const free=transactions.filter(t=>t.type==="free").length;
+  const extra=financeRecords.filter(t=>t.type==="income").reduce((s,t)=>s+(Number(t.amount)||0),0);
+  const expenses=financeRecords.filter(t=>t.type==="expense").reduce((s,t)=>s+(Number(t.amount)||0),0);
+  $("fIncome").textContent=money(paid+extra);
+  $("fExpenses").textContent=money(expenses);
+  $("fNet").textContent=money(paid+extra-expenses);
+  $("fFree").textContent=free;
 
-function recordDelivery(cid){
- const c=customers.find(x=>String(x.id)===String(cid));if(!c)return;
- let type="paid",price=0;
- if(c.doubleFreeCredits>0&&confirm("عندو "+c.doubleFreeCredits+" توصيلات مجانية إضافية. واش تستعمل وحدة؟"))type="bonus";
- else if(eligible(c)&&paid(c)>=10)type="free";
- else{
-  const ans=prompt(eligible(c)?"شحال خلص الزبون على التوصيلة؟":"الزبون غير مؤهل للهدايا الأوتوماتيكية. دخل الثمن المؤدى عنه:","15");
-  if(ans===null)return;
-  if(ans.trim()===""||!Number.isFinite(Number(ans))||Number(ans)<0){alert("دخل ثمن صحيح.");return}
-  price=Number(ans);
- }
- if(type==="paid"&&confirm("واش بغيتي تمنح توصيل فابور استثنائي بدل التوصيلة المؤدى عنها؟"))type="gift";
- const labels={paid:"توصيلة مدفوعة بثمن "+money(price),free:"هدية عادية مجانية",bonus:"استعمال توصيل مجاني إضافي",gift:"هدية استثنائية"};
- if(!confirm("تأكيد: "+labels[type]+"؟"))return;
- const event={id:id(),type,date:new Date().toISOString(),amount:type==="paid"?price:0};
- c.deliveries++;
- if(type==="paid"){c.paidSinceFree=Math.min(10,paid(c)+1);if(price>0){event.transactionId=id();transactions.unshift({id:event.transactionId,type:"income",amount:price,note:"توصيلة مدفوعة: "+c.name,customerId:c.id,date:event.date})}}
- if(type==="free"){c.paidSinceFree=0;c.freeDeliveries++}
- if(type==="bonus"){c.doubleFreeCredits--;c.freeDeliveries++}
- if(type==="gift")c.freeDeliveries++;
- c.history.unshift(event);
- if(c.deliveries>=50&&!c.milestone50Claimed){c.milestone50Claimed=true;c.doubleFreeCredits+=2;alert("🏆 وصل لـ50 توصيل! تزادو ليه جوج توصيلات مجانية.")}
- else alert("تسجلات التوصيلة بنجاح 🧡");
- if(save())render();
-}
-function undoDelivery(cid){
- const c=customers.find(x=>String(x.id)===String(cid));if(!c)return;
- if(!c.history.length){alert("ما كاينش سجل مفصل للتوصيلات القديمة باش نلغيوها بأمان.");return}
- const e=c.history[0];
- if(!confirm("واش متأكد بغيتي تلغي آخر توصيلة ديال "+c.name+"؟"))return;
- if(e.type==="paid"){
-  if(e.transactionId)transactions=transactions.filter(t=>t.id!==e.transactionId);
-  c.paidSinceFree=Math.max(0,paid(c)-1);
- }else if(e.type==="free"){c.paidSinceFree=10;c.freeDeliveries=Math.max(0,c.freeDeliveries-1)}
- else if(e.type==="bonus"){c.doubleFreeCredits++;c.freeDeliveries=Math.max(0,c.freeDeliveries-1)}
- else if(e.type==="gift")c.freeDeliveries=Math.max(0,c.freeDeliveries-1);
- c.history.shift();c.deliveries=Math.max(0,c.deliveries-1);
- if(save()){render();alert("تصلحات آخر توصيلة. راجع مكافأة 50 إذا كانت مرتبطة بها.")}
-}
-function manualGift(cid){
- const c=customers.find(x=>String(x.id)===String(cid));if(!c)return;
- if(!confirm("منح توصيل فابور استثنائي لـ "+c.name+"؟"))return;
- c.deliveries++;c.freeDeliveries++;
- c.history.unshift({id:id(),type:"gift",date:new Date().toISOString(),amount:0});
- if(save()){render();alert("تسجلات الهدية الاستثنائية 🎁")}
-}
-function changeCategory(cid){
- const c=customers.find(x=>String(x.id)===String(cid));if(!c)return;
- const ans=prompt("اختار الفئة:\n1 = VIP\n2 = Régulier\n3 = Passage",c.category==="vip"?"1":c.category==="passage"?"3":"2");
- if(ans===null)return;
- const cats={"1":"vip","2":"regular","3":"passage"};
- if(!cats[ans.trim()]){alert("اختيار غير صحيح.");return}
- c.category=cats[ans.trim()];
- if(c.category==="passage")c.giftEligible=false;
- else c.giftEligible=true;
- if(save())render();
-}
-function editCustomer(cid){
- const c=customers.find(x=>String(x.id)===String(cid));if(!c)return;
- const name=prompt("الاسم الجديد:",c.name);if(name===null||!name.trim())return;
- const phone=prompt("رقم الهاتف:",c.phone);if(phone===null||!phone.trim())return;
- const normalized=phone.replace(/\s/g,"");
- if(customers.some(x=>String(x.id)!==String(cid)&&String(x.phone).replace(/\s/g,"")===normalized)){alert("هاد الرقم مستعمل.");return}
- c.name=name.trim();c.phone=phone.trim();if(save())render();
-}
-function deleteCustomer(cid){
- const c=customers.find(x=>String(x.id)===String(cid));if(!c)return;
- if(!confirm("واش متأكد بغيتي تمسح "+c.name+"؟"))return;
- customers=customers.filter(x=>String(x.id)!==String(cid));
- if(save())render();
+  const records=financeRecords.slice().sort((a,b)=>new Date(b.date)-new Date(a.date));
+  $("financeHistory").innerHTML=records.length?`<div class="table-wrap"><table><thead><tr><th>النوع</th><th>التفاصيل</th><th>المبلغ</th><th>التاريخ</th><th></th></tr></thead><tbody>${records.map(r=>`<tr><td>${r.type==="expense"?"مصروف":"مدخول"}</td><td>${safe(r.description)}</td><td>${money(r.amount)} DH</td><td>${safe(dateText(r.date))}</td><td><button class="btn danger small" data-fin-delete="${safe(r.id)}">حذف</button></td></tr>`).join("")}</tbody></table></div>`:'<div class="empty">ما كايناش عمليات مالية إضافية.</div>';
+  $("financeHistory").querySelectorAll("[data-fin-delete]").forEach(b=>b.addEventListener("click",()=>{
+    const r=financeRecords.find(x=>x.id===b.dataset.finDelete);if(!r)return;
+    askModal("حذف العملية",`<p>واش متأكد بغيتي تحذف هاد العملية المالية؟</p><p class="hint">${safe(r.description)} — ${money(r.amount)} درهم</p>`,()=>{
+      financeRecords=financeRecords.filter(x=>x.id!==r.id);
+      saveData();renderAll();toast("تحذفات العملية المالية.");
+    },"حذف");
+  }));
 }
 
-$("customerForm").addEventListener("submit",e=>{
- e.preventDefault();
- const name=$("customerName").value.trim(),phone=$("customerPhone").value.trim();
- if(!name||!phone)return;
- const normalized=phone.replace(/\s/g,"");
- if(customers.some(c=>String(c.phone).replace(/\s/g,"")===normalized)){alert("هاد الرقم مسجل من قبل.");return}
- const category=$("customerCategory").value;
- customers.push({id:id(),name,phone,source:$("customerSource").value,category,giftEligible:category!=="passage",deliveries:0,paidSinceFree:0,freeDeliveries:0,doubleFreeCredits:0,milestone50Claimed:false,history:[],createdAt:new Date().toISOString()});
- if(!save())return;
- $("customerForm").reset();render();alert("تسجل الزبون بنجاح 🧡");
-});
-
-function customerAction(e){
- const b=e.target.closest("button[data-a]");if(!b)return;
- const a=b.dataset.a,cid=b.dataset.id,c=customers.find(x=>String(x.id)===String(cid));if(!c)return;
- if(a==="deliver")recordDelivery(cid);
- if(a==="undo")undoDelivery(cid);
- if(a==="category")changeCategory(cid);
- if(a==="eligibility"){if(confirm("تغيير أهلية الهدايا ديال "+c.name+"؟")){c.giftEligible=!c.giftEligible;if(save())render()}}
- if(a==="gift")manualGift(cid);
- if(a==="edit")editCustomer(cid);
- if(a==="delete")deleteCustomer(cid);
+function renderAll(){
+  renderDashboard();renderCustomers();renderFinance();
 }
-$("customerList").addEventListener("click",customerAction);
-$("recentCustomers").addEventListener("click",customerAction);
+
+$("addCustomer").addEventListener("click",()=>openCustomerForm());
+$("quickAdd").addEventListener("click",()=>openCustomerForm());
+$("deliveryButton").addEventListener("click",()=>openDeliveryForm());
+$("quickDelivery").addEventListener("click",()=>openDeliveryForm());
 $("search").addEventListener("input",renderCustomers);
-$("filter").addEventListener("change",renderCustomers);
 
-$("financeForm").addEventListener("submit",e=>{
- e.preventDefault();
- const amount=Number($("financeAmount").value);
- if(!Number.isFinite(amount)||amount<=0){alert("دخل مبلغ صحيح.");return}
- const type=$("financeType").value,note=$("financeNote").value.trim()||(type==="income"?"مدخول إضافي":"مصروف");
- addTransaction(type,amount,note);
- if(!save())return;
- $("financeForm").reset();render();alert("تسجلات الحركة المالية.");
+$("saveFinance").addEventListener("click",()=>{
+  const type=$("financeType").value;
+  const amount=Number($("financeAmount").value);
+  const description=$("financeDescription").value.trim();
+  if(!Number.isFinite(amount)||amount<=0){toast("دخل مبلغ صحيح أكبر من صفر.","bad");return}
+  if(!description){toast("كتب تفاصيل العملية.","bad");return}
+  financeRecords.unshift({id:uid(),type,amount,description,date:new Date().toISOString()});
+  $("financeAmount").value="";$("financeDescription").value="";
+  saveData();renderAll();toast("تحفظات العملية المالية.");
 });
 
-function go(page){
- document.querySelectorAll(".page").forEach(p=>p.classList.toggle("active",p.id===page));
- document.querySelectorAll(".bottom-nav button").forEach(b=>b.classList.toggle("active",b.dataset.page===page));
- window.scrollTo({top:0,behavior:"smooth"});
-}
-document.querySelectorAll(".bottom-nav button").forEach(b=>b.addEventListener("click",()=>go(b.dataset.page)));
-document.querySelectorAll("[data-goto]").forEach(b=>b.addEventListener("click",()=>go(b.dataset.goto)));
+$("exportBackup").addEventListener("click",()=>{
+  const data={version:2,customers,transactions,financeRecords,exportedAt:new Date().toISOString()};
+  const blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement("a");
+  a.href=url;a.download="SKHAWA-LIVRILI-backup-"+new Date().toISOString().slice(0,10)+".json";
+  document.body.appendChild(a);a.click();a.remove();
+  setTimeout(()=>URL.revokeObjectURL(url),1500);
+  toast("وجدنا ليك النسخة الاحتياطية. احتافظ بها.");
+});
 
-function exportBackup(){
- const blob=new Blob([JSON.stringify({customers,transactions,exportedAt:new Date().toISOString()},null,2)],{type:"application/json"});
- const url=URL.createObjectURL(blob),a=document.createElement("a");
- a.href=url;a.download="SKHAWA-LIVRILI-backup-"+new Date().toISOString().slice(0,10)+".json";
- document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
-}
-$("exportBtn").addEventListener("click",exportBackup);
-$("exportBtn2").addEventListener("click",exportBackup);
-$("importBtn").addEventListener("click",()=>$("importFile").click());
-$("importFile").addEventListener("change",async e=>{
- const file=e.target.files[0];if(!file)return;
- try{
-  const d=JSON.parse(await file.text());
-  if(!Array.isArray(d.customers)||!Array.isArray(d.transactions))throw Error("invalid");
-  if(!confirm("استرجاع النسخة غادي يعوض البيانات الحالية. متأكد؟"))return;
-  customers=d.customers;transactions=d.transactions;
-  if(save()){load();render();alert("ترجعات النسخة الاحتياطية بنجاح.")}
- }catch(err){alert("الملف ما صالحش أو ما قدرناش نقراوه.")}
- finally{e.target.value=""}
+$("importBackup").addEventListener("click",()=>$("backupFile").click());
+$("backupFile").addEventListener("change",async e=>{
+  const file=e.target.files&&e.target.files[0];
+  if(!file)return;
+  try{
+    const parsed=JSON.parse(await file.text());
+    if(!parsed||!Array.isArray(parsed.customers)||!Array.isArray(parsed.transactions)){
+      throw new Error("Invalid backup");
+    }
+    askModal("استرجاع النسخة الاحتياطية",`<div class="notice">النسخة فيها ${parsed.customers.length} زبون و${parsed.transactions.length} عملية. غادي تعوّض البيانات الحالية.</div><p>واش متأكد بغيتي تكمل؟</p>`,()=>{
+      customers=parsed.customers.map(normaliseCustomer);
+      transactions=parsed.transactions;
+      financeRecords=Array.isArray(parsed.financeRecords)?parsed.financeRecords:[];
+      if(saveData()){renderAll();toast("ترجعات النسخة الاحتياطية بنجاح.");}
+    },"استرجاع البيانات");
+  }catch(err){
+    toast("الملف ماشي نسخة احتياطية صالحة ديال التطبيق.","bad");
+  }
+  e.target.value="";
 });
-$("resetBtn").addEventListener("click",()=>{
- if(!confirm("غادي تتمسح جميع بيانات الزبناء والحركات. واش متأكد؟"))return;
- if(!confirm("آخر تأكيد: واش حمّلتي نسخة احتياطية؟"))return;
- customers=[];transactions=[];
- if(save()){render();alert("تم مسح البيانات.")}
+
+$("resetData").addEventListener("click",()=>{
+  askModal("مسح جميع البيانات",'<div class="notice">تحذير: هاد العملية غادي تمسح جميع الزبناء والعمليات المحفوظة فهاد المتصفح.</div><p>الأفضل تحمّل نسخة احتياطية قبل المتابعة.</p>',()=>{
+    customers=[];transactions=[];financeRecords=[];
+    saveData();renderAll();toast("تم مسح البيانات.");
+  },"مسح نهائيا");
 });
-load();render();
+
+loadData();
+renderAll();
 })();
 </script>
 </body>
