@@ -259,7 +259,6 @@ function normalizeCustomer(c) {
  if (Number.isFinite(Number(x.paidDeliveries))) {
   x.paidDeliveries = Math.max(0, Number(x.paidDeliveries));
  } else {
-  /* توافق مع السجلات القديمة */
   x.paidDeliveries = Math.max(0, x.deliveries - x.freeDeliveries);
  }
 
@@ -269,7 +268,6 @@ function normalizeCustomer(c) {
  x.availableGifts = Math.max(0, Number(x.availableGifts)||0);
  x.milestone50Claimed = Boolean(x.milestone50Claimed);
 
- /* تصحيح بعض السجلات القديمة: كل 10 توصيلات مؤداة تمنح هدية */
  if (!Number.isFinite(Number(c.paidDeliveries)) &&
      x.paidSinceFree === 0 && x.paidDeliveries >= 10) {
   x.availableGifts = Math.max(x.availableGifts, Math.floor(x.paidDeliveries/10) - x.freeDeliveries);
@@ -460,7 +458,7 @@ function render() {
  renderFinance();
 }
 
-/* تسجيل توصيلة */
+/* تسجيل توصيلة مع تقليل التأكيدات */
 function recordDelivery(cid) {
  const c = customers.find(x=>String(x.id)===String(cid));
  if (!c) return;
@@ -492,12 +490,6 @@ function recordDelivery(cid) {
   }
   price = Number(ans);
  }
-
- if (!confirm("واش متأكد بغيتي تسجل "+(
-  type==="paid"?"توصيلة مؤداة بـ"+money(price):
-  type==="free"?"استعمال هدية الوفاء المجانية":
-  "استعمال هدية مجانية إضافية"
- )+"؟")) return;
 
  const event = {
   id:makeId(),type,date:new Date().toISOString(),
@@ -543,17 +535,10 @@ function recordDelivery(cid) {
 
  if (save()) {
   render();
-  if (event.milestoneAward) {
-   alert("🏆 وصل الزبون لـ50 توصيل مؤدى! تزادو ليه جوج توصيلات مجانية إضافية.");
-  } else if (event.earnedGift) {
-   alert("تسجلات التوصيلة! 🎁 ربح الزبون توصيل فابور للطلبية الموالية.");
-  } else {
-   alert("تسجلات التوصيلة بنجاح 🧡");
-  }
  }
 }
 
-/* إلغاء آخر توصيلة */
+/* إلغاء آخر توصيلة: تأكيد واحد للحماية */
 function undoDelivery(cid) {
  const c = customers.find(x=>String(x.id)===String(cid));
  if (!c) return;
@@ -571,7 +556,6 @@ function undoDelivery(cid) {
   c.paidDeliveries = Math.max(0,paid(c)-1);
 
   if (e.earnedGift) {
-   /* ما نلغيوش هدية سبق للزبون واستعملها */
    if (Number(c.availableGifts)>0) c.availableGifts--;
    else {
     alert("تنبيه: هدية الوفاء المرتبطة بهاد التوصيلة ممكن تكون تستعملات من قبل. راجع الرصيد ديال الهدايا.");
@@ -600,7 +584,6 @@ function undoDelivery(cid) {
 
  if (save()) {
   render();
-  alert("تلغات آخر توصيلة.");
  }
 }
 
@@ -618,7 +601,6 @@ function manualGift(cid) {
 
  if (save()) {
   render();
-  alert("تسجلات الهدية الاستثنائية 🎁");
  }
 }
 
@@ -650,7 +632,7 @@ function deleteCustomer(cid) {
  if (save()) render();
 }
 
-/* تسجيل زبون */
+/* تسجيل زبون بلا تأكيد إضافي */
 $("customerForm").addEventListener("submit",e=>{
  e.preventDefault();
  const name = $("customerName").value.trim();
@@ -672,7 +654,6 @@ $("customerForm").addEventListener("submit",e=>{
  if (!save()) return;
  $("customerForm").reset();
  render();
- alert("تسجل الزبون بنجاح 🧡");
 });
 
 function customerAction(e) {
@@ -694,7 +675,7 @@ $("recentCustomers").addEventListener("click",customerAction);
 $("search").addEventListener("input",renderCustomers);
 $("filter").addEventListener("change",renderCustomers);
 
-/* المالية */
+/* المالية بلا رسالة تأكيد إضافية */
 $("financeForm").addEventListener("submit",e=>{
  e.preventDefault();
  const amount = Number($("financeAmount").value);
@@ -709,7 +690,6 @@ $("financeForm").addEventListener("submit",e=>{
  if (!save()) return;
  $("financeForm").reset();
  render();
- alert("تسجلات الحركة المالية.");
 });
 
 /* التنقل */
@@ -764,7 +744,7 @@ $("importFile").addEventListener("change",async e=>{
  }
 });
 
-/* مسح البيانات */
+/* مسح البيانات: تأكيدان للحماية */
 $("resetBtn").addEventListener("click",()=>{
  if (!confirm("غادي تتمسح جميع بيانات الزبناء والحركات. واش متأكد؟")) return;
  if (!confirm("آخر تأكيد: واش حمّلتي نسخة احتياطية؟")) return;
