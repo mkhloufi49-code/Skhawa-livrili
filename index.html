@@ -4,566 +4,539 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#101012">
-<meta name="description" content="SKHAWA LIVRILI - برنامج وفاء الزبناء">
+<meta name="theme-color" content="#111111">
+<meta name="description" content="SKHAWA LIVRILI - إدارة الزبناء الأوفياء">
 <title>SKHAWA LIVRILI | الإدارة</title>
+
 <style>
-:root{--bg:#101012;--panel:#1b1b20;--panel2:#25252c;--orange:#ff7900;--gold:#ffad52;--white:#fff;--muted:#aaaab5;--border:#36363e;--green:#42d392;--red:#ff6262}
+:root {
+  --bg:#101010;
+  --panel:#1b1b1b;
+  --panel2:#242424;
+  --orange:#ff7900;
+  --orange2:#ff9d36;
+  --text:#f7f7f7;
+  --muted:#aaa;
+  --green:#42d392;
+  --red:#ff6565;
+  --border:#333;
+}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--white);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+body{
+  margin:0;background:var(--bg);color:var(--text);
+  font-family:Arial,Tahoma,sans-serif;line-height:1.6;
+}
 button,input,select{font:inherit}
 button{cursor:pointer}
-.app{max-width:1100px;margin:auto;padding:15px;padding-bottom:45px}
-header{display:flex;justify-content:space-between;align-items:center;padding:20px;border:1px solid var(--border);border-radius:20px;background:linear-gradient(135deg,#25252b,#151518);margin-bottom:17px}
-h1{font-size:clamp(21px,5vw,30px);margin:0;font-weight:900}
-h1 span{color:var(--orange)}
-header p{font-size:12px;color:var(--muted);margin:7px 0 0}
-.logo{width:48px;height:48px;display:grid;place-items:center;border-radius:15px;background:var(--orange);color:#111;font-size:26px;font-weight:900}
-nav{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-bottom:20px}
-nav button{background:var(--panel);color:var(--muted);border:1px solid var(--border);border-radius:12px;padding:12px 3px;font-size:12px;font-weight:800}
-nav button.active{color:var(--gold);border-color:var(--orange);background:#ff790018}
-section{display:none}
-section.active{display:block}
-h2{font-size:21px;margin:0 0 15px}
-.subtitle{display:block;font-size:12px;font-weight:400;color:var(--muted);margin-top:5px}
-.stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-bottom:17px}
-.stat,.card,.customer{background:var(--panel);border:1px solid var(--border);border-radius:17px;padding:16px;margin-bottom:13px;min-width:0}
-.stat .label{font-size:12px;color:var(--muted)}
-.stat .value{font-size:clamp(23px,6vw,32px);font-weight:900;color:var(--gold);margin-top:7px;overflow-wrap:anywhere}
-.stat small{font-size:11px;color:var(--muted)}
-h3{font-size:16px;margin:0 0 13px}
-.row{display:flex;gap:9px;flex-wrap:wrap}
-.btn{border:1px solid transparent;border-radius:11px;padding:11px 14px;min-height:42px;font-weight:800}
-.primary{background:var(--orange);color:#111}
-.secondary{background:var(--panel2);color:white;border-color:var(--border)}
-.danger{background:#3a1d1d;color:#ffaaaa;border-color:#713838}
-.success{background:#153829;color:#a3f2c7;border-color:#276648}
-.small{font-size:12px;padding:8px 10px;min-height:34px}
-.full{width:100%}
-.field{margin-bottom:13px}
-.field label{display:block;font-size:13px;margin-bottom:7px;color:#ddd}
-.field input,.field select,.search{width:100%;min-height:44px;background:#111114;border:1px solid var(--border);border-radius:11px;padding:11px;color:white;outline:none}
-.field input:focus,.field select:focus,.search:focus{border-color:var(--orange)}
-.search{margin-bottom:13px}
-.hint{font-size:12px;line-height:1.8;color:var(--muted)}
-.notice{padding:12px;border:1px solid #70471e;border-radius:12px;color:#ffd1a0;background:#ff790010;font-size:13px;line-height:1.8;margin-bottom:14px}
-.notice.good{border-color:#276648;color:#a3f2c7;background:#153829}
-.customer-list{display:grid;gap:11px}
-.customer-top{display:flex;justify-content:space-between;gap:8px;align-items:flex-start}
-.customer-name{font-size:16px;font-weight:900;overflow-wrap:anywhere}
-.phone{direction:ltr;text-align:right;font-size:13px;color:var(--muted);margin-top:5px}
-.badge{font-size:11px;font-weight:800;border-radius:20px;padding:5px 9px;background:#ff79001c;color:var(--gold);white-space:nowrap}
-.metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;margin:14px 0}
-.metric{text-align:center;padding:9px 3px;background:var(--panel2);border-radius:10px}
-.metric strong{display:block;font-size:19px;color:var(--gold)}
-.metric span{display:block;font-size:10px;color:var(--muted);margin-top:4px}
-.progress{height:7px;background:#38383f;border-radius:10px;overflow:hidden;margin:10px 0 6px}
-.progress div{height:100%;background:linear-gradient(90deg,var(--orange),var(--gold))}
+.app{max-width:1100px;margin:auto;padding:18px}
+header{
+  background:linear-gradient(135deg,#242424,#111);
+  border:1px solid #383838;border-radius:22px;padding:23px;
+  margin-bottom:18px;position:relative;overflow:hidden;
+}
+header:after{
+  content:"";position:absolute;width:160px;height:160px;
+  border:28px solid #ff790019;border-radius:50%;
+  left:-55px;top:-65px;
+}
+.brand{color:var(--orange);font-size:clamp(25px,5vw,38px);font-weight:900;letter-spacing:1px}
+.slogan{color:#ddd;font-size:14px}
+.header-label{color:#aaa;font-size:12px;margin-top:8px}
+nav{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0}
+.nav-btn,.btn{
+  border:1px solid var(--border);border-radius:12px;padding:11px 15px;
+  background:var(--panel2);color:white;font-weight:700;
+}
+.nav-btn.active,.btn.primary{background:var(--orange);color:#171717;border-color:var(--orange)}
+.btn.green{background:#174a34;border-color:#246d4b;color:#9df4c7}
+.btn.red{background:#4b2020;border-color:#703030;color:#ffaaaa}
+.btn.small{padding:7px 10px;font-size:13px}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.stats{
+  display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:18px
+}
+.stat,.card{
+  background:var(--panel);border:1px solid var(--border);
+  border-radius:17px;padding:16px;min-width:0;
+}
+.stat-label{font-size:13px;color:var(--muted)}
+.stat-value{font-size:28px;font-weight:900;color:var(--orange);overflow-wrap:anywhere}
+.section-title{font-size:20px;font-weight:900;margin:0 0 14px}
+.card{margin-bottom:16px}
+.field{display:flex;flex-direction:column;gap:6px;margin-bottom:12px}
+.field label{font-size:13px;color:#ccc}
+input,select{
+  width:100%;background:#111;color:white;border:1px solid #444;
+  padding:12px;border-radius:10px;outline:none;
+}
+input:focus,select:focus{border-color:var(--orange)}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.actions{display:flex;gap:8px;flex-wrap:wrap}
+.search-row{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:13px}
+.search-row input{flex:1;min-width:170px}
+.customer-list{display:grid;gap:12px}
+.customer{
+  background:#191919;border:1px solid #363636;border-radius:15px;padding:15px;
+}
+.customer-top{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+.customer-name{font-size:18px;font-weight:900;overflow-wrap:anywhere}
+.customer-phone{font-size:13px;color:var(--muted);direction:ltr;text-align:right}
+.category{font-size:12px;font-weight:bold;padding:4px 9px;border-radius:20px;white-space:nowrap}
+.vip{background:#493710;color:#ffd46b;border:1px solid #a87c24}
+.premium{background:#303030;color:#eee;border:1px solid #777}
+.fidele{background:#4b2a13;color:#ffb779;border:1px solid #a95720}
+.passage{background:#292929;color:#bbb;border:1px solid #444}
+.customer-stats{
+  display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:14px 0
+}
+.mini{background:#242424;border-radius:10px;padding:9px;text-align:center}
+.mini span{display:block;font-size:11px;color:#aaa}
+.mini strong{font-size:18px;overflow-wrap:anywhere}
+.progress{height:7px;background:#343434;border-radius:9px;overflow:hidden;margin:8px 0}
+.progress div{height:100%;background:var(--orange);border-radius:9px}
 .customer-actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}
-.empty{padding:24px;text-align:center;color:var(--muted);border:1px dashed var(--border);border-radius:13px}
-.table-wrap{overflow-x:auto}
-table{width:100%;border-collapse:collapse;min-width:400px}
-th,td{text-align:right;padding:10px 8px;border-bottom:1px solid var(--border);font-size:12px}
-th{color:var(--gold)}
-td{color:#e5e5ea}
-.modal-bg{display:none;position:fixed;inset:0;z-index:20;background:#000b;align-items:center;justify-content:center;padding:12px}
-.modal-bg.open{display:flex}
-.modal{background:#1b1b20;border:1px solid var(--border);border-radius:20px;padding:19px;width:100%;max-width:500px;max-height:90vh;overflow:auto}
-.modal h3{font-size:19px}
-.modal-actions{display:flex;gap:9px;margin-top:17px}
-.modal-actions button{flex:1}
-.toast{display:none;position:fixed;z-index:30;bottom:18px;left:15px;right:15px;margin:auto;max-width:450px;text-align:center;padding:13px;border:1px solid var(--border);border-radius:12px;background:#28282e;box-shadow:0 5px 25px #0008}
-.toast.show{display:block}
-footer{text-align:center;color:#777;font-size:11px;line-height:1.8;margin-top:25px}
-@media(min-width:700px){.stats{grid-template-columns:repeat(4,minmax(0,1fr))}.customer-list{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.notice{padding:12px;border-radius:12px;background:#38260f;color:#ffd59a;margin-bottom:12px}
+.empty{text-align:center;color:#aaa;padding:28px 10px}
+.hidden{display:none!important}
+.small-muted{font-size:12px;color:#999}
+#toast{
+  position:fixed;bottom:20px;left:50%;transform:translateX(-50%);
+  background:#f7f7f7;color:#111;padding:12px 18px;border-radius:12px;
+  box-shadow:0 5px 25px #0008;z-index:20;max-width:90%;display:none;font-weight:bold
+}
+footer{text-align:center;color:#777;font-size:12px;padding:18px}
+@media(max-width:650px){
+  .app{padding:12px}
+  .stats{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+  .stat{padding:12px}
+  .stat-value{font-size:24px}
+  .form-grid{grid-template-columns:1fr}
+  .customer-stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .customer-top{align-items:flex-start}
+  .nav-btn{flex:1}
+}
 </style>
 </head>
+
 <body>
 <div class="app">
 <header>
-  <div>
-    <h1>SKHAWA <span>LIVRILI</span></h1>
-    <p>السخاوة فالقلب، وليڤري فالوقت ⚡🧡</p>
-  </div>
-  <div class="logo">S</div>
+  <div class="brand">SKHAWA LIVRILI ⚡</div>
+  <div class="slogan">السخاوة فالقلب، وليڤري فالوقت 🧡</div>
+  <div class="header-label">فضاء الإدارة · برنامج وفاء الزبناء</div>
 </header>
 
 <nav>
-  <button class="active" data-page="dashboard">🏠 الرئيسية</button>
-  <button data-page="customers">👥 الزبناء</button>
-  <button data-page="finance">💰 المالية</button>
-  <button data-page="settings">⚙️ الإعدادات</button>
+  <button class="nav-btn active" data-page="dashboard">الرئيسية</button>
+  <button class="nav-btn" data-page="customers">الزبناء</button>
+  <button class="nav-btn" data-page="add">إضافة زبون +</button>
+  <button class="nav-btn" data-page="backup">النسخ الاحتياطي</button>
 </nav>
 
-<section id="dashboard" class="active">
-  <h2>لوحة الإدارة <span class="subtitle">نظرة عامة على برنامج الوفاء</span></h2>
+<section id="page-dashboard">
   <div class="stats">
-    <div class="stat"><div class="label">مجموع الزبناء</div><div class="value" id="sCustomers">0</div><small>زبون مسجل</small></div>
-    <div class="stat"><div class="label">مجموع التوصيلات المؤداة</div><div class="value" id="sDeliveries">0</div><small>توصيلة مؤداة</small></div>
-    <div class="stat"><div class="label">النقاط</div><div class="value" id="sPoints">0</div><small>10 نقاط لكل توصيل مؤدى</small></div>
-    <div class="stat"><div class="label">هدايا متاحة</div><div class="value" id="sGifts">0</div><small>توصيلات مجانية مستحقة</small></div>
+    <div class="stat"><div class="stat-label">مجموع الزبناء</div><div class="stat-value" id="statCustomers">0</div></div>
+    <div class="stat"><div class="stat-label">التوصيلات المؤداة</div><div class="stat-value" id="statPaid">0</div></div>
+    <div class="stat"><div class="stat-label">التوصيلات المجانية</div><div class="stat-value" id="statFree">0</div></div>
+    <div class="stat"><div class="stat-label">مجموع النقاط</div><div class="stat-value" id="statPoints">0</div></div>
   </div>
-  <div id="dashboardNotice"></div>
+
   <div class="card">
-    <h3>⚡ إجراءات سريعة</h3>
-    <div class="row">
-      <button class="btn primary" id="quickAdd">＋ زيد زبون</button>
-      <button class="btn secondary" id="quickDelivery">🛵 سجل توصيل</button>
+    <h2 class="section-title">🔔 تنبيهات الزبناء</h2>
+    <div id="alerts"></div>
+  </div>
+
+  <div class="card">
+    <h2 class="section-title">⭐ آخر الزبناء المضافين</h2>
+    <div id="recentCustomers" class="customer-list"></div>
+  </div>
+</section>
+
+<section id="page-customers" class="hidden">
+  <div class="card">
+    <h2 class="section-title">لائحة الزبناء</h2>
+    <div class="search-row">
+      <input id="search" placeholder="قلب بالسمية أو رقم الهاتف..." />
+      <select id="filterCategory" aria-label="تصنيف الزبون">
+        <option value="all">جميع التصنيفات</option>
+        <option value="VIP">Client VIP</option>
+        <option value="Premium">Client Premium</option>
+        <option value="Fidèle">Client Fidèle</option>
+        <option value="Passage">Client Passage</option>
+      </select>
     </div>
-  </div>
-  <div class="card"><h3>⭐ باقي 3 توصيلات أو أقل على الهدية</h3><div id="nearGift"></div></div>
-  <div class="card"><h3>🕘 آخر العمليات</h3><div id="recent"></div></div>
-</section>
-
-<section id="customers">
-  <h2>الزبناء الأوفياء <span class="subtitle">سجل الزبناء وتابع التوصيلات والهدايا</span></h2>
-  <div class="row" style="margin-bottom:13px">
-    <button class="btn primary" id="addCustomer">＋ زبون جديد</button>
-    <button class="btn secondary" id="deliveryButton">🛵 سجل توصيل</button>
-  </div>
-  <input class="search" id="search" type="search" placeholder="🔎 قلب بالاسم أو رقم الهاتف...">
-  <div class="customer-list" id="customerList"></div>
-</section>
-
-<section id="finance">
-  <h2>المالية <span class="subtitle">المداخيل والمصاريف</span></h2>
-  <div class="stats">
-    <div class="stat"><div class="label">مداخيل التوصيل</div><div class="value" id="fIncome">0</div><small>درهم</small></div>
-    <div class="stat"><div class="label">مصاريف</div><div class="value" id="fExpenses">0</div><small>درهم</small></div>
-    <div class="stat"><div class="label">الصافي</div><div class="value" id="fNet">0</div><small>درهم</small></div>
-    <div class="stat"><div class="label">توصيلات مجانية</div><div class="value" id="fFree">0</div><small>هدية مستعملة</small></div>
-  </div>
-  <div class="card">
-    <h3>＋ إضافة عملية مالية</h3>
-    <div class="field"><label for="financeType">نوع العملية</label><select id="financeType"><option value="expense">مصروف</option><option value="income">مدخول إضافي</option></select></div>
-    <div class="field"><label for="financeAmount">المبلغ بالدرهم</label><input id="financeAmount" type="number" min="0.01" step="0.01" placeholder="مثال: 25"></div>
-    <div class="field"><label for="financeDescription">التفاصيل</label><input id="financeDescription" maxlength="120" placeholder="مثال: البنزين"></div>
-    <button class="btn primary full" id="saveFinance">حفظ العملية</button>
-  </div>
-  <div class="card"><h3>📋 سجل العمليات المالية</h3><div id="financeHistory"></div></div>
-</section>
-
-<section id="settings">
-  <h2>الإعدادات <span class="subtitle">النسخ الاحتياطي وحماية البيانات</span></h2>
-  <div class="notice">البيانات كتتحفظ فهاد المتصفح والجهاز. قبل تغيير الهاتف أو المتصفح، حمّل نسخة احتياطية واحتافظ بها.</div>
-  <div class="card">
-    <h3>💾 النسخ الاحتياطي</h3>
-    <button class="btn primary full" id="exportBackup">⬇️ تحميل نسخة احتياطية</button>
-    <button class="btn secondary full" style="margin-top:9px" id="importBackup">⬆️ استرجاع نسخة احتياطية</button>
-    <input id="backupFile" type="file" accept=".json,application/json" hidden>
-    <p class="hint">الاسترجاع كيعوّض البيانات الحالية ببيانات النسخة المختارة.</p>
-  </div>
-  <div class="card">
-    <h3>📊 قواعد الوفاء</h3>
-    <p class="hint">كل توصيل مؤدى = 10 نقاط.</p>
-    <p class="hint">من بعد 10 توصيلات مؤداة، كتستحق توصيل مجاني واحد.</p>
-    <p class="hint">كل ما يوصل الزبون لـ50 توصيل مؤدى إضافي حسب مراحل 50، كيتزاد ليه رصيد ديال جوج توصيلات مجانية.</p>
-    <p class="hint">المجموع من أول تعامل كيبقى محفوظ، والهدايا كتتسجل بوحدها.</p>
-  </div>
-  <div class="card">
-    <h3>⚠️ مسح البيانات</h3>
-    <p class="hint">هاد العملية كتحذف جميع بيانات التطبيق من هاد المتصفح.</p>
-    <button class="btn danger full" id="resetData">مسح جميع البيانات</button>
+    <div id="customerList" class="customer-list"></div>
   </div>
 </section>
 
-<footer>SKHAWA LIVRILI ©<br>السخاوة فالقلب، وليڤري فالوقت ⚡🧡</footer>
+<section id="page-add" class="hidden">
+  <div class="card">
+    <h2 class="section-title" id="formTitle">➕ إضافة زبون جديد</h2>
+    <form id="customerForm">
+      <div class="form-grid">
+        <div class="field">
+          <label for="customerName">الاسم الكامل *</label>
+          <input id="customerName" required maxlength="100" placeholder="مثال: محمد العلوي">
+        </div>
+        <div class="field">
+          <label for="customerPhone">رقم الهاتف *</label>
+          <input id="customerPhone" required inputmode="tel" maxlength="25" placeholder="06xxxxxxxx">
+        </div>
+      </div>
+      <div class="field">
+        <label for="customerNote">ملاحظات (اختياري)</label>
+        <input id="customerNote" maxlength="250" placeholder="معلومات إضافية على الزبون">
+      </div>
+      <div class="actions">
+        <button class="btn primary" type="submit">حفظ الزبون</button>
+        <button class="btn" type="button" id="cancelEdit">إلغاء</button>
+      </div>
+    </form>
+  </div>
+</section>
+
+<section id="page-backup" class="hidden">
+  <div class="card">
+    <h2 class="section-title">💾 النسخ الاحتياطي</h2>
+    <p>خرج نسخة من بيانات الزبناء واحتافظ بها فالتليفون. تقدر ترجعها من بعد باستيراد الملف.</p>
+    <div class="actions">
+      <button class="btn primary" id="exportBtn">تنزيل نسخة احتياطية</button>
+      <button class="btn" id="importBtn">استيراد نسخة</button>
+      <input type="file" id="importFile" accept=".json,application/json" class="hidden">
+    </div>
+    <p class="small-muted">مهم: البيانات كتتحفظ فهاد المتصفح. مسح بيانات المتصفح أو تبديل الجهاز يقدر يأثر عليها، لذلك دير نسخة احتياطية بانتظام.</p>
+  </div>
+</section>
+
+<footer>SKHAWA LIVRILI · السخاوة فالقلب، وليڤري فالوقت ⚡🧡</footer>
 </div>
 
-<div class="modal-bg" id="modalBg" role="dialog" aria-modal="true">
-  <div class="modal">
-    <h3 id="modalTitle">عملية جديدة</h3>
-    <div id="modalContent"></div>
-    <div class="modal-actions">
-      <button class="btn secondary" id="modalCancel">إلغاء</button>
-      <button class="btn primary" id="modalConfirm">تأكيد</button>
-    </div>
-  </div>
-</div>
-<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<div id="toast" role="status"></div>
 
 <script>
-(function(){
+(() => {
 "use strict";
 
-/* نفس المفتاح باش نحافظو على بيانات النسخة السابقة */
 const STORAGE_KEY = "skhawa_livrili_loyalty_v1";
 let customers = [];
-let transactions = [];
-let financeRecords = [];
-let toastTimer = null;
-let modalAction = null;
+let editingId = null;
 
 const $ = id => document.getElementById(id);
-const money = n => (Number(n)||0).toLocaleString("fr-MA",{maximumFractionDigits:2});
-const dateText = d => {
-  try { return new Date(d).toLocaleString("fr-MA"); }
-  catch(e){ return String(d||""); }
-};
-const uid = () => "id-" + Date.now().toString(36) + "-" + Math.random().toString(36).slice(2,9);
-const safe = v => String(v ?? "").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-const phoneClean = p => String(p||"").replace(/\s+/g,"").trim();
+const safe = value => String(value ?? "").replace(/[&<>"']/g, ch => ({
+  "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+}[ch]));
 
-function toast(message, type="good"){
-  const el=$("toast");
-  el.textContent=message;
-  el.className="toast show "+type;
-  clearTimeout(toastTimer);
-  toastTimer=setTimeout(()=>el.className="toast",3000);
+function uid(){
+  return "c_" + Date.now().toString(36) + Math.random().toString(36).slice(2,8);
+}
+function number(value){
+  const n = Number(value);
+  return Number.isFinite(n) && n > 0 ? Math.floor(n) : 0;
+}
+function toast(message){
+  const el = $("toast");
+  el.textContent = message;
+  el.style.display = "block";
+  clearTimeout(toast.timer);
+  toast.timer = setTimeout(() => el.style.display = "none", 2800);
 }
 
-function askModal(title, content, action, confirmText="تأكيد"){
-  $("modalTitle").textContent=title;
-  $("modalContent").innerHTML=content;
-  $("modalConfirm").textContent=confirmText;
-  modalAction=action;
-  $("modalBg").classList.add("open");
-}
-function closeModal(){
-  $("modalBg").classList.remove("open");
-  modalAction=null;
-  $("modalContent").innerHTML="";
-}
-$("modalCancel").addEventListener("click",closeModal);
-$("modalConfirm").addEventListener("click",()=>{
-  if(!modalAction)return;
-  const action=modalAction;
-  try{
-    const result=action();
-    if(result!==false)closeModal();
-  }catch(e){
-    console.error(e);
-    toast("وقع مشكل. راجع المعلومات وحاول من جديد.","bad");
-  }
-});
-$("modalBg").addEventListener("click",e=>{
-  if(e.target===$("modalBg"))closeModal();
-});
-
-function normaliseCustomer(c){
-  c=c||{};
-  const id=String(c.id||uid());
-  const paid=Math.max(0,Number(c.totalPaid ?? c.total_orders ?? c.totalOrders ?? c.orders ?? 0)||0);
-  const oldCycle=Number(c.cyclePaid ?? c.cycle_paid);
-  const cycle=Number.isFinite(oldCycle)?Math.max(0,oldCycle%10):paid%10;
+function normalizeCustomer(c){
+  const paid = number(c.paid ?? c.paidDeliveries ?? c.paid_deliveries ??
+    c.totalOrders ?? c.total_orders ?? c.orders ?? c.commandes ?? c.total ?? 0);
+  const free = number(c.free ?? c.freeDeliveries ?? c.free_deliveries ??
+    c.totalFree ?? c.total_free ?? c.freeOrders ?? 0);
+  const oldPoints = number(c.points ?? c.pointes ?? c.pts ?? 0);
+  const cycle = c.paidCycle != null ? number(c.paidCycle) : paid % 10;
   return {
-    id,
-    name:String(c.name||c.Name||c.customer_name||"زبون بلا اسم"),
-    phone:String(c.phone||c.Phone||""),
-    category:String(c.category||"عادي"),
-    points:Math.max(0,Number(c.points ?? c.pointes ?? paid*10)||0),
-    totalPaid:paid,
-    totalAll:Math.max(paid,Number(c.totalAll ?? c.total_orders_all ?? paid)||paid),
-    cyclePaid:cycle,
-    giftCredits:Math.max(0,Number(c.giftCredits ?? c.gift_credits ?? c.freeDeliveries ?? 0)||0),
-    claimedMilestones:Array.isArray(c.claimedMilestones)?c.claimedMilestones:[],
-    createdAt:c.createdAt||c.created_at||new Date().toISOString()
+    id: String(c.id ?? c.customer_id ?? uid()),
+    name: String(c.name ?? c.Name ?? c.nom ?? c.customerName ?? "زبون بلا اسم"),
+    phone: String(c.phone ?? c.Phone ?? c.telephone ?? c.mobile ?? ""),
+    note: String(c.note ?? c.notes ?? ""),
+    paid,
+    free,
+    points: oldPoints || paid * 10,
+    paidCycle: cycle % 10,
+    giftBalance: number(c.giftBalance ?? c.gift_balance ?? c.freeAvailable ?? c.free_available ?? 0),
+    milestone50Granted: Boolean(c.milestone50Granted ?? c.milestone_50_granted ?? paid >= 50),
+    createdAt: c.createdAt ?? c.created_at ?? new Date().toISOString(),
+    updatedAt: c.updatedAt ?? c.updated_at ?? new Date().toISOString()
   };
 }
 
-function loadData(){
+function load(){
   try{
-    const raw=localStorage.getItem(STORAGE_KEY);
-    if(!raw)return;
-    const data=JSON.parse(raw);
-    customers=Array.isArray(data.customers)?data.customers.map(normaliseCustomer):[];
-    transactions=Array.isArray(data.transactions)?data.transactions:[];
-    financeRecords=Array.isArray(data.financeRecords)?data.financeRecords:[];
-    /* محاولة قراءة سجل مالي قديم إن كان موجوداً */
-    if(!financeRecords.length && Array.isArray(data.finances))financeRecords=data.finances;
-  }catch(e){
-    console.error("Load error",e);
-    toast("ما قدرناش نقراو البيانات المحفوظة. ما تمسح والو.","bad");
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if(!raw) return;
+    const data = JSON.parse(raw);
+    const list = Array.isArray(data) ? data :
+      (Array.isArray(data.customers) ? data.customers :
+      (Array.isArray(data.Customers) ? data.Customers : []));
+    customers = list.map(normalizeCustomer);
+  }catch(err){
+    console.error("Load error:", err);
+    toast("ما قدرناش نقراو البيانات المحفوظة.");
   }
 }
-function saveData(){
-  try{
-    localStorage.setItem(STORAGE_KEY,JSON.stringify({customers,transactions,financeRecords,updatedAt:new Date().toISOString()}));
-    return true;
-  }catch(e){
-    toast("تعذر الحفظ. حمّل نسخة احتياطية وتأكد من مساحة المتصفح.","bad");
-    return false;
-  }
-}
-
-function showPage(page){
-  document.querySelectorAll("section").forEach(s=>s.classList.toggle("active",s.id===page));
-  document.querySelectorAll("nav button").forEach(b=>b.classList.toggle("active",b.dataset.page===page));
-  renderAll();
-}
-document.querySelectorAll("nav button").forEach(b=>b.addEventListener("click",()=>showPage(b.dataset.page)));
-
-function findCustomer(id){return customers.find(c=>c.id===id)}
-function addTransaction(customer,type,amount,note){
-  transactions.unshift({
-    id:uid(),customerId:customer?customer.id:null,
-    customerName:customer?customer.name:"",
-    type,amount:Number(amount)||0,note:String(note||""),
-    date:new Date().toISOString()
-  });
-  if(transactions.length>1500)transactions=transactions.slice(0,1500);
-}
-
-function openCustomerForm(id=null){
-  const c=id?findCustomer(id):null;
-  const content=`
-    <div class="field"><label for="cName">الاسم الكامل</label><input id="cName" maxlength="100" value="${safe(c?.name||"")}" placeholder="اسم الزبون"></div>
-    <div class="field"><label for="cPhone">رقم الهاتف</label><input id="cPhone" type="tel" maxlength="25" value="${safe(c?.phone||"")}" placeholder="06XXXXXXXX"></div>
-    <div class="field"><label for="cCategory">الفئة</label><select id="cCategory">
-      <option value="عادي" ${c?.category==="عادي"?"selected":""}>عادي</option>
-      <option value="وفي" ${c?.category==="وفي"?"selected":""}>وفي</option>
-      <option value="مميز" ${c?.category==="مميز"?"selected":""}>مميز</option>
-    </select></div>
-    ${c?`<p class="hint">المجموع الحالي: ${c.totalPaid} توصيل مؤدى. تعديل الاسم أو الهاتف ما كيبدلش سجل التوصيلات.</p>`:""}
-  `;
-  askModal(c?"تعديل معلومات الزبون":"إضافة زبون جديد",content,()=>{
-    const name=$("cName").value.trim();
-    const phone=phoneClean($("cPhone").value);
-    const category=$("cCategory").value;
-    if(!name){toast("دخل اسم الزبون أولا.","bad");return false}
-    if(phone && customers.some(x=>x.id!==id&&phoneClean(x.phone)===phone)){
-      toast("هاد رقم الهاتف مسجل عند زبون آخر.","bad");return false;
-    }
-    if(c){
-      c.name=name;c.phone=phone;c.category=category;
-    }else{
-      customers.push({id:uid(),name,phone,category,points:0,totalPaid:0,totalAll:0,cyclePaid:0,giftCredits:0,claimedMilestones:[],createdAt:new Date().toISOString()});
-      addTransaction(null,"customer",0,"تسجيل زبون: "+name);
-    }
-    saveData();renderAll();toast(c?"تبدلات معلومات الزبون":"تزاد الزبون بنجاح");
-  },c?"حفظ التغييرات":"إضافة الزبون");
-}
-
-function openDeliveryForm(defaultId=null){
-  if(!customers.length){
-    toast("زيد زبون أولا قبل تسجيل التوصيل.","bad");
-    openCustomerForm();
-    return;
-  }
-  const options=customers.slice().sort((a,b)=>a.name.localeCompare(b.name,"ar")).map(c=>
-    `<option value="${safe(c.id)}" ${c.id===defaultId?"selected":""}>${safe(c.name)} — ${safe(c.phone||"بلا رقم")}</option>`
-  ).join("");
-  const content=`
-    <div class="field"><label for="dCustomer">اختار الزبون</label><select id="dCustomer">${options}</select></div>
-    <div class="field"><label for="dType">نوع التوصيل</label><select id="dType">
-      <option value="paid">توصيل مؤدى</option>
-      <option value="free">توصيل مجاني / هدية</option>
-    </select></div>
-    <div class="field"><label for="dPrice">ثمن التوصيل بالدرهم</label><input id="dPrice" type="number" min="0" step="0.5" value="15" inputmode="decimal"></div>
-    <div class="field"><label for="dNote">ملاحظة (اختياري)</label><input id="dNote" maxlength="120" placeholder="ملاحظة على الطلب"></div>
-    <div id="giftInfo" class="notice"></div>
-    <p class="hint">تأكد من الزبون ونوع التوصيل والثمن، ومن بعد ضغط على تأكيد مرة وحدة.</p>
-  `;
-  askModal("تسجيل توصيل",content,()=>{
-    const customer=findCustomer($("dCustomer").value);
-    const type=$("dType").value;
-    const price=Number($("dPrice").value);
-    const note=$("dNote").value.trim();
-    if(!customer){toast("اختار الزبون.","bad");return false}
-    if(!Number.isFinite(price)||price<0){toast("دخل ثمن صحيح.","bad");return false}
-    if(type==="paid"){
-      customer.totalPaid++;
-      customer.totalAll++;
-      customer.points+=10;
-      customer.cyclePaid++;
-      let giftMessage="";
-      if(customer.cyclePaid>=10){
-        customer.cyclePaid=0;
-        customer.giftCredits++;
-        giftMessage=" استحق هدية عادية جديدة.";
-      }
-      if(customer.totalPaid>0 && customer.totalPaid%50===0 && !customer.claimedMilestones.includes(customer.totalPaid)){
-        customer.giftCredits+=2;
-        customer.claimedMilestones.push(customer.totalPaid);
-        giftMessage+=" وصل لـ"+customer.totalPaid+" توصيل مؤدى واستحق جوج هدايا إضافية.";
-      }
-      addTransaction(customer,"paid",price,note||"توصيل مؤدى");
-      toast("تسجل التوصيل بنجاح. +10 نقاط."+giftMessage);
-    }else{
-      if(customer.giftCredits<=0){
-        toast("هاد الزبون ما عندوش هدية متاحة. اختار توصيل مؤدى أو راجع رصيد الهدايا.","bad");
-        return false;
-      }
-      customer.giftCredits--;
-      customer.totalAll++;
-      addTransaction(customer,"free",0,note||"توصيل مجاني");
-      toast("تسجل التوصيل المجاني. باقي ليه "+customer.giftCredits+" هدية.");
-    }
-    saveData();renderAll();
-  },"تأكيد التوصيل");
-
-  const updateGiftInfo=()=>{
-    const id=$("dCustomer").value;
-    const c=findCustomer(id);
-    if(!c)return;
-    const type=$("dType").value;
-    const info=$("giftInfo");
-    if(type==="free"){
-      info.textContent=c.giftCredits>0?"الهدايا المتاحة: "+c.giftCredits:"ما كايناش هدية متاحة لهاد الزبون.";
-      info.className=c.giftCredits>0?"notice good":"notice";
-    }else{
-      const remaining=10-c.cyclePaid;
-      info.textContent="المجموع: "+c.totalPaid+" توصيل مؤدى. باقي "+remaining+" توصيل"+(remaining===1?"":"ات")+" باش يستحق هدية عادية. الهدايا المتاحة حاليا: "+c.giftCredits+".";
-      info.className="notice";
-    }
-  };
-  $("dCustomer").addEventListener("change",updateGiftInfo);
-  $("dType").addEventListener("change",()=>{
-    $("dPrice").disabled=$("dType").value==="free";
-    if($("dType").value==="free")$("dPrice").value="0";
-    else if(Number($("dPrice").value)===0)$("dPrice").value="15";
-    updateGiftInfo();
-  });
-  updateGiftInfo();
-}
-
-function deleteCustomer(id){
-  const c=findCustomer(id);if(!c)return;
-  askModal("حذف الزبون",`<p>واش متأكد بغيتي تحذف <strong>${safe(c.name)}</strong>؟</p><p class="hint">سجل العمليات القديمة غادي يبقى، ولكن الزبون غادي يتحيد من القائمة.</p>`,()=>{
-    customers=customers.filter(x=>x.id!==id);
-    saveData();renderAll();toast("تحذف الزبون.");
-  },"حذف الزبون");
-}
-
-function renderCustomers(){
-  const query=$("search").value.trim().toLowerCase();
-  const list=customers.filter(c=>(c.name+" "+c.phone).toLowerCase().includes(query))
-    .sort((a,b)=>b.totalPaid-a.totalPaid);
-  if(!list.length){
-    $("customerList").innerHTML='<div class="empty">ما لقينا حتى زبون. زيد زبون جديد أو بدّل البحث.</div>';return;
-  }
-  $("customerList").innerHTML=list.map(c=>{
-    const remaining=10-c.cyclePaid;
-    const pct=Math.min(100,c.cyclePaid*10);
-    return `<article class="customer">
-      <div class="customer-top">
-        <div><div class="customer-name">${safe(c.name)}</div><div class="phone">${safe(c.phone||"بلا رقم هاتف")}</div></div>
-        <span class="badge">${safe(c.category)}</span>
-      </div>
-      <div class="metrics">
-        <div class="metric"><strong>${c.totalPaid}</strong><span>توصيل مؤدى</span></div>
-        <div class="metric"><strong>${c.points}</strong><span>نقطة</span></div>
-        <div class="metric"><strong>${c.giftCredits}</strong><span>هدايا متاحة</span></div>
-      </div>
-      <div class="hint">المجموع من أول تعامل: <strong>${c.totalAll}</strong> توصيل</div>
-      <div class="progress"><div style="width:${pct}%"></div></div>
-      <div class="hint">${c.cyclePaid===0?"بداية دورة جديدة":`داز ${c.cyclePaid} من 10 توصيلات مؤداة`}. باقي ${remaining} باش يستحق هدية عادية.</div>
-      ${remaining<=3?'<p class="hint" style="color:var(--gold)">⭐ قرب يستحق الهدية!</p>':""}
-      <div class="customer-actions">
-        <button class="btn primary small" data-delivery="${safe(c.id)}">＋ توصيل</button>
-        <button class="btn secondary small" data-edit="${safe(c.id)}">✏️ تعديل</button>
-        <button class="btn danger small" data-delete="${safe(c.id)}">حذف</button>
-      </div>
-    </article>`;
-  }).join("");
-  $("customerList").querySelectorAll("[data-delivery]").forEach(b=>b.addEventListener("click",()=>openDeliveryForm(b.dataset.delivery)));
-  $("customerList").querySelectorAll("[data-edit]").forEach(b=>b.addEventListener("click",()=>openCustomerForm(b.dataset.edit)));
-  $("customerList").querySelectorAll("[data-delete]").forEach(b=>b.addEventListener("click",()=>deleteCustomer(b.dataset.delete)));
-}
-
-function renderDashboard(){
-  $("sCustomers").textContent=customers.length;
-  $("sDeliveries").textContent=customers.reduce((s,c)=>s+c.totalPaid,0);
-  $("sPoints").textContent=customers.reduce((s,c)=>s+c.points,0);
-  $("sGifts").textContent=customers.reduce((s,c)=>s+c.giftCredits,0);
-
-  const alerts=customers.filter(c=>10-c.cyclePaid<=3);
-  $("dashboardNotice").innerHTML=alerts.length?`<div class="notice">🔔 عندك ${alerts.length} زبون قربو يستحقو الهدية. تواصل معاهم وشجعهم يرجعو.</div>`:"";
-  $("nearGift").innerHTML=alerts.length?alerts.sort((a,b)=>a.cyclePaid-b.cyclePaid).map(c=>
-    `<div style="padding:10px 0;border-bottom:1px solid var(--border)"><strong>${safe(c.name)}</strong><div class="hint">باقي ${10-c.cyclePaid} توصيلات مؤداة — ${c.totalPaid} توصيل مؤدى</div></div>`
-  ).join(""):'<div class="empty">ما كاين حتى زبون قريب للهدية حاليا.</div>';
-
-  const recent=transactions.slice(0,6);
-  $("recent").innerHTML=recent.length?`<div class="table-wrap"><table><thead><tr><th>الزبون</th><th>العملية</th><th>المبلغ</th><th>التاريخ</th></tr></thead><tbody>${recent.map(t=>`<tr><td>${safe(t.customerName||"الإدارة")}</td><td>${safe(transactionLabel(t.type))}</td><td>${money(t.amount)} DH</td><td>${safe(dateText(t.date))}</td></tr>`).join("")}</tbody></table></div>`:'<div class="empty">مازال ما تسجلات حتى عملية.</div>';
-}
-
-function transactionLabel(type){
-  return ({paid:"توصيل مؤدى",free:"توصيل مجاني",customer:"تسجيل زبون",income:"مدخول إضافي",expense:"مصروف"}[type]||type||"عملية");
-}
-
-function renderFinance(){
-  const paid=transactions.filter(t=>t.type==="paid").reduce((s,t)=>s+(Number(t.amount)||0),0);
-  const free=transactions.filter(t=>t.type==="free").length;
-  const extra=financeRecords.filter(t=>t.type==="income").reduce((s,t)=>s+(Number(t.amount)||0),0);
-  const expenses=financeRecords.filter(t=>t.type==="expense").reduce((s,t)=>s+(Number(t.amount)||0),0);
-  $("fIncome").textContent=money(paid+extra);
-  $("fExpenses").textContent=money(expenses);
-  $("fNet").textContent=money(paid+extra-expenses);
-  $("fFree").textContent=free;
-
-  const records=financeRecords.slice().sort((a,b)=>new Date(b.date)-new Date(a.date));
-  $("financeHistory").innerHTML=records.length?`<div class="table-wrap"><table><thead><tr><th>النوع</th><th>التفاصيل</th><th>المبلغ</th><th>التاريخ</th><th></th></tr></thead><tbody>${records.map(r=>`<tr><td>${r.type==="expense"?"مصروف":"مدخول"}</td><td>${safe(r.description)}</td><td>${money(r.amount)} DH</td><td>${safe(dateText(r.date))}</td><td><button class="btn danger small" data-fin-delete="${safe(r.id)}">حذف</button></td></tr>`).join("")}</tbody></table></div>`:'<div class="empty">ما كايناش عمليات مالية إضافية.</div>';
-  $("financeHistory").querySelectorAll("[data-fin-delete]").forEach(b=>b.addEventListener("click",()=>{
-    const r=financeRecords.find(x=>x.id===b.dataset.finDelete);if(!r)return;
-    askModal("حذف العملية",`<p>واش متأكد بغيتي تحذف هاد العملية المالية؟</p><p class="hint">${safe(r.description)} — ${money(r.amount)} درهم</p>`,()=>{
-      financeRecords=financeRecords.filter(x=>x.id!==r.id);
-      saveData();renderAll();toast("تحذفات العملية المالية.");
-    },"حذف");
+function save(){
+  localStorage.setItem(STORAGE_KEY, JSON.stringify({
+    customers,
+    updatedAt:new Date().toISOString(),
+    version:2
   }));
 }
 
-function renderAll(){
-  renderDashboard();renderCustomers();renderFinance();
+function category(c){
+  if(c.paid >= 50) return "VIP";
+  if(c.paid >= 20) return "Premium";
+  if(c.paid >= 10) return "Fidèle";
+  return "Passage";
+}
+function categoryLabel(c){
+  const cat = category(c);
+  if(cat === "VIP") return '<span class="category vip">👑 Client VIP</span>';
+  if(cat === "Premium") return '<span class="category premium">🥇 Client Premium</span>';
+  if(cat === "Fidèle") return '<span class="category fidele">🛡️ Client Fidèle</span>';
+  return '<span class="category passage">Client Passage</span>';
 }
 
-$("addCustomer").addEventListener("click",()=>openCustomerForm());
-$("quickAdd").addEventListener("click",()=>openCustomerForm());
-$("deliveryButton").addEventListener("click",()=>openDeliveryForm());
-$("quickDelivery").addEventListener("click",()=>openDeliveryForm());
-$("search").addEventListener("input",renderCustomers);
+function addPaid(id){
+  const c = customers.find(x => x.id === id);
+  if(!c) return;
+  if(!confirm("تأكيد تسجيل توصيل مؤدى للزبون "+c.name+"؟")) return;
 
-$("saveFinance").addEventListener("click",()=>{
-  const type=$("financeType").value;
-  const amount=Number($("financeAmount").value);
-  const description=$("financeDescription").value.trim();
-  if(!Number.isFinite(amount)||amount<=0){toast("دخل مبلغ صحيح أكبر من صفر.","bad");return}
-  if(!description){toast("كتب تفاصيل العملية.","bad");return}
-  financeRecords.unshift({id:uid(),type,amount,description,date:new Date().toISOString()});
-  $("financeAmount").value="";$("financeDescription").value="";
-  saveData();renderAll();toast("تحفظات العملية المالية.");
+  c.paid++;
+  c.points += 10;
+  c.paidCycle = (c.paidCycle + 1) % 10;
+
+  let message = "تسجلات التوصيلة المؤداة. تزادو 10 نقاط.";
+
+  // Every 10 paid deliveries earns one free delivery.
+  if(c.paidCycle === 0){
+    c.giftBalance++;
+    message += " 🎁 استحق توصيل مجاني!";
+  }
+
+  // At 50 paid deliveries, grant two additional free deliveries once.
+  if(c.paid >= 50 && !c.milestone50Granted){
+    c.giftBalance += 2;
+    c.milestone50Granted = true;
+    message += " 👑 وصل لـ50 توصيل مؤدى: تزادو جوج توصيلات مجانية إضافية!";
+  }
+
+  c.updatedAt = new Date().toISOString();
+  save();
+  render();
+  toast(message);
+}
+
+function addFree(id){
+  const c = customers.find(x => x.id === id);
+  if(!c) return;
+  if(c.giftBalance <= 0){
+    toast("ما عندوش توصيل مجاني متاح دابا.");
+    return;
+  }
+  if(!confirm("تأكيد تسجيل توصيل مجاني للزبون "+c.name+"؟")) return;
+
+  c.giftBalance--;
+  c.free++;
+  c.updatedAt = new Date().toISOString();
+  save();
+  render();
+  toast("تسجل التوصيل المجاني بنجاح 🎁");
+}
+
+function deleteCustomer(id){
+  const c = customers.find(x => x.id === id);
+  if(!c) return;
+  if(!confirm("واش متأكد بغيتي تحذف الزبون "+c.name+"؟ هاد العملية غادي تحذف سجلّو من هاد الجهاز.")) return;
+  customers = customers.filter(x => x.id !== id);
+  save();
+  render();
+  toast("تحذف الزبون.");
+}
+
+function editCustomer(id){
+  const c = customers.find(x => x.id === id);
+  if(!c) return;
+  editingId = id;
+  $("formTitle").textContent = "✏️ تعديل معلومات الزبون";
+  $("customerName").value = c.name;
+  $("customerPhone").value = c.phone;
+  $("customerNote").value = c.note;
+  showPage("add");
+}
+function resetForm(){
+  editingId = null;
+  $("customerForm").reset();
+  $("formTitle").textContent = "➕ إضافة زبون جديد";
+}
+function showPage(page){
+  document.querySelectorAll("[id^='page-']").forEach(el => el.classList.add("hidden"));
+  $("page-"+page).classList.remove("hidden");
+  document.querySelectorAll(".nav-btn").forEach(btn => {
+    btn.classList.toggle("active", btn.dataset.page === page);
+  });
+  if(page === "customers") renderCustomers();
+  if(page === "dashboard") renderDashboard();
+}
+
+function customerCard(c){
+  const progress = c.paidCycle % 10;
+  const remaining = progress === 0 ? 10 : 10-progress;
+  const giftMessage = c.giftBalance > 0
+    ? `<div class="notice">🎁 عندو ${c.giftBalance} توصيل مجاني متاح</div>`
+    : (remaining === 3
+      ? `<div class="notice">🔔 باقي ليه 3 توصيلات مؤداة باش يستحق الهدية الجاية</div>` : "");
+
+  return `
+  <article class="customer">
+    <div class="customer-top">
+      <div>
+        <div class="customer-name">${category(c)==="VIP" ? "👑 " : category(c)==="Premium" ? "🥇 " : category(c)==="Fidèle" ? "🛡️ " : ""}${safe(c.name)}</div>
+        <div class="customer-phone">${safe(c.phone || "بلا رقم هاتف")}</div>
+      </div>
+      ${categoryLabel(c)}
+    </div>
+    ${c.note ? `<p class="small-muted">${safe(c.note)}</p>` : ""}
+    <div class="customer-stats">
+      <div class="mini"><span>المؤداة</span><strong>${c.paid}</strong></div>
+      <div class="mini"><span>المجانية المستعملة</span><strong>${c.free}</strong></div>
+      <div class="mini"><span>النقاط</span><strong>${c.points}</strong></div>
+      <div class="mini"><span>مجانية متاحة</span><strong>${c.giftBalance}</strong></div>
+    </div>
+    <div class="small-muted">الدورة الحالية: ${progress}/10 توصيلات مؤداة</div>
+    <div class="progress"><div style="width:${progress*10}%"></div></div>
+    ${giftMessage}
+    <div class="customer-actions">
+      <button class="btn primary small" data-action="paid" data-id="${safe(c.id)}">＋ توصيل مؤدى</button>
+      <button class="btn green small" data-action="free" data-id="${safe(c.id)}" ${c.giftBalance<=0?"disabled":""}>🎁 توصيل مجاني</button>
+      <button class="btn small" data-action="edit" data-id="${safe(c.id)}">تعديل</button>
+      <button class="btn red small" data-action="delete" data-id="${safe(c.id)}">حذف</button>
+    </div>
+  </article>`;
+}
+
+function renderCustomers(){
+  const term = $("search").value.trim().toLowerCase();
+  const filter = $("filterCategory").value;
+  const list = customers.filter(c => {
+    const matches = (c.name+" "+c.phone).toLowerCase().includes(term);
+    return matches && (filter === "all" || category(c) === filter);
+  }).sort((a,b)=>b.paid-a.paid);
+
+  $("customerList").innerHTML = list.length
+    ? list.map(customerCard).join("")
+    : '<div class="empty">ما كاين حتى زبون بهاد البحث. زيد زبون جديد من الفوق.</div>';
+}
+function renderDashboard(){
+  $("statCustomers").textContent = customers.length;
+  $("statPaid").textContent = customers.reduce((s,c)=>s+c.paid,0);
+  $("statFree").textContent = customers.reduce((s,c)=>s+c.free,0);
+  $("statPoints").textContent = customers.reduce((s,c)=>s+c.points,0);
+
+  const alerts = [];
+  customers.forEach(c => {
+    if(c.giftBalance > 0) alerts.push(`<div class="notice">🎁 <b>${safe(c.name)}</b>: عندو ${c.giftBalance} توصيل مجاني متاح.</div>`);
+    else if(c.paidCycle % 10 === 7) alerts.push(`<div class="notice">🔔 <b>${safe(c.name)}</b>: باقي ليه 3 توصيلات مؤداة للهدية الجاية.</div>`);
+    if(c.paid >= 50 && c.milestone50Granted) {
+      // VIP is displayed in the customer list; no repeated alert needed.
+    }
+  });
+  $("alerts").innerHTML = alerts.length ? alerts.join("") : '<div class="empty">ما كاين حتى تنبيه دابا 👌</div>';
+
+  const recent = [...customers].sort((a,b)=>new Date(b.createdAt)-new Date(a.createdAt)).slice(0,5);
+  $("recentCustomers").innerHTML = recent.length
+    ? recent.map(customerCard).join("")
+    : '<div class="empty">مازال ما ضفتي حتى زبون.</div>';
+}
+function render(){
+  renderDashboard();
+  renderCustomers();
+}
+
+document.querySelectorAll(".nav-btn").forEach(btn =>
+  btn.addEventListener("click", () => showPage(btn.dataset.page))
+);
+
+$("customerForm").addEventListener("submit", e => {
+  e.preventDefault();
+  const name = $("customerName").value.trim();
+  const phone = $("customerPhone").value.trim();
+  const note = $("customerNote").value.trim();
+  if(!name || !phone){toast("دخل الاسم ورقم الهاتف.");return;}
+
+  if(editingId){
+    const c = customers.find(x=>x.id===editingId);
+    if(!c) return;
+    c.name = name;
+    c.phone = phone;
+    c.note = note;
+    c.updatedAt = new Date().toISOString();
+    toast("تحدّثات معلومات الزبون.");
+  }else{
+    const duplicate = customers.some(c=>c.phone.replace(/\s/g,"")===phone.replace(/\s/g,""));
+    if(duplicate && !confirm("هاد الرقم كاين من قبل. واش بغيتي تزيد زبون آخر بنفس الرقم؟")) return;
+    customers.unshift({
+      id:uid(),name,phone,note,paid:0,free:0,points:0,
+      paidCycle:0,giftBalance:0,milestone50Granted:false,
+      createdAt:new Date().toISOString(),updatedAt:new Date().toISOString()
+    });
+    toast("تزاد الزبون بنجاح.");
+  }
+  save();
+  resetForm();
+  render();
+  showPage("customers");
+});
+$("cancelEdit").addEventListener("click",()=>{resetForm();showPage("customers");});
+$("search").addEventListener("input",renderCustomers);
+$("filterCategory").addEventListener("change",renderCustomers);
+
+document.addEventListener("click",e=>{
+  const btn=e.target.closest("[data-action]");
+  if(!btn)return;
+  const id=btn.dataset.id;
+  const action=btn.dataset.action;
+  if(action==="paid")addPaid(id);
+  if(action==="free")addFree(id);
+  if(action==="edit")editCustomer(id);
+  if(action==="delete")deleteCustomer(id);
 });
 
-$("exportBackup").addEventListener("click",()=>{
-  const data={version:2,customers,transactions,financeRecords,exportedAt:new Date().toISOString()};
+$("exportBtn").addEventListener("click",()=>{
+  const data={app:"SKHAWA LIVRILI",version:2,exportedAt:new Date().toISOString(),customers};
   const blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"});
   const url=URL.createObjectURL(blob);
   const a=document.createElement("a");
-  a.href=url;a.download="SKHAWA-LIVRILI-backup-"+new Date().toISOString().slice(0,10)+".json";
-  document.body.appendChild(a);a.click();a.remove();
-  setTimeout(()=>URL.revokeObjectURL(url),1500);
-  toast("وجدنا ليك النسخة الاحتياطية. احتافظ بها.");
+  a.href=url;
+  a.download="skhawa-livrili-backup-"+new Date().toISOString().slice(0,10)+".json";
+  a.click();
+  URL.revokeObjectURL(url);
+  toast("وجدنا ليك النسخة الاحتياطية.");
 });
-
-$("importBackup").addEventListener("click",()=>$("backupFile").click());
-$("backupFile").addEventListener("change",async e=>{
-  const file=e.target.files&&e.target.files[0];
+$("importBtn").addEventListener("click",()=>$("importFile").click());
+$("importFile").addEventListener("change",async e=>{
+  const file=e.target.files[0];
   if(!file)return;
   try{
-    const parsed=JSON.parse(await file.text());
-    if(!parsed||!Array.isArray(parsed.customers)||!Array.isArray(parsed.transactions)){
-      throw new Error("Invalid backup");
-    }
-    askModal("استرجاع النسخة الاحتياطية",`<div class="notice">النسخة فيها ${parsed.customers.length} زبون و${parsed.transactions.length} عملية. غادي تعوّض البيانات الحالية.</div><p>واش متأكد بغيتي تكمل؟</p>`,()=>{
-      customers=parsed.customers.map(normaliseCustomer);
-      transactions=parsed.transactions;
-      financeRecords=Array.isArray(parsed.financeRecords)?parsed.financeRecords:[];
-      if(saveData()){renderAll();toast("ترجعات النسخة الاحتياطية بنجاح.");}
-    },"استرجاع البيانات");
+    const data=JSON.parse(await file.text());
+    const list=Array.isArray(data)?data:data.customers;
+    if(!Array.isArray(list))throw new Error("invalid");
+    if(!confirm("الاستيراد غادي يعوّض لائحة الزبناء الحالية. واش متأكد؟"))return;
+    customers=list.map(normalizeCustomer);
+    save();render();
+    toast("ترجعات البيانات بنجاح.");
   }catch(err){
-    toast("الملف ماشي نسخة احتياطية صالحة ديال التطبيق.","bad");
+    toast("الملف ما صالحش أو ما قدرناش نقراوه.");
+  }finally{
+    e.target.value="";
   }
-  e.target.value="";
 });
 
-$("resetData").addEventListener("click",()=>{
-  askModal("مسح جميع البيانات",'<div class="notice">تحذير: هاد العملية غادي تمسح جميع الزبناء والعمليات المحفوظة فهاد المتصفح.</div><p>الأفضل تحمّل نسخة احتياطية قبل المتابعة.</p>',()=>{
-    customers=[];transactions=[];financeRecords=[];
-    saveData();renderAll();toast("تم مسح البيانات.");
-  },"مسح نهائيا");
-});
-
-loadData();
-renderAll();
+load();
+render();
 })();
 </script>
 </body>
