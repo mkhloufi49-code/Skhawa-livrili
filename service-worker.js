@@ -1,4 +1,4 @@
-const CACHE_NAME = "skhawa-livrili-v2";
+const CACHE_NAME = "skhawa-livrili-v3";
 
 const FILES_TO_CACHE = [
 "./",
@@ -10,10 +10,17 @@ const FILES_TO_CACHE = [
 
 self.addEventListener("install", (event) => {
 event.waitUntil(
-caches.open(CACHE_NAME).then((cache) =>
-cache.addAll(FILES_TO_CACHE)
-)
+caches.open(CACHE_NAME).then(async (cache) => {
+for (const file of FILES_TO_CACHE) {
+try {
+await cache.add(file);
+} catch (error) {
+console.warn("Impossible de mettre en cache :", file, error);
+}
+}
+})
 );
+
 self.skipWaiting();
 });
 
@@ -25,25 +32,43 @@ keys
 .filter((key) => key !== CACHE_NAME)
 .map((key) => caches.delete(key))
 )
-)
+).then(() => self.clients.claim())
 );
-self.clients.claim();
 });
 
 self.addEventListener("fetch", (event) => {
 if (event.request.method !== "GET") return;
+
+const url = new URL(event.request.url);
+
+if (url.origin !== self.location.origin) return;
 
 event.respondWith(
 fetch(event.request)
 .then((response) => {
 if (response && response.ok) {
 const copy = response.clone();
-caches.open(CACHE_NAME).then((cache) =>
-cache.put(event.request, copy)
-);
-}
-return response;
-})
-.catch(() => caches.match(event.request))
+
+      caches.open(CACHE_NAME).then((cache) => {
+        cache.put(event.request, copy);
+      });
+    }
+
+    return response;
+  })
+  .catch(async () => {
+    const cached = await caches.match(event.request);
+
+    if (cached) return cached;
+
+    if (event.request.mode === "navigate") {
+      return (
+        await caches.match("./index.html")
+      ) || Response.error();
+    }
+
+    return Response.error();
+  })
+
 );
 });
